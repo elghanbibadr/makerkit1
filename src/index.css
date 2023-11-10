@@ -32,3 +32,15 @@ h3{
 .small-title{
   @apply text-sm font-medium text-gray-500 dark:text-gray-400
 }
+
+
+
+/* BUTTONS */
+
+.button-transparent{
+  @apply border border-accent1  hover:bg-accent1 hover:text-white text-sm h-10 px-4
+}
+
+.button-pink{
+  @apply  bg-darkPink px-6 py-3
+}
