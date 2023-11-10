@@ -15,7 +15,8 @@ export default {
         "accent1":"#1f2937"
       },
       boxShadow:{
-        "grayBoxShadow":"0 1px 3px 0 #334155"
+        "grayBoxShadow":"0 1px 3px 0 #334155",
+        "pinkBoxShadow":"0 14px 49px 0 #6c28d94c"
       }
     },
   },

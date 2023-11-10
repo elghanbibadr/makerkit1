@@ -1,7 +1,7 @@
 import Button from "./ui/Button";
-
+import Navbar from "./componenet/Navbar";
 const App = () => {
-  return <h1>hello </h1>;
+  return <Navbar />;
 };
 
 export default App;
