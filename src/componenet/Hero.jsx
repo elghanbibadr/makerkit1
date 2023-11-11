@@ -19,24 +19,11 @@ const Hero = () => {
         usually laid out on multiple lines Impress your customers, straight to
         the point.
       </p>
-      <Button className="bg-darkPink rounded-full   text-white   py-5 px-6 ">
+      <Button
+        className="bg-darkPink rounded-full   text-white   py-5 px-6 "
+        withArrow={true}
+      >
         <span>Get Started</span>
-        <svg
-          className="ml-3 h-5"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          aria-hidden="true"
-          class="h-4 animate-in fade-in slide-in-from-left-8 delay-1000 fill-mode-both duration-1000 zoom-in"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-          ></path>
-        </svg>
       </Button>
       <p className=" text-xs mt-3 text-gray-500 dark:text-gray-400">
         Free plan. No credit card required.
@@ -46,7 +33,7 @@ const Hero = () => {
         <img
           className="rounded-md shadow-pinkBoxShadow2"
           src={dashboardImg}
-          alt=""
+          alt="dashboard image"
         />
       </div>
     </div>
