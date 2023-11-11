@@ -43,20 +43,22 @@ const featuresArray = [
 
 const Features = () => {
   return (
-    <div className="mt-24">
+    <div className="mt-24 text-center">
       <CtaCard>A modern, scalable, and secure SaaS Starter Kit</CtaCard>
       <h2>The best tool in the space</h2>
       <p className="gradientParagraph my-6">
         Unbeatable Features and Benefits for Your SaaS Business
       </p>
-      {featuresArray.map(({ imgSrc, title, description }, index) => (
-        <FeatureCard
-          key={index}
-          imgSrc={imgSrc}
-          title={title}
-          description={description}
-        />
-      ))}
+      <div className="mx-auto sm:w-1/2  text-left lg:grid lg:grid-cols-3 lg:w-auto lg:gap-10">
+        {featuresArray.map(({ imgSrc, title, description }, index) => (
+          <FeatureCard
+            key={index}
+            imgSrc={imgSrc}
+            title={title}
+            description={description}
+          />
+        ))}
+      </div>
     </div>
   );
 };
