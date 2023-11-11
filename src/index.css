@@ -21,7 +21,7 @@ body{
 
 
 .gradientParagraph {
-  @apply flex flex-col space-y-1 bg-gradient-to-br text-xl lg:text-2xl dark:from-white dark:via-gray-300 dark:to-gray-400 bg-clip-text text-gray-700 font-normal dark:text-transparent text-center;
+  @apply  space-y-1 bg-gradient-to-br text-xl lg:text-2xl dark:from-white dark:via-gray-300 dark:to-gray-400 bg-clip-text text-gray-700 font-normal dark:text-transparent;
 }
 
 h2{
