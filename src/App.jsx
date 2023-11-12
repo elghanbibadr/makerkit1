@@ -1,9 +1,9 @@
-import Button from "./ui/Button";
 import Navbar from "./componenet/Navbar";
 import Hero from "./componenet/Hero";
 import Features from "./componenet/Features";
 import WhatWeProvide from "./componenet/WhatWeProvide";
 import Pricing from "./componenet/Pricing";
+import Footer from "./componenet/Footer";
 
 const App = () => {
   return (
@@ -13,6 +13,7 @@ const App = () => {
       <Features />
       <WhatWeProvide />
       <Pricing />
+      <Footer />
     </>
   );
 };
