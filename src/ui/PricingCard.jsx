@@ -2,9 +2,21 @@ import Button from "./Button";
 import checkmark from "../assets/checkmark.svg";
 import proplanicon from "../assets/proplanicon.svg";
 
-const PricingCard = ({ title, description, price, billing, features, cta }) => {
+const PricingCard = ({
+  title,
+  description,
+  features,
+  cta,
+  selectedPlan,
+  yearlyBilling,
+  monthlybilling,
+}) => {
   return (
-    <div className="text-left mt-10 border-accent1 border-[2px] rounded-xl  p-5">
+    <div
+      className={`text-left mt-10 ${
+        title === "Pro" ? "border-darkPink" : "border-accent1"
+      }  border-[2px] rounded-xl  p-5 sm:w-[70%] sm:mx-auto lg:w-full`}
+    >
       <div className="flex items-center gap-6">
         <h3 className="text-white">{title}</h3>
         {title !== "Premium" && (
@@ -25,14 +37,17 @@ const PricingCard = ({ title, description, price, billing, features, cta }) => {
       <span className="small-title inline-block my-3">
         Description of your {title} plan
       </span>
-      <div className="my-3">
-        <span className="text-2xl text-white font-bold lg:text-3xl xl:text-4xl">
-          {price}
-        </span>
-        <span className="text-lg lowercase text-gray-500 dark:text-gray-400">
-          <span>{billing}</span>
-        </span>
-      </div>
+      {title !== "Premium" && (
+        <div className="my-3">
+          <span className="text-2xl text-white font-bold lg:text-3xl xl:text-4xl">
+            {console.log(yearlyBilling, monthlybilling)}
+            {selectedPlan !== "Monthly" ? yearlyBilling : monthlybilling}
+          </span>
+          <span className="text-lg lowercase text-gray-500 dark:text-gray-400">
+            <span>/{selectedPlan === "Monthly" ? "Monthly" : "Yearly"}</span>
+          </span>
+        </div>
+      )}
       <ul className="text-gray-300 font-medium text-[.93rem]">
         {features.map((feature, index) => (
           <li key={index} className="flex my-1 items-center gap-2">
