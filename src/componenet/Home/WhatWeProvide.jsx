@@ -1,7 +1,7 @@
-import Button from "../ui/Button";
-import signin from "../assets/sign-in.webp";
-import darkdashboard from "../assets/dashboard.webp";
-import WhatWeProvideDesc from "../ui/WhatWeProvideDesc";
+import Button from "../../ui/Button";
+import signin from "../../assets/sign-in.webp";
+import darkdashboard from "../../assets/dashboard.webp";
+import WhatWeProvideDesc from "../../ui/WhatWeProvideDesc";
 
 const WhatWeProvide = () => {
   return (

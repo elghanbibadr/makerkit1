@@ -1,5 +1,4 @@
-import React from "react";
-import logo from "../assets/logo.svg";
+import logo from "../../assets/logo.svg";
 
 const Footer = () => {
   return (
@@ -44,7 +43,7 @@ const Footer = () => {
             <input
               type="email"
               placeholder="your@email.com"
-              className="w-full px-4 py-2 mt-2 rounded bg-transparent text-accent1 font-medium focus:outline-none border border-accent1"
+              className="input"
             />
             <button className="bg-darkPink text-white px-4 py-2 mt-2 rounded font-medium">
               Subscribe

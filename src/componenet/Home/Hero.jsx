@@ -1,6 +1,7 @@
-import CtaCard from "../componenet/CtaCard";
-import Button from "../ui/Button";
-import dashboardImg from "../assets/dashboard-dark.webp";
+import CtaCard from "./CtaCard";
+import Button from "../../ui/Button";
+import dashboardImg from "../../assets/dashboard-dark.webp";
+
 const Hero = () => {
   return (
     <div className="mt-20 p-2 text-center flex flex-col items-center justify-center">

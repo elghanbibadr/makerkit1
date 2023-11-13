@@ -54,4 +54,8 @@ footer p{
 
 
 
+/* INPUTS */
 
+.input{
+  @apply w-full px-4 py-2 mt-2 rounded bg-transparent text-accent1 font-medium text-sm focus:outline-none border border-accent1
+}

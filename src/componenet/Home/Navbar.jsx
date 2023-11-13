@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import menuHamburger from "../assets/menu.svg";
-import moon from "../assets/moon.svg";
-import sun from "../assets/sun.svg";
-import logo from "../assets/logo.svg";
-import Button from "../ui/Button";
+import menuHamburger from "../../assets/menu.svg";
+import moon from "../../assets/moon.svg";
+import sun from "../../assets/sun.svg";
+import logo from "../../assets/logo.svg";
+import Button from "../../ui/Button";
 
 const navLinks = ["Sign In", "Blog", "Documentation", "Pricing", "FAQ"];
 const Navbar = () => {

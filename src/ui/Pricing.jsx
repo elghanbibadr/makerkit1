@@ -1,8 +1,9 @@
-import CtaCard from "./CtaCard";
-import checkmark from "../assets/checkmark.svg";
-import Button from "../ui/Button";
-import PricingCard from "../ui/PricingCard";
 import { useState } from "react";
+import CtaCard from "../componenet/Home/CtaCard";
+import checkmark from "../assets/checkmark.svg";
+import Button from "./Button";
+import PricingCard from "./PricingCard";
+
 const pricingData = [
   {
     name: "Basic",

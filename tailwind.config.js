@@ -11,6 +11,7 @@ export default {
         "lightBlue":"#a78bfa",
         "lightGrey":"#6b7280e0",
         "darkPink":"#6d28d9",
+        "secondary":"#030712",
         "lighterPink":"#a78bfa",
         "accent1":"#1f2937"
       },

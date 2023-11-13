@@ -1,11 +1,11 @@
 import CtaCard from "./CtaCard";
-import auth from "../assets/auth.svg";
-import multitenancy from "../assets/multitenancy.svg";
-import teamManagment from "../assets/teamManagment.svg";
-import uitheme from "../assets/uithemes.svg";
-import uicomponenet from "../assets/uicomponenet.svg";
-import blogdoc from "../assets/blog&doc.svg";
-import FeatureCard from "../ui/FeatureCard";
+import auth from "../../assets/auth.svg";
+import multitenancy from "../../assets/multitenancy.svg";
+import teamManagment from "../../assets/teamManagment.svg";
+import uitheme from "../../assets/uithemes.svg";
+import uicomponenet from "../../assets/uicomponenet.svg";
+import blogdoc from "../../assets/blog&doc.svg";
+import FeatureCard from "../../ui/FeatureCard";
 
 const featuresArray = [
   {
