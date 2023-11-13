@@ -1,21 +1,18 @@
-import Navbar from "./componenet/Navbar";
-import Hero from "./componenet/Hero";
-import Features from "./componenet/Features";
-import WhatWeProvide from "./componenet/WhatWeProvide";
-import Pricing from "./componenet/Pricing";
-import Footer from "./componenet/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
-const App = () => {
+function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Features />
-      <WhatWeProvide />
-      <Pricing />
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;
