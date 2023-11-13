@@ -7,7 +7,9 @@ const AuthPage = ({ isSignUp }) => {
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div>
-        <img className="mx-auto" src={logo} alt="makerkit logo" />
+        <Link to="/">
+          <img className="mx-auto" src={logo} alt="makerkit logo" />
+        </Link>
         <div className="border border-accent1 shadow-pinkBoxShadow2 p-6 rounded-xl mt-10">
           <h5 className="scroll-m-20 font-heading text-lg font-medium text-white text-center">
             {isSignUp ? "Create account" : "Sign in to your account"}

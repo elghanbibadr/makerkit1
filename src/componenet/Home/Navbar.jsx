@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import menuHamburger from "../../assets/menu.svg";
 import moon from "../../assets/moon.svg";
+import { Link } from "react-router-dom";
 import sun from "../../assets/sun.svg";
 import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
@@ -54,12 +55,16 @@ const Navbar = () => {
             {/* BUTTONS */}
           </div>
           <div className="hidden lg:flex">
-            <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
-              Sign In
-            </Button>
-            <Button className="bg-darkPink rounded-full text-white px-6 py-2">
-              Sign Up
-            </Button>
+            <Link to="/auth/signin">
+              <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/auth/signup">
+              <Button className="bg-darkPink rounded-full text-white px-6 py-2">
+                Sign Up
+              </Button>
+            </Link>
           </div>
         </div>
 
