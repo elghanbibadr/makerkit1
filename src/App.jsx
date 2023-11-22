@@ -20,11 +20,11 @@ function App() {
         <Route index path="/" element={<Home />} />
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="dashboard/setting" element={<Setting />}>
+          <Route path="dashboard/settings" element={<Setting />}>
             <Route index element={<Navigate replace to="profil" />} />
             <Route path="profil" element={<SettingProfil />} />
           </Route>
-          <Route path="dashboard/task" element={<Task />} />
+          <Route path="dashboard/tasks" element={<Task />} />
         </Route>
         <Route path="/auth/signin" element={<SignIn />} />
         <Route path="/auth/signup" element={<SignUp />} />
