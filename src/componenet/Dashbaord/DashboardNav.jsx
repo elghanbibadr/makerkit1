@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../../ui/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import menu from "../../assets/menu.svg";
 import organizationIcon from "../../assets/organization.svg";
 
@@ -8,6 +8,8 @@ const navLinks = ["Your Organizations", "dashboard", "tasks", "settings"];
 
 const DashboardNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const currentURL = location.pathname;
 
   return (
     <div>
@@ -19,26 +21,34 @@ const DashboardNav = () => {
             src={menu}
             alt="menu hamburger"
           />
-          <h3 className="text-white">Dashboard</h3>
+          <h3 className="text-white">
+            {currentURL.includes("tasks")
+              ? "Tasks"
+              : currentURL.includes("settings")
+              ? "Settings"
+              : "Dashboard"}
+          </h3>
         </div>
-        <Button className="button-transparent text-white rounded-md ">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-            class="w-4 mr-2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          <span>Add Widget</span>
-        </Button>
+        {!currentURL.includes("tasks") && !currentURL.includes("settings") && (
+          <Button className="button-transparent text-white rounded-md ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              class="w-4 mr-2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <span>Add Widget</span>
+          </Button>
+        )}
         <div
           className={`lg:flex z-50 ${
             isMenuOpen
