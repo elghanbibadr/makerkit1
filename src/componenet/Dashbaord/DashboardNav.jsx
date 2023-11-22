@@ -40,9 +40,9 @@ const DashboardNav = () => {
           <span>Add Widget</span>
         </Button>
         <div
-          className={`lg:flex ${
+          className={`lg:flex z-50 ${
             isMenuOpen
-              ? "block  shadow-pinkBoxShadow border border-gray-50 border-opacity-10 p-6 px-8 rounded-md absolute top-20 -left-3 w-full"
+              ? "block  shadow-pinkBoxShadow border border-gray-50 border-opacity-10 p-6 px-8 rounded-md absolute z-50 opacity-100 top-16 bg-[#030712] -left-3 w-full"
               : "hidden"
           }`}
         >
