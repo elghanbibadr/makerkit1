@@ -42,6 +42,10 @@ footer p{
   cursor: pointer;
 }
 
+img{
+  cursor: pointer;
+}
+
 /* BUTTONS */
 
 .button-transparent{

@@ -3,8 +3,16 @@ import Button from "../../ui/Button";
 import { Link, useLocation } from "react-router-dom";
 import menu from "../../assets/menu.svg";
 import organizationIcon from "../../assets/organization.svg";
+import TaskIcon from "../../assets/taskIcon.svg";
+import SettingIcon from "../../assets/setting.svg";
+import DashboardIcon from "../../assets/dashboardicon.svg";
 
-const navLinks = ["Your Organizations", "dashboard", "tasks", "settings"];
+const navLinks = [
+  { name: "Your Organizations", img: organizationIcon },
+  { name: "dashboard", img: DashboardIcon },
+  { name: "tasks", img: TaskIcon },
+  { name: "settings", img: SettingIcon },
+];
 
 const DashboardNav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +25,7 @@ const DashboardNav = () => {
         <div className="flex items-center">
           <img
             onClick={() => setIsMenuOpen((prv) => !prv)}
-            className="h-10"
+            className="h-10 mr-2"
             src={menu}
             alt="menu hamburger"
           />
@@ -57,13 +65,13 @@ const DashboardNav = () => {
           }`}
         >
           <ul className="lg:flex">
-            {navLinks.map((navLink, index) => (
+            {navLinks.map(({ name, img }, index) => (
               // eslint-disable-next-line react/jsx-key
-              <Link to={index > 1 ? `dashboard/${navLink}` : `${navLink}`}>
+              <Link to={index > 1 ? `dashboard/${name}` : `${name}`}>
                 <li className="p-1 flex items-center gap-2 mb-3 lg:px-2.5 text-sm  font-medium  rounded-md  text-gray-600 dark:text-gray-300">
-                  <img className="h-6 mr-2" src={organizationIcon} alt="" />
+                  <img className="h-6 mr-2" src={img} alt="nav icon image" />
                   <a href="#" className="text-white">
-                    {navLink}
+                    {name}
                   </a>
                 </li>
               </Link>
