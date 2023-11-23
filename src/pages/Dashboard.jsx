@@ -1,35 +1,60 @@
-import Navbar from "../componenet/Home/Navbar";
-import { useState } from "react";
 import React from "react";
 import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+} from "chart.js";
+
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
 const LineChart = () => {
   // Sample data for the line chart
   const data = {
-    labels: ["January", "February", "March", "April", "May"],
+    labels: ["April 23", "May 23", "June 23", "August 23", "October 23"],
     datasets: [
       {
-        label: "Sample Line Chart",
-        data: [65, 59, 80, 81, 56],
-        fill: false, // To have an unfilled line
-        borderColor: "rgba(75,192,192,1)",
+        data: [3, 5, 1, 4, 2, 1, 4, 2],
+        label: "",
+        fill: false,
+        backgroundColor: "transparent",
+        pointBorderColor: "transparent",
+        pointBorderWidth: 4,
+        borderColor: "#a78bfa",
         borderWidth: 2,
+        tension: 0.5,
       },
     ],
   };
 
   // Configuration options for the chart
   const options = {
+    plugins: {
+      legend: false,
+      title: {
+        display: false, // Hide the title label on top of the chart
+        text: "",
+      },
+      subtitle: {
+        display: false,
+      },
+    },
     scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
       y: {
-        beginAtZero: true,
+        display: false, // Hide the Y-axis
       },
     },
   };
 
   return (
     <div>
-      <h2>Line Chart Example</h2>
       <Line data={data} options={options} />
     </div>
   );
