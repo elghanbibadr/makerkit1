@@ -6,7 +6,7 @@ import DashboardNav from "../componenet/Dashbaord/DashboardNav";
 
 const DashboardLayout = () => {
   return (
-    <div className="lg:grid lg:grid-cols-[240px_1fr] lg:gap-x-10   h-[93vh]">
+    <div className="lg:grid lg:grid-cols-[220px_1fr] lg:gap-x-3   h-[93vh]">
       <DashboardNav />
 
       <div className="row-start-1 col-start-2">

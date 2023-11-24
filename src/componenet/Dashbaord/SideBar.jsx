@@ -88,7 +88,7 @@ const SidebarLink = ({ to, icon, text }) => (
 
 export const SideBar = () => {
   return (
-    <aside className="hidden md:block md:row-start-1 row-span-2 md:border-r md:border-accent1">
+    <aside className="hidden lg:block lg:row-start-1 row-span-2 lg:border-r md:border-accent1">
       <ul className="text-white">
         <li className="flex items-center mr-3 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md">
           <span className="font-semibold inline-flex justify-center items-center text-xl text-white bg-blue-600 rounded-full h-7 w-7">

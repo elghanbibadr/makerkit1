@@ -53,7 +53,7 @@ const Dashboard = () => {
     },
   ];
   return (
-    <div className="mb-10">
+    <div className="mb-10 md:grid md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
       {StatisticData.map((data) => (
         <StatisticChartCard
           key={data.id}
