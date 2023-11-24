@@ -10,13 +10,13 @@ import {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-const LineChart = () => {
+const LineChart = ({ data: lineChartData }) => {
   // Sample data for the line chart
   const data = {
     labels: ["April 23", "May 23", "June 23", "August 23", "October 23"],
     datasets: [
       {
-        data: [3, 5, 1, 4, 2, 1, 4, 2],
+        data: lineChartData,
         label: "",
         fill: false,
         backgroundColor: "transparent",

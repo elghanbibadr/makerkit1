@@ -21,7 +21,7 @@ const DashboardNav = () => {
 
   return (
     <div>
-      <div className="flex block md:hidden justify-between">
+      <div className="flex block md:hidden mb-10   justify-between">
         <div className="flex items-center">
           <img
             onClick={() => setIsMenuOpen((prv) => !prv)}
