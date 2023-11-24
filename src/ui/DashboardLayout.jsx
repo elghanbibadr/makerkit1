@@ -9,7 +9,7 @@ const DashboardLayout = () => {
     <div className="lg:grid lg:grid-cols-[220px_1fr] lg:gap-x-3   h-[93vh]">
       <DashboardNav />
 
-      <div className="row-start-1 col-start-2">
+      <div className="row-start-2 col-start-2">
         <Outlet />
       </div>
       <SideBar />

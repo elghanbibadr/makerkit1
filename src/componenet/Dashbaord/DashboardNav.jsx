@@ -21,21 +21,30 @@ const DashboardNav = () => {
 
   return (
     <div>
-      <div className="flex block lg:hidden mb-10   justify-between">
+      <div className="flex block  mb-10   justify-between ">
         <div className="flex items-center">
           <img
             onClick={() => setIsMenuOpen((prv) => !prv)}
-            className="h-10 mr-2"
+            className="h-10 mr-2 lg:hidden"
             src={menu}
             alt="menu hamburger"
           />
-          <h3 className="text-white ">
-            {currentURL.includes("tasks")
-              ? "Tasks"
-              : currentURL.includes("settings")
-              ? "Settings"
-              : "Dashboard"}
-          </h3>
+          <div>
+            <h3 className="text-white ">
+              {currentURL.includes("tasks")
+                ? "Tasks"
+                : currentURL.includes("settings")
+                ? "Settings"
+                : "Dashboard"}
+            </h3>
+            <h3 className="hidden lg:block text-gray-400 text-xl font-normal">
+              {currentURL.includes("tasks")
+                ? "Manage your Tasks and never lose track of your work.                "
+                : currentURL.includes("settings")
+                ? "Manage your settings and preferences.                "
+                : "An overview of your organization's activity and performance across all your projects.                "}
+            </h3>
+          </div>
         </div>
         {!currentURL.includes("tasks") && !currentURL.includes("settings") && (
           <Button className="button-transparent text-white rounded-md ">
@@ -58,7 +67,7 @@ const DashboardNav = () => {
           </Button>
         )}
         <div
-          className={`lg:flex z-50 ${
+          className={`lg:flex z-50 lg:hidden ${
             isMenuOpen
               ? "block  shadow-pinkBoxShadow border border-gray-50 border-opacity-10 p-6 px-8 rounded-md absolute z-50 opacity-100 top-16 bg-[#030712] -left-3 w-full"
               : "hidden"
