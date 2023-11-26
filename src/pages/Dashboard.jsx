@@ -75,19 +75,89 @@ const Dashboard = () => {
       chartLineData: [7, 7, 14, 1, 7, 8, 4, 2],
     },
   ];
+  const tableData = [
+    {
+      Customer: "Pippin Oddo",
+      Plan: "Pro",
+      MRR: "$100.2",
+      Logins: 920,
+      Status: "Healthy",
+    },
+    {
+      Customer: "Väinö Pánfilo",
+      Plan: "Basic",
+      MRR: "$40.6",
+      Logins: 300,
+      Status: "Possible Churn",
+    },
+    {
+      Customer: "Giorgos Quinten",
+      Plan: "Pro",
+      MRR: "$2004.3",
+      Logins: 1000,
+      Status: "Healthy",
+    },
+    {
+      Customer: "Adhelm Otis",
+      Plan: "Basic",
+      MRR: "$0",
+      Logins: 10,
+      Status: "Churned",
+    },
+  ];
   return (
-    <div className="mb-10 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4">
-      {StatisticData.map((data) => (
-        <StatisticChartCard
-          key={data.id}
-          chartCardTitle={data.chartCardTitle}
-          percentage={data.percentage}
-          isGrowing={data.isGrowing}
-          gaineValue={data.gaineValue}
-          chartLineData={data.chartLineData}
-        />
-      ))}
-    </div>
+    <>
+      <div className="mb-10 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4">
+        {StatisticData.map((data) => (
+          <StatisticChartCard
+            key={data.id}
+            chartCardTitle={data.chartCardTitle}
+            percentage={data.percentage}
+            isGrowing={data.isGrowing}
+            gaineValue={data.gaineValue}
+            chartLineData={data.chartLineData}
+          />
+        ))}
+      </div>
+      <div className="border border-accent1 p-3 rounded-md">
+        <h4 className="text-gray-400 text-xl font-normal">Customers</h4>
+        <table className="w-full ">
+          <thead className=" text-gray-400 border-b border-accent1 ">
+            <th>Customer</th>
+            <th>Plan</th>
+            <th>MRR</th>
+            <th>Logins</th>
+            <th>Status</th>
+          </thead>
+          <tbody className="text-white">
+            {tableData.map(({ Customer, Plan, MRR, Logins, Status }, index) => {
+              return (
+                <tr
+                  key={index}
+                  className="text-center border-b border-accent1 "
+                >
+                  <td>{Customer}</td>
+                  <td>{Plan}</td>
+                  <td>{MRR} </td>
+                  <td>{Logins} </td>
+                  <td>
+                    <div
+                      className={`bg-[#eab3081a] mx-auto flex items-center w-fit font-semibold px-3 py-2 rounded-md p-1`}
+                    >
+                      <span
+                        className={` text-yellow-500  ml-1 text-xs  md:text-sm`}
+                      >
+                        {Status}
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
