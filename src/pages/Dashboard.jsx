@@ -121,28 +121,25 @@ const Dashboard = () => {
       </div>
       <div className="border border-accent1 p-3 rounded-md">
         <h4 className="text-gray-400 text-xl font-normal">Customers</h4>
-        <table className="w-full ">
-          <thead className=" text-gray-400 border-b border-accent1 ">
+        <table className="w-full mt-6 mx-3 ">
+          <thead className=" text-gray-400  text-left border-b border-accent1 ">
             <th>Customer</th>
             <th>Plan</th>
             <th>MRR</th>
             <th>Logins</th>
-            <th>Status</th>
+            <th className="hidden md:block"> Status</th>
           </thead>
           <tbody className="text-white">
             {tableData.map(({ Customer, Plan, MRR, Logins, Status }, index) => {
               return (
-                <tr
-                  key={index}
-                  className="text-center border-b border-accent1 "
-                >
+                <tr key={index} className="text-left border-b border-accent1 ">
                   <td>{Customer}</td>
                   <td>{Plan}</td>
                   <td>{MRR} </td>
                   <td>{Logins} </td>
                   <td>
                     <div
-                      className={`bg-[#eab3081a] mx-auto flex items-center w-fit font-semibold px-3 py-2 rounded-md p-1`}
+                      className={`bg-[#eab3081a] hidden md:block  w-fit font-semibold px-3 py-2 rounded-md p-1`}
                     >
                       <span
                         className={` text-yellow-500  ml-1 text-xs  md:text-sm`}
