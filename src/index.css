@@ -70,5 +70,5 @@ img{
 /* helping styles */
 
 table td,table th{
-  @apply py-2
+  @apply py-2 font-normal
 }

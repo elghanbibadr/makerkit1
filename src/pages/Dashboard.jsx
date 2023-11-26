@@ -139,11 +139,15 @@ const Dashboard = () => {
                   <td>{Logins} </td>
                   <td>
                     <div
-                      className={`bg-[#eab3081a] hidden md:block  w-fit font-semibold px-3 py-2 rounded-md p-1`}
+                      className={`${
+                        Status === "Healthy"
+                          ? "bg-[#22c55e1a] text-green-500"
+                          : Status === "Possible Churn"
+                          ? "bg-[#eab3081a] text-yellow-500"
+                          : "bg-[#ef44441a] text-red-500"
+                      }  hidden md:block  w-fit font-semibold px-3 py-1 rounded-md p-1`}
                     >
-                      <span
-                        className={` text-yellow-500  ml-1 text-xs  md:text-sm`}
-                      >
+                      <span className={`   ml-1 text-xs  md:text-sm`}>
                         {Status}
                       </span>
                     </div>
