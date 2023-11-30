@@ -10,7 +10,7 @@ import DashboardLayout from "./ui/DashboardLayout";
 import SignUp from "./pages/SignUp";
 import Setting from "./pages/Setting";
 import SettingProfil from "./pages/SettingProfil";
-import Task from "./pages/Task";
+import Task from "./pages/task/Task";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
