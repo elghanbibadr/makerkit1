@@ -4,14 +4,13 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Home from "./pages/Home";
-import SignIn from "./pages/AuthPage";
+import Home from "./pages/home/Home";
 import DashboardLayout from "./ui/DashboardLayout";
-import SignUp from "./pages/SignUp";
-import Setting from "./pages/Setting";
-import SettingProfil from "./pages/SettingProfil";
+import SignUp from "./pages/authPage/SignUp";
+import Setting from "./pages/settings/Setting";
+import SignIn from "./pages/authPage/SignIn";
 import Task from "./pages/task/Task";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="dashboard/settings" element={<Setting />}>
             <Route index element={<Navigate replace to="profil" />} />
-            <Route path="profil" element={<SettingProfil />} />
           </Route>
           <Route path="dashboard/tasks" element={<Task />} />
         </Route>

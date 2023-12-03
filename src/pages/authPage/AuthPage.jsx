@@ -1,6 +1,6 @@
-import logo from "../assets/logo.svg";
-import Button from "../ui/Button";
-import googlelogo from "../assets/googlelogo.webp";
+import logo from "../../assets/logo.svg";
+import Button from "../../ui/Button";
+import googlelogo from "../../assets/googlelogo.webp";
 import { Link } from "react-router-dom";
 
 const AuthPage = ({ isSignUp }) => {
@@ -29,7 +29,7 @@ const AuthPage = ({ isSignUp }) => {
                 Email Address
               </label>
               <input
-                className="input"
+                className="input block w-[400px] "
                 id="email"
                 placeholder="your@email"
                 name="email"
@@ -41,7 +41,7 @@ const AuthPage = ({ isSignUp }) => {
                 Password
               </label>
               <input
-                className="input"
+                className="input block w-[400px]"
                 id="password"
                 name="password"
                 type="password"
@@ -58,7 +58,7 @@ const AuthPage = ({ isSignUp }) => {
                   RepeatPassword
                 </label>
                 <input
-                  className="input"
+                  className="input block w-[400px]"
                   id="repeatpassword"
                   name="repeatpassword"
                   type="repeatpassword"

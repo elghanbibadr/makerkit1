@@ -1,7 +1,7 @@
 import React from "react";
-import arrow from "../assets/arrow.svg";
-import StatisticChartCard from "../componenet/Dashbaord/StatisticChartCard";
-import UsersTable from "../componenet/Dashbaord/UsersTable";
+import arrow from "../../assets/arrow.svg";
+import StatisticChartCard from "../../componenet/Dashbaord/StatisticChartCard";
+import UsersTable from "../../componenet/Dashbaord/UsersTable";
 const Dashboard = () => {
   const StatisticData = [
     {
