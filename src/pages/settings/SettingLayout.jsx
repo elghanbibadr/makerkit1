@@ -1,18 +1,40 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 
 const SettingLayout = () => {
   return (
     <div>
-      <h1>setting</h1>
-      <ul className="text-white flex w-full justify-between  lg:justify-normal mb-6 border-accent1 border-b-[1px] pb-3   items-center gap-x-10">
-        <li className="text-[1rem] capitalize font-medium">
-          <Link to="profil">profil</Link>
+      <ul className="text-white flex w-full justify-between pb-3 lg:justify-normal  border-accent1 border-b-[1px]    items-center gap-x-10">
+        <li className="text-[1rem] capitalize font-medium ">
+          <NavLink
+            to="profil"
+            className={({ isActive }) =>
+              `pb-3  ${isActive ? " border-b-4 border-darkPink" : ""}`
+            }
+          >
+            profil
+          </NavLink>
         </li>
         <li className="text-[1rem] capitalize font-medium">
-          <Link to="organization">organization</Link>
+          <NavLink
+            to="organization"
+            className={({ isActive }) =>
+              `pb-3  ${isActive ? " border-b-4 border-darkPink" : ""}`
+            }
+            end
+          >
+            organization
+          </NavLink>
         </li>
         <li className="text-[1rem] capitalize font-medium">
-          <Link to="subscription">subscription</Link>
+          <NavLink
+            to="subscription"
+            className={({ isActive }) =>
+              `pb-3  ${isActive ? " border-b-4 border-darkPink" : ""}`
+            }
+            end
+          >
+            subscription
+          </NavLink>
         </li>
       </ul>
       <Outlet />
