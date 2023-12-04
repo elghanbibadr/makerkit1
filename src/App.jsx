@@ -9,14 +9,14 @@ import DashboardLayout from "./ui/DashboardLayout";
 import SignUp from "./pages/authPage/SignUp";
 import SignIn from "./pages/authPage/SignIn";
 import Task from "./pages/task/Task";
-import ProfilDetails from "./pages/settings/ProfilDetails";
+import ProfilDetails from "./pages/settings/profil/ProfilDetails";
 import Dashboard from "./pages/dashboard/Dashboard";
-import SettingProfil from "./pages/settings/SettingProfil";
-import OrganizationSetting from "./pages/settings/OrganizationSetting";
+import SettingProfil from "./pages/settings/profil/SettingProfil";
+import OrganizationSetting from "./pages/settings/organization/OrganizationSetting";
 
 import SettingLayout from "./pages/settings/SettingLayout";
-import SettingSubscription from "./pages/settings/SettingSubscription";
-import ProfilAuth from "./pages/settings/ProfilAuth";
+import SettingSubscription from "./pages/settings/subscription/SettingSubscription";
+import ProfilAuth from "./pages/settings/profil/ProfilAuth";
 
 function App() {
   return (
