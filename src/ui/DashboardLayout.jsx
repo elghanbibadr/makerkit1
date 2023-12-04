@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { SideBar } from "../componenet/Dashbaord/SideBar";
 import { Outlet } from "react-router-dom";
 import DashboardNav from "../componenet/Dashbaord/DashboardNav";

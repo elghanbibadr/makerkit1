@@ -17,6 +17,8 @@ import OrganizationSetting from "./pages/settings/organization/OrganizationSetti
 import SettingLayout from "./pages/settings/SettingLayout";
 import SettingSubscription from "./pages/settings/subscription/SettingSubscription";
 import ProfilAuth from "./pages/settings/profil/ProfilAuth";
+import ProfilEmailPage from "./pages/settings/profil/ProfilEmailPage";
+import ProfilPasswordPage from "./pages/settings/profil/ProfilPasswordPage";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
               <Route index element={<Navigate replace to="details" />} />
               <Route path="details" element={<ProfilDetails />} />
               <Route path="authentication" element={<ProfilAuth />} />
+              <Route path="email" element={<ProfilEmailPage />} />
+              <Route path="password" element={<ProfilPasswordPage />} />
             </Route>
             <Route path="organization" element={<OrganizationSetting />} />
             <Route path="subscription" element={<SettingSubscription />} />
