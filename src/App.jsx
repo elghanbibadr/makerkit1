@@ -19,6 +19,8 @@ import SettingSubscription from "./pages/settings/subscription/SettingSubscripti
 import ProfilAuth from "./pages/settings/profil/ProfilAuth";
 import ProfilEmailPage from "./pages/settings/profil/ProfilEmailPage";
 import ProfilPasswordPage from "./pages/settings/profil/ProfilPasswordPage";
+import OrganizationGeneralPage from "./pages/settings/organization/OrganizationGeneralPage";
+import OrganizationMemberPage from "./pages/settings/organization/OrganizationMemberPage";
 
 function App() {
   return (
@@ -36,7 +38,10 @@ function App() {
               <Route path="email" element={<ProfilEmailPage />} />
               <Route path="password" element={<ProfilPasswordPage />} />
             </Route>
-            <Route path="organization" element={<OrganizationSetting />} />
+            <Route path="organization" element={<OrganizationSetting />}>
+              <Route index element={<OrganizationGeneralPage />} />
+              <Route path="members" element={<OrganizationMemberPage />} />
+            </Route>
             <Route path="subscription" element={<SettingSubscription />} />
           </Route>
           <Route path="dashboard/tasks" element={<Task />} />

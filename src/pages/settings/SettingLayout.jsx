@@ -20,7 +20,6 @@ const SettingLayout = () => {
             className={({ isActive }) =>
               `pb-3  ${isActive ? " border-b-4 border-darkPink" : ""}`
             }
-            end
           >
             organization
           </NavLink>
@@ -31,7 +30,6 @@ const SettingLayout = () => {
             className={({ isActive }) =>
               `pb-3  ${isActive ? " border-b-4 border-darkPink" : ""}`
             }
-            end
           >
             subscription
           </NavLink>
