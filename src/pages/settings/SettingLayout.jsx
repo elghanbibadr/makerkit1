@@ -36,7 +36,7 @@ const SettingLayout = () => {
         </li>
       </ul>
       <div>
-        <div className="mt-6">
+        <div className="mt-6 w-[70%]">
           <Outlet />
         </div>
       </div>
