@@ -1,3 +1,4 @@
+import PricingPlansList from "../../../ui/PricingPlansList";
 const SettingSubscription = () => {
   return (
     <div className="">
@@ -6,6 +7,9 @@ const SettingSubscription = () => {
         <p className="text-gray-400 text-lg font-normal">
           Manage your Subscription and Billing
         </p>
+      </div>
+      <div className="max-w-[1200px] mx-auto">
+        <PricingPlansList />
       </div>
     </div>
   );
