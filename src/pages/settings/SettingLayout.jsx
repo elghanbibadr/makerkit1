@@ -35,7 +35,11 @@ const SettingLayout = () => {
           </NavLink>
         </li>
       </ul>
-      <Outlet />
+      <div>
+        <div className="mt-6">
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };
