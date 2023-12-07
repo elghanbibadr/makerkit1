@@ -2,8 +2,20 @@ import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
 import googlelogo from "../../assets/googlelogo.webp";
 import { Link } from "react-router-dom";
-
+import supabase from "../../../public/supabase/Supabase";
+import { Login, SignUp } from "../../services/apiAuth";
+import { useState } from "react";
 const AuthPage = ({ isSignUp }) => {
+  const [email, setEmail] = useState();
+  const [password, setpassword] = useState("");
+  const handleSignUp = () => {
+    SignUp("bghanbi0@gmail.com", "clandestino@1");
+  };
+
+  const handleAuth = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div>
@@ -23,7 +35,7 @@ const AuthPage = ({ isSignUp }) => {
           <span className="text-[.8rem] mt-4 font-medium flex items-center justify-center text-gray-400">
             or continue with email
           </span>
-          <form>
+          <form onClick={handleAuth}>
             <div className="mt-6">
               <label className="small-title " htmlFor="email">
                 Email Address
@@ -68,8 +80,11 @@ const AuthPage = ({ isSignUp }) => {
                 </span>
               </div>
             )}
-            <Button className="button-pink text-white w-full mt-6 rounded-md">
-              Sign in
+            <Button
+              onClick={handleSignUp}
+              className="button-pink text-white w-full mt-6 rounded-md"
+            >
+              Sign up
             </Button>
           </form>
           <div className="text-[.8rem] font-medium flex justify-center gap-1 items-center mt-4">

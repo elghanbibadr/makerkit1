@@ -21,7 +21,6 @@ import ProfilEmailPage from "./pages/settings/profil/ProfilEmailPage";
 import ProfilPasswordPage from "./pages/settings/profil/ProfilPasswordPage";
 import OrganizationGeneralPage from "./pages/settings/organization/OrganizationGeneralPage";
 import OrganizationMemberPage from "./pages/settings/organization/OrganizationMemberPage";
-
 function App() {
   return (
     <Router>
