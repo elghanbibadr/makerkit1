@@ -1,19 +1,25 @@
+import { useState } from "react";
 import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
 import googlelogo from "../../assets/googlelogo.webp";
 import { Link } from "react-router-dom";
-import supabase from "../../../public/supabase/Supabase";
+import { useForm } from "react-hook-form";
 import { Login, SignUp } from "../../services/apiAuth";
-import { useState } from "react";
+
 const AuthPage = ({ isSignUp }) => {
-  const [email, setEmail] = useState();
-  const [password, setpassword] = useState("");
+  const { register, handleSubmit } = useForm();
+
+  // const [email, setEmail] = useState();
+  // const [password, setpassword] = useState("");
   const handleSignUp = () => {
-    SignUp("bghanbi0@gmail.com", "clandestino@1");
+    // SignUp("bghanbi0@gmail.com", "clandestino@1");
   };
 
-  const handleAuth = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    console.log(data);
+    if (isSignUp) {
+      SignUp(data.email, data.password);
+    }
   };
 
   return (
@@ -35,7 +41,7 @@ const AuthPage = ({ isSignUp }) => {
           <span className="text-[.8rem] mt-4 font-medium flex items-center justify-center text-gray-400">
             or continue with email
           </span>
-          <form onClick={handleAuth}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-6">
               <label className="small-title " htmlFor="email">
                 Email Address
@@ -46,6 +52,7 @@ const AuthPage = ({ isSignUp }) => {
                 placeholder="your@email"
                 name="email"
                 type="email"
+                {...register("email")}
               />
             </div>
             <div className="mt-4">
@@ -57,6 +64,7 @@ const AuthPage = ({ isSignUp }) => {
                 id="password"
                 name="password"
                 type="password"
+                {...register("password")}
               />
               {!isSignUp && (
                 <span className="text-[.79rem] cursor-pointer inline-block mt-4 hover:underline font-medium  text-gray-400">
@@ -73,7 +81,8 @@ const AuthPage = ({ isSignUp }) => {
                   className="input block w-[400px]"
                   id="repeatpassword"
                   name="repeatpassword"
-                  type="repeatpassword"
+                  type="password"
+                  {...register("repeatedpassword")}
                 />
                 <span className="text-[.79rem] cursor-pointer inline-block mt-4 hover:underline font-medium  text-gray-400">
                   type your password again
