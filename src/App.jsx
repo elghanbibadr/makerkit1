@@ -21,6 +21,7 @@ import ProfilEmailPage from "./pages/settings/profil/ProfilEmailPage";
 import ProfilPasswordPage from "./pages/settings/profil/ProfilPasswordPage";
 import OrganizationGeneralPage from "./pages/settings/organization/OrganizationGeneralPage";
 import OrganizationMemberPage from "./pages/settings/organization/OrganizationMemberPage";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +34,8 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient} />
+      <ReactQueryDevtools initialIsOpen={false} />
+
       <Router>
         <Routes>
           <Route index path="/" element={<Home />} />
