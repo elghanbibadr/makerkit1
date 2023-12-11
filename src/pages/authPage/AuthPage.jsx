@@ -9,17 +9,12 @@ import { Login, SignUp } from "../../services/apiAuth";
 const AuthPage = ({ isSignUp }) => {
   const { register, handleSubmit } = useForm();
 
-  // const [email, setEmail] = useState();
-  // const [password, setpassword] = useState("");
-  const handleSignUp = () => {
-    // SignUp("bghanbi0@gmail.com", "clandestino@1");
-  };
-
   const onSubmit = (data) => {
     console.log(data);
     if (isSignUp) {
-      SignUp(data.email, data.password);
+      return SignUp(data.email, data.password);
     }
+    Login(data.email, data.password);
   };
 
   return (
@@ -89,12 +84,18 @@ const AuthPage = ({ isSignUp }) => {
                 </span>
               </div>
             )}
-            <Button
-              onClick={handleSignUp}
-              className="button-pink text-white w-full mt-6 rounded-md"
-            >
-              Sign up
-            </Button>
+
+            {isSignUp && (
+              <Button className="button-pink text-white w-full mt-6 rounded-md">
+                Sign up
+              </Button>
+            )}
+
+            {!isSignUp && (
+              <Button className="button-pink text-white w-full mt-6 rounded-md">
+                Sign in
+              </Button>
+            )}
           </form>
           <div className="text-[.8rem] font-medium flex justify-center gap-1 items-center mt-4">
             <span className="text-white">

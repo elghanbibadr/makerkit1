@@ -33,35 +33,36 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <>
-      <QueryClientProvider client={queryClient} />
-      <ReactQueryDevtools initialIsOpen={false} />
+      <QueryClientProvider client={queryClient}>
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
 
-      <Router>
-        <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route element={<DashboardLayout />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="dashboard/settings" element={<SettingLayout />}>
-              <Route index element={<Navigate replace to="profil" />} />
-              <Route path="profil" element={<SettingProfil />}>
-                <Route index element={<Navigate replace to="details" />} />
-                <Route path="details" element={<ProfilDetails />} />
-                <Route path="authentication" element={<ProfilAuth />} />
-                <Route path="email" element={<ProfilEmailPage />} />
-                <Route path="password" element={<ProfilPasswordPage />} />
+        <Router>
+          <Routes>
+            <Route index path="/" element={<Home />} />
+            <Route element={<DashboardLayout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="dashboard/settings" element={<SettingLayout />}>
+                <Route index element={<Navigate replace to="profil" />} />
+                <Route path="profil" element={<SettingProfil />}>
+                  <Route index element={<Navigate replace to="details" />} />
+                  <Route path="details" element={<ProfilDetails />} />
+                  <Route path="authentication" element={<ProfilAuth />} />
+                  <Route path="email" element={<ProfilEmailPage />} />
+                  <Route path="password" element={<ProfilPasswordPage />} />
+                </Route>
+                <Route path="organization" element={<OrganizationSetting />}>
+                  <Route index element={<OrganizationGeneralPage />} />
+                  <Route path="members" element={<OrganizationMemberPage />} />
+                </Route>
+                <Route path="subscription" element={<SettingSubscription />} />
               </Route>
-              <Route path="organization" element={<OrganizationSetting />}>
-                <Route index element={<OrganizationGeneralPage />} />
-                <Route path="members" element={<OrganizationMemberPage />} />
-              </Route>
-              <Route path="subscription" element={<SettingSubscription />} />
+              <Route path="dashboard/tasks" element={<Task />} />
             </Route>
-            <Route path="dashboard/tasks" element={<Task />} />
-          </Route>
-          <Route path="/auth/signin" element={<SignIn />} />
-          <Route path="/auth/signup" element={<SignUp />} />
-        </Routes>
-      </Router>
+            <Route path="/auth/signin" element={<SignIn />} />
+            <Route path="/auth/signup" element={<SignUp />} />
+          </Routes>
+        </Router>
+      </QueryClientProvider>
     </>
   );
 }
