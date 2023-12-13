@@ -2,11 +2,15 @@ import { useState } from "react";
 import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
 import googlelogo from "../../assets/googlelogo.webp";
-import { Link } from "react-router-dom";
+import supabase from "../../../public/supabase/Supabase";
+
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Login, SignUp } from "../../services/apiAuth";
+import { SignUp } from "../../services/apiAuth";
+// import { useLogin } from "../../hook/useLogin";
 
 const AuthPage = ({ isSignUp }) => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
@@ -16,6 +20,28 @@ const AuthPage = ({ isSignUp }) => {
     }
     Login(data.email, data.password);
   };
+
+  async function Login(email, password) {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        // Handle the error, e.g., log it or throw an exception
+        console.error("Authentication error:", error);
+        throw new Error("Authentication failed");
+      }
+      if (!error) navigate("/dashboard");
+      // Return the authentication data if successful
+      console.log(data);
+    } catch (error) {
+      // Handle unexpected errors, e.g., network issues
+      console.error("Unexpected error during authentication:", error);
+      throw new Error("Unexpected error during authentication");
+    }
+  }
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
