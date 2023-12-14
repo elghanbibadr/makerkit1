@@ -9,13 +9,14 @@ import { useForm } from "react-hook-form";
 import { SignUp } from "../../services/apiAuth";
 // import { useLogin } from "../../hook/useLogin";
 
-const AuthPage = ({ isSignUp }) => {
+const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     if (isSignUp) {
+      console.log("sign up");
       return SignUp(data.email, data.password);
     }
     Login(data.email, data.password);
@@ -38,6 +39,17 @@ const AuthPage = ({ isSignUp }) => {
     }
   }
 
+  // SIGN UP FUNCTION
+  async function SignUp(email, password) {
+    let { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error) throw new Error(error.message);
+    console.log(data);
+    return data;
+  }
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div>

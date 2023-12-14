@@ -11,6 +11,7 @@ const AppContextProvider = ({ children }) => {
       setSession(session);
     });
 
+    console.log("somthing changed");
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
