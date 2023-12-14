@@ -16,7 +16,7 @@ const navLinks = [
 ];
 
 const DashboardNav = () => {
-  const { user } = useContext(AppContext);
+  const { session } = useContext(AppContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -24,7 +24,7 @@ const DashboardNav = () => {
 
   return (
     <div>
-      <h1 className="text-white">hello {user.email}</h1>
+      <h1 className="text-white">hello {session?.user.email}</h1>
       <div className="flex   mb-10   justify-between md:h-fit">
         <div className="flex items-center">
           <img

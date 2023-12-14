@@ -6,12 +6,13 @@ import sun from "../../assets/sun.svg";
 import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
 import { AppContext } from "../../store/AppContext";
+import { logout } from "../../services/apiAuth";
 
 const navLinks = ["Sign In", "Blog", "Documentation", "Pricing", "FAQ"];
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isModeCardOpen, setIsModeCardOpen] = useState(false);
-  const { user } = useContext(AppContext);
+  const { session } = useContext(AppContext);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -20,7 +21,7 @@ const Navbar = () => {
     setIsModeCardOpen((prv) => !prv);
   };
 
-  console.log(user);
+  console.log(session);
 
   return (
     <nav className=" py-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
@@ -59,7 +60,7 @@ const Navbar = () => {
             {/* BUTTONS */}
           </div>
           <div className="hidden lg:flex">
-            {!user && (
+            {!session && (
               <Link to="/auth/signin">
                 <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
                   Sign In
@@ -67,8 +68,11 @@ const Navbar = () => {
               </Link>
             )}
 
-            {user && (
-              <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
+            {session && (
+              <Button
+                onClick={logout}
+                className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full"
+              >
                 Log out
               </Button>
             )}

@@ -12,9 +12,6 @@ import { SignUp } from "../../services/apiAuth";
 const AuthPage = ({ isSignUp }) => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { user, setUser } = useContext(AppContext);
-
-  console.log(user);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -26,23 +23,18 @@ const AuthPage = ({ isSignUp }) => {
 
   async function Login(email, password) {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
 
       if (error) {
-        // Handle the error, e.g., log it or throw an exception
-        console.error("Authentication error:", error);
         throw new Error("Authentication failed");
       }
-      // if (!error) navigate("/dashboard");
-      // Return the authentication data if successful
-      setUser(data.user);
+      if (!error) navigate("/dashboard");
     } catch (error) {
       // Handle unexpected errors, e.g., network issues
       console.error("Unexpected error during authentication:", error);
-      throw new Error("Unexpected error during authentication");
     }
   }
 

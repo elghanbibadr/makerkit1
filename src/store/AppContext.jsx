@@ -1,17 +1,31 @@
 import { createContext, useEffect, useState } from "react";
-import { getCurrentUser } from "../services/apiAuth";
+
+import supabase from "../../public/supabase/Supabase";
 const AppContext = createContext();
 
-const { user: currentUser } = await getCurrentUser();
 const AppContextProvider = ({ children }) => {
-  const [user, setUser] = useState(currentUser);
+  const [session, setSession] = useState(null);
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
   const value = {
-    user,
-    setUser,
+    session,
+    setSession,
   };
 
-  console.log(user);
+  console.log("session", session);
+
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
