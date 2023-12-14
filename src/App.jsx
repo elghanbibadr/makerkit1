@@ -22,6 +22,7 @@ import ProfilPasswordPage from "./pages/settings/profil/ProfilPasswordPage";
 import OrganizationGeneralPage from "./pages/settings/organization/OrganizationGeneralPage";
 import OrganizationMemberPage from "./pages/settings/organization/OrganizationMemberPage";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -63,6 +64,11 @@ function App() {
           </Routes>
         </Router>
       </QueryClientProvider>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+      />
     </>
   );
 }
