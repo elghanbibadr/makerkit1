@@ -77,11 +77,13 @@ const Navbar = () => {
               </Button>
             )}
 
-            <Link to="/auth/signup">
-              <Button className="bg-darkPink rounded-full text-white px-6 py-2">
-                Sign Up
-              </Button>
-            </Link>
+            {!session && (
+              <Link to="/auth/signup">
+                <Button className="bg-darkPink rounded-full text-white px-6 py-2">
+                  Sign Up
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
 
