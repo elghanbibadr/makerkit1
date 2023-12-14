@@ -21,7 +21,7 @@ import ProfilEmailPage from "./pages/settings/profil/ProfilEmailPage";
 import ProfilPasswordPage from "./pages/settings/profil/ProfilPasswordPage";
 import OrganizationGeneralPage from "./pages/settings/organization/OrganizationGeneralPage";
 import OrganizationMemberPage from "./pages/settings/organization/OrganizationMemberPage";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
@@ -68,6 +68,21 @@ function App() {
         position="top-center"
         gutter={12}
         containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "white",
+            color: "red",
+          },
+        }}
       />
     </>
   );

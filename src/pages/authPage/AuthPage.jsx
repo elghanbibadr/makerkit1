@@ -8,18 +8,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { SignUp } from "../../services/apiAuth";
 // import { useLogin } from "../../hook/useLogin";
+import toast from "react-hot-toast";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     if (isSignUp) {
       console.log("sign up");
-      return SignUp(data.email, data.password);
+      await SignUp(data.email, data.password);
+    } else {
+      await Login(data.email, data.password);
     }
-    Login(data.email, data.password);
+
+    // Reset the form values
+    reset();
   };
 
   async function Login(email, password) {
@@ -29,13 +33,10 @@ const AuthPage = ({ isSignUp = true }) => {
         password: password,
       });
 
-      if (error) {
-        throw new Error("Authentication failed");
-      }
-      if (!error) navigate("/dashboard");
+      if (error) return toast.error(error.message);
+      navigate("/dashboard");
     } catch (error) {
-      // Handle unexpected errors, e.g., network issues
-      console.error("Unexpected error during authentication:", error);
+      console.log("hi");
     }
   }
 
