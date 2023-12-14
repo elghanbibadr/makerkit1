@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import menuHamburger from "../../assets/menu.svg";
 import moon from "../../assets/moon.svg";
 import { Link } from "react-router-dom";
 import sun from "../../assets/sun.svg";
 import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
+import { AppContext } from "../../store/AppContext";
 
 const navLinks = ["Sign In", "Blog", "Documentation", "Pricing", "FAQ"];
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isModeCardOpen, setIsModeCardOpen] = useState(false);
+  const { user } = useContext(AppContext);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -17,6 +19,8 @@ const Navbar = () => {
   const toggleMode = () => {
     setIsModeCardOpen((prv) => !prv);
   };
+
+  console.log(user);
 
   return (
     <nav className=" py-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
@@ -55,11 +59,20 @@ const Navbar = () => {
             {/* BUTTONS */}
           </div>
           <div className="hidden lg:flex">
-            <Link to="/auth/signin">
+            {!user && (
+              <Link to="/auth/signin">
+                <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
+                  Sign In
+                </Button>
+              </Link>
+            )}
+
+            {user && (
               <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
-                Sign In
+                Log out
               </Button>
-            </Link>
+            )}
+
             <Link to="/auth/signup">
               <Button className="bg-darkPink rounded-full text-white px-6 py-2">
                 Sign Up

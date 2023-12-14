@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { getCurrentUser } from "../services/apiAuth";
 const AppContext = createContext();
 
-const currentUser = await getCurrentUser();
+const { user: currentUser } = await getCurrentUser();
 const AppContextProvider = ({ children }) => {
   const [user, setUser] = useState(currentUser);
 
