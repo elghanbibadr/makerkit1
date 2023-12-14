@@ -23,3 +23,9 @@ export async function SignUp(email, password) {
   console.log(data);
   return data;
 }
+
+export const getCurrentUser = async () => {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) throw new Error(error.message);
+  return data;
+};

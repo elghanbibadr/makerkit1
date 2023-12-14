@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import arrow from "../../assets/arrow.svg";
 import StatisticChartCard from "../../componenet/Dashbaord/StatisticChartCard";
 import UsersTable from "../../componenet/Dashbaord/UsersTable";
+import { AppContext } from "../../store/AppContext";
 const Dashboard = () => {
   const StatisticData = [
     {

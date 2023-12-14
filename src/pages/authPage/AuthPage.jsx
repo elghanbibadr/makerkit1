@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
 import googlelogo from "../../assets/googlelogo.webp";
 import supabase from "../../../public/supabase/Supabase";
-
+import { AppContext } from "../../store/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { SignUp } from "../../services/apiAuth";
@@ -12,6 +12,9 @@ import { SignUp } from "../../services/apiAuth";
 const AuthPage = ({ isSignUp }) => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+  const { user, setUser } = useContext(AppContext);
+
+  console.log(user);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -33,9 +36,9 @@ const AuthPage = ({ isSignUp }) => {
         console.error("Authentication error:", error);
         throw new Error("Authentication failed");
       }
-      if (!error) navigate("/dashboard");
+      // if (!error) navigate("/dashboard");
       // Return the authentication data if successful
-      console.log(data);
+      setUser(data.user);
     } catch (error) {
       // Handle unexpected errors, e.g., network issues
       console.error("Unexpected error during authentication:", error);

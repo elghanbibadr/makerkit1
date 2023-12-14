@@ -6,7 +6,8 @@ import organizationIcon from "../../assets/organization.svg";
 import TaskIcon from "../../assets/taskIcon.svg";
 import SettingIcon from "../../assets/setting.svg";
 import DashboardIcon from "../../assets/dashboardicon.svg";
-
+import { useContext } from "react";
+import { AppContext } from "../../store/AppContext";
 const navLinks = [
   { name: "Your Organizations", img: organizationIcon },
   { name: "dashboard", img: DashboardIcon },
@@ -15,12 +16,15 @@ const navLinks = [
 ];
 
 const DashboardNav = () => {
+  const { user } = useContext(AppContext);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const currentURL = location.pathname;
 
   return (
     <div>
+      <h1 className="text-white">hello {user.user.email}</h1>
       <div className="flex   mb-10   justify-between md:h-fit">
         <div className="flex items-center">
           <img
