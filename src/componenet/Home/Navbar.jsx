@@ -23,7 +23,7 @@ const Navbar = () => {
 
   console.log(session);
   const closeMenu = () => {
-    if (window.innerWidth > 1000) {
+    if (window.innerWidth > 1023) {
       setMenuOpen(false);
     }
   };
