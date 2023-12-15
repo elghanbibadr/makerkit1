@@ -7,14 +7,21 @@ import { AppContext } from "../../store/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { SignUp } from "../../services/apiAuth";
-// import { useLogin } from "../../hook/useLogin";
 import toast from "react-hot-toast";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = async (data) => {
+    // if (!data.password || !data.email) {
+    //   return alert("fill out all inputs");
+    // }
     if (isSignUp) {
       console.log("sign up");
       await SignUp(data.email, data.password);
@@ -81,8 +88,13 @@ const AuthPage = ({ isSignUp = true }) => {
                 placeholder="your@email"
                 name="email"
                 type="email"
-                {...register("email")}
+                {...register("email", { required: "Email is required" })}
               />
+              {errors.email && (
+                <p className="text-red-600 text-sm font-semibold">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
             <div className="mt-4">
               <label className="small-title " htmlFor="password">
@@ -93,8 +105,13 @@ const AuthPage = ({ isSignUp = true }) => {
                 id="password"
                 name="password"
                 type="password"
-                {...register("password")}
+                {...register("password", { required: "Password is required" })}
               />
+              {errors.password && (
+                <p className="text-red-600 text-sm font-semibold">
+                  {errors.password.message}
+                </p>
+              )}
               {!isSignUp && (
                 <span className="text-[.79rem] cursor-pointer inline-block mt-4 hover:underline font-medium  text-gray-400">
                   Password forgotten?
