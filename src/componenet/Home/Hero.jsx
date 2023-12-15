@@ -1,5 +1,6 @@
 import CtaCard from "./CtaCard";
 import Button from "../../ui/Button";
+import { Link } from "react-router-dom";
 import dashboardImg from "../../assets/dashboard-dark.webp";
 
 const Hero = () => {
@@ -24,13 +25,14 @@ const Hero = () => {
         className="bg-darkPink rounded-full   text-white   py-5 px-6 "
         withArrow={true}
       >
-        <span>Get Started</span>
+        <Link to="auth/signup">
+          <span>Get Started</span>
+        </Link>
       </Button>
       <p className=" text-xs mt-3 text-gray-500 dark:text-gray-400">
         Free plan. No credit card required.
       </p>
       <div className="mt-20   py-12 max-w-5xl mx-auto ">
-        {/* animate-in fade-in  duration-1000 slide-in-from-top-16 fill-mode-both delay-300 */}
         <img
           className="rounded-md shadow-pinkBoxShadow2"
           src={dashboardImg}

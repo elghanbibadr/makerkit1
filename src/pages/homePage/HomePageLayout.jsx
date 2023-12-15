@@ -1,13 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../../componenet/Home/Footer";
 import Navbar from "../../componenet/Home/Navbar";
+import Container from "../../ui/Container";
+
 const HomePageLayout = () => {
   return (
-    <>
+    <Container>
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </Container>
   );
 };
 
