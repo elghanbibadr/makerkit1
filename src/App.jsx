@@ -22,7 +22,7 @@ import ProfilPasswordPage from "./pages/settings/profil/ProfilPasswordPage";
 import OrganizationGeneralPage from "./pages/settings/organization/OrganizationGeneralPage";
 import OrganizationMemberPage from "./pages/settings/organization/OrganizationMemberPage";
 import HomePageLayout from "./pages/homePage/HomePageLayout";
-
+import FaqPage from "./pages/Faq/FaqPage";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import PricingPage from "./pages/Pricing/PricingPage";
@@ -45,6 +45,7 @@ function App() {
             <Route path="/" element={<HomePageLayout />}>
               <Route index path="/" element={<HomePage />} />
               <Route path="pricing" element={<PricingPage />} />
+              <Route path="faq" element={<FaqPage />} />
             </Route>
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />

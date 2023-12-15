@@ -1,7 +1,7 @@
 import Button from "./Button";
 import checkmark from "../assets/checkmark.svg";
 import proplanicon from "../assets/proplanicon.svg";
-
+import { Link } from "react-router-dom";
 const PricingCard = ({
   title,
   description,
@@ -56,13 +56,15 @@ const PricingCard = ({
           </li>
         ))}
       </ul>
-      <Button
-        className={` text-white w-full mt-6 rounded-md ${
-          title === "Pro" ? "button-pink" : "button-transparent"
-        }`}
-      >
-        {cta}
-      </Button>
+      <Link to="/auth/signup">
+        <Button
+          className={` text-white w-full mt-6 rounded-md ${
+            title === "Pro" ? "button-pink" : "button-transparent"
+          }`}
+        >
+          {cta}
+        </Button>
+      </Link>
     </div>
   );
 };
