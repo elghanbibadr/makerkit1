@@ -23,7 +23,9 @@ const AuthPage = ({ isSignUp = true }) => {
     //   return alert("fill out all inputs");
     // }
     if (isSignUp) {
-      console.log("sign up");
+      if (data.repeatedpassword !== data.password) {
+        return toast.error("passwords are not matched");
+      }
       await SignUp(data.email, data.password);
     } else {
       await Login(data.email, data.password);
@@ -34,17 +36,13 @@ const AuthPage = ({ isSignUp = true }) => {
   };
 
   async function Login(email, password) {
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
 
-      if (error) return toast.error(error.message);
-      navigate("/dashboard");
-    } catch (error) {
-      console.log("hi");
-    }
+    if (error) return toast.error(error.message);
+    navigate("/dashboard");
   }
 
   // SIGN UP FUNCTION
@@ -54,9 +52,8 @@ const AuthPage = ({ isSignUp = true }) => {
       password: password,
     });
 
-    if (error) throw new Error(error.message);
-    console.log(data);
-    return data;
+    if (error) return toast.error(error.message);
+    navigate("/dashboard");
   }
   return (
     <div className="flex flex-col justify-center items-center h-screen">
@@ -128,8 +125,15 @@ const AuthPage = ({ isSignUp = true }) => {
                   id="repeatpassword"
                   name="repeatpassword"
                   type="password"
-                  {...register("repeatedpassword")}
+                  {...register("repeatedpassword", {
+                    required: "Repeated Password is required",
+                  })}
                 />
+                {errors.repeatedpassword && (
+                  <p className="text-red-600 text-sm font-semibold">
+                    {errors.repeatedpassword.message}
+                  </p>
+                )}
                 <span className="text-[.79rem] cursor-pointer inline-block mt-4 hover:underline font-medium  text-gray-400">
                   type your password again
                 </span>
