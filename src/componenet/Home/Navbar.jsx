@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import menuHamburger from "../../assets/menu.svg";
 import moon from "../../assets/moon.svg";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import Button from "../../ui/Button";
 import { AppContext } from "../../store/AppContext";
 import { logout } from "../../services/apiAuth";
 
-const navLinks = ["Sign In", "Blog", "Documentation", "Pricing", "FAQ"];
+const navLinks = ["Blog", "Documentation", "Pricing", "FAQ"];
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isModeCardOpen, setIsModeCardOpen] = useState(false);
@@ -22,6 +22,19 @@ const Navbar = () => {
   };
 
   console.log(session);
+  const closeMenu = () => {
+    if (window.innerWidth > 1000) {
+      setMenuOpen(false);
+    }
+  };
+
+  // useEffect to add event listener for window resize
+  useEffect(() => {
+    window.addEventListener("resize", closeMenu);
+    return () => {
+      window.removeEventListener("resize", closeMenu);
+    };
+  }, []);
 
   return (
     <nav className=" py-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
@@ -114,6 +127,11 @@ const Navbar = () => {
                   </a>
                 </li>
               ))}
+              <li className="p-1 lg:hidden lg:px-2.5 text-sm  font-medium  rounded-md  text-gray-600 dark:text-gray-300">
+                <a href="#" className="text-white">
+                  sign in
+                </a>
+              </li>
             </ul>
           </div>
         </div>
