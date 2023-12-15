@@ -55,6 +55,14 @@ const AuthPage = ({ isSignUp = true }) => {
     if (error) return toast.error(error.message);
     navigate("/dashboard");
   }
+  const handleGoogleSignIn = async () => {
+    const { user, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+
+    console.log(user);
+    if (error) console.log(error);
+  };
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div>
@@ -65,10 +73,13 @@ const AuthPage = ({ isSignUp = true }) => {
           <h5 className="scroll-m-20 font-heading text-lg font-medium text-white text-center">
             {isSignUp ? "Create account" : "Sign in to your account"}
           </h5>
-          <Button className="button-transparent mt-6 w-full flex justify-between rounded-md p-4">
+          <Button
+            onClick={handleGoogleSignIn}
+            className="button-transparent mt-6 w-full flex justify-between rounded-md p-4"
+          >
             <img className="h-6" src={googlelogo} alt="google logo image" />
             <span className="text-center w-full  text-white">
-              Sign in with Google
+              Sign {isSignUp ? "up" : "in"} with Google
             </span>
           </Button>
           <span className="text-[.8rem] mt-4 font-medium flex items-center justify-center text-gray-400">
@@ -134,9 +145,6 @@ const AuthPage = ({ isSignUp = true }) => {
                     {errors.repeatedpassword.message}
                   </p>
                 )}
-                <span className="text-[.79rem] cursor-pointer inline-block mt-4 hover:underline font-medium  text-gray-400">
-                  type your password again
-                </span>
               </div>
             )}
 
