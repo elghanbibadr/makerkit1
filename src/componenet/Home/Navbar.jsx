@@ -1,14 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import menuHamburger from "../../assets/menu.svg";
-import moon from "../../assets/moon.svg";
 import { Link } from "react-router-dom";
+import moon from "../../assets/moon.svg";
 import sun from "../../assets/sun.svg";
 import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
 import { AppContext } from "../../store/AppContext";
 import { logout } from "../../services/apiAuth";
 
-const navLinks = ["Blog", "Documentation", "Pricing", "FAQ"];
+const navLinks = [
+  { navLink: "Blog", href: "blog" },
+  { navLink: "Documentation", href: "documentation" },
+  { navLink: "Pricing", href: "pricing" },
+  { navLink: "FAQ", href: "faq" },
+];
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isModeCardOpen, setIsModeCardOpen] = useState(false);
@@ -40,7 +45,9 @@ const Navbar = () => {
     <nav className=" py-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
       <div className="container mx-auto flex justify-between items-center">
         <div className="w-[80%] lg:w-auto">
-          <img src={logo} alt="malerkit logo" />
+          <Link to="/">
+            <img src={logo} alt="malerkit logo" />
+          </Link>
         </div>
 
         {/* dark and light mode togglers */}
@@ -117,14 +124,14 @@ const Navbar = () => {
             }`}
           >
             <ul className="lg:flex">
-              {navLinks.map((navLink) => (
+              {navLinks.map(({ navLink, href }) => (
                 <li
                   key={navLink.id}
                   className="p-1 lg:px-2.5 text-sm  font-medium  rounded-md  text-gray-600 dark:text-gray-300"
                 >
-                  <a href="#" className="text-white">
+                  <Link to={href} className="text-white">
                     {navLink}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li className="p-1 lg:hidden lg:px-2.5 text-sm  font-medium  rounded-md  text-gray-600 dark:text-gray-300">
