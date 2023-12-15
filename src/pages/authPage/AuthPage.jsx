@@ -19,9 +19,6 @@ const AuthPage = ({ isSignUp = true }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // if (!data.password || !data.email) {
-    //   return alert("fill out all inputs");
-    // }
     if (isSignUp) {
       if (data.repeatedpassword !== data.password) {
         return toast.error("passwords are not matched");
@@ -60,8 +57,10 @@ const AuthPage = ({ isSignUp = true }) => {
       provider: "google",
     });
 
-    console.log(user);
-    if (error) console.log(error);
+    if (error) {
+      return toast.error(error.message);
+    }
+    if (!error) navigate("/dashboard");
   };
   return (
     <div className="flex flex-col justify-center items-center h-screen">
