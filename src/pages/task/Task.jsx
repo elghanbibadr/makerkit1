@@ -3,6 +3,8 @@ import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 import Overlay from "../../ui/Overlay";
 import NewTaskModal from "./NewTaskModal";
+import { useQuery } from "react-query";
+import { getTasks } from "../../services/apiTasks";
 const taskData = [
   {
     Name: "vvvvvv",
@@ -27,6 +29,16 @@ const Task = () => {
   const [taskUpdateCardOpen, setTaskUpdateCardOpen] = useState(
     Array(taskData.length).fill(false)
   );
+
+  // FETCHING TASKS FROM SUPABASE DEPENDING ON USERID
+
+  const x = useQuery({
+    queryKey: ["tasks"],
+    queryFn: getTasks,
+  });
+
+  console.log(x);
+  console.log("hieee");
 
   const toggleUpdateCard = (index) => {
     const newCardOpenState = [...taskUpdateCardOpen];

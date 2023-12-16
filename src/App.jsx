@@ -26,6 +26,7 @@ import FaqPage from "./pages/Faq/FaqPage";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import PricingPage from "./pages/Pricing/PricingPage";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,8 +39,6 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-
         <Router>
           <Routes>
             <Route path="/" element={<HomePageLayout />}>
@@ -70,6 +69,7 @@ function App() {
             <Route path="/auth/signup" element={<SignUp />} />
           </Routes>
         </Router>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
       <Toaster
         position="top-center"
