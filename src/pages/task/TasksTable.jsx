@@ -5,9 +5,11 @@ import { getTasks } from "../../services/apiTasks";
 const TasksTable = ({ taskUpdateCardOpen, toggleUpdateCard }) => {
   // FETCHING TASKS FROM SUPABASE DEPENDING ON USERID
   const { data: tasks } = useQuery({
-    queryKey: ["tasks"],
-    queryFn: getTasks,
+    queryKey: ["tasks"], // Include the user ID in the query key
+    queryFn: () => getTasks("ea203a37-5f72-40d7-bd78-b69c60c35382"),
   });
+
+  console.log(tasks);
   return (
     <table className="w-full  border p-2 mt-6 border-accent1 rounded-md">
       <thead className="text-gray-400  text-left border-b border-accent1">

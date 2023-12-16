@@ -3,7 +3,7 @@ import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 import Overlay from "../../ui/Overlay";
 import NewTaskModal from "./NewTaskModal";
-
+import LoadingSpinner from "../../ui/LoadingSpinner";
 import TasksTable from "./TasksTable";
 
 const Task = () => {
@@ -48,6 +48,7 @@ const Task = () => {
           toggleUpdateCard={toggleUpdateCard}
         />
       </div>
+      <LoadingSpinner />
       {newTaskModalOpen && (
         <Overlay>
           <NewTaskModal />
