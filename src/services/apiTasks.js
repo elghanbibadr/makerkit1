@@ -12,3 +12,14 @@ export async function getTasks(userId) {
 
   return tasks;
 }
+
+export async function createTask(taskDetails) {
+  // Replace 'tasks' with your actual table name
+  const { error } = await supabase.from("tasks").insert([taskDetails]);
+
+  if (error) {
+    console.log(error);
+  }
+
+  // return newTask;
+}

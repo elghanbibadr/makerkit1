@@ -50,7 +50,7 @@ const Task = () => {
       </div>
       {newTaskModalOpen && (
         <Overlay>
-          <NewTaskModal />
+          <NewTaskModal setNewTaskModelOpen={setNewTaskModelOpen} />
         </Overlay>
       )}
     </>
