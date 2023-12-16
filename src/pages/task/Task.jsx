@@ -48,7 +48,6 @@ const Task = () => {
           toggleUpdateCard={toggleUpdateCard}
         />
       </div>
-      <LoadingSpinner />
       {newTaskModalOpen && (
         <Overlay>
           <NewTaskModal />
