@@ -1,21 +1,15 @@
-import ClipLoader from "react-spinners/ClipLoader";
+import { RingLoader } from "react-spinners";
 
 const override = {
-  display: "block",
   margin: "0 auto",
-  borderColor: "red",
 };
-const LoadingSpinner = () => {
-  let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState("#ffffff");
+const LoadingSpinner = (isloading) => {
   return (
-    <ClipLoader
-      color={color}
-      loading={loading}
+    <RingLoader
+      color="#ffffff"
+      loading={isloading}
       cssOverride={override}
-      size={150}
-      aria-label="Loading Spinner"
-      data-testid="loader"
+      size={27}
     />
   );
 };
