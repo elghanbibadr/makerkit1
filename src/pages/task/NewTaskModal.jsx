@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { createTask } from "../../services/apiTasks";
 import toast from "react-hot-toast";
+import { useContext } from "react";
+import { AppContext } from "../../store/AppContext";
 
 function generateUniqueRandomNumber() {
   // Multiply Math.random() by a large number to get a floating-point value,
@@ -15,10 +17,12 @@ function generateUniqueRandomNumber() {
 
 // eslint-disable-next-line react/prop-types
 const NewTaskModal = ({ setNewTaskModelOpen }) => {
+  const { session } = useContext(AppContext);
+  const currentUserId = session.user.id;
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -34,8 +38,14 @@ const NewTaskModal = ({ setNewTaskModelOpen }) => {
   });
 
   const onSubmit = (data) => {
-    mutate({ id: generateUniqueRandomNumber(), ...data });
+    mutate({
+      id: generateUniqueRandomNumber(),
+      userId: currentUserId,
+      ...data,
+    });
   };
+
+  console.log();
 
   return (
     <Modal>

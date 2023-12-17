@@ -25,8 +25,6 @@ const AppContextProvider = ({ children }) => {
     setSession,
   };
 
-  console.log("session", session);
-
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
