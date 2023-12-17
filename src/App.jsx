@@ -28,7 +28,7 @@ import { Toaster } from "react-hot-toast";
 import PricingPage from "./pages/Pricing/PricingPage";
 import { ReactQueryDevtools } from "react-query/devtools";
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000,

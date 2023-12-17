@@ -1,25 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { getTasks } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
+import { AppContext } from "../../store/AppContext";
 const TasksTable = ({ taskUpdateCardOpen, toggleUpdateCard }) => {
+  const { session } = useContext(AppContext);
+  console.log(session);
+  const userId = session?.user.id;
+  console.log(userId);
   // FETCHING TASKS FROM SUPABASE DEPENDING ON USERID
   const {
     data: tasks,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["tasks"], // Include the user ID in the query key
-    queryFn: () => getTasks("ea203a37-5f72-40d7-bd78-b69c60c35382"),
+    queryKey: ["tasks", userId], // Include the user ID in the query key
+    queryFn: () => getTasks("a56a7fe3-3f38-40b7-83f2-caa33f3daac7"),
   });
+
+  // console.log("tasks", tasks);
 
   return (
     <>
       {isLoading && <LoadingSpinner />}
-
+      {!isLoading && !error && tasks?.length === 0 && (
+        <div className="text-white my-5">
+          <h2 className="my-2">
+            Hey, it looks like you don't have any tasks yet... 🤔
+          </h2>
+          <h3>Create your first task by clicking on the button below</h3>
+        </div>
+      )}
       {!isLoading && (
-        <table className="w-full  border p-2 mt-6 border-accent1 rounded-md">
-          <thead className="text-gray-400  text-left border-b border-accent1">
+        <table className="w-full  border  p-2 mt-6 border-accent1 rounded-full">
+          <thead className="text-gray-400  text-left border-b border-accent1 ">
             <tr>
               <th>Name</th>
               <th>Description</th>

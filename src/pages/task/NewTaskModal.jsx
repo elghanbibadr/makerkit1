@@ -5,8 +5,8 @@ import { useMutation } from "react-query";
 import { createTask } from "../../services/apiTasks";
 import toast from "react-hot-toast";
 import { useContext } from "react";
+import { queryClient } from "../../App";
 import { AppContext } from "../../store/AppContext";
-
 function generateUniqueRandomNumber() {
   // Multiply Math.random() by a large number to get a floating-point value,
   // then convert it to an integer using Math.floor().
@@ -30,6 +30,7 @@ const NewTaskModal = ({ setNewTaskModelOpen }) => {
     mutationFn: createTask,
     onSuccess: () => {
       toast.success("Task successfully created");
+      queryClient.invalidateQueries("tasks");
       setNewTaskModelOpen(false);
     },
     onError: (err) => {
