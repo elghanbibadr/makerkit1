@@ -1,7 +1,8 @@
-const Button = ({ children, className, withArrow, onClick }) => {
+const Button = ({ children, className, withArrow, onClick, type }) => {
   return (
     <button
       onClick={onClick}
+      type={type}
       className={`inline-flex items-center capitalize justify-center font-medium  transition-colors ${className}`}
     >
       {children}

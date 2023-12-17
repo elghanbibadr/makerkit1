@@ -13,7 +13,6 @@ const TasksTable = ({ taskUpdateCardOpen, toggleUpdateCard }) => {
     queryFn: () => getTasks("ea203a37-5f72-40d7-bd78-b69c60c35382"),
   });
 
-  console.log(tasks);
   return (
     <>
       {isLoading && <LoadingSpinner />}

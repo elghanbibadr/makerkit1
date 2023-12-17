@@ -4,6 +4,16 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { createTask } from "../../services/apiTasks";
 import toast from "react-hot-toast";
+
+function generateUniqueRandomNumber() {
+  // Multiply Math.random() by a large number to get a floating-point value,
+  // then convert it to an integer using Math.floor().
+  const randomNumber = Math.floor(Math.random() * 1000000);
+
+  return randomNumber;
+}
+
+// eslint-disable-next-line react/prop-types
 const NewTaskModal = ({ setNewTaskModelOpen }) => {
   const {
     register,
@@ -16,6 +26,7 @@ const NewTaskModal = ({ setNewTaskModelOpen }) => {
     mutationFn: createTask,
     onSuccess: () => {
       toast.success("Task successfully created");
+      setNewTaskModelOpen(false);
     },
     onError: (err) => {
       toast.error(err.message);
@@ -23,7 +34,7 @@ const NewTaskModal = ({ setNewTaskModelOpen }) => {
   });
 
   const onSubmit = (data) => {
-    mutate(data);
+    mutate({ id: generateUniqueRandomNumber(), ...data });
   };
 
   return (
@@ -68,20 +79,25 @@ const NewTaskModal = ({ setNewTaskModelOpen }) => {
           )}
         </div>
         <div>
-          <label className="block text-lightGrey font-medium" htmlFor="name">
+          <label
+            className="block text-lightGrey font-medium"
+            htmlFor="taskDescription"
+          >
             Description
           </label>
           <textarea
             className="input w-full "
             type="text"
+            name="taskDescription"
+            id="taskDescription"
             placeholder="Describe the task "
-            {...register("taskdescription", {
-              required: "Taskdescription is required",
+            {...register("taskDescription", {
+              required: "TaskDescription is required",
             })}
           />
-          {errors.taskdescription && (
+          {errors.taskDescription && (
             <p className="text-red-600 text-sm font-semibold">
-              {errors.taskdescription.message}
+              {errors.taskDescription.message}
             </p>
           )}
         </div>
@@ -94,7 +110,10 @@ const NewTaskModal = ({ setNewTaskModelOpen }) => {
             Leave empty to set the due date to tomorrow
           </span>
         </div>
-        <Button className="bg-darkPink  p-3 px-5 rounded-md text-sm text-white">
+        <Button
+          type="submit"
+          className="bg-darkPink  p-3 px-5 rounded-md text-sm text-white"
+        >
           Create Task
         </Button>
       </form>

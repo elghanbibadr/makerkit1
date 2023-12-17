@@ -50,8 +50,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* dark and light mode togglers */}
-        {/* <div className="flex items-center w-1/2 "> */}
         <div className="lg:flex lg:items-center lg:order-2">
           <div className="relative  mr-10 ">
             <img
