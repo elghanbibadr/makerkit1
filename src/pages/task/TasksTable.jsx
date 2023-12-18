@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
-import { getTasks } from "../../services/apiTasks";
+import { getTasks, markTaskAsTodo } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { AppContext } from "../../store/AppContext";
 import { DeleteTaskModal } from "./DeleteTaskModal";
@@ -40,6 +40,9 @@ const TasksTable = () => {
 
   const handleTaskMarkedAsDone = (taskId) => {
     markTaskAsDone(taskId);
+  };
+  const handleTaskMarkedAsTodo = (taskId) => {
+    markTaskAsTodo(taskId);
   };
 
   return (
@@ -99,12 +102,22 @@ const TasksTable = () => {
                     {openTaskId === index && (
                       <ul className="shadow-pinkBoxShadow border w-[130px] mb-10 border-gray-50 border-opacity-10 font-medium text-sm py-4 bg-[#030712] z-10 p-2 px-5 rounded-md absolute top-10 -right-0">
                         <li onClick={() => console.log(task.id)}>View Task</li>
-                        <li
-                          className="my-1"
-                          onClick={() => handleTaskMarkedAsDone(task.id)}
-                        >
-                          Mark as Done
-                        </li>
+                        {!task.isDone && (
+                          <li
+                            className="my-2"
+                            onClick={() => handleTaskMarkedAsDone(task.id)}
+                          >
+                            Mark as Done
+                          </li>
+                        )}
+                        {task.isDone && (
+                          <li
+                            className="my-2"
+                            onClick={() => handleTaskMarkedAsTodo(task.id)}
+                          >
+                            Mark as Todo
+                          </li>
+                        )}
                         <li onClick={() => handleTaskDelete(task.id)}>
                           Delete Task
                         </li>

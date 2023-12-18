@@ -20,8 +20,6 @@ export async function createTask(taskDetails) {
   if (error) {
     console.log(error);
   }
-
-  // return newTask;
 }
 
 export async function deleteTask(taskId) {
@@ -53,6 +51,16 @@ export async function markTaskAsDone(taskId) {
   if (error) {
     console.log(error);
   }
+}
 
-  // return newTask;
+// task AS Todo
+export async function markTaskAsTodo(taskId) {
+  // Replace 'tasks' with your actual table name
+  const { data, error } = await supabase
+    .from("tasks") // Replace 'yourTableName' with your actual table name
+    .update({ ["isDone"]: false })
+    .eq("id", taskId); // Replace 'id' with the actual name of your ID column
+  if (error) {
+    console.log(error);
+  }
 }
