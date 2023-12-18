@@ -9,13 +9,7 @@ import TasksTable from "./TasksTable";
 const Task = () => {
   // const [taskUpdateCardOpen, setTaskUpdateCardOpen] = useState(false);
   const [newTaskModalOpen, setNewTaskModelOpen] = useState(false);
-  const [taskUpdateCardOpen, setTaskUpdateCardOpen] = useState(true);
 
-  const toggleUpdateCard = (index) => {
-    const newCardOpenState = [...taskUpdateCardOpen];
-    newCardOpenState[index] = !newCardOpenState[index];
-    setTaskUpdateCardOpen(newCardOpenState);
-  };
   return (
     <>
       <div>
@@ -43,10 +37,7 @@ const Task = () => {
           </Button>
           <input type="email" placeholder="Search for task" className="input" />
         </div>
-        <TasksTable
-          taskUpdateCardOpen={taskUpdateCardOpen}
-          toggleUpdateCard={toggleUpdateCard}
-        />
+        <TasksTable />
       </div>
       {newTaskModalOpen && (
         <Overlay>
