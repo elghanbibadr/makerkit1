@@ -10,6 +10,7 @@ const TasksTable = () => {
   const { session } = useContext(AppContext);
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
+  const [taskToDeleteId, setTaskToDelete] = useState(null);
 
   const toggleTaskDetails = (taskId) => {
     setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
@@ -27,6 +28,12 @@ const TasksTable = () => {
     queryFn: () => getTasks(userId),
   });
 
+  // Task delete handler
+
+  const handleTaskDelete = (taskId) => {
+    setDeleteTaskModelOpen(true);
+    setTaskToDelete(taskId);
+  };
   return (
     <>
       {isLoading && <LoadingSpinner />}
@@ -74,9 +81,9 @@ const TasksTable = () => {
                     </svg>
                     {openTaskId === index && (
                       <ul className="shadow-pinkBoxShadow border w-[130px] mb-10 border-gray-50 border-opacity-10 font-medium text-sm py-4 bg-[#030712] z-10 p-2 px-5 rounded-md absolute top-10 -right-0">
-                        <li onClick={() => console.log(index)}>View Task</li>
+                        <li onClick={() => console.log(task.id)}>View Task</li>
                         <li className="my-1">Mark as Done</li>
-                        <li onClick={() => setDeleteTaskModelOpen(true)}>
+                        <li onClick={() => handleTaskDelete(task.id)}>
                           Delete Task
                         </li>
                       </ul>
@@ -89,7 +96,10 @@ const TasksTable = () => {
       )}
       {deleteTaskModalOpen && (
         <Overlay>
-          <DeleteTaskModal setDeleteTaskModelOpen={setDeleteTaskModelOpen} />
+          <DeleteTaskModal
+            setDeleteTaskModelOpen={setDeleteTaskModelOpen}
+            taskToDeleteId={taskToDeleteId}
+          />
         </Overlay>
       )}
     </>

@@ -23,3 +23,22 @@ export async function createTask(taskDetails) {
 
   // return newTask;
 }
+
+export async function deleteTask(taskId) {
+  try {
+    const { data, error } = await supabase
+      .from("tasks")
+      .delete()
+      .eq("id", taskId);
+
+    if (error) {
+      console.error("Error deleting task:", error.message);
+      throw error;
+    }
+
+    return data; // Optionally return data if needed
+  } catch (error) {
+    console.error("Error in deleteTask:", error.message);
+    throw error; // Rethrow the error to be caught by the calling code
+  }
+}

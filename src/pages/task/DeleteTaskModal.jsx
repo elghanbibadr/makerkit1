@@ -1,7 +1,32 @@
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
+import { deleteTask as deleteTaskApi } from "../../services/apiTasks";
+import { queryClient } from "../../App";
+import { useMutation } from "react-query";
+import toast from "react-hot-toast";
+export const DeleteTaskModal = ({ setDeleteTaskModelOpen, taskToDeleteId }) => {
+  console.log(taskToDeleteId);
+  const {
+    mutate: deleteTask,
+    isLoading: isDeleting,
+    error,
+  } = useMutation({
+    // queryKey: ["tasks", taskId],
+    mutationFn: (taskId) => deleteTaskApi(taskId),
+    onSuccess: () => {
+      toast.success("task deleted successfully");
+      setDeleteTaskModelOpen(false);
+      queryClient.invalidateQueries("tasks");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 
-export const DeleteTaskModal = ({ setDeleteTaskModelOpen }) => {
+  const handleTaskDeleteConfirm = () => {
+    deleteTask(taskToDeleteId);
+  };
+
   return (
     <Modal>
       <div className="text-white">
@@ -29,7 +54,10 @@ export const DeleteTaskModal = ({ setDeleteTaskModelOpen }) => {
           You are about to delete the task badt Do you want to continue?
         </p>
 
-        <Button className="bg-[#721b1c] rounded-md p-2 px-3">
+        <Button
+          onClick={handleTaskDeleteConfirm}
+          className="bg-[#721b1c] rounded-md p-2 px-3"
+        >
           Yep,delete task
         </Button>
       </div>
