@@ -5,6 +5,7 @@ import LoadingSpinner from "../../ui/LoadingSpinner";
 import { AppContext } from "../../store/AppContext";
 import { DeleteTaskModal } from "./DeleteTaskModal";
 import Overlay from "../../ui/Overlay";
+import { markTaskAsDone } from "../../services/apiTasks";
 
 const TasksTable = () => {
   const { session } = useContext(AppContext);
@@ -34,6 +35,13 @@ const TasksTable = () => {
     setDeleteTaskModelOpen(true);
     setTaskToDelete(taskId);
   };
+
+  // taske as done handler
+
+  const handleTaskMarkedAsDone = (taskId) => {
+    markTaskAsDone(taskId);
+  };
+
   return (
     <>
       {isLoading && <LoadingSpinner />}
@@ -60,7 +68,14 @@ const TasksTable = () => {
                 <tr key={task.id} className="text-left border-b border-accent1">
                   <td>{task.taskName}</td>
                   <td>{task.taskDescription}</td>
-                  <td>{task.taskDueDate}</td>
+                  {!task.isDone && <td>{task.taskDueDate}</td>}
+                  {task.isDone && (
+                    <td>
+                      {" "}
+                      <span className="text-white text-xl">Done</span>{" "}
+                    </td>
+                  )}
+
                   <td className="w-5 cursor-pointer relative">
                     <svg
                       onClick={() => toggleTaskDetails(index)}
@@ -82,7 +97,12 @@ const TasksTable = () => {
                     {openTaskId === index && (
                       <ul className="shadow-pinkBoxShadow border w-[130px] mb-10 border-gray-50 border-opacity-10 font-medium text-sm py-4 bg-[#030712] z-10 p-2 px-5 rounded-md absolute top-10 -right-0">
                         <li onClick={() => console.log(task.id)}>View Task</li>
-                        <li className="my-1">Mark as Done</li>
+                        <li
+                          className="my-1"
+                          onClick={() => handleTaskMarkedAsDone(task.id)}
+                        >
+                          Mark as Done
+                        </li>
                         <li onClick={() => handleTaskDelete(task.id)}>
                           Delete Task
                         </li>
