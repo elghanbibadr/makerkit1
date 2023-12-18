@@ -72,7 +72,9 @@ const TasksTable = () => {
                   {task.isDone && (
                     <td>
                       {" "}
-                      <span className="text-white text-xl">Done</span>{" "}
+                      <span className="text-green-500 text-xs bg-[#22c55e1a] font-semibold px-2 py-1 rounded-md ">
+                        Done
+                      </span>{" "}
                     </td>
                   )}
 
