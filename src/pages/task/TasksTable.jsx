@@ -3,9 +3,13 @@ import { useQuery } from "react-query";
 import { getTasks } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { AppContext } from "../../store/AppContext";
-const TasksTable = ({ taskUpdateCardOpen, toggleUpdateCard }) => {
+import { DeleteTaskModal } from "./DeleteTaskModal";
+import Overlay from "../../ui/Overlay";
+
+const TasksTable = () => {
   const { session } = useContext(AppContext);
   const [openTaskId, setOpenTaskId] = useState(null);
+  const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
 
   const toggleTaskDetails = (taskId) => {
     setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
@@ -19,7 +23,7 @@ const TasksTable = ({ taskUpdateCardOpen, toggleUpdateCard }) => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["tasks", userId], // Include the user ID in the query key
+    queryKey: ["tasks", userId],
     queryFn: () => getTasks(userId),
   });
 
@@ -52,7 +56,7 @@ const TasksTable = ({ taskUpdateCardOpen, toggleUpdateCard }) => {
                   <td>{task.taskDueDate}</td>
                   <td className="w-5 cursor-pointer relative">
                     <svg
-                      onClick={() => toggleTaskDetails(task.id)}
+                      onClick={() => toggleTaskDetails(index)}
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -68,11 +72,13 @@ const TasksTable = ({ taskUpdateCardOpen, toggleUpdateCard }) => {
                         d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
                       ></path>
                     </svg>
-                    {openTaskId === task.id && (
+                    {openTaskId === index && (
                       <ul className="shadow-pinkBoxShadow border w-[130px] mb-10 border-gray-50 border-opacity-10 font-medium text-sm py-4 bg-[#030712] z-10 p-2 px-5 rounded-md absolute top-10 -right-0">
                         <li onClick={() => console.log(index)}>View Task</li>
                         <li className="my-1">Mark as Done</li>
-                        <li>Delete Task</li>
+                        <li onClick={() => setDeleteTaskModelOpen(true)}>
+                          Delete Task
+                        </li>
                       </ul>
                     )}
                   </td>
@@ -80,6 +86,11 @@ const TasksTable = ({ taskUpdateCardOpen, toggleUpdateCard }) => {
               ))}
           </tbody>
         </table>
+      )}
+      {deleteTaskModalOpen && (
+        <Overlay>
+          <DeleteTaskModal setDeleteTaskModelOpen={setDeleteTaskModelOpen} />
+        </Overlay>
       )}
     </>
   );

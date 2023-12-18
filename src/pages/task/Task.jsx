@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
-import Modal from "../../ui/Modal";
 import Overlay from "../../ui/Overlay";
 import NewTaskModal from "./NewTaskModal";
-import LoadingSpinner from "../../ui/LoadingSpinner";
 import TasksTable from "./TasksTable";
 
 const Task = () => {
-  // const [taskUpdateCardOpen, setTaskUpdateCardOpen] = useState(false);
   const [newTaskModalOpen, setNewTaskModelOpen] = useState(false);
 
   return (
