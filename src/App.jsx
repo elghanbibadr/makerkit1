@@ -64,7 +64,7 @@ function App() {
                 <Route path="subscription" element={<SettingSubscription />} />
               </Route>
               <Route path="dashboard/tasks" element={<Task />} />
-              <Route path="dashboard/tasks/:id" element={<SingleTask />} />
+              <Route path="dashboard/tasks/:taskId" element={<SingleTask />} />
               {/* </Route> */}
             </Route>
             <Route path="/auth/signin" element={<SignIn />} />

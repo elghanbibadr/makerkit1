@@ -1,10 +1,15 @@
 import { useContext } from "react";
 import { AppContext } from "../../store/AppContext";
+import { useParams } from "react-router-dom";
 import Button from "../../ui/Button";
 const SingleTask = () => {
   const { tasks } = useContext(AppContext);
+  const { taskId } = useParams();
 
-  console.log(tasks);
+  const taskToBeEdited = tasks?.find((task) => task.id == taskId);
+  console.log(taskToBeEdited);
+
+  console.log(taskId);
   return (
     <div className="text-white text-3xl">
       <div className="flex justify-between">

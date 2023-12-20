@@ -7,31 +7,18 @@ import { DeleteTaskModal } from "./DeleteTaskModal";
 import { Link } from "react-router-dom";
 import Overlay from "../../ui/Overlay";
 import { markTaskAsDone } from "../../services/apiTasks";
-
+import { useTask } from "../../hook/usetasks";
 const TasksTable = () => {
   const { session, setTasks } = useContext(AppContext);
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
   const [taskToDeleteId, setTaskToDelete] = useState(null);
+  const userId = session?.user.id;
+  const { tasks, isLoading, error } = useTask(userId);
 
   const toggleTaskDetails = (taskId) => {
     setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
-  console.log(session);
-  const userId = session?.user.id;
-  console.log(userId);
-  // FETCHING TASKS FROM SUPABASE DEPENDING ON USERID
-  const {
-    data: tasks,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["tasks", userId],
-    queryFn: () => getTasks(userId),
-    onSuccess: (data) => {
-      setTasks(data);
-    },
-  });
 
   // Task delete handler
 
