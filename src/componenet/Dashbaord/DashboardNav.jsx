@@ -26,7 +26,7 @@ const DashboardNav = () => {
     <div>
       <h1 className="text-white">hello {session?.user.email}</h1>
       <div className="flex   mb-10   justify-between md:h-fit">
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <img
             onClick={() => setIsMenuOpen((prv) => !prv)}
             className="h-10 mr-2 lg:hidden"

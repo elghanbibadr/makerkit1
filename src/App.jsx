@@ -23,7 +23,7 @@ import OrganizationGeneralPage from "./pages/settings/organization/OrganizationG
 import OrganizationMemberPage from "./pages/settings/organization/OrganizationMemberPage";
 import HomePageLayout from "./pages/homePage/HomePageLayout";
 import FaqPage from "./pages/Faq/FaqPage";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import SingleTask from "./pages/task/SingleTask";
 import { Toaster } from "react-hot-toast";
 import PricingPage from "./pages/Pricing/PricingPage";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -64,6 +64,8 @@ function App() {
                 <Route path="subscription" element={<SettingSubscription />} />
               </Route>
               <Route path="dashboard/tasks" element={<Task />} />
+              <Route path="dashboard/tasks/:id" element={<SingleTask />} />
+              {/* </Route> */}
             </Route>
             <Route path="/auth/signin" element={<SignIn />} />
             <Route path="/auth/signup" element={<SignUp />} />
