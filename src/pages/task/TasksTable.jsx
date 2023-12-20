@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
-import { useQuery } from "react-query";
-import { getTasks, markTaskAsTodo } from "../../services/apiTasks";
+import { useContext, useState } from "react";
+import { markTaskAsTodo } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { AppContext } from "../../store/AppContext";
 import { DeleteTaskModal } from "./DeleteTaskModal";
@@ -8,12 +7,14 @@ import { Link } from "react-router-dom";
 import Overlay from "../../ui/Overlay";
 import { markTaskAsDone } from "../../services/apiTasks";
 import { useTask } from "../../hook/usetasks";
+
 const TasksTable = () => {
-  const { session, setTasks } = useContext(AppContext);
+  const { session } = useContext(AppContext);
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
   const [taskToDeleteId, setTaskToDelete] = useState(null);
   const userId = session?.user.id;
+
   const { tasks, isLoading, error } = useTask(userId);
 
   const toggleTaskDetails = (taskId) => {
