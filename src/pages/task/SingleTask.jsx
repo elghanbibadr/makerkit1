@@ -23,7 +23,7 @@ const SingleTask = () => {
           <p className="text-sm font-medium">Back to Task</p>
         </div>
       </div>
-      <div className="w-1/2">
+      <div className="w-full  md:w-1/2">
         <div className="mt-6">
           <label className="small-title " htmlFor="name">
             Name

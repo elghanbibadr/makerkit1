@@ -4,6 +4,7 @@ import { getTasks, markTaskAsTodo } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { AppContext } from "../../store/AppContext";
 import { DeleteTaskModal } from "./DeleteTaskModal";
+import { Link } from "react-router-dom";
 import Overlay from "../../ui/Overlay";
 import { markTaskAsDone } from "../../services/apiTasks";
 
@@ -43,6 +44,12 @@ const TasksTable = () => {
   };
   const handleTaskMarkedAsTodo = (taskId) => {
     markTaskAsTodo(taskId);
+  };
+
+  // TASK VIEW HANLDER
+
+  const handleTaskView = (taskToBeEdited) => {
+    console.log(taskToBeEdited);
   };
 
   return (
@@ -101,7 +108,13 @@ const TasksTable = () => {
                     </svg>
                     {openTaskId === index && (
                       <ul className="shadow-pinkBoxShadow border w-[130px] mb-10 border-gray-50 border-opacity-10 font-medium text-sm py-4 bg-[#030712] z-10 p-2 px-5 rounded-md absolute top-10 -right-0">
-                        <li onClick={() => console.log(task.id)}>View Task</li>
+                        <li
+                          onClick={() =>
+                            handleTaskView({ id: task.id, ...task })
+                          }
+                        >
+                          <Link to={`${task.id}`}>View Task</Link>
+                        </li>
                         {!task.isDone && (
                           <li
                             className="my-2"
