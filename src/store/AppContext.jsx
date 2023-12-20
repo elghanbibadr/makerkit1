@@ -4,6 +4,7 @@ import supabase from "../../public/supabase/Supabase";
 const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
+  const [tasks, setTasks] = useState(undefined);
   const [session, setSession] = useState(null);
 
   useEffect(() => {
@@ -23,6 +24,8 @@ const AppContextProvider = ({ children }) => {
   const value = {
     session,
     setSession,
+    tasks,
+    setTasks,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

@@ -9,7 +9,7 @@ import Overlay from "../../ui/Overlay";
 import { markTaskAsDone } from "../../services/apiTasks";
 
 const TasksTable = () => {
-  const { session } = useContext(AppContext);
+  const { session, setTasks } = useContext(AppContext);
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
   const [taskToDeleteId, setTaskToDelete] = useState(null);
@@ -28,6 +28,9 @@ const TasksTable = () => {
   } = useQuery({
     queryKey: ["tasks", userId],
     queryFn: () => getTasks(userId),
+    onSuccess: (data) => {
+      setTasks(data);
+    },
   });
 
   // Task delete handler

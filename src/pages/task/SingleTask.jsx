@@ -1,5 +1,10 @@
+import { useContext } from "react";
+import { AppContext } from "../../store/AppContext";
 import Button from "../../ui/Button";
 const SingleTask = () => {
+  const { tasks } = useContext(AppContext);
+
+  console.log(tasks);
   return (
     <div className="text-white text-3xl">
       <div className="flex justify-between">
