@@ -5,7 +5,7 @@ import Button from "../../ui/Button";
 import { useTask } from "../../hook/usetasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { useForm } from "react-hook-form";
-
+import { Link } from "react-router-dom";
 const SingleTask = () => {
   const { session } = useContext(AppContext);
   const { taskId } = useParams();
@@ -40,7 +40,9 @@ const SingleTask = () => {
                   d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
                 ></path>
               </svg>
-              <p className="text-sm font-medium">Back to Task</p>
+              <p className="text-sm font-medium">
+                <Link to="/dashboard/tasks">Back to Task</Link>
+              </p>
             </div>
           </div>
           <div className="w-full  md:w-1/2">
@@ -87,7 +89,9 @@ const SingleTask = () => {
                     d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
                   ></path>
                 </svg>
-                <p className="text-sm font-medium">Back to Task</p>
+                <p className="text-sm font-medium">
+                  <Link to="/dashboard/tasks">Back to Task</Link>
+                </p>
               </div>
               <Button className="bg-darkPink  p-3 rounded-md text-sm">
                 Update Task
