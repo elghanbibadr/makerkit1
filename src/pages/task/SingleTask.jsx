@@ -1,21 +1,23 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../../store/AppContext";
 import { useParams } from "react-router-dom";
 import Button from "../../ui/Button";
 import { useTask } from "../../hook/usetasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
+import { useForm } from "react-hook-form";
 
 const SingleTask = () => {
   const { session } = useContext(AppContext);
   const { taskId } = useParams();
   const userId = session?.user.id;
   const { tasks, isLoading } = useTask(userId);
-
   const taskTobeEdited = tasks?.find((task) => task.id == taskId);
+  const [taskName, setTaskName] = useState(taskTobeEdited?.taskName);
+  const [taskDescription, setTaskDescription] = useState(
+    taskTobeEdited?.taskDescription
+  );
 
   console.log(taskTobeEdited);
-
-  console.log(isLoading);
   return (
     <>
       {!isLoading && (
@@ -49,9 +51,10 @@ const SingleTask = () => {
               <input
                 className="input block w-full "
                 id="name"
-                value={taskTobeEdited?.taskName}
+                value={taskName}
                 name="name"
                 type="text"
+                onChange={(e) => setTaskName(e.target.value)}
               />
             </div>
             <div className="my-6">
@@ -61,7 +64,7 @@ const SingleTask = () => {
               <textarea
                 className="input  w-full  "
                 type="text"
-                value={taskTobeEdited?.taskDescription}
+                // value={taskTobeEdited?.taskDescription}
                 name="Description"
                 id="Description"
                 placeholder="Describe the task "
