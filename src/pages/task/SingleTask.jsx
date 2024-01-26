@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../store/AppContext";
 import { useParams } from "react-router-dom";
 import Button from "../../ui/Button";
+import supabase from "../../../public/supabase/Supabase";
 import { useTask } from "../../hook/usetasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { useForm } from "react-hook-form";
@@ -17,11 +18,29 @@ const SingleTask = () => {
     taskTobeEdited?.taskDescription
   );
 
-  console.log(taskTobeEdited);
+  console.log("task description", taskDescription);
+
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    console.log(taskDescription)
+    console.log(taskName)
+    try{
+      const { data, error } = await supabase
+      .from('tasks')
+      .update({taskName:taskName,taskDescription:taskDescription})
+      .eq('id', taskId)
+      .select()
+    }catch(e){
+      alert(e.message)
+    }
+   
+  }
+
   return (
     <>
       {!isLoading && (
-        <div className="text-white text-3xl">
+        <form onSubmit={handleSubmit} className="text-white text-3xl">
           <div className="flex justify-between">
             <h3>{taskTobeEdited?.taskName}</h3>
             <div className="flex items-center cursor-pointer button-transparent border-none rounded-md">
@@ -66,9 +85,10 @@ const SingleTask = () => {
               <textarea
                 className="input  w-full  "
                 type="text"
-                // value={taskTobeEdited?.taskDescription}
+                value={taskDescription}
                 name="Description"
                 id="Description"
+                onChange={(e) => setTaskDescription(e.target.value)}
                 placeholder="Describe the task "
               />
             </div>
@@ -98,7 +118,7 @@ const SingleTask = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </form>
       )}
       {isLoading && <LoadingSpinner />}
     </>
