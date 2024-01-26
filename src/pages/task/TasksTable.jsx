@@ -17,6 +17,8 @@ const TasksTable = () => {
 
   const { tasks, isLoading, error } = useTask(userId);
 
+
+  console.log(tasks)
   const toggleTaskDetails = (taskId) => {
     setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
@@ -75,6 +77,14 @@ const TasksTable = () => {
                       {" "}
                       <span className="text-green-500 text-xs bg-[#22c55e1a] font-semibold px-2 py-1 rounded-md ">
                         Done
+                      </span>{" "}
+                    </td>
+                  )}
+                  {!task.isDone && (
+                    <td>
+                      {" "}
+                      <span className="bg-red-500  text-xs  text-white font-semibold px-2 py-1 rounded-md ">
+                        Todo
                       </span>{" "}
                     </td>
                   )}

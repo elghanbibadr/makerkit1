@@ -6,7 +6,14 @@ import supabase from "../../../public/supabase/Supabase";
 import { useTask } from "../../hook/usetasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { updateTask } from "../../services/apiTasks";
+import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
+import { queryClient } from "../../App";
+
+
+
 const SingleTask = () => {
   const { session } = useContext(AppContext);
   const { taskId } = useParams();
@@ -21,19 +28,25 @@ const SingleTask = () => {
   console.log("task description", taskDescription);
 
 
+  const { mutate, isLoadingUpdateTask } = useMutation({
+    // Replace updateTask with the actual function that updates a task
+    mutationFn: updateTask,
+    onSuccess: () => {
+      toast.success("Task successfully updated");
+      queryClient.invalidateQueries("tasks");
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  
   const handleSubmit=async(e)=>{
     e.preventDefault()
     console.log(taskDescription)
     console.log(taskName)
-    try{
-      const { data, error } = await supabase
-      .from('tasks')
-      .update({taskName:taskName,taskDescription:taskDescription})
-      .eq('id', taskId)
-      .select()
-    }catch(e){
-      alert(e.message)
-    }
+    mutate({taskId:taskId,taskName:taskName,taskDescription:taskDescription})
+   
    
   }
 

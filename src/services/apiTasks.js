@@ -64,3 +64,18 @@ export async function markTaskAsTodo(taskId) {
     console.log(error);
   }
 }
+
+
+// UPDATE TASKS
+
+export async function updateTask(taskId,updatedTask){
+  try{
+    const { data, error } = await supabase
+    .from('tasks')
+    .update({taskName:taskName,taskDescription:taskDescription})
+    .eq('id', taskId)
+    .select()
+  }catch(e){
+    alert(e.message)
+  }
+}
