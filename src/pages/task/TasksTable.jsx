@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { markTaskAsTodo } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { AppContext } from "../../store/AppContext";
@@ -9,7 +9,7 @@ import { markTaskAsDone } from "../../services/apiTasks";
 import { useTask } from "../../hook/usetasks";
 
 const TasksTable = () => {
-  const { session } = useContext(AppContext);
+  const { session,filteredTasks,setFilteredTasks} = useContext(AppContext);
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
   const [taskToDeleteId, setTaskToDelete] = useState(null);
@@ -39,11 +39,20 @@ const TasksTable = () => {
     markTaskAsTodo(taskId);
   };
 
+
+  // useEffect(() =>{
+  // console.log("filtered",filteredTasks)
+  // setFilteredTasks(tasks)
+  // },[])
   // TASK VIEW HANLDER
 
+
+  console.log(filteredTasks)
   const handleTaskView = (taskToBeEdited) => {
     console.log(taskToBeEdited);
   };
+
+
 
   return (
     <>
@@ -67,7 +76,7 @@ const TasksTable = () => {
           </thead>
           <tbody className="text-white">
             {tasks?.length > 0 &&
-              tasks.map((task, index) => (
+              filteredTasks?.map((task, index) => (
                 <tr key={task.id} className="text-left border-b border-accent1">
                   <td>{task.taskName}</td>
                   <td>{task.taskDescription}</td>

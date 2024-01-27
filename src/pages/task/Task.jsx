@@ -1,12 +1,33 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
 import Overlay from "../../ui/Overlay";
+import { useTask } from "../../hook/usetasks";
 import NewTaskModal from "./NewTaskModal";
+import { useContext } from "react";
+import { AppContext } from "../../store/AppContext";
 import TasksTable from "./TasksTable";
 
 const Task = () => {
   const [newTaskModalOpen, setNewTaskModelOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const { session,filteredTasks,setFilteredTasks } = useContext(AppContext);
+  const userId = session?.user.id;
+  const { tasks, isLoading, error } = useTask(userId);
 
+
+console.log('tasks', tasks)
+  
+  const handleSearchInputChange = (e) => {
+    setSearchInput(e.target.value);
+    filterTasks(e.target.value);
+  };
+
+  const filterTasks = (searchTerm) => {
+    const filtered = tasks.filter((task) =>
+      task.taskName.toLowerCase().startsWith(searchTerm.toLowerCase())
+    );
+    setFilteredTasks(filtered);
+  };
   return (
     <>
       <div>
@@ -32,9 +53,9 @@ const Task = () => {
             </svg>
             <span>New Task</span>
           </Button>
-          <input type="email" placeholder="Search for task" className="input" />
+          <input type="email" value={searchInput} onChange={handleSearchInputChange} placeholder="Search for task" className="input" />
         </div>
-        <TasksTable />
+        <TasksTable searchInput={searchInput}  />
       </div>
       {newTaskModalOpen && (
         <Overlay>

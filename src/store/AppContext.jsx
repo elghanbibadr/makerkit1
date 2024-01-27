@@ -6,13 +6,16 @@ const AppContext = createContext();
 const AppContextProvider = ({ children }) => {
   const [tasks, setTasks] = useState(undefined);
   const [session, setSession] = useState(null);
+  const [filteredTasks, setFilteredTasks] = useState(tasks );
+
+
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
 
-    console.log("somthing changed");
+  
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -26,6 +29,8 @@ const AppContextProvider = ({ children }) => {
     setSession,
     tasks,
     setTasks,
+    filteredTasks,
+    setFilteredTasks
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
