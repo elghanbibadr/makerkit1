@@ -25,12 +25,11 @@ const SingleTask = () => {
     taskTobeEdited?.taskDescription
   );
 
-  console.log("task description", taskDescription);
+
 
 
   const { mutate, isLoadingUpdateTask } = useMutation({
-    // Replace updateTask with the actual function that updates a task
-    mutationFn: updateTask,
+    mutationFn: ({ taskId, updatedTask }) => updateTask(taskId, updatedTask),
     onSuccess: () => {
       toast.success("Task successfully updated");
       queryClient.invalidateQueries("tasks");
@@ -39,17 +38,11 @@ const SingleTask = () => {
       toast.error(err.message);
     },
   });
-
   
-  const handleSubmit=async(e)=>{
-    e.preventDefault()
-    console.log(taskDescription)
-    console.log(taskName)
-    mutate({taskId:taskId,taskName:taskName,taskDescription:taskDescription})
-   
-   
-  }
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    mutate({ taskId: taskId, updatedTask: { taskName: taskName, taskDescription: taskDescription } });
+  };
   return (
     <>
       {!isLoading && (

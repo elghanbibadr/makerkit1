@@ -72,7 +72,7 @@ export async function updateTask(taskId,updatedTask){
   try{
     const { data, error } = await supabase
     .from('tasks')
-    .update({taskName:taskName,taskDescription:taskDescription})
+    .update(updatedTask)
     .eq('id', taskId)
     .select()
   }catch(e){
