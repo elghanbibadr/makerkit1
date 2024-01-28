@@ -3,7 +3,7 @@ import Button from "./Button";
 const WhatWeProvideDesc = () => {
   return (
     <div className="">
-      <h2>Authentication</h2>
+      <h2 className="text-white ">Authentication</h2>
       <span className="gradientParagraph inline-block my-3">
         Secure and Easy-to-Use Authentication for Your SaaS Website and API
       </span>

@@ -10,7 +10,7 @@ const Hero = () => {
         {" "}
         Get started for free. No credit card required. Cancel anytime.
       </CtaCard>
-      <h1 className="text-center text-4xl mt-10 text-gray-600 dark:text-white md:text-5xl flex flex-col font-heading font-medium xl:text-7xl 2xl:text-[5.2rem]">
+      <h1 className="text-center text-4xl mt-10 text-gray-600 text-white dark:text-white md:text-5xl flex flex-col font-heading font-medium xl:text-7xl 2xl:text-[5.2rem]">
         The SaaS Solution for
         <span className="gr bg-clip-text text-transparent from-primary-400 to-primary-700 leading-[1.2]">
           developers and founders

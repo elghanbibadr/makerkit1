@@ -45,7 +45,7 @@ const Features = () => {
   return (
     <div className="mt-24 text-center">
       <CtaCard>A modern, scalable, and secure SaaS Starter Kit</CtaCard>
-      <h2>The best tool in the space</h2>
+      <h2 className="text-white"> The best tool in the space</h2>
       <p className="gradientParagraph my-6">
         Unbeatable Features and Benefits for Your SaaS Business
       </p>

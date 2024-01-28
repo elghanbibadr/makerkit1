@@ -7,7 +7,7 @@ const Pricing = () => {
       <CtaCard>
         Get started for free. No credit card required. Cancel anytime.
       </CtaCard>
-      <h2 className="mt-10">
+      <h2 className="mt-10 text-white">
         Ready to take your SaaS business to the next level?
       </h2>
       <span className="gradientParagraph inline-block my-3">

@@ -16,6 +16,12 @@ export async function SignUp(email, password) {
   let { data, error } = await supabase.auth.signUp({
     email: email,
     password: password,
+    options:{
+      data:{
+        fullName,
+        avatar:""
+      }
+    }
   });
 
   if (error) throw new Error(error.message);
