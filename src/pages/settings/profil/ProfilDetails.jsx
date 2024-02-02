@@ -1,16 +1,16 @@
 import Button from "../../../ui/Button";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../store/AppContext";
 import supabase from "../../../../public/supabase/Supabase";
 
 const ProfilDetails = () => {
   const {session}=useContext(AppContext)
   // const userName=session?.user?.user_metadata.full_name  
-  const userName=session?.user?.user_metadata?.fullName
+  const userName=session?.user?.user_metadata?.full_name
 
   const [name,setName]=useState(userName)
 
-console.log(userName)
+console.log("user name", userName)
 
   const handleSubmit=async (e)=>{
     e.preventDefault()
@@ -26,6 +26,7 @@ console.log(userName)
       // password: newPassword, 
     });
 
+   
     if (error) {
       console.error('Error updating profile:', error.message);
     } else {
