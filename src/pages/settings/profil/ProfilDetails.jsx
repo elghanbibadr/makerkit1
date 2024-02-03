@@ -6,11 +6,12 @@ import supabase from "../../../../public/supabase/Supabase";
 const ProfilDetails = () => {
   const {session}=useContext(AppContext)
   // const userName=session?.user?.user_metadata.full_name  
-  const userName=session?.user?.user_metadata?.full_name
+  // const userName=session?.user?.user_metadata?.fullName
+  const avatar=session?.user?.user_metadata?.avatar_url
 
-  const [name,setName]=useState(userName)
+  const [name,setName]=useState("")
 
-console.log("user name", userName)
+// console.log("user name", userName)
 
   const handleSubmit=async (e)=>{
     e.preventDefault()
@@ -39,6 +40,13 @@ console.log("user name", userName)
 
   }
   console.log('session',session)
+
+
+  useEffect(() =>{
+    setName(session?.user?.user_metadata?.fullName)
+  },[session])
+
+
   return (
     <form onSubmit={handleSubmit} className="text-white ">
       <h3>My Details</h3>
@@ -69,6 +77,7 @@ console.log("user name", userName)
           type="file"
           
         />
+        <img src={avatar} alt="" />
       </div>
       <div className="mt-6">
         <label className="small-title " htmlFor="email">
