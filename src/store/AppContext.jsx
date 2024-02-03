@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-
 import supabase from "../../public/supabase/Supabase";
+
+
 const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
@@ -10,7 +11,10 @@ const AppContextProvider = ({ children }) => {
 
 
 
-  useEffect(() => {
+  useEffect( () => {
+   
+
+    // console.log("user",user)
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
@@ -24,6 +28,11 @@ const AppContextProvider = ({ children }) => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+
+
+
+
   const value = {
     session,
     setSession,
