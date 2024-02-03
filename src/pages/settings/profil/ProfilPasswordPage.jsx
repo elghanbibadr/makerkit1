@@ -1,18 +1,29 @@
 import Button from "../../../ui/Button";
 import supabase from "../../../../public/supabase/Supabase";
+import { useState } from "react";
 
 const ProfilPasswordPage = () => {
+  const [password,setPassword]=useState("")
+  const [repeatedPassword,setRepeatedPassword]=useState("")
+
+
 
   const handleSubmit=async (e)=>{
+    console.log(password,repeatedPassword)
+
     e.preventDefault()
+
+    if (!password && !repeatedPassword)return 
+    if(password !== repeatedPassword)return alert("password are not matched")
+
+    console.log(password === repeatedPassword)
     try{
 
-     const {data,error}= await supabase.auth.updateUser({ password: "clandestino@1" })
+     const {data,error}= await supabase.auth.updateUser({ password: password })
      if (error) {
       console.error('Error updating profile:', error.message);
     } else {
       console.log('Profile updated successfully:', data);
-      // Optionally, you can handle success, redirect, or perform additional actions
     }
     }catch(e){
       console.log(e.message)
@@ -36,6 +47,8 @@ const ProfilPasswordPage = () => {
           <input
             className="input block w-full "
             id="newpassword"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             name="newpassword"
             type="password"
           />
@@ -49,6 +62,9 @@ const ProfilPasswordPage = () => {
             id="repeatedpassword"
             name="repeatedpassword"
             type="password"
+            onChange={(e) => setRepeatedPassword(e.target.value)}
+            value={repeatedPassword}
+
           />
         </div>
         <Button className="bg-darkPink mt-5 text-white p-3 rounded-md text-sm">

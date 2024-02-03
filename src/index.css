@@ -61,7 +61,7 @@ img{
 /* INPUTS */
 
 .input{
-  @apply  px-4 py-2 mt-2 rounded bg-transparent text-accent1 font-medium text-sm focus:outline-none border border-accent1
+  @apply  px-4 py-2 mt-2 rounded bg-transparent text-accent1 text-gray-400 font-medium text-sm focus:outline-none border border-accent1
 }
 
 
