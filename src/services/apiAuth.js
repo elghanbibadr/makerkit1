@@ -24,10 +24,13 @@ export async function SignUp(email, password) {
     }
   });
 
+console.log(data)
+
   if (error) throw new Error(error.message);
 
   return data;
 }
+
 
 export const logout = async () => {
   const { error } = await supabase.auth.signOut();

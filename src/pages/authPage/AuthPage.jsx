@@ -49,6 +49,17 @@ const AuthPage = ({ isSignUp = true }) => {
       password: password,
     });
 
+    if (!error){
+      console.log("data",data)
+      console.log("userId",typeof data.user.id)
+      // create a new row inside the organization tables for this user
+       await supabase
+    .from('organizations')
+    .insert([
+      {userId:"hello6383GDHZè", organizationName:"",organizationLogoUrl:"" },
+    ])
+    .select()
+    }
     if (error) return toast.error(error.message);
     navigate("/dashboard");
   }

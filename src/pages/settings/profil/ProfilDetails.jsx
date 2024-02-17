@@ -3,28 +3,42 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../store/AppContext";
 import supabase from "../../../../public/supabase/Supabase";
 
+
+const imgurl='https://images.unsplash.com/photo-1682685797439-a05dd915cee9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
 const ProfilDetails = () => {
   const {session}=useContext(AppContext)
-  // const userName=session?.user?.user_metadata.full_name  
-  // const userName=session?.user?.user_metadata?.fullName
-  const avatar=session?.user?.user_metadata?.avatar_url
+ 
+  const avatar=session?.user?.user_metadata?.avatar
 
   const [name,setName]=useState("")
 
-// console.log("user name", userName)
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      console.log(reader.result)
+      // setImageUrl(reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+
+  console.log('avatar',avatar)
 
   const handleSubmit=async (e)=>{
     e.preventDefault()
-    console.log(name)
-  console.log("first")
+
   try {
     // Update user profile information
     const { data, error } = await supabase.auth.updateUser({
       data: {
         fullName: name,
-        // profile_image: newProfileImage,
+        avatar:imgurl
       },
-      // password: newPassword, 
     });
 
    
@@ -75,9 +89,10 @@ const ProfilDetails = () => {
           id="photo"
           name="photo"
           type="file"
+          onChange={handleFileChange}
           
         />
-        <img src={avatar} alt="" />
+        <img className="h-6 w-6" src={avatar} alt="" />
       </div>
       <div className="mt-6">
         <label className="small-title " htmlFor="email">
