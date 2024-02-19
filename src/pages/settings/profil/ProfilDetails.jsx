@@ -12,18 +12,36 @@ const ProfilDetails = () => {
 
   const [name,setName]=useState("")
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
+
     const file = e.target.files[0];
-    const reader = new FileReader();
+    console.log(file)
+    // upload the avatar to supabase for testing
+    const { data, error } = await supabase.storage
+    .from('avatars')
+    .upload('image1', file);
 
-    reader.onload = () => {
-      console.log(reader.result)
-      // setImageUrl(reader.result);
-    };
+  if (error) {
+    console.error('Error uploading image:', error.message);
+    return null;
+  }else{
+    console.log("image uploaded successfuly")
+  }
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+
+
+    // const file = e.target.files[0];
+    // console.log(file)
+    // const reader = new FileReader();
+
+    // reader.onload = () => {
+    //   console.log(reader.result)
+    //   // setImageUrl(reader.result);
+    // };
+
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // }
   };
 
 
@@ -88,6 +106,7 @@ const ProfilDetails = () => {
           className="input block w-full "
           id="photo"
           name="photo"
+          accept="image/*"
           type="file"
           onChange={handleFileChange}
           
