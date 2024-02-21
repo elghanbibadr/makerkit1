@@ -3,14 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../store/AppContext";
 import supabase from "../../../../public/supabase/Supabase";
 import { supabaseUrl } from "../../../../public/supabase/Supabase";
+import { useUpdateUser } from "../../../services/useUpdateUser";
 
-const imgurl='https://images.unsplash.com/photo-1682685797439-a05dd915cee9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
 const ProfilDetails = () => {
   const {session}=useContext(AppContext)
  
 
-  const [name,setName]=useState("")
+  const [name,setName]=useState(session?.user?.user_metadata?.fullName)
   const [avatarURL,setAvatarUrl]=useState("")
+  const {updateUser,isUpdating}=useUpdateUser()
   const handleFileChange = async (e) => {
 
     const file = e.target.files[0];
@@ -26,8 +27,7 @@ const ProfilDetails = () => {
   }else{
     console.log("image uploaded successfuly")
     console.log("data", data)
-     const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/${data.fullPath}`;
-
+     const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
       setAvatarUrl(imageUrl1)
   }
 
@@ -36,39 +36,25 @@ const ProfilDetails = () => {
 
 
 
-  const handleSubmit=async (e)=>{
+  const handleSubmit=(e)=>{
+
+
+
     e.preventDefault()
-
-
-
-
-  try {
-    // Update user profile information
-    const { data, error } = await supabase.auth.updateUser({
-      data: {
-        fullName: name,
-        avatar:avatarURL
-      },
-    });
-
-   
-    if (error) {
-      console.error('Error updating profile:', error.message);
-    } else {
-      console.log('Profile updated successfully:', data);
-      // Optionally, you can handle success, redirect, or perform additional actions
-    }
-  } catch (error) {
-    console.error('Error updating profile:', error.message);
+    console.log("avatarUrl",avatarURL)
+    updateUser(name,avatarURL)
   }
 
-  }
 
+  console.log("session",session)
 
 
   useEffect(() =>{
     setName(session?.user?.user_metadata?.fullName)
-    setAvatarUrl(session?.user?.user_metadata?.avatar)
+    // if (!avatarURL){
+    //   setAvatarUrl(session?.user?.user_metadata?.avatar)
+
+    // }
   },[session])
 
 
@@ -104,7 +90,7 @@ const ProfilDetails = () => {
           onChange={handleFileChange}
           
         />
-        <img className="h-6 w-6" src={avatar} alt="" />
+        <img className="h-6 w-6" src={avatarURL} alt="" />
       </div>
       <div className="mt-6">
         <label className="small-title " htmlFor="email">
