@@ -2,16 +2,15 @@ import Button from "../../../ui/Button";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../store/AppContext";
 import supabase from "../../../../public/supabase/Supabase";
-
+import { supabaseUrl } from "../../../../public/supabase/Supabase";
 
 const imgurl='https://images.unsplash.com/photo-1682685797439-a05dd915cee9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8'
 const ProfilDetails = () => {
   const {session}=useContext(AppContext)
  
-  const avatar=session?.user?.user_metadata?.avatar
 
   const [name,setName]=useState("")
-
+  const [avatarURL,setAvatarUrl]=useState("")
   const handleFileChange = async (e) => {
 
     const file = e.target.files[0];
@@ -19,43 +18,36 @@ const ProfilDetails = () => {
     // upload the avatar to supabase for testing
     const { data, error } = await supabase.storage
     .from('avatars')
-    .upload('image1', file);
+    .upload(file.name, file);
 
   if (error) {
     console.error('Error uploading image:', error.message);
     return null;
   }else{
     console.log("image uploaded successfuly")
+    console.log("data", data)
+     const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/${data.fullPath}`;
+
+      setAvatarUrl(imageUrl1)
   }
 
 
-
-    // const file = e.target.files[0];
-    // console.log(file)
-    // const reader = new FileReader();
-
-    // reader.onload = () => {
-    //   console.log(reader.result)
-    //   // setImageUrl(reader.result);
-    // };
-
-    // if (file) {
-    //   reader.readAsDataURL(file);
-    // }
   };
 
 
-  console.log('avatar',avatar)
 
   const handleSubmit=async (e)=>{
     e.preventDefault()
+
+
+
 
   try {
     // Update user profile information
     const { data, error } = await supabase.auth.updateUser({
       data: {
         fullName: name,
-        avatar:imgurl
+        avatar:avatarURL
       },
     });
 
@@ -71,11 +63,12 @@ const ProfilDetails = () => {
   }
 
   }
-  console.log('session',session)
+
 
 
   useEffect(() =>{
     setName(session?.user?.user_metadata?.fullName)
+    setAvatarUrl(session?.user?.user_metadata?.avatar)
   },[session])
 
 
