@@ -15,10 +15,10 @@ const ProfilDetails = () => {
   const [name,setName]=useState(session?.user?.user_metadata?.fullName)
   const [avatarURL,setAvatarUrl]=useState("")
   const [selectedAvatarName,setSelectedAvatarName]=useState('')
-
   const {updateUser,isUpdating}=useUpdateUser()
-  const handleFileChange = async (e) => {
 
+
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
     console.log(file)
     setSelectedAvatarName(file.name)
@@ -40,14 +40,14 @@ const ProfilDetails = () => {
 
   };
 
-  const onChooseFile = () => {
+  const onChooseFile = (e) => {
+    if(e.target.getAttribute('data-id')==='removeAvatar')return
     fileInputRef.current.click();
   };
 
   const handleSubmit=(e)=>{
 
     e.preventDefault()
-
     if(!name)return 
       updateUser({name,avatarURL})
   }
@@ -116,7 +116,7 @@ console.log("sesstion",session)
           <p>{selectedAvatarName}</p>
         }
         
-       {avatarURL !=="" && <svg onClick={handleAvatarRemoved} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
+       {avatarURL !=="" && <svg data-id="removeAvatar" onClick={handleAvatarRemoved} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-4"><path data-id="removeAvatar" stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
         
 }
      
