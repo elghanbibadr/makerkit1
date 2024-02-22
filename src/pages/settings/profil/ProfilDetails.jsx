@@ -5,6 +5,7 @@ import supabase from "../../../../public/supabase/Supabase";
 import { supabaseUrl } from "../../../../public/supabase/Supabase";
 import { useUpdateUser } from "../../../services/useUpdateUser";
 import uploadIcon from "../../../assets/uploadIcon.svg"
+import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 
 // import FileInput from "../../../ui/FileInput";
 const ProfilDetails = () => {
@@ -16,29 +17,18 @@ const ProfilDetails = () => {
   const [avatarURL,setAvatarUrl]=useState("")
   const [selectedAvatarName,setSelectedAvatarName]=useState('')
   const {updateUser,isUpdating}=useUpdateUser()
+  const {uploadingAvatar,isUpoading}=useUploadAvatar()
 
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     console.log(file)
     setSelectedAvatarName(file.name)
-    // upload the avatar to supabase for testing
-    const { data, error } = await supabase.storage
-    .from('avatars')
-    .upload(file.name, file);
-
-  if (error) {
-    console.error('Error uploading image:', error.message);
-    return null;
-  }else{
-    console.log("image uploaded successfuly")
-    console.log("data", data)
-     const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
-      setAvatarUrl(imageUrl1)
+    uploadingAvatar(file.name,file)
+    //  const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
+    //   setAvatarUrl(imageUrl1)
   }
 
-
-  };
 
   const onChooseFile = (e) => {
     if(e.target.getAttribute('data-id')==='removeAvatar')return
@@ -147,6 +137,6 @@ console.log("sesstion",session)
      
     </form>
   );
-};
 
+};
 export default ProfilDetails;
