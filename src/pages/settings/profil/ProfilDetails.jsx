@@ -52,13 +52,19 @@ const ProfilDetails = () => {
       updateUser({name,avatarURL})
   }
 
-
+console.log("sesstion",session)
   useEffect(() =>{
     setName(session?.user?.user_metadata?.fullName)
-
-      setAvatarUrl(session?.user?.user_metadata?.avatar)
+    setAvatarUrl(session?.user?.user_metadata?.avatar)
 
   },[session])
+
+
+  const handleAvatarRemoved=()=>{
+    setAvatarUrl('')
+    setSelectedAvatarName('')
+    return 
+  }
 
 
   return (
@@ -99,13 +105,24 @@ const ProfilDetails = () => {
           
         /> 
 
-        <span className="block text-gray-400 text-xs input font-semibold" onClick={onChooseFile}>
-            {!selectedAvatarName &&  <span>Click here to upload an image </span>}
-        {selectedAvatarName && <p>{selectedAvatarName}</p>}
+        <span className="input  flex items-center gap-3 " onClick={onChooseFile}>
+      { avatarURL && <img className="h-6 w-6" src={avatarURL} alt="upload icon " />}
+            {!selectedAvatarName && <div className="flex items-center gap-3  font-semibold text-gray-500 dark:text-gray-400 [&amp;>*]:mt-[0.35rem] cursor-pointer text-xs">
+                     { avatarURL ==="" && <img className="h-6 w-6" src={uploadIcon} alt="" />}
+              <span >Click here to upload an image </span>
+            </div>}
+   
+        {selectedAvatarName && 
+          <p>{selectedAvatarName}</p>
+        }
+        
+       {avatarURL !=="" && <svg onClick={handleAvatarRemoved} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
+        
+}
+     
         </span>
 
         
-        <img className="h-6 w-6" src={avatarURL} alt="" />
 
       </div>
       {/* <CustomFileInput onChange={handleFileChange} /> */}
