@@ -56,7 +56,7 @@ console.log("sesstion",session)
   useEffect(() =>{
     setName(session?.user?.user_metadata?.fullName)
     setAvatarUrl(session?.user?.user_metadata?.avatar)
-
+  
   },[session])
 
 
@@ -116,14 +116,11 @@ console.log("sesstion",session)
           <p>{selectedAvatarName}</p>
         }
         
-       {avatarURL !=="" && <svg data-id="removeAvatar" onClick={handleAvatarRemoved} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-4"><path data-id="removeAvatar" stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
+       {avatarURL !=="" && <svg  data-id="removeAvatar" onClick={handleAvatarRemoved} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-4 mt-1 hover:border hover:rounded-full cursor-pointer hover:border-[#ccc]"><path data-id="removeAvatar" stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
         
 }
      
         </span>
-
-        
-
       </div>
       {/* <CustomFileInput onChange={handleFileChange} /> */}
 
