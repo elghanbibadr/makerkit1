@@ -6,7 +6,7 @@ import { supabaseUrl } from "../../../../public/supabase/Supabase";
 import { useUpdateUser } from "../../../services/useUpdateUser";
 import uploadIcon from "../../../assets/uploadIcon.svg"
 import { useUploadAvatar } from "../../../hook/useUploadAvatar";
-
+import Input from "../../../ui/Input";
 // import FileInput from "../../../ui/FileInput";
 const ProfilDetails = () => {
   const {session}=useContext(AppContext)
@@ -74,7 +74,7 @@ console.log('avatarUrl', avatarURL)
         <label className="small-title " htmlFor="name">
           Name
         </label>
-        <input
+        {/* <input
           className="input block w-full "
           id="name"
           name="name"
@@ -82,7 +82,16 @@ console.log('avatarUrl', avatarURL)
           onChange={(e) => setName(e.target.value)}
           type="text"
           disabled={isUpdating}
-        />
+        /> */}
+        <Input
+         className=" block w-full " 
+         id="name"
+          name="name"
+         value={name} 
+         type="text" 
+         onChange={(e) => setName(e.target.value)}
+         disabled={isUpdating}
+         />
       </div>
       <div className="mt-2">
         <label className="small-title " htmlFor="photo">
