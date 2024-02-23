@@ -27,8 +27,7 @@ const ProfilDetails = () => {
    
     setSelectedFile(file)
     setSelectedAvatarName(file.name)
-    // const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${file.name}`;
-    // setAvatarUrl(imageUrl1)
+
     const reader = new FileReader();
     reader.onload = () => {
       setAvatarUrl(reader.result);
@@ -47,13 +46,16 @@ const ProfilDetails = () => {
     e.preventDefault()
     if(!name)return 
     console.log(selectedFile)
-    const {data,error} = await supabase.storage
-    .from('avatars')
-    .upload(selectedFile.name,selectedFile);
-    console.log(data.path)
-    console.log('data',data)
-    const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
-    setAvatarUrl(imageUrl1)
+    if(selectedFile){
+      const {data,error} = await supabase.storage
+      .from('avatars')
+      .upload(selectedFile.name,selectedFile);
+      console.log(data.path)
+      console.log('data',data)
+      const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
+      setAvatarUrl(imageUrl1)
+    }
+  
       updateUser({name,avatarURL})
       // console.log("sessiion",session)
   }
@@ -75,7 +77,6 @@ const ProfilDetails = () => {
   }
 
 
-console.log('avatarUrl', avatarURL)
 
   return (
     <form onSubmit={handleSubmit} className="text-white ">
