@@ -5,6 +5,7 @@ import supabase from "../../../../public/supabase/Supabase";
 import { supabaseUrl } from "../../../../public/supabase/Supabase";
 import { useUpdateUser } from "../../../services/useUpdateUser";
 import uploadIcon from "../../../assets/uploadIcon.svg"
+import { Link } from "react-router-dom";
 import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 import Input from "../../../ui/Input";
 // import FileInput from "../../../ui/FileInput";
@@ -74,15 +75,7 @@ console.log('avatarUrl', avatarURL)
         <label className="small-title " htmlFor="name">
           Name
         </label>
-        {/* <input
-          className="input block w-full "
-          id="name"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          type="text"
-          disabled={isUpdating}
-        /> */}
+       
         <Input
          className=" block w-full " 
          id="name"
@@ -133,7 +126,7 @@ console.log('avatarUrl', avatarURL)
         <label className="small-title " htmlFor="email">
           Email Address
         </label>
-        <input
+        <Input
           className="input block w-full "
           id="email"
           placeholder="bghanbi50@gmail.com"
@@ -141,7 +134,10 @@ console.log('avatarUrl', avatarURL)
           type="email"
           disabled
         />
-        <Button className="text-xs mt-3  mb-6">Update Email Address</Button>
+        <Link to="/dashboard/settings/profil/email">
+          <span className="text-xs mt-6 font-medium w-fit hover:bg-[#17182A] px-4 py-2 rounded-md  block  mb-4">Update Email Address</span>
+        </Link>
+
       </div>
      {!isUpdating && <Button className="bg-darkPink  p-2 px-5 rounded-md text-sm">
         Update profil
