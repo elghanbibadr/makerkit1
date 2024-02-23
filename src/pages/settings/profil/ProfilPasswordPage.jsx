@@ -1,5 +1,7 @@
 import Button from "../../../ui/Button";
 import supabase from "../../../../public/supabase/Supabase";
+import Label from "../../../ui/Label";
+import Input from "../../../ui/Input";
 import { useState } from "react";
 
 const ProfilPasswordPage = () => {
@@ -33,32 +35,33 @@ const ProfilPasswordPage = () => {
   }
   return (
     <div>
-      <div>
+      
         <h3 className="text-white"> Password</h3>
-        <p className="text-gray-400 text-lg font-normal">
+        <p className="text-gray-400 mb-10 text-lg font-normal">
           Update your password
         </p>
-      </div>
+      
       <form onSubmit={handleSubmit}>
-        <div className="mt-4">
-          <label className="small-title " htmlFor="newpassword">
-            Your New Password
-          </label>
-          <input
-            className="input block w-full "
+        {/* <div className="mt-4"> */}
+         
+          <Label labelfor="newpassword">
+          Your New Password
+          </Label>
+          <Input
             id="newpassword"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             name="newpassword"
             type="password"
           />
-        </div>
-        <div className="mt-6">
-          <label className="small-title " htmlFor="repeatedpassword">
+          
+        {/* </div> */}
+        {/* <div className="mt-6"> */}
+          <Label labelfor="repeatedpassword">
             Repeat Password
-          </label>
-          <input
-            className="input block w-full "
+          </Label>
+          <Input
+            
             id="repeatedpassword"
             name="repeatedpassword"
             type="password"
@@ -66,7 +69,7 @@ const ProfilPasswordPage = () => {
             value={repeatedPassword}
 
           />
-        </div>
+        {/* </div> */}
         <Button className="bg-darkPink mt-5 text-white p-3 rounded-md text-sm">
           Update Password Address
         </Button>
