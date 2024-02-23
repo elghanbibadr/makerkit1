@@ -15,25 +15,26 @@ const ProfilDetails = () => {
   const fileInputRef=useRef()
 
   const [name,setName]=useState(session?.user?.user_metadata?.fullName)
+  const [selectedFile, setSelectedFile] = useState(null);
   const [avatarURL,setAvatarUrl]=useState("")
   const [selectedAvatarName,setSelectedAvatarName]=useState('')
   const {updateUser,isUpdating}=useUpdateUser()
-  const {uploadingAvatar,isUpoading}=useUploadAvatar()
+  // const {uploadingAvatar,isUpoading}=useUploadAvatar()
 
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    console.log(file)
+   
+    setSelectedFile(file)
     setSelectedAvatarName(file.name)
-    // uploadingAvatar(file.name, file);
-
-   const {data,error} = await supabase.storage
-    .from('avatars')
-    .upload(file.name, file);
-    console.log(data.path)
-    console.log('data',data)
-    const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
-    setAvatarUrl(imageUrl1)
+    // const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${file.name}`;
+    // setAvatarUrl(imageUrl1)
+    const reader = new FileReader();
+    reader.onload = () => {
+      setAvatarUrl(reader.result);
+    };
+    reader.readAsDataURL(file);
+ 
 }
 
   const onChooseFile = (e) => {
@@ -41,11 +42,20 @@ const ProfilDetails = () => {
     fileInputRef.current.click();
   };
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async (e)=>{
 
     e.preventDefault()
     if(!name)return 
+    console.log(selectedFile)
+    const {data,error} = await supabase.storage
+    .from('avatars')
+    .upload(selectedFile.name,selectedFile);
+    console.log(data.path)
+    console.log('data',data)
+    const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
+    setAvatarUrl(imageUrl1)
       updateUser({name,avatarURL})
+      // console.log("sessiion",session)
   }
 
   useEffect(() =>{
@@ -55,9 +65,12 @@ const ProfilDetails = () => {
   },[session])
 
 
+  
+
   const handleAvatarRemoved=()=>{
     setAvatarUrl('')
     setSelectedAvatarName('')
+    setSelectedFile(null)
     return 
   }
 
@@ -105,16 +118,16 @@ console.log('avatarUrl', avatarURL)
 
         <span className="input  flex items-center gap-3 " onClick={onChooseFile}>
       { avatarURL && <img className="h-6 w-6" src={avatarURL} alt="upload icon " />}
-            {!selectedAvatarName && <div className="flex items-center gap-3  font-semibold text-gray-500 dark:text-gray-400 [&amp;>*]:mt-[0.35rem] cursor-pointer text-xs">
-                     { avatarURL ==="" && <img className="h-6 w-6" src={uploadIcon} alt="" />}
-              <span >Click here to upload an image </span>
+            {  <div className="flex items-center gap-3  font-semibold text-gray-500 dark:text-gray-400 [&amp;>*]:mt-[0.35rem] cursor-pointer text-xs">
+                     {  avatarURL ==="" && <img className="h-6 w-6" src={uploadIcon} alt="" />}
+             { !selectedFile && <span >Click here to upload an image </span>}
             </div>}
    
-        {selectedAvatarName && 
+        {selectedFile && 
           <p>{selectedAvatarName}</p>
         }
         
-       {avatarURL !=="" && <svg  data-id="removeAvatar" onClick={handleAvatarRemoved} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-4 mt-1 hover:border hover:rounded-full cursor-pointer hover:border-[#ccc]"><path data-id="removeAvatar" stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
+       { avatarURL!=="" && <svg   data-id="removeAvatar" onClick={handleAvatarRemoved} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-4 mt-1 hover:border hover:rounded-full cursor-pointer hover:border-[#ccc]"><path data-id="removeAvatar" stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path></svg>
         
 }
      
