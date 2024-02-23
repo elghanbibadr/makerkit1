@@ -15,8 +15,17 @@ export async function updateUserProfil({ name, avatarURL }) {
 
 
 export async function uploadAvatar(fileName, file) {
- await supabase.storage
+    await supabase.storage
         .from('avatars')
         .upload(fileName, file);
 
+}
+
+
+
+export async function updatePassword(password) {
+    const { error } = await supabase.auth.updateUser({ password: password })
+    if (error) {
+        console.error('Error updating profile:', error.message);
+    }
 }

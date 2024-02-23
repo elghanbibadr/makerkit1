@@ -1,75 +1,63 @@
+import { useState } from "react";
 import Button from "../../../ui/Button";
-import supabase from "../../../../public/supabase/Supabase";
 import Label from "../../../ui/Label";
 import Input from "../../../ui/Input";
-import { useState } from "react";
+import { useUpdatePassword } from "../../../hook/useUpdatePassword";
+
 
 const ProfilPasswordPage = () => {
-  const [password,setPassword]=useState("")
-  const [repeatedPassword,setRepeatedPassword]=useState("")
+  const [password, setPassword] = useState("")
+  const [repeatedPassword, setRepeatedPassword] = useState("")
+  const { updateUserPassword, isUpdating } = useUpdatePassword()
 
 
 
-  const handleSubmit=async (e)=>{
-    console.log(password,repeatedPassword)
-
+  const handleSubmit = async (e) => {
     e.preventDefault()
-
-    if (!password && !repeatedPassword)return 
-    if(password !== repeatedPassword)return alert("password are not matched")
-
+    if (!password && !repeatedPassword) return
+    if (password !== repeatedPassword) return alert("password are not matched")
     console.log(password === repeatedPassword)
-    try{
-
-     const {data,error}= await supabase.auth.updateUser({ password: password })
-     if (error) {
-      console.error('Error updating profile:', error.message);
-    } else {
-      console.log('Profile updated successfully:', data);
-    }
-    }catch(e){
-      console.log(e.message)
-    }
-
+    updateUserPassword(password)
 
   }
+
+
+
+
   return (
     <div>
-      
-        <h3 className="text-white"> Password</h3>
-        <p className="text-gray-400 mb-10 text-lg font-normal">
-          Update your password
-        </p>
-      
-      <form onSubmit={handleSubmit}>
-        {/* <div className="mt-4"> */}
-         
-          <Label labelfor="newpassword">
-          Your New Password
-          </Label>
-          <Input
-            id="newpassword"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            name="newpassword"
-            type="password"
-          />
-          
-        {/* </div> */}
-        {/* <div className="mt-6"> */}
-          <Label labelfor="repeatedpassword">
-            Repeat Password
-          </Label>
-          <Input
-            
-            id="repeatedpassword"
-            name="repeatedpassword"
-            type="password"
-            onChange={(e) => setRepeatedPassword(e.target.value)}
-            value={repeatedPassword}
+      <h3 className="text-white"> Password</h3>
+      <p className="text-gray-400 mb-10 text-lg font-normal">
+        Update your password
+      </p>
 
-          />
-        {/* </div> */}
+      <form onSubmit={handleSubmit}>
+     
+
+        <Label labelfor="newpassword">
+          Your New Password
+        </Label>
+        <Input
+          id="newpassword"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          name="newpassword"
+          type="password"
+        />
+
+        <Label labelfor="repeatedpassword">
+          Repeat Password
+        </Label>
+        <Input
+
+          id="repeatedpassword"
+          name="repeatedpassword"
+          type="password"
+          onChange={(e) => setRepeatedPassword(e.target.value)}
+          value={repeatedPassword}
+
+        />
+   
         <Button className="bg-darkPink mt-5 text-white p-3 rounded-md text-sm">
           Update Password Address
         </Button>
