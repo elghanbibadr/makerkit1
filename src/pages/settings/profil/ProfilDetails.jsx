@@ -1,5 +1,5 @@
 import Button from "../../../ui/Button";
-import { useContext, useEffect, useState,useRef } from "react";
+import { useContext, useEffect, useState,useRef, Children } from "react";
 import { AppContext } from "../../../store/AppContext";
 import supabase from "../../../../public/supabase/Supabase";
 import { supabaseUrl } from "../../../../public/supabase/Supabase";
@@ -24,11 +24,16 @@ const ProfilDetails = () => {
     const file = e.target.files[0];
     console.log(file)
     setSelectedAvatarName(file.name)
-    uploadingAvatar(file.name,file)
-    //  const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
-    //   setAvatarUrl(imageUrl1)
-  }
+    // uploadingAvatar(file.name, file);
 
+   const {data,error} = await supabase.storage
+    .from('avatars')
+    .upload(file.name, file);
+    console.log(data.path)
+    console.log('data',data)
+    const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
+    setAvatarUrl(imageUrl1)
+}
 
   const onChooseFile = (e) => {
     if(e.target.getAttribute('data-id')==='removeAvatar')return
@@ -42,7 +47,6 @@ const ProfilDetails = () => {
       updateUser({name,avatarURL})
   }
 
-console.log("sesstion",session)
   useEffect(() =>{
     setName(session?.user?.user_metadata?.fullName)
     setAvatarUrl(session?.user?.user_metadata?.avatar)
@@ -56,6 +60,8 @@ console.log("sesstion",session)
     return 
   }
 
+
+console.log('avatarUrl', avatarURL)
 
   return (
     <form onSubmit={handleSubmit} className="text-white ">

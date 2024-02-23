@@ -9,9 +9,7 @@ export function useUploadAvatar(){
         mutationFn:uploadAvatar,
       
         onError:(err) => toast.error(err.message),
-        onSuccess:(data)=>{
-            console.log('successs',data)
-        }
+        
     
     })
 

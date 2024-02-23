@@ -1,6 +1,6 @@
 
 import supabase from "../../public/supabase/Supabase";
-
+import { supabaseUrl } from "../../public/supabase/Supabase";
 export async function updateUserProfil({ name, avatarURL }) {
     await supabase.auth.updateUser({
         data: {
@@ -15,7 +15,8 @@ export async function updateUserProfil({ name, avatarURL }) {
 
 
 export async function uploadAvatar(fileName, file) {
-    await supabase.storage
+ await supabase.storage
         .from('avatars')
         .upload(fileName, file);
+
 }
