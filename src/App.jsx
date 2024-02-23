@@ -1,45 +1,45 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import HomePage from "./pages/homePage/HomePage";
-import DashboardLayout from "./ui/DashboardLayout";
-import SignUp from "./pages/authPage/SignUp";
-import SignIn from "./pages/authPage/SignIn";
-import Task from "./pages/task/Task";
-import ProfilDetails from "./pages/settings/profil/ProfilDetails";
-import Dashboard from "./pages/dashboard/Dashboard";
-import SettingProfil from "./pages/settings/profil/SettingProfil";
-import OrganizationSetting from "./pages/settings/organization/OrganizationSetting";
+import React, { Suspense,lazy } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import SettingLayout from "./pages/settings/SettingLayout";
-import SettingSubscription from "./pages/settings/subscription/SettingSubscription";
-import ProfilAuth from "./pages/settings/profil/ProfilAuth";
-import ProfilEmailPage from "./pages/settings/profil/ProfilEmailPage";
-import ProfilPasswordPage from "./pages/settings/profil/ProfilPasswordPage";
-import OrganizationGeneralPage from "./pages/settings/organization/OrganizationGeneralPage";
-import OrganizationMemberPage from "./pages/settings/organization/OrganizationMemberPage";
-import HomePageLayout from "./pages/homePage/HomePageLayout";
-import FaqPage from "./pages/Faq/FaqPage";
-import SingleTask from "./pages/task/SingleTask";
-import { Toaster } from "react-hot-toast";
-import PricingPage from "./pages/Pricing/PricingPage";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Toaster } from "react-hot-toast";
+import LoadingSpinner from "./ui/LoadingSpinner";
+// Lazy load components
+const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
+const HomePage = lazy(() => import("./pages/homePage/HomePage"));
+const PricingPage = lazy(() => import("./pages/Pricing/PricingPage"));
+const FaqPage = lazy(() => import("./pages/Faq/FaqPage"));
+const DashboardLayout = lazy(() => import("./ui/DashboardLayout"));
+const SignIn = lazy(() => import("./pages/authPage/SignIn"));
+const SignUp = lazy(() => import("./pages/authPage/SignUp"));
+const Task = lazy(() => import("./pages/task/Task"));
+const SingleTask = lazy(() => import("./pages/task/SingleTask"));
+const SettingLayout = lazy(() => import("./pages/settings/SettingLayout"));
+const SettingProfil = lazy(() => import("./pages/settings/profil/SettingProfil"));
+const ProfilDetails = lazy(() => import("./pages/settings/profil/ProfilDetails"));
+const ProfilAuth = lazy(() => import("./pages/settings/profil/ProfilAuth"));
+const ProfilEmailPage = lazy(() => import("./pages/settings/profil/ProfilEmailPage"));
+const ProfilPasswordPage = lazy(() => import("./pages/settings/profil/ProfilPasswordPage"));
+const OrganizationSetting = lazy(() => import("./pages/settings/organization/OrganizationSetting"));
+const OrganizationGeneralPage = lazy(() => import("./pages/settings/organization/OrganizationGeneralPage"));
+const OrganizationMemberPage = lazy(() => import("./pages/settings/organization/OrganizationMemberPage"));
+const SettingSubscription = lazy(() => import("./pages/settings/subscription/SettingSubscription"));
+const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 
-export const queryClient = new QueryClient({
+// Create query client
+export const  queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000,
     },
   },
 });
+
 function App() {
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Suspense fallback={<LoadingSpinner />}>
           <Routes>
             <Route path="/" element={<HomePageLayout />}>
               <Route index path="/" element={<HomePage />} />
@@ -65,14 +65,13 @@ function App() {
               </Route>
               <Route path="dashboard/tasks" element={<Task />} />
               <Route path="dashboard/tasks/:taskId" element={<SingleTask />} />
-              {/* </Route> */}
             </Route>
             <Route path="/auth/signin" element={<SignIn />} />
             <Route path="/auth/signup" element={<SignUp />} />
           </Routes>
-        </Router>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+        </Suspense>
+      </Router>
+      <ReactQueryDevtools initialIsOpen={false} />
       <Toaster
         position="top-center"
         gutter={12}
@@ -89,11 +88,11 @@ function App() {
             maxWidth: "500px",
             padding: "16px 24px",
             backgroundColor: "white",
-            color: "red",
+            color: "#6b7280e0",
           },
         }}
       />
-    </>
+    </QueryClientProvider>
   );
 }
 
