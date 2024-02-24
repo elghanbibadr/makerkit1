@@ -3,6 +3,7 @@ import Button from "../../../ui/Button";
 import Label from "../../../ui/Label";
 import Input from "../../../ui/Input";
 import { useUpdatePassword } from "../../../hook/useUpdatePassword";
+import toast from "react-hot-toast";
 
 
 const ProfilPasswordPage = () => {
@@ -14,10 +15,18 @@ const ProfilPasswordPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!password && !repeatedPassword) return
-    if (password !== repeatedPassword) return alert("password are not matched")
-    console.log(password === repeatedPassword)
+    if (!password || !repeatedPassword){
+      return  toast.error("please fill out all the inputs")
+    }
+    if (password !== repeatedPassword) {
+     return  toast.error("password are not matched")
+    } 
+
     updateUserPassword(password)
+    if(!isUpdating){
+      setPassword('')
+      setRepeatedPassword('')
+    }
 
   }
 
@@ -56,8 +65,7 @@ const ProfilPasswordPage = () => {
           onChange={(e) => setRepeatedPassword(e.target.value)}
           value={repeatedPassword}
 
-        />
-   
+        />   
         <Button className="bg-darkPink mt-5 text-white p-3 rounded-md text-sm">
           Update Password Address
         </Button>
