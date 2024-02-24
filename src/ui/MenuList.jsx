@@ -1,6 +1,7 @@
 // import Card from "./Card"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom";
+import Card from "./Card";
 // const variants = {
 //   open: {
 //     transition: { staggerChildren: 0.07, delayChildren: 0.2 }
@@ -30,8 +31,7 @@ import { Link } from "react-router-dom";
 // {menuItems,isOpen}
 const MenuList = ({menuItems}) => {
   return (
-    // <Card>
-       <div className="shadow-pinkBoxShadow border border-gray-50 border-opacity-10 py-4 p-2 absolute top-14 -right-3 rounded-md">
+       <Card >
          <motion.ul className="lg:flex z-50"  >
                 {menuItems.map(({ navLink, href }) => (
                   <Link
@@ -48,8 +48,7 @@ const MenuList = ({menuItems}) => {
                 ))}
          
               </motion.ul>
-       </div>
-      // </Card>
+       </Card>
   )
 }
 

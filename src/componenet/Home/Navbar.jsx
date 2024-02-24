@@ -2,18 +2,23 @@ import { useContext, useState, useEffect } from "react";
 import menuHamburger from "../../assets/menu.svg";
 import { Link } from "react-router-dom";
 import moon from "../../assets/moon.svg";
-import sun from "../../assets/sun.svg";
+// import sun from "../../assets/sun.svg";
 import Button from "../../ui/Button";
 import { AppContext } from "../../store/AppContext";
 import { logout } from "../../services/apiAuth";
 import MenuList from "../../ui/MenuList";
 import Logo from "../../ui/Logo";
-
+import ScreenModeCard from "../../ui/ScreenModeCard";
 const navLinks = [
   { navLink: "Blog", href: "blog" },
   { navLink: "Documentation", href: "documentation" },
   { navLink: "Pricing", href: "pricing" },
   { navLink: "FAQ", href: "faq" },
+];
+const modeLinks = [
+  { navLink: "light",  },
+  { navLink: "dark" },
+ 
 ];
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -57,23 +62,7 @@ const Navbar = () => {
               src={moon}
               alt="moon icon"
             />
-            <div
-              className={` text-white ${
-                isModeCardOpen
-                  ? "block  shadow-pinkBoxShadow border border-gray-50 border-opacity-10 py-4 p-2 rounded-md absolute top-14 -right-3"
-                  : "hidden"
-              }`}
-            >
-              <span className="font-semibold ml-3 "> Theme</span>
-              <div className="flex my-2 items-center px-8 ">
-                <img className="h-4 mr-2" src={sun} alt="sun icon" />
-                <span className=" text-sm">light</span>
-              </div>
-              <div className="flex items-center px-8 ">
-                <img className="h-4 mr-2" src={moon} alt="sun icon" />
-                <span className=" text-sm">dark</span>
-              </div>
-            </div>
+            {isModeCardOpen && <ScreenModeCard />}
             {/* BUTTONS */}
           </div>
           <div className="hidden lg:flex">
