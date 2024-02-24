@@ -2,6 +2,8 @@ import Button from "../../../ui/Button";
 import supabase from "../../../../public/supabase/Supabase";
 import { useContext } from "react";
 import { AppContext } from "../../../store/AppContext";
+import Input from "../../../ui/Input";
+import Label from "../../../ui/Label";
 
 
 const ProfilEmailPage = () => {
@@ -11,19 +13,15 @@ const ProfilEmailPage = () => {
 
   console.log(email)
 
-  // const [email,setEmail]=useState("")
 
   const handleSubmit=async (e)=>{
     e.preventDefault()
-    // console.log(name)
-  console.log("first")
+
+  console.log("first2")
   try {
     // Update user profile information
     const { data, error } = await supabase.auth.updateUser({
-      data: {
-        email:"updated@gmail.com",
-        // profile_image: newProfileImage,
-      },
+        email:"gidiyo9412@ricorit.com",
     })
 
 
@@ -49,28 +47,28 @@ const ProfilEmailPage = () => {
         Update your email address
       </p>
       <form onSubmit={handleSubmit}>
-        <div className="mt-4">
-          <label className="small-title " htmlFor="newemail">
+        
+          <Label  labelfor="newemail">
             Your New Email
-          </label>
-          <input
+          </Label>
+          <Input
             className="input block w-full "
             id="newemail"
             name="newemail"
             type="email"
           />
-        </div>
-        <div className="mt-6">
-          <label className="small-title " htmlFor="repeatedemail">
+      
+     
+          <Label className="small-title " labelfor="repeatedemail">
             Repeat Email
-          </label>
-          <input
+          </Label>
+          <Input
             className="input block w-full "
             id="repeatedemail"
             name="repeatedemail"
             type="email"
           />
-        </div>
+  
         <Button className="bg-darkPink mt-5  p-2 rounded-md text-sm">
           Update Email Address
         </Button>

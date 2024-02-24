@@ -33,11 +33,13 @@ const AuthPage = ({ isSignUp = true }) => {
   };
 
   async function Login(email, password) {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data,error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
+
+    console.log("sign in data",data)
     if (error) return toast.error(error.message);
     navigate("/dashboard");
   }
@@ -51,14 +53,13 @@ const AuthPage = ({ isSignUp = true }) => {
 
     if (!error){
       console.log("data",data)
-      console.log("userId",typeof data.user.id)
       // create a new row inside the organization tables for this user
-       await supabase
-    .from('organizations')
-    .insert([
-      {userId:"hello6383GDHZè", organizationName:"",organizationLogoUrl:"" },
-    ])
-    .select()
+    //    await supabase
+    // .from('organizations')
+    // .insert([
+    //   {userId:"hello6383GDHZè", organizationName:"",organizationLogoUrl:"" },
+    // ])
+    // .select()
     }
     if (error) return toast.error(error.message);
     navigate("/dashboard");
