@@ -32,6 +32,10 @@ h3{
   @apply scroll-m-20 text-2xl font-medium tracking-tight
 }
 
+.linkHover{
+  @apply text-xs mt-6 font-medium w-fit hover:bg-[#17182A] px-4 py-2 rounded-md  block  mb-4
+}
+
 .small-title,footer p{
   @apply text-sm  font-medium text-gray-500 dark:text-gray-400
 }

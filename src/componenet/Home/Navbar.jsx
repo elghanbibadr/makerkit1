@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import menuHamburger from "../../assets/menu.svg";
 import { Link } from "react-router-dom";
 import moon from "../../assets/moon.svg";
-// import sun from "../../assets/sun.svg";
 import Button from "../../ui/Button";
 import { AppContext } from "../../store/AppContext";
 import { logout } from "../../services/apiAuth";
