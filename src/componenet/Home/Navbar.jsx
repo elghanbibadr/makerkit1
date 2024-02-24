@@ -3,10 +3,11 @@ import menuHamburger from "../../assets/menu.svg";
 import { Link } from "react-router-dom";
 import moon from "../../assets/moon.svg";
 import sun from "../../assets/sun.svg";
-import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
 import { AppContext } from "../../store/AppContext";
 import { logout } from "../../services/apiAuth";
+import MenuList from "../../ui/MenuList";
+import Logo from "../../ui/Logo";
 
 const navLinks = [
   { navLink: "Blog", href: "blog" },
@@ -45,23 +46,8 @@ const Navbar = () => {
     <nav className=" py-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
    
       <div className="container mx-auto flex justify-between items-center">
-      <label className="btn btn-circle swap swap-rotate ">
-  
-  {/* this hidden checkbox controls the state */}
-  <input type="checkbox" />
-  
-  {/* hamburger icon */}
-  <svg className="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"/></svg>
-  
-  {/* close icon */}
-  <svg className="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"/></svg>
-  
-</label>
-        <div className="w-[80%] lg:w-auto">
-          <Link to="/">
-            <img src={logo} alt="malerkit logo" />
-          </Link>
-        </div>
+      
+       <Logo />
 
         <div className="lg:flex lg:items-center lg:order-2">
           <div className="relative  mr-10 ">
@@ -126,15 +112,8 @@ const Navbar = () => {
             src={menuHamburger}
             alt="menu hamburger icon"
           />
-          {/* Menu items */}
-          <div
-            className={`lg:flex ${
-              isMenuOpen
-                ? "block  shadow-pinkBoxShadow border border-gray-50 border-opacity-10 p-6 px-8 rounded-md absolute top-14 -right-3"
-                : "hidden"
-            }`}
-          >
-            <ul className="lg:flex">
+       
+            <ul className=" hidden lg:block lg:flex">
               {navLinks.map(({ navLink, href }) => (
                 <li
                   key={navLink.id}
@@ -151,9 +130,8 @@ const Navbar = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          { isMenuOpen && <MenuList menuItems={navLinks} />}
         </div>
-        {/* </div> */}
       </div>
     </nav>
   );
