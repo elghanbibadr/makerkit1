@@ -45,7 +45,7 @@ const Navbar = () => {
     <nav className=" py-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
    
       <div className="container mx-auto flex justify-between items-center">
-      <label className="btn btn-circle swap swap-rotate">
+      <label className="btn btn-circle swap swap-rotate ">
   
   {/* this hidden checkbox controls the state */}
   <input type="checkbox" />
