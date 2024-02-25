@@ -1,24 +1,38 @@
-import React from 'react'
-import Card from './Card'
-import moon from "../assets/moon.svg";
-import sun from "../assets/sun.svg";
+import React from 'react';
+import Card from './Card';
+import moon from '../assets/moon.svg';
+import sun from '../assets/sun.svg';
+import { motion } from 'framer-motion';
+
+const themes = [
+  { icon: sun, text: 'light' },
+  { icon: moon, text: 'dark' }
+];
+
 const ScreenModeCard = () => {
   return (
-    <Card>   
-    <div className='pl-2 w-[114px]'>
-        <span className="font-semibold "> Theme</span>
-        <div className="flex my-2 items-center  cursor-pointer   hover:bg-[#17182A] rounded-md p-1 ">
-          <img className="h-4 mr-2" src={sun} alt="sun icon" />
-          <span className=" text-sm">light</span>
-        </div>
-        <div className="flex items-center  cursor-pointer hover:bg-[#17182A] rounded-md p-1  ">
-          <img className="h-4 mr-2" src={moon} alt="sun icon" />
-          <span className=" text-sm">dark</span>
-        </div>
-    </div>
+    <Card>
+      <motion.div
+        className='pl-2 w-[124px]'
+        exit={{ opacity: 0 }}
 
+      >
+        <h6 className='font-medium'>Theme</h6>
+        {themes.map((theme, index) => (
+          <Item key={index} icon={theme.icon} text={theme.text} />
+        ))}
+      </motion.div>
     </Card>
-  )
-}
+  );
+};
 
-export default ScreenModeCard
+const Item = ({ icon, text }) => {
+  return (
+    <div className="flex my-2 items-center cursor-pointer hover:bg-[#17182A] rounded-md p-1">
+      <img className="h-5 mr-2" src={icon} alt={`${text} icon`} />
+      <span className="text-sm font-medium">{text}</span>
+    </div>
+  );
+};
+
+export default ScreenModeCard;

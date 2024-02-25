@@ -8,6 +8,7 @@ import { logout } from "../../services/apiAuth";
 import MenuList from "../../ui/MenuList";
 import Logo from "../../ui/Logo";
 import ScreenModeCard from "../../ui/ScreenModeCard";
+import { AnimatePresence } from "framer-motion";
 const navLinks = [
   { navLink: "Blog", href: "blog" },
   { navLink: "Documentation", href: "documentation" },
@@ -56,12 +57,12 @@ const Navbar = () => {
         <div className="lg:flex lg:items-center lg:order-2">
           <div className="relative  mr-10 ">
             <img
-              className="h-5 cursor-pointer"
+              className="h-8  p-1 shadow-lg border-2 border-transparent hover:border-darkPink rounded-full"
               onClick={toggleMode}
               src={moon}
               alt="moon icon"
             />
-            {isModeCardOpen && <ScreenModeCard />}
+            <AnimatePresence>{isModeCardOpen && <ScreenModeCard />}</AnimatePresence>
             {/* BUTTONS */}
           </div>
           <div className="hidden lg:flex">
@@ -96,7 +97,7 @@ const Navbar = () => {
         <div className=" relative">
           <img
             onClick={toggleMenu}
-            className="h-9 cursor-pointer lg:hidden"
+            className="h-7  lg:hidden"
             src={menuHamburger}
             alt="menu hamburger icon"
           />
@@ -118,7 +119,9 @@ const Navbar = () => {
                 </a>
               </li>
             </ul>
-          { isMenuOpen && <MenuList menuItems={navLinks} />}
+            <AnimatePresence>
+             { isMenuOpen && <MenuList menuItems={navLinks} />}
+          </AnimatePresence>
         </div>
       </div>
     </nav>
