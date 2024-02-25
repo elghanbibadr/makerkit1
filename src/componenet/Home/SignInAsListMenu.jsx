@@ -2,15 +2,16 @@ import React, { useContext } from 'react'
 import Card from '../../ui/Card'
 import dashboardIcon from "../../assets/dashboardicon.svg"
 import { AppContext } from '../../store/AppContext';
+import signouticon from "../../assets/signouticon.svg"
+import { logout } from '../../services/apiAuth';
 
-
-const Item = ({ icon, text }) => {
+const Item = ({ icon, text ,onClick}) => {
 
 
 
 
     return (
-      <div className="flex py-2 px-1 mt-2  border-t border-accent1 items-center cursor-pointer hover:bg-[#17182A]">
+      <div onClick={onClick} className="flex py-2 px-1 mt-2  border-t border-accent1 items-center cursor-pointer hover:bg-[#17182A]">
        {icon &&  <img className="h-5 mr-2" src={icon} alt={`${text} icon`} />}
         <span className="text-sm font-medium">{text}</span>
       </div>
@@ -33,6 +34,7 @@ const SignInAsListMenu = () => {
     <Item icon={dashboardIcon} text="Dashboard" />
     <Item icon={dashboardIcon} text="Dashboard" />
     <Item icon={dashboardIcon} text="Dashboard" />
+    <Item onClick={logout} icon={signouticon} text="Sign out" />
     </Card>
 
   )
