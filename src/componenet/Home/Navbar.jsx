@@ -9,6 +9,8 @@ import MenuList from "../../ui/MenuList";
 import Logo from "../../ui/Logo";
 import ScreenModeCard from "../../ui/ScreenModeCard";
 import { AnimatePresence } from "framer-motion";
+
+import SignInAsListMenu from "./SignInAsListMenu";
 const navLinks = [
   { navLink: "Blog", href: "blog" },
   { navLink: "Documentation", href: "documentation" },
@@ -48,7 +50,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className=" py-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
+    <nav className=" pb-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
    
       <div className="container mx-auto flex justify-between items-center">
       
@@ -75,12 +77,33 @@ const Navbar = () => {
             )}
 
             {session && (
-              <Button
-                onClick={logout}
-                className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full"
-              >
-                Log out
-              </Button>
+              // <Button
+              //   onClick={logout}
+              //   className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full"
+              // >
+              //   Log out
+              // </Button>
+              // <img src={} />
+              // <Card>
+              //   <ul>
+              //     <li></li>
+              //   </ul>
+              // </Card>
+              <>
+              <div className="bg-darkPink w-10 h-10 rounded-full flex justify-center items-center font-bold text-white">
+                <h6>B</h6>
+              </div>
+               {/* <Card> */}
+                 {/* <ul>
+                   <li>hello </li>
+                   <li>hello </li>
+                   <li>hello </li>
+                   <li>hello </li>
+                 </ul>
+               </Card> */}
+               <SignInAsListMenu />
+              </>
+            
             )}
 
             {!session && (
@@ -106,15 +129,15 @@ const Navbar = () => {
               {navLinks.map(({ navLink, href }) => (
                 <li
                   key={navLink.id}
-                  className="p-1 lg:px-2.5 text-sm  font-medium  rounded-md  text-gray-600 dark:text-gray-300"
+                  className="p-1 lg:px-2.5 text-[0.95rem]  font-semibold  rounded-md  text-gray-300  hover:text-white transition-colors duration-100"
                 >
-                  <Link to={href} className="text-white">
+                  <Link to={href}>
                     {navLink}
                   </Link>
                 </li>
               ))}
               <li className="p-1 lg:hidden lg:px-2.5 text-sm  font-medium  rounded-md  text-gray-600 dark:text-gray-300">
-                <a href="#" className="text-white">
+                <a href="#" className="text-gray-300">
                   sign in
                 </a>
               </li>

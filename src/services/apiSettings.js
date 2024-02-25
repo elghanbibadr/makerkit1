@@ -2,6 +2,8 @@
 import supabase from "../../public/supabase/Supabase";
 import { supabaseUrl } from "../../public/supabase/Supabase";
 export async function updateUserProfil({ name, avatarURL }) {
+
+    console.log('avatar url',avatarURL)
     await supabase.auth.updateUser({
         data: {
             fullName: name,

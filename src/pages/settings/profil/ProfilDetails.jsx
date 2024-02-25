@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 import Input from "../../../ui/Input";
 import Label from "../../../ui/Label";
+import toast from "react-hot-toast";
 
 // import FileInput from "../../../ui/FileInput";
 const ProfilDetails = () => {
@@ -52,13 +53,20 @@ const ProfilDetails = () => {
       const { data, error } = await supabase.storage
         .from('avatars')
         .upload(selectedFile.name, selectedFile);
-      console.log(data.path)
-      console.log('data', data)
-      const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
-      setAvatarUrl(imageUrl1)
+      
+
+        if(error){
+          console.log(error.message)
+          toast.error(error.message)
+          return 
+        }
+
+      //   console.log(  `path, ${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`)
+      // const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
+      setAvatarUrl(`${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`)
+      updateUser({ name, avatarURL})
     }
 
-    updateUser({ name, avatarURL })
     // console.log("sessiion",session)
   }
 

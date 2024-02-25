@@ -80,7 +80,7 @@ const DashboardNav = () => {
           <ul className="lg:flex">
             {navLinks.map(({ name, img }, index) => (
               // eslint-disable-next-line react/jsx-key
-              <Link to={index > 1 ? `dashboard/${name}` : `${name}`}>
+              <Link  key={index} to={index > 1 ? `dashboard/${name}` : `${name}`}>
                 <li className="p-1 flex items-center gap-2 mb-3 lg:px-2.5 text-sm  font-medium  rounded-md  text-gray-600 dark:text-gray-300">
                   <img className="h-6 mr-2" src={img} alt="nav icon image" />
                   <a href="#" className="text-white">
