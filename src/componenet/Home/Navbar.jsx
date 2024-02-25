@@ -5,6 +5,7 @@ import moon from "../../assets/moon.svg";
 import Button from "../../ui/Button";
 import { AppContext } from "../../store/AppContext";
 import { logout } from "../../services/apiAuth";
+import { useLogout } from "../../hook/useLogout";
 import MenuList from "../../ui/MenuList";
 import Logo from "../../ui/Logo";
 import ScreenModeCard from "../../ui/ScreenModeCard";

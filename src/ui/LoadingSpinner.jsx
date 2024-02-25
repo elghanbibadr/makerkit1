@@ -1,9 +1,9 @@
 import React from 'react';
 import { ColorRing } from 'react-loader-spinner';
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({className}) => {
   return (
-    <div className='h-screen flex justify-center items-center'>
+    <div className={`h-screen flex justify-center items-centern ${className}`}>
     <ColorRing
   visible={true}
   height="60"
@@ -11,7 +11,8 @@ const LoadingSpinner = () => {
   ariaLabel="color-ring-loading"
   wrapperStyle={{}}
   wrapperClass="color-ring-wrapper"
-  colors={['#C8A2FF', 'white',"#C8A2FF","white","#C8A2FF","white"]}
+  // colors={['#C8A2FF', 'white',"#C8A2FF","white","#C8A2FF","white"]}
+  colors={['white', 'white',"white","white","white","white"]}
   />
     </div>
   );
