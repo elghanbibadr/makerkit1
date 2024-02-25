@@ -25,6 +25,9 @@ const modeLinks = [
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isModeCardOpen, setIsModeCardOpen] = useState(false);
+  const [isSignedAsCardOpen,setIsSignedAsCardOpen]=useState(false)
+
+
   const { session } = useContext(AppContext);
 
   const toggleMenu = () => {
@@ -49,6 +52,10 @@ const Navbar = () => {
     };
   }, []);
 
+
+  const handleUserProfilClicked=()=>{
+   setIsSignedAsCardOpen(prv => !prv)
+  }
   return (
     <nav className=" pb-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
    
@@ -67,7 +74,7 @@ const Navbar = () => {
             <AnimatePresence>{isModeCardOpen && <ScreenModeCard />}</AnimatePresence>
             {/* BUTTONS */}
           </div>
-          <div className="hidden lg:flex">
+          <div className=" lg:flex">
             {!session && (
               <Link to="/auth/signin">
                 <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
@@ -77,31 +84,13 @@ const Navbar = () => {
             )}
 
             {session && (
-              // <Button
-              //   onClick={logout}
-              //   className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full"
-              // >
-              //   Log out
-              // </Button>
-              // <img src={} />
-              // <Card>
-              //   <ul>
-              //     <li></li>
-              //   </ul>
-              // </Card>
+             
               <>
-              <div className="bg-darkPink w-10 h-10 rounded-full flex justify-center items-center font-bold text-white">
+              <div onClick={handleUserProfilClicked} className="bg-darkPink cursor-pointer w-10 h-10 rounded-full flex justify-center items-center font-bold text-white">
                 <h6>B</h6>
               </div>
-               {/* <Card> */}
-                 {/* <ul>
-                   <li>hello </li>
-                   <li>hello </li>
-                   <li>hello </li>
-                   <li>hello </li>
-                 </ul>
-               </Card> */}
-               <SignInAsListMenu />
+             
+               { isSignedAsCardOpen &&  <SignInAsListMenu />}
               </>
             
             )}
