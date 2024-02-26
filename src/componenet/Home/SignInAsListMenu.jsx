@@ -5,6 +5,10 @@ import { AppContext } from '../../store/AppContext';
 import signouticon from "../../assets/signouticon.svg"
 import { useLogout } from '../../hook/useLogout';
 import LoadingSpinner from '../../ui/LoadingSpinner';
+import themIcon from "../../assets/themeIcon.svg"
+import documentationIcon from "../../assets/documentationIcon.svg"
+
+
 const Item = ({ icon, text ,onClick}) => {
     return (
       <div onClick={onClick} className="flex py-3 px-2   border-t border-accent1 items-center cursor-pointer hover:bg-[#17182A]">
@@ -29,8 +33,8 @@ const SignInAsListMenu = ({position}) => {
          </div>
 
     <Item icon={dashboardIcon} text="Dashboard" />
-    <Item icon={dashboardIcon} text="Dashboard" />
-    <Item icon={dashboardIcon} text="Dashboard" />
+    <Item icon={themIcon} text="Theme" />
+    <Item icon={documentationIcon} text="Documentation" />
    { !isLoading && <Item onClick={logout} icon={signouticon} text="Sign out" />}
     {isLoading && <LoadingSpinner className="h-8 w-8 mx-auto   "/>}
    

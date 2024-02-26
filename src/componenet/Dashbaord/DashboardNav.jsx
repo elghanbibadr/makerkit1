@@ -23,7 +23,7 @@ const DashboardNav = () => {
   const currentURL = location.pathname;
 
   return (
-    <div>
+    <div className="col-start-2">
       <h1 className="text-white">hello {session?.user.email}</h1>
       <div className="flex   mb-10   justify-between md:h-fit">
         <div className="flex items-center ">

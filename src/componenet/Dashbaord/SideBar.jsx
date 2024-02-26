@@ -1,89 +1,26 @@
-// import React from "react";
-// import { NavLink } from "react-router-dom";
-// import dashboardicon from "../../assets/dashboardicon.svg";
-// import TaskIcon from "../../assets/taskIcon.svg";
-// import SettingIcon from "../../assets/setting.svg";
-// import DashboardIcon from "../../assets/dashboardicon.svg";
-// export const SideBar = () => {
-//   return (
-//     <aside className="hidden md:block md:row-start-1 row-span-2 md:border-r   md:border-accent1">
-//       <ul className="text-white">
-//         <li className="flex items-center text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md">
-//           <span className="font-semibold inline-flex justify-center items-center text-xl text-white bg-blue-600 rounded-full h-7 w-7">
-//             B
-//           </span>
 
-//           <p className="text-white font-medium text-sm ml-2">badr</p>
-//         </li>
-//         <li>
-//           <NavLink
-//             to="/dashboard"
-
-//             className={({ isActive }) =>
-//               `flex items-center mr-3  hover:bg-[#17182A] px-4 py-2 rounded-md my-2 border-transparent text-sm font-base font-medium  dark:text-white ${
-//                 isActive ? "bg-[#17182A]" : ""
-//               }`
-//             }
-//             end
-//           >
-//             <img
-//               className="h-7 mr-3"
-//               src={DashboardIcon}
-//               alt="dashboard icon"
-//             />
-//             <span>Dashboard</span>
-//           </NavLink>
-//         </li>
-
-//         <li>
-//           <NavLink
-//             to="dashboard/tasks"
-//             className={({ isActive }) =>
-//               `flex items-center mr-3  hover:bg-[#17182A] px-4 py-2 rounded-md my-2 border-transparent text-sm font-base font-medium  dark:text-white ${
-//                 isActive ? "bg-[#17182A]" : ""
-//               }`
-//             }
-//           >
-//             <img className="h-7 mr-3" src={TaskIcon} alt="task icon" />
-//             <span>Task</span>
-//           </NavLink>
-//         </li>
-//         <li>
-//           <NavLink
-//             to="dashboard/settings"
-//             className={({ isActive }) =>
-//               `flex items-center mr-3  hover:bg-[#17182A] px-4 py-2 rounded-md my-2 border-transparent text-sm font-base font-medium  dark:text-white ${
-//                 isActive ? "bg-[#17182A]" : ""
-//               }`
-//             }
-//           >
-//             <img className="h-7 mr-3" src={SettingIcon} alt="setting icon" />
-//             <span>Setting</span>
-//           </NavLink>
-//         </li>
-//       </ul>
-//     </aside>
-//   );
-// };
 import React ,{useState} from "react";
 import { NavLink } from "react-router-dom";
 import DashboardIcon from "../../assets/dashboardicon.svg";
 import TaskIcon from "../../assets/taskIcon.svg";
 import SettingIcon from "../../assets/setting.svg";
 import SignInAsListMenu from "../Home/SignInAsListMenu";
-
+import Logo from "../../ui/Logo";
+import profilIcon from "../../assets/profilIcon.svg"
+import organizationIcon from "../../assets/organizationIcon.svg"
+import subscriptionIcon from "../../assets/subscription.svg"
 const SidebarLink = ({ to, icon, text }) => (
   <NavLink
     to={to}
     className={({ isActive }) =>
-      `flex items-center mr-3 hover:bg-[#17182A] px-4 py-2 rounded-md my-2 border-transparent text-sm font-base font-medium dark:text-white ${
+      `flex items-center mr-3 hover:bg-[#17182A] px-4 py-[7px] rounded-md my-3 border-transparent text-sm font-base font-medium dark:text-white ${
         isActive ? "bg-[#17182A]" : ""
       }`
     }
     end
   >
-    <img className="h-7 mr-3" src={icon} alt={`${text} icon`} />
-    <span>{text}</span>
+    <img className="h-5 mr-3 " src={icon} alt={`${text} icon`} />
+    <span className="text-[0.9rem]  text-gray-300">{text}</span>
   </NavLink>
 );
 
@@ -95,24 +32,20 @@ export const SideBar = () => {
    }
 
   return (
-    <aside className="hidden lg:block lg:row-start-1 row-span-2 lg:border-r md:border-accent1">
-      <ul className="text-white">
-        <li className="flex items-center mr-3 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md">
-          {/* <span className="font-semibold inline-flex justify-center items-center text-xl text-white bg-blue-600 rounded-full h-7 w-7">
-            B
-          </span>
-          <p className="text-white font-medium text-sm ml-2">badr</p> */}
-           <div onClick={handleUserProfilClicked} className="bg-darkPink cursor-pointer w-10 h-10 rounded-full flex justify-center items-center font-bold text-white">
-                <h6>B</h6>
-              </div>
-             
-               { isSignedAsCardOpen &&  <SignInAsListMenu position="left-6 top-20"  />}
-        </li>
+    <aside className=" lg:fixed hidden pt-4 pl-3 lg:block bg-secondary inset-0 w-[240px]   lg:row-start-1 row-span-2 lg:border-r md:border-accent1">
+        <span className="mx-4 inline-block my-4">
+          <Logo />
+        </span>
+
+      <ul className="text-white relative h-full">
+        {/* <li className="flex items-center mr-3 mb-4 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md">
+        <Logo />
+        </li> */}
         <li>
           <SidebarLink to="/dashboard" icon={DashboardIcon} text="Dashboard" />
         </li>
         <li>
-          <SidebarLink to="/dashboard/tasks" icon={TaskIcon} text="Task" />
+          <SidebarLink to="/dashboard/tasks" icon={TaskIcon} text="Tasks" />
         </li>
         <li>
           <SidebarLink
@@ -121,6 +54,39 @@ export const SideBar = () => {
             text="Setting"
           />
         </li>
+        <li>
+          <SidebarLink
+            to="/dashboard/settings"
+            icon={profilIcon}
+            text="Profile"
+          />
+        </li>
+        <li>
+          <SidebarLink
+            to="/dashboard/settings"
+            icon={organizationIcon}
+            text="Organization"
+          />
+        </li>
+        <li>
+          <SidebarLink
+            to="/dashboard/settings"
+            icon={subscriptionIcon}
+            text="Subscription"
+          />
+        </li>
+        { isSignedAsCardOpen &&   <SignInAsListMenu position="relative top-1"  />}
+
+        <li className="flex absolute bottom-20 w-full items-center mr-3 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md">
+      
+
+      <div className="cursor-pointer font-bold text-white">
+        <div onClick={handleUserProfilClicked}  className="w-8 h-8   flex justify-center items-center rounded-full bg-darkPink ">
+             <h6>B</h6>
+           </div>
+      </div>
+        
+   </li>
       </ul>
     </aside>
   );
