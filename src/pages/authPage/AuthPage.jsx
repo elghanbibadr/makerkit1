@@ -8,6 +8,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { SignUp } from "../../services/apiAuth";
 import toast from "react-hot-toast";
+// import input from "../../ui/input";
+import Label from "../../ui/Label";
+import Logo from "../../ui/Logo";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
@@ -54,15 +57,10 @@ const AuthPage = ({ isSignUp = true }) => {
     if (!error){
       console.log("data",data)
       // create a new row inside the organization tables for this user
-    //    await supabase
-    // .from('organizations')
-    // .insert([
-    //   {userId:"hello6383GDHZè", organizationName:"",organizationLogoUrl:"" },
-    // ])
-    // .select()
+ 
     }
     if (error) return toast.error(error.message);
-    navigate("/dashboard");
+    navigate("/onboarding");
   }
   const handleGoogleSignIn = async () => {
     const { user, error } = await supabase.auth.signInWithOAuth({
@@ -75,10 +73,11 @@ const AuthPage = ({ isSignUp = true }) => {
     if (!error) navigate("/dashboard");
   };
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <div>
+    <div className="flex  flex-col justify-center items-center ">
+      <div className= "w-[400px]">
         <Link to="/">
-          <img className="mx-auto" src={logo} alt="makerkit logo" />
+          {/* <img className="mx-auto" src={logo} alt="makerkit logo" /> */}
+          <Logo className="mx-auto" />
         </Link>
         <div className="border border-accent1 shadow-pinkBoxShadow2 p-6 rounded-xl mt-10">
           <h5 className="scroll-m-20 font-heading text-lg font-medium text-white text-center">
@@ -98,11 +97,11 @@ const AuthPage = ({ isSignUp = true }) => {
           </span>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-6">
-              <label className="small-title " htmlFor="email">
+              <Label  labelfor="email">
                 Email Address
-              </label>
+              </Label>
               <input
-                className="input block w-[400px] "
+                className=" input block w-full "
                 id="email"
                 placeholder="your@email"
                 name="email"
@@ -116,11 +115,11 @@ const AuthPage = ({ isSignUp = true }) => {
               )}
             </div>
             <div className="mt-4">
-              <label className="small-title " htmlFor="password">
+              <Label  labelfor="password">
                 Password
-              </label>
+              </Label>
               <input
-                className="input block w-[400px]"
+                className=" input block  w-full "
                 id="password"
                 name="password"
                 type="password"
@@ -139,11 +138,11 @@ const AuthPage = ({ isSignUp = true }) => {
             </div>
             {isSignUp && (
               <div className="mt-4">
-                <label className="small-title " htmlFor="repeatpassword">
+                <Label  labelfor="repeatpassword">
                   RepeatPassword
-                </label>
+                </Label>
                 <input
-                  className="input block w-[400px]"
+                  className=" input block  w-full "
                   id="repeatpassword"
                   name="repeatpassword"
                   type="password"

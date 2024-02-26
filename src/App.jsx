@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from "react-hot-toast";
 import LoadingSpinner from "./ui/LoadingSpinner";
+import OnBoardingPage from "./pages/onboarding/OnBoardingPage";
 // Lazy load components
 const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
 const HomePage = lazy(() => import("./pages/homePage/HomePage"));
@@ -68,6 +69,7 @@ function App() {
             </Route>
             <Route path="/auth/signin" element={<SignIn />} />
             <Route path="/auth/signup" element={<SignUp />} />
+            <Route path="/onboarding" element={<OnBoardingPage />} />
           </Routes>
         </Suspense>
       </Router>

@@ -1,4 +1,7 @@
 import Button from "../../../ui/Button";
+import Input from "../../../ui/Input";
+import Label from "../../../ui/Label";
+
 const OrganizationGeneralPage = () => {
   return (
     <div>
@@ -9,11 +12,11 @@ const OrganizationGeneralPage = () => {
         </p>
       </div>
       <div className="mt-4">
-        <label className="small-title " htmlFor="organizationName">
+        <Label className="small-title " labelfor="organizationName">
           Organization Name
-        </label>
-        <input
-          className="input block w-full "
+        </Label>
+        <Input
+        
           id="organizationName"
           name="organizationName"
           type="text"
@@ -21,11 +24,11 @@ const OrganizationGeneralPage = () => {
       </div>
 
       <div className="mt-6">
-        <label className="small-title " htmlFor="organizationlogo">
+        <Label className="small-title " labelfor="organizationlogo" >
           Organization Logo
-        </label>
-        <input
-          className="input block w-full "
+        </Label>
+        <Input
+         
           id="organizationlogo"
           name="organizationlogo"
           type="file"
