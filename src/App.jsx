@@ -71,7 +71,7 @@ function App() {
           </Routes>
         </Suspense>
       </Router>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       <Toaster
         position="top-center"
         gutter={12}

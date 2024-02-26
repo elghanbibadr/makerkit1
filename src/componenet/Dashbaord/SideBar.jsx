@@ -47,43 +47,38 @@ export const SideBar = () => {
         <li>
           <SidebarLink to="/dashboard/tasks" icon={TaskIcon} text="Tasks" />
         </li>
+      
         <li>
           <SidebarLink
-            to="/dashboard/settings"
-            icon={SettingIcon}
-            text="Setting"
-          />
-        </li>
-        <li>
-          <SidebarLink
-            to="/dashboard/settings"
+            to="/dashboard/settings/profil"
             icon={profilIcon}
             text="Profile"
           />
         </li>
         <li>
           <SidebarLink
-            to="/dashboard/settings"
+            to="/dashboard/settings/organization"
             icon={organizationIcon}
             text="Organization"
           />
         </li>
         <li>
           <SidebarLink
-            to="/dashboard/settings"
+            to="/dashboard/settings/subscription"
             icon={subscriptionIcon}
             text="Subscription"
           />
         </li>
-        { isSignedAsCardOpen &&   <SignInAsListMenu position="relative top-1"  />}
+        { isSignedAsCardOpen &&   <SignInAsListMenu position="relative -top-[70px]"  />}
 
-        <li className="flex absolute bottom-20 w-full items-center mr-3 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md">
+        <li onClick={handleUserProfilClicked} className="flex absolute left-3 bottom-20 cursor-pointer items-center mr-3 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md border-accent1 border w-[90%]">
       
 
-      <div className="cursor-pointer font-bold text-white">
-        <div onClick={handleUserProfilClicked}  className="w-8 h-8   flex justify-center items-center rounded-full bg-darkPink ">
-             <h6>B</h6>
+      <div className=" flex items-center gap-4 ">
+        <div   className="w-8 h-8   flex justify-center items-center rounded-full bg-darkPink ">
+             <h6 className="font-bold text-white">B</h6>
            </div>
+             <span className="text-[13px] font-normal text-gray-400">badr@gmail.com</span>
       </div>
         
    </li>
