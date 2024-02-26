@@ -65,11 +65,12 @@
 //     </aside>
 //   );
 // };
-import React from "react";
+import React ,{useState} from "react";
 import { NavLink } from "react-router-dom";
 import DashboardIcon from "../../assets/dashboardicon.svg";
 import TaskIcon from "../../assets/taskIcon.svg";
 import SettingIcon from "../../assets/setting.svg";
+import SignInAsListMenu from "../Home/SignInAsListMenu";
 
 const SidebarLink = ({ to, icon, text }) => (
   <NavLink
@@ -87,14 +88,25 @@ const SidebarLink = ({ to, icon, text }) => (
 );
 
 export const SideBar = () => {
+
+  const [isSignedAsCardOpen,setIsSignedAsCardOpen]=useState(false)
+  const handleUserProfilClicked=()=>{
+    setIsSignedAsCardOpen(prv => !prv)
+   }
+
   return (
     <aside className="hidden lg:block lg:row-start-1 row-span-2 lg:border-r md:border-accent1">
       <ul className="text-white">
         <li className="flex items-center mr-3 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md">
-          <span className="font-semibold inline-flex justify-center items-center text-xl text-white bg-blue-600 rounded-full h-7 w-7">
+          {/* <span className="font-semibold inline-flex justify-center items-center text-xl text-white bg-blue-600 rounded-full h-7 w-7">
             B
           </span>
-          <p className="text-white font-medium text-sm ml-2">badr</p>
+          <p className="text-white font-medium text-sm ml-2">badr</p> */}
+           <div onClick={handleUserProfilClicked} className="bg-darkPink cursor-pointer w-10 h-10 rounded-full flex justify-center items-center font-bold text-white">
+                <h6>B</h6>
+              </div>
+             
+               { isSignedAsCardOpen &&  <SignInAsListMenu />}
         </li>
         <li>
           <SidebarLink to="/dashboard" icon={DashboardIcon} text="Dashboard" />

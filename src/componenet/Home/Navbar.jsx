@@ -78,7 +78,7 @@ const Navbar = () => {
           <div className=" lg:flex">
             {!session && (
               <Link to="/auth/signin">
-                <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
+                <Button className="text-white hidden lg:block mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
                   Sign In
                 </Button>
               </Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
 
             {!session && (
               <Link to="/auth/signup">
-                <Button className="bg-darkPink rounded-full text-white px-6 py-2">
+                <Button className="bg-darkPink hidden lg:block rounded-full text-white px-6 py-2">
                   Sign Up
                 </Button>
               </Link>
