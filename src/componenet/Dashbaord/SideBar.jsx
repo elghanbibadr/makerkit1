@@ -106,7 +106,7 @@ export const SideBar = () => {
                 <h6>B</h6>
               </div>
              
-               { isSignedAsCardOpen &&  <SignInAsListMenu />}
+               { isSignedAsCardOpen &&  <SignInAsListMenu position="left-6 top-20"  />}
         </li>
         <li>
           <SidebarLink to="/dashboard" icon={DashboardIcon} text="Dashboard" />

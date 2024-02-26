@@ -91,7 +91,7 @@ const Navbar = () => {
                 <h6>B</h6>
               </div>
              
-               { isSignedAsCardOpen &&  <SignInAsListMenu />}
+               { isSignedAsCardOpen &&  <SignInAsListMenu position="right-6 top-20" />}
               </>
             
             )}

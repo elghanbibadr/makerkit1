@@ -14,15 +14,16 @@ const Item = ({ icon, text ,onClick}) => {
     );
   };
   
-const SignInAsListMenu = () => {
+const SignInAsListMenu = ({position}) => {
     const {session}=useContext(AppContext)
     const { logout,isLoading=true} = useLogout() 
 
 
 
   return (
-    <Card className="left-0 b  top-40 w-[210px] py-0 p-0  m-0">
-         <div className='w-full p-2  hover:bg-[#17182A]  cursor-pointer  '>
+    <Card  className={`${position} w-[210px] py-0 p-0  m-0`}
+    >
+         <div className='w-full px-2 py-3   hover:bg-[#17182A]  cursor-pointer  '>
             <span className='text-[0.8rem] text-gray-600 font-medium '>Signed in as</span>
             <span className='block text-[0.8rem] font-medium'>{session?.user?.email}</span>
          </div>
@@ -31,9 +32,9 @@ const SignInAsListMenu = () => {
     <Item icon={dashboardIcon} text="Dashboard" />
     <Item icon={dashboardIcon} text="Dashboard" />
    { !isLoading && <Item onClick={logout} icon={signouticon} text="Sign out" />}
-    {isLoading && <span  className='h-8 w-8 block mx-auto'>
-        <LoadingSpinner className="h-fit  "/>
-        </span>}
+    {!isLoading && <LoadingSpinner className="h-8 w-8 mx-auto   "/>}
+   
+
     </Card>
 
   )
