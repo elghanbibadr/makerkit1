@@ -6,6 +6,7 @@ import signouticon from "../../assets/signouticon.svg"
 import { useLogout } from '../../hook/useLogout';
 import LoadingSpinner from '../../ui/LoadingSpinner';
 import themIcon from "../../assets/themeIcon.svg"
+import { Link } from 'react-router-dom';
 import documentationIcon from "../../assets/documentationIcon.svg"
 
 
@@ -32,7 +33,9 @@ const SignInAsListMenu = ({position}) => {
             <span className='block text-[0.8rem] font-medium'>{session?.user?.email}</span>
          </div>
 
-    <Item icon={dashboardIcon} text="Dashboard" />
+    <Link to="/dashboard">
+      <Item icon={dashboardIcon} text="Dashboard" />
+    </Link>
     <Item icon={themIcon} text="Theme" />
     <Item icon={documentationIcon} text="Documentation" />
    { !isLoading && <Item onClick={logout} icon={signouticon} text="Sign out" />}
