@@ -2,16 +2,19 @@ import { useMutation } from "react-query";
 
 import { logout as logoutApi } from "../services/apiAuth";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export function useLogout() {
+const navigate=useNavigate()
   const { mutate: logout, isLoading} = useMutation({
     mutationFn: logoutApi,
     onSuccess: function () {
  
-      toast.success('logout  succsefuly')
+      navigate('/',{replace:true})
+      toast.success('Logout successful');
     },
-    onError: (err) => {
-     toast.error(err.message)
+    onError: () => {
+      toast.error("Error logging you out. Please try again later.");
     },
   });
 

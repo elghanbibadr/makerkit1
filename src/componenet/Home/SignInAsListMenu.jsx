@@ -32,7 +32,7 @@ const SignInAsListMenu = ({position}) => {
     <Item icon={dashboardIcon} text="Dashboard" />
     <Item icon={dashboardIcon} text="Dashboard" />
    { !isLoading && <Item onClick={logout} icon={signouticon} text="Sign out" />}
-    {!isLoading && <LoadingSpinner className="h-8 w-8 mx-auto   "/>}
+    {isLoading && <LoadingSpinner className="h-8 w-8 mx-auto   "/>}
    
 
     </Card>
