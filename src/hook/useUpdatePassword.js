@@ -10,7 +10,6 @@ export function useUpdatePassword(){
     mutationFn:updatePassword,
     onSuccess:() =>{
         toast.success("password updated successfuly")
-        // queryClient.invalidateQueries({queryKey:["user"]})
     },
     onError:(err) => toast.error(err.message),
 
