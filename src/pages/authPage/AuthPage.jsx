@@ -11,9 +11,12 @@ import toast from "react-hot-toast";
 // import input from "../../ui/input";
 import Label from "../../ui/Label";
 import Logo from "../../ui/Logo";
+import LoadingSpinner from "../../ui/LoadingSpinner";
+import { ColorRing } from "react-loader-spinner";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -22,27 +25,37 @@ const AuthPage = ({ isSignUp = true }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    if (isSignUp) {
-      if (data.repeatedpassword !== data.password) {
-        return toast.error("passwords are not matched");
+    setIsLoading(true)
+
+    try {
+
+      if (isSignUp) {
+        if (data.repeatedpassword !== data.password) {
+          return toast.error("passwords are not matched");
+        }
+        await SignUp(data.email, data.password);
+      } else {
+        await Login(data.email, data.password);
       }
-      await SignUp(data.email, data.password);
-    } else {
-      await Login(data.email, data.password);
+
+    } catch (e) {
+      console.log(e.message)
+    } finally {
+      setIsLoading(false)
+      // Reset the form values
+      reset();
     }
 
-    // Reset the form values
-    reset();
   };
 
   async function Login(email, password) {
-    const { data,error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
 
-    console.log("sign in data",data)
+    console.log("sign in data", data)
     if (error) return toast.error(error.message);
     navigate("/dashboard");
   }
@@ -54,10 +67,10 @@ const AuthPage = ({ isSignUp = true }) => {
       password: password,
     });
 
-    if (!error){
-      console.log("data",data)
+    if (!error) {
+      console.log("data", data)
       // create a new row inside the organization tables for this user
- 
+
     }
     if (error) return toast.error(error.message);
     navigate("/onboarding");
@@ -74,7 +87,7 @@ const AuthPage = ({ isSignUp = true }) => {
   };
   return (
     <div className="flex  flex-col justify-center items-center ">
-      <div className= "w-[400px]">
+      <div className="w-[400px]">
         <Link to="/">
           {/* <img className="mx-auto" src={logo} alt="makerkit logo" /> */}
           <Logo className="mx-auto" />
@@ -97,7 +110,7 @@ const AuthPage = ({ isSignUp = true }) => {
           </span>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-6">
-              <Label  labelfor="email">
+              <Label labelfor="email">
                 Email Address
               </Label>
               <input
@@ -115,7 +128,7 @@ const AuthPage = ({ isSignUp = true }) => {
               )}
             </div>
             <div className="mt-4">
-              <Label  labelfor="password">
+              <Label labelfor="password">
                 Password
               </Label>
               <input
@@ -138,7 +151,7 @@ const AuthPage = ({ isSignUp = true }) => {
             </div>
             {isSignUp && (
               <div className="mt-4">
-                <Label  labelfor="repeatpassword">
+                <Label labelfor="repeatpassword">
                   RepeatPassword
                 </Label>
                 <input
@@ -161,12 +174,38 @@ const AuthPage = ({ isSignUp = true }) => {
             {isSignUp && (
               <Button className="button-pink text-white w-full mt-6 rounded-md">
                 Sign up
+                {isLoading && 
+                  <ColorRing
+                    visible={true}
+                    height="30"
+                    width="30"
+                    ariaLabel="color-ring-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="color-ring-wrapper"
+                    colors={['#C8A2FF', 'white', "#C8A2FF", "white", "#C8A2FF", "white"]}
+                  // colors={['white', 'white',"white","white","white","white"]}
+                  />
+              }
               </Button>
             )}
 
             {!isSignUp && (
               <Button className="button-pink text-white w-full mt-6 rounded-md">
                 Sign in
+                {isLoading && 
+               
+                  <ColorRing
+                    visible={true}
+                    height="30"
+                    width="30"
+                    ariaLabel="color-ring-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="color-ring-wrapper"
+                    colors={['#C8A2FF', 'white', "#C8A2FF", "white", "#C8A2FF", "white"]}
+                  // colors={['white', 'white',"white","white","white","white"]}
+                  />
+                }
+
               </Button>
             )}
           </form>
