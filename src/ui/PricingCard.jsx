@@ -15,7 +15,7 @@ const PricingCard = ({
     <div
       className={`text-left mt-10 ${
         title === "Pro" ? "border-darkPink" : "border-accent1"
-      }  border-[2px] rounded-xl  p-5 sm:w-[70%] sm:mx-auto lg:w-full`}
+      }  border-[2px] rounded-xl  p-5 sm:w-[70%] sm:mx-auto md:w-full`}
     >
       <div className="flex items-center gap-6">
         <h3 className="text-white">{title}</h3>
@@ -48,7 +48,8 @@ const PricingCard = ({
           </span>
         </div>
       )}
-      <ul className="text-gray-300 font-medium text-[.93rem]">
+      <ul className={`text-gray-300  font-medium text-[.93rem]  ${title==='Premium' ? 'md:pb-9 lg:pb-16':'pb-0'} `}> 
+      
         {features.map((feature, index) => (
           <li key={index} className="flex my-1 items-center gap-2">
             <img className="h-5" src={checkmark} alt="check mark icon" />

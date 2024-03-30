@@ -101,7 +101,7 @@ const AuthPage = ({ isSignUp = true }) => {
                 Email Address
               </Label>
               <input
-                className=" input block w-full "
+                className={`input block w-full `}
                 id="email"
                 placeholder="your@email"
                 name="email"

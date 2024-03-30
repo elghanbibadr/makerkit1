@@ -37,7 +37,7 @@ const PricingPlansList = () => {
           <span>Yearly</span>
         </button>
       </div>
-      <div className="lg:grid lg:grid-cols-3 lg:gap-10">
+      <div className="md:grid md:grid-cols-3 md:gap-2">
         {pricingData.map(
           (
             {
