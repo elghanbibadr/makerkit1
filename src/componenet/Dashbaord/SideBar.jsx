@@ -1,14 +1,15 @@
 
-import React ,{useState} from "react";
+import React ,{useContext, useState} from "react";
 import { NavLink } from "react-router-dom";
 import DashboardIcon from "../../assets/dashboardicon.svg";
 import TaskIcon from "../../assets/taskIcon.svg";
-import SettingIcon from "../../assets/setting.svg";
+
 import SignInAsListMenu from "../Home/SignInAsListMenu";
 import Logo from "../../ui/Logo";
 import profilIcon from "../../assets/profilIcon.svg"
 import organizationIcon from "../../assets/organizationIcon.svg"
 import subscriptionIcon from "../../assets/subscription.svg"
+import { AppContext } from "../../store/AppContext";
 const SidebarLink = ({ to, icon, text }) => (
   <NavLink
     to={to}
@@ -25,7 +26,7 @@ const SidebarLink = ({ to, icon, text }) => (
 );
 
 export const SideBar = () => {
-
+  const {session}=useContext(AppContext)
   const [isSignedAsCardOpen,setIsSignedAsCardOpen]=useState(false)
   const handleUserProfilClicked=()=>{
     setIsSignedAsCardOpen(prv => !prv)
@@ -38,9 +39,7 @@ export const SideBar = () => {
         </span>
 
       <ul className="text-white relative h-full">
-        {/* <li className="flex items-center mr-3 mb-4 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md">
-        <Logo />
-        </li> */}
+     
         <li>
           <SidebarLink to="/dashboard" icon={DashboardIcon} text="Dashboard" />
         </li>
@@ -74,11 +73,11 @@ export const SideBar = () => {
         <li onClick={handleUserProfilClicked} className="flex absolute left-3 bottom-20 cursor-pointer items-center mr-3 text-gray-300 hover:bg-[#17182A] px-4 py-2 rounded-md border-accent1 border w-[90%]">
       
 
-      <div className=" flex items-center gap-4 ">
-        <div   className="w-8 h-8   flex justify-center items-center rounded-full bg-darkPink ">
-             <h6 className="font-bold text-white">B</h6>
+      <div className=" flex items-center gap-3 ">
+        <div   className="w-7 h-7   flex justify-center items-center rounded-full bg-darkPink ">
+             <h6 className="font-semibold text-sm text-white">B</h6>
            </div>
-             <span className="text-[13px] font-normal text-gray-400">badr@gmail.com</span>
+             <span className="text-[13px] font-normal text-gray-400">{session?.user?.email}</span>
       </div>
         
    </li>
