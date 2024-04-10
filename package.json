@@ -23,7 +23,8 @@
     "react-loader-spinner": "^6.1.6",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.18.0",
-    "react-spinners": "^0.13.8"
+    "react-spinners": "^0.13.8",
+    "tailwind-datepicker-react": "^1.4.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

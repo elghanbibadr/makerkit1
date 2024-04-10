@@ -4,10 +4,49 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { createTask } from "../../services/apiTasks";
 import toast from "react-hot-toast";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { queryClient } from "../../App";
 import closeIcon from '../../assets/xIcon.svg'
 import { AppContext } from "../../store/AppContext";
+import Datepicker from "tailwind-datepicker-react"
+const options = {
+	// title: "Demo Title",
+	// autoHide: true,
+	todayBtn: false,
+	clearBtn: false,
+	// clearBtnText: "Clear",
+	maxDate: new Date("2030-01-01"),
+	minDate: new Date("1950-01-01"),
+	theme: {
+		background: "bg-[#030712]   shadow-darkPink ",
+	
+		// icons: "",
+		text: " text-white hover:text-darkPink",
+		
+		input: "bg-[#030712] input cursor-pointer focus:border-auto",
+		inputIcon: "hidden",
+		selected: "bg-darkPink text-darkPink hover:text-darkPink hover:bg-white",
+	},
+	// icons: {
+
+	// 	prev: () => <span className="h-1 w-10 block"></span>,
+	// 	next: () => <span className="h-1 w-10 block"></span>,
+	// },
+	datepickerClassNames: "top-10",
+	defaultDate: new Date(),
+	language: "en",
+	disabledDates: [],
+	weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+	inputNameProp: "date",
+	inputIdProp: "date",
+	inputPlaceholderProp: "Select Date",
+	inputDateFormatProp: {
+		day: "numeric",
+		month: "long",
+		year: "numeric"
+	}
+}
+
 function generateUniqueRandomNumber() {
   // Multiply Math.random() by a large number to get a floating-point value,
   // then convert it to an integer using Math.floor().
@@ -49,7 +88,13 @@ const NewTaskModal = () => {
     });
   };
 
-
+  const [show, setShow] = useState(false)
+	const handleChange = (selectedDate) => {
+		console.log(selectedDate)
+	}
+	const handleClose = (state) => {
+		setShow(state)
+	}
   
 
   return (
@@ -107,19 +152,20 @@ const NewTaskModal = () => {
             <label className="block text-lightGrey font-medium" htmlFor="name">
               Due date (optional)
             </label>
-            <input className="input text-white w-full mb-2" type="date" />
-            <span className="text-lightGrey text-sm mt-2 font-medium">
-              Leave empty to set the due date to tomorrow
-            </span>
+            {/* <input className="input text-white w-full mb-2" type="date" /> */}
+            <div className="">
+              <Datepicker  options={options} onChange={handleChange} show={show} setShow={handleClose} />
+            </div>
+
           </div>
-          <label htmlFor="my_modal_7">
+         
             <button
               type="submit"
               className="bg-darkPink  p-3 px-5 rounded-md text-sm text-white"
             >
               Create Task
             </button>
-          </label>
+         
 
         </form>
   </div>
