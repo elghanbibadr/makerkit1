@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from "react-hot-toast";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import OnBoardingPage from "./pages/onboarding/OnBoardingPage";
+import ProtectedRoute from "./ui/ProtectedRoute";
 // Lazy load components
 const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
 const HomePage = lazy(() => import("./pages/homePage/HomePage"));
@@ -47,8 +48,9 @@ function App() {
               <Route path="pricing" element={<PricingPage />} />
               <Route path="faq" element={<FaqPage />} />
             </Route>
-            <Route element={<DashboardLayout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
+            <Route element={ <ProtectedRoute> <DashboardLayout /></ProtectedRoute>  }>
+              <Route index  element={<Navigate replace to='dashboard' />} />
+              <Route path="dashboard"  element={<Dashboard />} />
               <Route path="dashboard/settings" element={<SettingLayout />}>
                 <Route index element={<Navigate replace to="profil" />} />
                 <Route path="profil" element={<SettingProfil />}>
@@ -64,7 +66,7 @@ function App() {
                 </Route>
                 <Route path="subscription" element={<SettingSubscription />} />
               </Route>
-              <Route path="dashboard/tasks" element={<Task />} />
+              <Route path="dashboard/tasks" element={  <ProtectedRoute><Task /></ProtectedRoute> } />
               <Route path="dashboard/tasks/:taskId" element={<SingleTask />} />
             </Route>
             <Route path="/auth/signin" element={<SignIn />} />
@@ -73,7 +75,7 @@ function App() {
           </Routes>
         </Suspense>
       </Router>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
       <Toaster
         position="top-center"
         gutter={12}

@@ -16,7 +16,7 @@ const options = {
 	clearBtn: false,
 	// clearBtnText: "Clear",
 	maxDate: new Date("2030-01-01"),
-	minDate: new Date("1950-01-01"),
+	minDate: new Date(),
 	theme: {
 		background: "bg-[#030712]   shadow-darkPink ",
 	
@@ -33,7 +33,7 @@ const options = {
 	// 	next: () => <span className="h-1 w-10 block"></span>,
 	// },
 	datepickerClassNames: "top-10",
-	defaultDate: new Date(),
+	defaultDate:  new Date(+new Date() + 86400000),
 	language: "en",
 	disabledDates: [],
 	weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
@@ -63,14 +63,16 @@ const NewTaskModal = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const { mutate, isloading } = useMutation({
     mutationFn: createTask,
     onSuccess: () => {
+      
       modalCheckboxRef.current.checked = false;
-
+      
       toast.success("Task successfully created");
       queryClient.invalidateQueries("tasks");
    
@@ -81,16 +83,22 @@ const NewTaskModal = () => {
   });
 
   const onSubmit = (data) => {
+    console.log('due',taskDueDate)
+   console.log('data',data)
+  
     mutate({
       id: generateUniqueRandomNumber(),
       userId: currentUserId,
+      // taskDueDate:new Date(),
       ...data,
     });
   };
 
   const [show, setShow] = useState(false)
+  const [taskDueDate,setTaskDueDate]=useState(new Date(+new Date() + 86400000))
 	const handleChange = (selectedDate) => {
-		console.log(selectedDate)
+		setTaskDueDate(selectedDate)
+    
 	}
 	const handleClose = (state) => {
 		setShow(state)
@@ -150,11 +158,11 @@ const NewTaskModal = () => {
           </div>
           <div className="my-4">
             <label className="block text-lightGrey font-medium" htmlFor="name">
-              Due date (optional)
+              Due date 
             </label>
             {/* <input className="input text-white w-full mb-2" type="date" /> */}
             <div className="">
-              <Datepicker  options={options} onChange={handleChange} show={show} setShow={handleClose} />
+              <Datepicker  options={options}   onChange={handleChange} show={show} setShow={handleClose} />
             </div>
 
           </div>

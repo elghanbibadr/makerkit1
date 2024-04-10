@@ -14,6 +14,7 @@ export async function getTasks(userId) {
 }
 
 export async function createTask(taskDetails) {
+  console.log('details',taskDetails)
   // Replace 'tasks' with your actual table name
   const { error } = await supabase.from("tasks").insert([taskDetails]);
 
