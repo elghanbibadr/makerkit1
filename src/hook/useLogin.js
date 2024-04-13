@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import { Login as LoginApi } from "../services/apiAuth";
-import { useNavigate } from "react-router-dom";
+
 
 export function useLogin() {
   // const navigate = useNavigate();
@@ -9,7 +9,7 @@ export function useLogin() {
     mutationFn: ({ email, password }) => LoginApi({ email, password }),
     onSuccess: function () {
       console.log("Success");
-      // navigate("/dashboard");
+      
     },
     onError: (err) => {
       console.log(err);

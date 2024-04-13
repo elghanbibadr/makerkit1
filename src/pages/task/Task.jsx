@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "../../ui/Button";
-import Overlay from "../../ui/Overlay";
 import { useTask } from "../../hook/usetasks";
 import NewTaskModal from "./NewTaskModal";
 import { useContext } from "react";
@@ -8,7 +7,6 @@ import { AppContext } from "../../store/AppContext";
 import TasksTable from "./TasksTable";
 
 const Task = () => {
-  const [newTaskModalOpen, setNewTaskModelOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const { session,filteredTasks,setFilteredTasks } = useContext(AppContext);
   const userId = session?.user.id;
@@ -62,19 +60,9 @@ console.log('tasks', tasks)
         <TasksTable searchInput={searchInput}  />
       </div>
    
-        {/* <Overlay> */}
+       
           <NewTaskModal  />
-        {/* </Overlay> */}
-    
-
-{/* <input type="checkbox" id="my_modal_7" className="modal-toggle" />
-<div className="modal" role="dialog">
-  <div className="modal-box">
-    <h3 className="text-lg font-bold">Hello!</h3>
-    <p className="py-4">This modal works with a hidden checkbox!</p>
-  </div>
-  <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
-</div> */}
+ 
     </>
   );
 };

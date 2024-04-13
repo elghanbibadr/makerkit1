@@ -5,3 +5,10 @@ const supabaseKey =
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default supabase;
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of f94f37a (fix task due date issue)
+=======
+>>>>>>> parent of f94f37a (fix task due date issue)

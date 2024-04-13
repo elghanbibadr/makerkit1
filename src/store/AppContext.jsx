@@ -11,6 +11,8 @@ const AppContextProvider = ({ children }) => {
 
 
 
+  console.log('session',session)
+
   useEffect( () => {
    
     supabase.auth.getSession().then(({ data: { session } }) => {

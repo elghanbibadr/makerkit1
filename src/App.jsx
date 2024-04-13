@@ -48,7 +48,16 @@ function App() {
               <Route path="pricing" element={<PricingPage />} />
               <Route path="faq" element={<FaqPage />} />
             </Route>
+<<<<<<< HEAD
+<<<<<<< HEAD
+            {/* <ProtectedRoute> */}
+            <Route element={ <ProtectedRoute><DashboardLayout /></ProtectedRoute>  }>
+=======
             <Route element={ <ProtectedRoute> <DashboardLayout /></ProtectedRoute>  }>
+>>>>>>> parent of f94f37a (fix task due date issue)
+=======
+            <Route element={ <ProtectedRoute> <DashboardLayout /></ProtectedRoute>  }>
+>>>>>>> parent of f94f37a (fix task due date issue)
               <Route index  element={<Navigate replace to='dashboard' />} />
               <Route path="dashboard"  element={<Dashboard />} />
               <Route path="dashboard/settings" element={<SettingLayout />}>
