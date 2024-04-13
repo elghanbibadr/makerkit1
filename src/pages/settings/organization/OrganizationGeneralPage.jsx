@@ -4,7 +4,7 @@ import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 import Label from "../../../ui/Label";
 import supabase from "../../../../public/supabase/Supabase";
-import { useOrganization } from "../../../hook/useOrganization";
+import { useOrganization as useGetOrg } from "../../../hook/useOrganization";
 import LoadingSpinner from "../../../ui/LoadingSpinner";
 import uploadIcon from "../../../assets/uploadIcon.svg"
 import { supabaseUrl } from "../../../../public/supabase/Supabase";
@@ -16,7 +16,7 @@ const OrganizationGeneralPage = () => {
 
   const {user}=useUser()
   // :{organizations}
-  const {organizations,isLoading}=useOrganization(user.data.user.id)
+  const {organizations,isLoading}=useGetOrg(user.data.user.id)
 
   const [orgName,setOrgName]=useState('')
   const [orgLogoUrl,setOrgLogoUrl]=useState('')
@@ -150,7 +150,12 @@ const OrganizationGeneralPage = () => {
        </span>
      </div>
       <Button className="bg-darkPink mt-5 text-white p-3 rounded-md text-sm">
-        Update Organization
+      {/* !isUpdating && */}
+      { <span>Update Organization</span>}
+      {/* {isUpdating &&  <span className="inline-flex h-fit items-center">
+          <span>Upaditing Organization</span>
+          <LoadingSpinner className='h-1' />
+        </span>} */}
       </Button>
     </form>
   );
