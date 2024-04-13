@@ -1,4 +1,4 @@
-import React, { Suspense,lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import OnBoardingPage from "./pages/onboarding/OnBoardingPage";
 import ProtectedRoute from "./ui/ProtectedRoute";
+
 // Lazy load components
 const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
 const HomePage = lazy(() => import("./pages/homePage/HomePage"));
@@ -29,7 +30,7 @@ const SettingSubscription = lazy(() => import("./pages/settings/subscription/Set
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 
 // Create query client
-export const  queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000,
@@ -48,18 +49,17 @@ function App() {
               <Route path="pricing" element={<PricingPage />} />
               <Route path="faq" element={<FaqPage />} />
             </Route>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             {/* <ProtectedRoute> */}
-            <Route element={ <ProtectedRoute><DashboardLayout /></ProtectedRoute>  }>
-=======
-            <Route element={ <ProtectedRoute> <DashboardLayout /></ProtectedRoute>  }>
->>>>>>> parent of f94f37a (fix task due date issue)
-=======
-            <Route element={ <ProtectedRoute> <DashboardLayout /></ProtectedRoute>  }>
->>>>>>> parent of f94f37a (fix task due date issue)
-              <Route index  element={<Navigate replace to='dashboard' />} />
-              <Route path="dashboard"  element={<Dashboard />} />
+            <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
+            
+            {/* <ProtectedRoute> */}
+            <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
+
+            {/* <ProtectedRoute> */}
+            <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+              <Route index element={<Navigate replace to='dashboard' />} />
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="dashboard/settings" element={<SettingLayout />}>
                 <Route index element={<Navigate replace to="profil" />} />
                 <Route path="profil" element={<SettingProfil />}>
@@ -75,9 +75,10 @@ function App() {
                 </Route>
                 <Route path="subscription" element={<SettingSubscription />} />
               </Route>
-              <Route path="dashboard/tasks" element={  <ProtectedRoute><Task /></ProtectedRoute> } />
+              <Route path="dashboard/tasks" element={<ProtectedRoute><Task /></ProtectedRoute>} />
               <Route path="dashboard/tasks/:taskId" element={<SingleTask />} />
             </Route>
+
             <Route path="/auth/signin" element={<SignIn />} />
             <Route path="/auth/signup" element={<SignUp />} />
             <Route path="/onboarding" element={<OnBoardingPage />} />

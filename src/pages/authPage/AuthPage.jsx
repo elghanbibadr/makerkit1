@@ -66,17 +66,12 @@ const AuthPage = ({ isSignUp = true }) => {
       email: email,
       password: password,
     });
-<<<<<<< HEAD
-<<<<<<< HEAD
-  
+
 
     console.log('error',error)
-=======
 
->>>>>>> parent of f94f37a (fix task due date issue)
-=======
 
->>>>>>> parent of f94f37a (fix task due date issue)
+
     if (!error) {
       console.log("data sign up", data)
       // create a new row inside the organization tables for this user
