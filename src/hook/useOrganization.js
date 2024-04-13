@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { getOrgDetails } from "../services/apiOrganisations";
+import {  getOrganizationDetails } from "../services/apiOrganisations";
 
 
 export function useOrganization(userId) {
@@ -9,7 +9,7 @@ export function useOrganization(userId) {
       error,
     } = useQuery({
       queryKey: ["organizations", userId],
-      queryFn: () => getOrgDetails(userId),
+      queryFn: () => getOrganizationDetails(userId),
     });
   
     return { organizations, error, isLoading };

@@ -9,6 +9,7 @@ import LoadingSpinner from "../../../ui/LoadingSpinner";
 import uploadIcon from "../../../assets/uploadIcon.svg"
 import { supabaseUrl } from "../../../../public/supabase/Supabase";
 import toast from "react-hot-toast";
+import { useUpdateOrganization } from "../../../hook/useUpdateOrganization";
 
 
 const OrganizationGeneralPage = () => {
@@ -22,7 +23,7 @@ const OrganizationGeneralPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedAvatarName, setSelectedAvatarName] = useState('')
   const fileInputRef = useRef()
-
+  const {updatingOrgDetails,isUpdating}= useUpdateOrganization()
   // console.log('useruserorg',organizations?.organizations)
 
 
@@ -69,18 +70,11 @@ const OrganizationGeneralPage = () => {
         return 
       }
       setOrgLogoUrl(`${supabaseUrl}/storage/v1/object/public/organizationsAvatars/${data.path}`)
-      // updateUser({ name, avatarURL})
-      const { data:updateData, error:updateError } = await supabase
-      .from('organizations')
-      .upsert({organizationName:orgName,organizationLogoUrl:orgLogoUrl })
-      .eq('orgId',user?.data.user.id)
-      .select()
-  if(updateError){
-    console.log('updating error',updateError)
-  }else{
-    console.log('data5',updateData)
-  }
-  }
+    }
+    const data1= {userId:user?.data.user.id,newOrgInfo:{organizationName:orgName,organizationLogoUrl:orgLogoUrl,orgId:user?.data.user.id}}  
+
+    updatingOrgDetails(data1)
+
   }
   const handleAvatarRemoved = () => {
     setOrgLogoUrl('')
