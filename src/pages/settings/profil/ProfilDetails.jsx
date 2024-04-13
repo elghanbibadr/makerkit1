@@ -65,9 +65,9 @@ const ProfilDetails = () => {
       // const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
       setAvatarUrl(`${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`)
       updateUser({ name, avatarURL})
+      
     }
 
-    // console.log("sessiion",session)
   }
 
   useEffect(() => {

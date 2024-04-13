@@ -5,13 +5,14 @@ import Input from "../../ui/Input"
 import Button from "../../ui/Button";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../../public/supabase/Supabase";
+import { useUser } from "../../hook/useUser";
 
 const OnBoardingPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [orgName,setOrgName]=useState('')
   const [membreEmail,setOrgEmail]=useState('')
   const [membreRole,setMembreRole]=useState('membre')
-
+  const {user}=useUser()
   const navigate=useNavigate()
   // Getting the org name
   const handleStepOneCompletion=()=>{
@@ -28,14 +29,14 @@ const OnBoardingPage = () => {
      const {error}= await supabase
     .from('organizations')
     .insert([
-      {organizationName:orgName,organizationLogoUrl:'',orgId:'40bedc82-d513-45b0-ba21-baa1b69bcd9c' },
+      {organizationName:orgName,organizationLogoUrl:'',orgId:user?.data.user.id },
     ])
     .select()
   
       await supabase
     .from('organizationsMembers')
     .insert([
-      {memberRole:membreRole,organizationId:'40bedc82-d513-45b0-ba21-baa1b69bcd9c',memberEmail:membreEmail },
+      {memberRole:membreRole,organizationId:user?.data.user.id,memberEmail:membreEmail },
     ])
     .select()
     

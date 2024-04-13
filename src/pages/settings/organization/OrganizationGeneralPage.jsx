@@ -7,6 +7,9 @@ import supabase from "../../../../public/supabase/Supabase";
 import { useOrganization } from "../../../hook/useOrganization";
 import LoadingSpinner from "../../../ui/LoadingSpinner";
 import uploadIcon from "../../../assets/uploadIcon.svg"
+import { supabaseUrl } from "../../../../public/supabase/Supabase";
+import toast from "react-hot-toast";
+
 
 const OrganizationGeneralPage = () => {
 
@@ -52,9 +55,33 @@ const OrganizationGeneralPage = () => {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault()
    console.log('submited')
-  }
+   if (selectedFile) {
+    const { data, error } = await supabase.storage
+      .from('organizationsAvatars')
+      .upload(selectedFile.name, selectedFile);
+    
 
+      if(error){
+        console.log(error.message)
+        toast.error(error.message)
+        return 
+      }
+      setOrgLogoUrl(`${supabaseUrl}/storage/v1/object/public/organizationsAvatars/${data.path}`)
+      // updateUser({ name, avatarURL})
+      const { data:updateData, error:updateError } = await supabase
+      .from('organizations')
+      .upsert({organizationName:orgName,organizationLogoUrl:orgLogoUrl })
+      .eq('orgId',user?.data.user.id)
+      .select()
+  if(updateError){
+    console.log('updating error',updateError)
+  }else{
+    console.log('data5',updateData)
+  }
+  }
+  }
   const handleAvatarRemoved = () => {
     setOrgLogoUrl('')
     setSelectedAvatarName('')
