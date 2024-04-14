@@ -1,16 +1,19 @@
-export const getOrgMembres=async(userId)=>{
+import supabase from "../../public/supabase/Supabase"
+
+export const getOrgMembres=async(orgId)=>{
     
-    let { data, error } = await supabase
+    let { data:orgMembers, error } = await supabase
     .from('organizationsMembers')
     .select("*")
     // Filters
-    .eq('orgId',userId)
+    .eq('orgId',orgId)
   
     if(error){
-        console.log('org error',error)
+        console.log('getting org members error',error)
     }
-
-   return {data}
+ 
+    console.log("my",orgMembers)
+   return { orgMembers }
   }
 
 
@@ -39,5 +42,5 @@ export const getOrgMembres=async(userId)=>{
     membreInfos
   ])
   .select()
-
+  
   }

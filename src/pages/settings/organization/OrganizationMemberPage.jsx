@@ -2,8 +2,13 @@ import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 import inviteIcon from '../../../assets/inviteIcon.svg'
 import dottedLine from '../../../assets/dottedLine.svg'
+import { useGetMembres } from "../../../hook/useGetMembre";
 
 const OrganizationMemberPage = () => {
+  const {orgMembres:{orgMembers}, error, isLoading }=useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
+
+  
+  console.log("memberes",orgMembers)
   return (
     <>
       <div>
@@ -67,21 +72,25 @@ const OrganizationMemberPage = () => {
    
         </p>
         <div>
-        <div className="flex justify-between items-center mt-7 gap-3">
-          <div className="flex gap-3 items-center">
-            <div   className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
-                   <h6 className="font-semibold text-sm text-white">B</h6>
-                 </div>
-            <span className="text-xs sm:text-[14px] font-normal text-white">xoheb32397@acname.com</span>
+
+          {orgMembers.map(({id,memberEmail,memberRole}) =>{
+            return  <div key={id} className="flex justify-between items-center mt-7 gap-3">
+            <div className="flex gap-3 items-center">
+              <div   className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
+                     <h6 className="font-semibold text-sm uppercase text-white">{memberEmail.charAt(0)}</h6>
+                   </div>
+              <span className="text-xs sm:text-[14px] font-normal text-white">{memberEmail}</span>
+            </div>
+           <div>
+           <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">
+           {memberRole}
+  
+  
+                          </span>{" "}
+           </div>
           </div>
-         <div>
-         <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">
-         Member
-
-
-                        </span>{" "}
-         </div>
-        </div>
+          })}
+       
         </div>
       </div>
       </div>
