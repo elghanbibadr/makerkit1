@@ -3,10 +3,12 @@ import Input from "../../../ui/Input";
 import inviteIcon from '../../../assets/inviteIcon.svg'
 import dottedLine from '../../../assets/dottedLine.svg'
 import { useGetMembres } from "../../../hook/useGetMembre";
+import closeIcon from '../../../assets/xIcon.svg'
+import { useState } from "react";
 
 const OrganizationMemberPage = () => {
   const {orgMembres, error, isLoading }=useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
-
+ const [membreEmailToBeDeleted,setMembreEmailToBeDeleted]=useState('')
   
   console.log("memberes err",orgMembres)
   return (
@@ -82,15 +84,46 @@ const OrganizationMemberPage = () => {
               <span className="text-xs sm:text-[14px] font-normal text-white">{memberEmail}</span>
             </div>
            <div>
-           <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">
-           {memberRole}
-  
-  
-                          </span>{" "}
+           <div className="flex items-center gap-2">
+             <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">{memberRole}</span>{" "}
+             <label onClick={()=>setMembreEmailToBeDeleted(memberEmail)} className="flex cursor-pointer"  htmlFor="my_modal_6">
+             <img  className="h-6 hover:border-[1px] border-lightGrey p-1 rounded-full" src={closeIcon} alt="close icon" />
+
+
+             </label>
+          
+           </div>
            </div>
           </div>
           })}
-       
+       {/* modal */}
+  
+          
+       <>
+       <input type="checkbox" id="my_modal_6" className="modal-toggle"  />
+<div className="modal bg-darkPink" role="dialog">
+  <div className="max-w-[500px] shadow-pinkBoxShadow z-10 bg-[#030712] p-7 rounded-[0.8rem] modal-box">
+  <div className="flex justify-between items-center mb-6">
+          <h3 className="text-white">Deleting Invite</h3>
+          <label className="flex cursor-pointer"  htmlFor="my_modal_6">
+             <img  className="h-6 hover:border-[1px] border-lightGrey p-1 rounded-full" src={closeIcon} alt="close icon" />
+
+
+             </label>
+        </div>
+        <div className="text-sm">
+          <p>You are deleting the invite to <strong>{membreEmailToBeDeleted}</strong></p>
+          <p className="my-4">Are you sure you want to continue?</p>
+        </div>
+        <Button className="bg-red-800 mt-6 text-sm py-2 px-5 rounded-md">Delete Invite</Button>
+  </div>
+  <label className="modal-backdrop " htmlFor="my_modal_6">
+    close
+  </label>
+</div> 
+
+
+       </>
         </div>
       </div>
       </div>
