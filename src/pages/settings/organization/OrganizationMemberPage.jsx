@@ -5,10 +5,10 @@ import dottedLine from '../../../assets/dottedLine.svg'
 import { useGetMembres } from "../../../hook/useGetMembre";
 
 const OrganizationMemberPage = () => {
-  const {orgMembres:{orgMembers}, error, isLoading }=useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
+  const {orgMembres, error, isLoading }=useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
 
   
-  console.log("memberes",orgMembers)
+  console.log("memberes err",orgMembres)
   return (
     <>
       <div>
@@ -73,7 +73,7 @@ const OrganizationMemberPage = () => {
         </p>
         <div>
 
-          {orgMembers.map(({id,memberEmail,memberRole}) =>{
+          { !isLoading &&  orgMembres.orgMembers?.map(({id,memberEmail,memberRole}) =>{
             return  <div key={id} className="flex justify-between items-center mt-7 gap-3">
             <div className="flex gap-3 items-center">
               <div   className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
