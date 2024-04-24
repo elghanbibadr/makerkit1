@@ -7,12 +7,13 @@ import closeIcon from '../../../assets/xIcon.svg'
 import { useState } from "react";
 import { deleteOrgMembre } from "../../../services/apiMembre";
 import { useDeleteMembre } from "../../../hook/useDeleteMembre";
-
+import { useRef } from "react";
 const OrganizationMemberPage = () => {
   const {orgMembres, error, isLoading }=useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
  const [membreEmailToBeDeleted,setMembreEmailToBeDeleted]=useState()
  const {deletingOrgMembre , isDeleting}=useDeleteMembre()
   
+
   console.log("memberes err",orgMembres)
   return (
     <>

@@ -8,7 +8,8 @@ export function useDeleteMembre(){
         mutationFn:(membreId) => deleteOrgMembre(membreId),
         onSuccess: () => {
             queryClient.invalidateQueries('organizationsMembers')
-            toast.success('membre deleted  ')
+            document.getElementById('my_modal_6').checked=false
+            toast.success('Invite deleted  ')
         },
         onError:(err) => toast.error(err.message),
         
