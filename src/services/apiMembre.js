@@ -37,7 +37,7 @@ export const getOrgMembres=async(orgId)=>{
 
 
   export const addOrgMembre=async(membreInfos)=>{
-
+console.log("data membre invited",membreInfos)
   await supabase
   .from('organizationsMembers')
   .insert([

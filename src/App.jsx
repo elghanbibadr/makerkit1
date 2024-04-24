@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import LoadingSpinner from "./ui/LoadingSpinner";
 import OnBoardingPage from "./pages/onboarding/OnBoardingPage";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import OrganizationInviteMembrePage from "./pages/settings/organization/OrganizationInviteMembrePage";
 
 // Lazy load components
 const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
@@ -71,7 +72,9 @@ function App() {
                 </Route>
                 <Route path="organization" element={<OrganizationSetting />}>
                   <Route index element={<OrganizationGeneralPage />} />
-                  <Route path="members" element={<OrganizationMemberPage />} />
+                  <Route path="members" element={<OrganizationMemberPage />}>
+                  </Route>
+                  <Route path="members/invite" element={<OrganizationInviteMembrePage />} />
                 </Route>
                 <Route path="subscription" element={<SettingSubscription />} />
               </Route>
