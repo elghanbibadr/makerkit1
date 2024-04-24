@@ -5,10 +5,13 @@ import dottedLine from '../../../assets/dottedLine.svg'
 import { useGetMembres } from "../../../hook/useGetMembre";
 import closeIcon from '../../../assets/xIcon.svg'
 import { useState } from "react";
+import { deleteOrgMembre } from "../../../services/apiMembre";
+import { useDeleteMembre } from "../../../hook/useDeleteMembre";
 
 const OrganizationMemberPage = () => {
   const {orgMembres, error, isLoading }=useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
- const [membreEmailToBeDeleted,setMembreEmailToBeDeleted]=useState('')
+ const [membreEmailToBeDeleted,setMembreEmailToBeDeleted]=useState()
+ const {deletingOrgMembre , isDeleting}=useDeleteMembre()
   
   console.log("memberes err",orgMembres)
   return (
@@ -86,7 +89,7 @@ const OrganizationMemberPage = () => {
            <div>
            <div className="flex items-center gap-2">
              <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">{memberRole}</span>{" "}
-             <label onClick={()=>setMembreEmailToBeDeleted(memberEmail)} className="flex cursor-pointer"  htmlFor="my_modal_6">
+             <label onClick={()=>setMembreEmailToBeDeleted(id)} className="flex cursor-pointer"  htmlFor="my_modal_6">
              <img  className="h-6 hover:border-[1px] border-lightGrey p-1 rounded-full" src={closeIcon} alt="close icon" />
 
 
@@ -115,7 +118,10 @@ const OrganizationMemberPage = () => {
           <p>You are deleting the invite to <strong>{membreEmailToBeDeleted}</strong></p>
           <p className="my-4">Are you sure you want to continue?</p>
         </div>
-        <Button className="bg-red-800 mt-6 text-sm py-2 px-5 rounded-md">Delete Invite</Button>
+        <Button onClick={() =>deletingOrgMembre(membreEmailToBeDeleted)} className="bg-red-800 mt-6 text-sm py-2 px-5 rounded-md">
+          {!isDeleting && <span>Delete Invite</span>}
+          {isDeleting && <span>Deleting Invite</span>}
+          </Button>
   </div>
   <label className="modal-backdrop " htmlFor="my_modal_6">
     close

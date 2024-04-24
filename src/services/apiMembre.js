@@ -19,10 +19,12 @@ export const getOrgMembres=async(orgId)=>{
 
 
   export const deleteOrgMembre=async(membreId)=>{
+
+    console.log("id to be deleted",membreId)
     
     let { data, error } = await supabase
     .from('organizationsMembers')
-    .select("*")
+    .delete()
     // Filters
     .eq('id',membreId)
   
@@ -30,7 +32,7 @@ export const getOrgMembres=async(orgId)=>{
         console.log('org error',error)
     }
 
-   return {data}
+   return {data,error}
   }
 
 
