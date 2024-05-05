@@ -13,6 +13,12 @@ const OrganizationMemberPage = () => {
   const { orgMembres, error, isLoading } = useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
   const [membreEmailToBeDeleted, setMembreEmailToBeDeleted] = useState()
   const { deletingOrgMembre, isDeleting } = useDeleteMembre()
+  const [searchQuery, setSearchQuery] = useState(""); // State to store search query
+
+  // Filter organization members based on search query
+  const filteredOrgMembers = orgMembres?.orgMembers?.filter(({ memberEmail }) =>
+    memberEmail.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
 
   console.log("memberes err", orgMembres)
@@ -34,7 +40,7 @@ const OrganizationMemberPage = () => {
               // value={name}
               type="text"
               placeholder='Search members'
-            // onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setSearchQuery(e.target.value)}
             // disabled={isUpdating}
             />
             <Link to='invite' className="w-full sm:w-[20%]  " >
@@ -84,7 +90,7 @@ const OrganizationMemberPage = () => {
           </p>
           <div>
 
-            {!isLoading && orgMembres.orgMembers?.map(({ id, memberEmail, memberRole }) => {
+            {!isLoading && filteredOrgMembers.map(({ id, memberEmail, memberRole }) => {
               return <div key={id} className="flex justify-between items-center mt-7 gap-3">
                 <div className="flex gap-3 items-center">
                   <div className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">

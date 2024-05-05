@@ -19,11 +19,33 @@ const OrganizationInviteMembrePage = () => {
   const invitedMembre={
     memberRole,
     memberEmail,
-    orgId:"1a52b845-58b1-4e08-a0cd-590cf886e11c"
+    orgId:"1a52b845-58b1-4e08-a0cd-590cf886e11c",
+    to_email:'bghanbi50@gmail.com'
   }
   console.log(invitedMembre)
   inviteMembre(invitedMembre)
+
+  // Sending email to invited members
+  emailjs
+  .sendForm('service_klj723p', 'template_uw0pu1c',invitedMembre, {
+    publicKey: 'IglxKjApNUagHGcdh',
+  })
+  .then(
+    () => {
+      console.log('SUCCESS!');
+      // setIsApplicationSent(true)
+
+    },
+    (error) => {
+      // setShowError(error)
+      console.log('error',error)
+      
+    },
+  )
   }
+
+
+
   return (
     <div>
     <div className="text-white">
