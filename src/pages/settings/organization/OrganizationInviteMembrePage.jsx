@@ -3,11 +3,14 @@ import Input from '../../../ui/Input'
 import Button from '../../../ui/Button'
 import { useState } from 'react'
 import { useInviteMembre } from '../../../hook/useInviteMembre'
+import arrow from '../../../assets/arrow.svg'
+import { Link, useNavigate } from 'react-router-dom'
 
 const OrganizationInviteMembrePage = () => {
   const [memberEmail,setOrgEmail]=useState('')
   const [memberRole,setMembreRole]=useState('membre')
  const { inviteMembre, isLoading:isInvitingMember }=useInviteMembre()
+ const navigate = useNavigate();
 
   function inviteMembreHandler(e){
    e.preventDefault()
@@ -45,6 +48,17 @@ const OrganizationInviteMembrePage = () => {
 
         </Button>
     </form>
+
+    <Button className='button-transparent  border-none rounded-md py-1  text-white'>
+    <Link className='flex items-center'      to={'..'}
+        onClick={(e) => {
+          e.preventDefault();
+          navigate(-1);
+        }}>
+      <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-3"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"></path></svg>
+      <span className='text-xs ml-2 inline-block font-normal'>Go back to members</span>
+    </Link>
+    </Button>
   </div>
   )
 }

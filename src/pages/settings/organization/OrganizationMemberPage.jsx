@@ -8,6 +8,7 @@ import { useState } from "react";
 import { deleteOrgMembre } from "../../../services/apiMembre";
 import { useDeleteMembre } from "../../../hook/useDeleteMembre";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 const OrganizationMemberPage = () => {
   const { orgMembres, error, isLoading } = useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
   const [membreEmailToBeDeleted, setMembreEmailToBeDeleted] = useState()
@@ -36,14 +37,18 @@ const OrganizationMemberPage = () => {
             // onChange={(e) => setName(e.target.value)}
             // disabled={isUpdating}
             />
-            <Button
+            <Link to='invite' className="w-full sm:w-[20%]  " >
 
-              className="button-transparent text-nowrap 	 w-full sm:w-[20%]  text-white rounded-md"
-            >
-              <img className="h-4 mr-2" src={inviteIcon} alt='invite membre icon' />
-              <span className="text-sm text-nowrap	">Invite members</span>
+              <Button
+                className="button-transparent  relative top-2 	text-white rounded-md "
+              >
 
-            </Button>
+                <img className="h-4 mr-2" src={inviteIcon} alt='invite membre icon' />
+                <span className="text-[0.8rem] text-nowrap	">Invite members</span>
+
+              </Button>
+            </Link>
+
           </div>
           {/* members list */}
           <div className="mt-7 sm:flex sm:justify-between sm:items-center">
