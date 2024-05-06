@@ -16,10 +16,7 @@ const OrganizationMemberPage = () => {
   const [searchQuery, setSearchQuery] = useState(""); // State to store search query
 
   // Filter organization members based on search query
-  const filteredOrgMembers = orgMembres?.orgMembers?.filter(({ memberEmail }) =>
-    memberEmail.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+ 
 
 
   const filterByStatus=(status) =>{
@@ -31,6 +28,9 @@ const OrganizationMemberPage = () => {
 
   const pendingMembersInvites=filterByStatus('pending')
 
+  const filteredInvites = acceptedMembresInvites?.filter(({ memberEmail }) =>
+    memberEmail.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
 
   console.log("memberes err", acceptedMembresInvites)
@@ -89,7 +89,7 @@ const OrganizationMemberPage = () => {
             </div>
           </div> }
           {/*  */}
-        { acceptedMembresInvites && acceptedMembresInvites.map(({memberRole,memberEmail}) =>{
+        { acceptedMembresInvites && filteredInvites?.map(({memberRole,memberEmail}) =>{
 
           return <div className="mt-7 sm:flex sm:justify-between sm:items-center">
           <div className="flex items-center gap-3">
