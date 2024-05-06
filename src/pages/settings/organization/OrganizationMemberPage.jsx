@@ -21,7 +21,20 @@ const OrganizationMemberPage = () => {
   );
 
 
-  console.log("memberes err", orgMembres)
+
+  const filterByStatus=(status) =>{
+   return  orgMembres?.orgMembers?.filter(({ inviteStatus }) =>
+      inviteStatus===status
+    );
+  }
+  const acceptedMembresInvites = filterByStatus("accepted")
+
+  const pendingMembersInvites=filterByStatus('pending')
+
+
+
+  console.log("memberes err", acceptedMembresInvites)
+
   return (
     <>
       <div>
@@ -57,7 +70,8 @@ const OrganizationMemberPage = () => {
 
           </div>
           {/* members list */}
-          <div className="mt-7 sm:flex sm:justify-between sm:items-center">
+          {/* "me" */}
+        {  <div className="mt-7 sm:flex sm:justify-between sm:items-center">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
                 <h6 className="font-semibold text-sm text-white">B</h6>
@@ -73,7 +87,28 @@ const OrganizationMemberPage = () => {
               </span>{" "}
               <img className="h-6 relative left-3 cursor-pointer cursor-not-allowed" src={dottedLine} alt="" />
             </div>
+          </div> }
+          {/*  */}
+        { acceptedMembresInvites && acceptedMembresInvites.map(({memberRole,memberEmail}) =>{
+
+          return <div className="mt-7 sm:flex sm:justify-between sm:items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
+              <h6 className="font-semibold text-sm text-white">{memberEmail.at(0)}</h6>
+            </div>
+            <span className="text-xs sm:text-[14px] font-normal text-white">{memberEmail}</span>
+            <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">
+              You
+            </span>{" "}
           </div>
+          <div className="flex ">
+            <span className=" text-xs font-medium ml-5 bg-yellow-200  text-black px-4 py-1 rounded-md ">
+             {memberRole}
+            </span>{" "}
+            <img className="h-6 relative left-3 cursor-pointer cursor-not-allowed" src={dottedLine} alt="" />
+          </div>
+        </div>
+        })  }
         </div>
       </div>
       <div>
@@ -90,7 +125,7 @@ const OrganizationMemberPage = () => {
           </p>
           <div>
 
-            {!isLoading && filteredOrgMembers.map(({ id, memberEmail, memberRole }) => {
+            {!isLoading && pendingMembersInvites.map(({ id, memberEmail, memberRole }) => {
               return <div key={id} className="flex justify-between items-center mt-7 gap-3">
                 <div className="flex gap-3 items-center">
                   <div className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">

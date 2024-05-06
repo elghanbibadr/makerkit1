@@ -24,10 +24,9 @@ const OrganizationInviteMembrePage = () => {
     memberRole,
     memberEmail,
     orgId:"1a52b845-58b1-4e08-a0cd-590cf886e11c",
-    // to_email:'bghanbi50@gmail.com'
   }
   console.log(invitedMembre)
-  // inviteMembre(invitedMembre)
+  inviteMembre(invitedMembre)
 
   // Sending email to invited members
 
@@ -40,11 +39,11 @@ const OrganizationInviteMembrePage = () => {
   .then(
     () => {
       console.log('SUCCESS!');
-      // setIsApplicationSent(true)
+
 
     },
     (error) => {
-      // setShowError(error)
+     
       console.log('error',error)
       
     },
@@ -64,7 +63,7 @@ const OrganizationInviteMembrePage = () => {
     {/* ref={form} */}
     <form ref={form} onSubmit={inviteMembreHandler} className="my-7">
       <div className="sm:flex  gap-2 ">
-      <input name='memberEmail' value={memberEmail} onChange={(e)=>setOrgEmail(e.target.value)} type='email' placeholder="membre@email.com" required/>
+      <Input name='memberEmail' value={memberEmail} onChange={(e)=>setOrgEmail(e.target.value)} type='email' placeholder="membre@email.com" required/>
       <select name='memberRole'  id="" className="h-fit relative top-4" value={memberRole} onChange={(e)=> setMembreRole(e.target.value)}>
           <option value="member">member</option>
           <option value="admin">admin</option>

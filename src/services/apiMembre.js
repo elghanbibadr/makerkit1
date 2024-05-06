@@ -46,3 +46,20 @@ console.log("data membre invited",membreInfos)
   .select()
   
   }
+
+
+
+
+  export const handleInviteAccepted=async (membreEmail)=>{
+    const {data,error}=await supabase
+    .from('organizationsMembers')
+    .update({inviteStatus:"accepted"})
+    // Filters
+    .eq('memberEmail',membreEmail)
+  
+    if(error){
+        console.log('getting org members error',error)
+    }
+
+    return data
+  }
