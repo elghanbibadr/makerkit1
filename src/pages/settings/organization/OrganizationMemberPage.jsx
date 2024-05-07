@@ -25,7 +25,7 @@ const OrganizationMemberPage = () => {
 //  ADD THE OWNER TO BE PART OF THE ACCEPTED INVITED MEMBERS
   //  const  orgAllActiveMembres=[owner,...orgactiveAcceptedInvitedMembers]
 
-  const filterByStatus=(status) =>{
+  const filterByInviteStatus=(status) =>{
    return  orgMembres?.orgMembers.filter(({ inviteStatus }) =>
       inviteStatus===status
     );
@@ -34,8 +34,8 @@ const OrganizationMemberPage = () => {
 
 
   // FILTERING INVITE BY STATUS
-  const acceptedInvites = filterByStatus("accepted") || []
-  const pendingMembersInvites=filterByStatus('pending')
+  const acceptedInvites = filterByInviteStatus("accepted") || []
+  const pendingInvites=filterByInviteStatus('pending')
 
 
 
@@ -45,7 +45,7 @@ const OrganizationMemberPage = () => {
 
 
   //  SEARCH TROUGH ACCEPTED INVITES BY EMAIL
-  const SearchedInvites = allActiveInvites.filter(({ memberEmail }) =>
+  const SearchedAcceptedInvites = allActiveInvites.filter(({ memberEmail }) =>
     memberEmail.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -105,7 +105,7 @@ const OrganizationMemberPage = () => {
             </div>
           </div> } */}
           {/*  */}
-        { acceptedInvites && SearchedInvites?.map(({memberRole,memberEmail}) =>{
+        { acceptedInvites.length > 0  && SearchedAcceptedInvites?.map(({memberRole,memberEmail}) =>{
 
           return <div className="mt-7 sm:flex sm:justify-between sm:items-center">
           <div className="flex items-center gap-3">
@@ -125,6 +125,8 @@ const OrganizationMemberPage = () => {
           </div>
         </div>
         })  }
+
+        {SearchedAcceptedInvites.length=== 0  && <p className="text-white text-base text-center">no Result ....</p> }
         </div>
       </div>
       <div>
@@ -141,7 +143,7 @@ const OrganizationMemberPage = () => {
           </p>
           <div>
 
-            {!isLoading && pendingMembersInvites.map(({ id, memberEmail, memberRole }) => {
+            {!isLoading && pendingInvites.map(({ id, memberEmail, memberRole }) => {
               return <div key={id} className="flex justify-between items-center mt-7 gap-3">
                 <div className="flex gap-3 items-center">
                   <div className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
