@@ -105,6 +105,8 @@ const OrganizationMemberPage = () => {
             </div>
           </div> } */}
           {/*  */}
+
+          
         { acceptedInvites.length > 0  && SearchedAcceptedInvites?.map(({memberRole,memberEmail}) =>{
 
           return <div className="mt-7 sm:flex sm:justify-between sm:items-center">

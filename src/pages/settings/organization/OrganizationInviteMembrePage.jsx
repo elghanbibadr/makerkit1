@@ -6,6 +6,7 @@ import { useInviteMembre } from '../../../hook/useInviteMembre'
 import arrow from '../../../assets/arrow.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import emailjs from '@emailjs/browser';
+import toast from 'react-hot-toast'
 
 
 const OrganizationInviteMembrePage = () => {
@@ -45,6 +46,7 @@ const OrganizationInviteMembrePage = () => {
     (error) => {
      
       console.log('error',error)
+      toast.error('there was an error sending email to this membre')
       
     },
   )
