@@ -9,31 +9,47 @@ import { deleteOrgMembre } from "../../../services/apiMembre";
 import { useDeleteMembre } from "../../../hook/useDeleteMembre";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useUser } from "../../../hook/useUser";
 const OrganizationMemberPage = () => {
   const { orgMembres, error, isLoading } = useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
   const [membreEmailToBeDeleted, setMembreEmailToBeDeleted] = useState()
   const { deletingOrgMembre, isDeleting } = useDeleteMembre()
   const [searchQuery, setSearchQuery] = useState(""); // State to store search query
+  const  {isLoading:isGettingUser,user,isAuthenticated}=useUser()
+  const userEmail=user?.data.user.email
+  const owner={memberEmail:userEmail,memberRole:"owner"}
 
-  // Filter organization members based on search query
- 
 
+
+
+//  ADD THE OWNER TO BE PART OF THE ACCEPTED INVITED MEMBERS
+  //  const  orgAllActiveMembres=[owner,...orgactiveAcceptedInvitedMembers]
 
   const filterByStatus=(status) =>{
-   return  orgMembres?.orgMembers?.filter(({ inviteStatus }) =>
+   return  orgMembres?.orgMembers.filter(({ inviteStatus }) =>
       inviteStatus===status
     );
   }
-  const acceptedMembresInvites = filterByStatus("accepted")
 
+
+
+  // FILTERING INVITE BY STATUS
+  const acceptedInvites = filterByStatus("accepted") || []
   const pendingMembersInvites=filterByStatus('pending')
 
-  const filteredInvites = acceptedMembresInvites?.filter(({ memberEmail }) =>
+
+
+  // ADD THE OWNER TO BE PART OF THE ACCEPTED INVITES
+   const allActiveInvites=[owner,...acceptedInvites]
+
+
+
+  //  SEARCH TROUGH ACCEPTED INVITES BY EMAIL
+  const SearchedInvites = allActiveInvites.filter(({ memberEmail }) =>
     memberEmail.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
 
-  console.log("memberes err", acceptedMembresInvites)
 
   return (
     <>
@@ -71,12 +87,12 @@ const OrganizationMemberPage = () => {
           </div>
           {/* members list */}
           {/* "me" */}
-        {  <div className="mt-7 sm:flex sm:justify-between sm:items-center">
+        {/* {  <div className="mt-7 sm:flex sm:justify-between sm:items-center">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
                 <h6 className="font-semibold text-sm text-white">B</h6>
               </div>
-              <span className="text-xs sm:text-[14px] font-normal text-white">xoheb32397@acname.com</span>
+             <span className="text-xs sm:text-[14px] font-normal text-white">{userEmail} </span>
               <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">
                 You
               </span>{" "}
@@ -87,9 +103,9 @@ const OrganizationMemberPage = () => {
               </span>{" "}
               <img className="h-6 relative left-3 cursor-pointer cursor-not-allowed" src={dottedLine} alt="" />
             </div>
-          </div> }
+          </div> } */}
           {/*  */}
-        { acceptedMembresInvites && filteredInvites?.map(({memberRole,memberEmail}) =>{
+        { acceptedInvites && SearchedInvites?.map(({memberRole,memberEmail}) =>{
 
           return <div className="mt-7 sm:flex sm:justify-between sm:items-center">
           <div className="flex items-center gap-3">
