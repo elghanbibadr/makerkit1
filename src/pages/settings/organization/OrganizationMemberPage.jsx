@@ -106,7 +106,7 @@ const OrganizationMemberPage = () => {
           </div> } */}
           {/*  */}
 
-          
+
         { acceptedInvites.length > 0  && SearchedAcceptedInvites?.map(({memberRole,memberEmail}) =>{
 
           return <div className="mt-7 sm:flex sm:justify-between sm:items-center">
@@ -123,7 +123,7 @@ const OrganizationMemberPage = () => {
             <span className=" text-xs font-medium ml-5 bg-yellow-200  text-black px-4 py-1 rounded-md ">
              {memberRole}
             </span>{" "}
-            <img className="h-6 relative left-3 cursor-pointer cursor-not-allowed" src={dottedLine} alt="" />
+            {/* <img className="h-6 relative left-3 cursor-pointer cursor-not-allowed" src={dottedLine} alt="" /> */}
           </div>
         </div>
         })  }

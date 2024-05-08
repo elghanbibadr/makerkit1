@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../ui/Logo";
 import Label from "../../ui/Label"
 import Input from "../../ui/Input"
@@ -20,6 +20,18 @@ const OnBoardingPage = () => {
   console.log('org name')
     
   }
+
+
+
+  // REDIRECT TO THE DASHBOARD IF THERE IS ALREADY AN ORG 
+
+
+
+  useEffect(()=>{
+    if(user?.data.user.id){
+      navigate('/dashboard')
+    } 
+  },[user])
 
 
   const handleOrgCompletionSetUp=async ()=>{

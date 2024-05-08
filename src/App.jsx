@@ -87,7 +87,7 @@ function App() {
 
             <Route path="/auth/signin" element={<SignIn />} />
             <Route path="/auth/signup" element={<SignUp />} />
-            <Route path="/onboarding" element={<OnBoardingPage />} />
+            <Route path="/onboarding" element={<ProtectedRoute><OnBoardingPage /></ProtectedRoute>} />
           </Routes>
         </Suspense>
       </Router>
