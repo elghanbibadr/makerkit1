@@ -7,12 +7,15 @@ import arrow from '../../../assets/arrow.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast'
+import { useGetMembres } from '../../../hook/useGetMembre'
 
 
 const OrganizationInviteMembrePage = () => {
   const [memberEmail,setOrgEmail]=useState('')
   const [memberRole,setMembreRole]=useState('membre')
+  const {orgMembres,isLoading:isGettingOrgMembers}=useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
  const { inviteMembre, isLoading:isInvitingMember }=useInviteMembre()
+
  const navigate = useNavigate();
 
   const form=useRef()
@@ -26,7 +29,15 @@ const OrganizationInviteMembrePage = () => {
     memberEmail,
     orgId:"1a52b845-58b1-4e08-a0cd-590cf886e11c",
   }
-  console.log(invitedMembre)
+  
+
+  if(isGettingOrgMembers) return 
+   if(orgMembres.orgMembers.some(item => item.memberEmail==="tuwuhe@pelagius.net" ) ||  invitedMembre.memberEmail==="bghanbi50@gmail.com"){
+      return toast.error('invite already exist !')
+      
+   }
+
+
   inviteMembre(invitedMembre)
 
   // Sending email to invited members
