@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "../../ui/Logo";
 import Label from "../../ui/Label"
 import Input from "../../ui/Input"
@@ -6,14 +6,21 @@ import Button from "../../ui/Button";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../../public/supabase/Supabase";
 import { useUser } from "../../hook/useUser";
+import emailjs from '@emailjs/browser';
+import { useForm } from "react-hook-form";
+import { useInviteMembre } from "../../hook/useInviteMembre";
 
 const OnBoardingPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [orgName,setOrgName]=useState('')
-  const [membreEmail,setOrgEmail]=useState('')
-  const [membreRole,setMembreRole]=useState('membre')
+  const [memberEmail,setOrgEmail]=useState('')
+  const [memberRole,setMemberRole]=useState('membre')
   const {user}=useUser()
+ const { inviteMembre, isLoading:isInvitingMember }=useInviteMembre()
+
   const navigate=useNavigate()
+
+  const form=useRef()
   // Getting the org name
   const handleStepOneCompletion=()=>{
     setCurrentStep(2)
@@ -27,17 +34,19 @@ const OnBoardingPage = () => {
 
 
 
-  useEffect(()=>{
-    if(user?.data.user.id){
-      navigate('/dashboard')
-    } 
-  },[user])
+  // useEffect(()=>{
+  //   if(user?.data.user.id){
+  //     navigate('/dashboard')
+  //   } 
+  // },[user])
 
 
   const handleOrgCompletionSetUp=async ()=>{
     // register the user org and its members 
     
 
+
+    // CREATE AN ORGANIZATION WITH THAT USER DETAILS
      const {error}= await supabase
     .from('organizations')
     .insert([
@@ -45,12 +54,50 @@ const OnBoardingPage = () => {
     ])
     .select()
   
-      await supabase
-    .from('organizationsMembers')
-    .insert([
-      {memberRole:membreRole,organizationId:user?.data.user.id,memberEmail:membreEmail },
-    ])
-    .select()
+
+    // CREATE A NEW INVITE IF THE USER CHOSE TO INVITE A MEMBRE
+    const invitedMembre={
+      memberRole,
+      memberEmail,
+      orgId:user?.data.user.id,
+    }
+    
+
+
+    inviteMembre(invitedMembre)
+    //   await supabase
+    // .from('organizationsMembers')
+    // .insert([
+    //   {memberRole:memberRole,organizationId:user?.data.user.id,memberEmail:memberEmail },
+    // ])
+    // .select()
+
+    // SEND AN EMAIL TO JOIN TO THAT INVITED MEMBER
+ 
+
+    // PREVENT SENDING AN EMAIL IF THE INVITE STILL PROCESSED
+    if(isInvitingMember)return;
+
+    // SENDING EMAIL
+    emailjs
+    .sendForm('service_klj723p', 'template_uw0pu1c',form.current, {
+      publicKey: 'IglxKjApNUagHGcdh',
+  
+    })
+    .then(
+      () => {
+        console.log('SUCCESS!');
+  
+  
+      },
+      (error) => {
+       
+        console.log('error',error)
+        toast.error('there was an error sending email to this membre')
+        
+      },
+    )
+
     
     console.log('error1',error)
     //navigate to the dashboard
@@ -59,7 +106,7 @@ const OnBoardingPage = () => {
 
 
   const handleOptionChange = (event) => {
-    setMembreRole(event.target.value);
+    setMemberRole(event.target.value);
     console.log(e.target.value)
   };
   console.log(orgName)
@@ -112,11 +159,11 @@ const OnBoardingPage = () => {
     { currentStep===2 &&   <div>
           <h2 className="text-white mb-2">Invite members</h2>
           <h4 className="text-gray-400 text-xl font-normal">Invite your team members to join your organization.</h4>
-    <form className="mt-16">
+    <form ref={form} className="mt-16">
    <div className="flex  gap-2">
      
-        <Input  value={membreEmail} onChange={(e)=>setOrgEmail(e.target.value)} type='email' placeholder="membre@email.com" />
-        <select  id="" className="h-fit relative top-4" value={membreRole} onChange={(e)=> setMembreRole(e.target.value)}>
+        <Input  value={memberEmail} onChange={(e)=>setOrgEmail(e.target.value)} type='email' placeholder="membre@email.com" />
+        <select  id="" className="h-fit relative top-4" value={memberRole} onChange={(e)=> setMembreRole(e.target.value)}>
           <option value="member">member</option>
           <option value="admin">admin</option>
         </select>
