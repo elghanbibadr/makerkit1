@@ -3,14 +3,14 @@ import { addOrgMembre } from "../services/apiMembre";
 import toast from "react-hot-toast";
 
 
-export function useInviteMembre() {
+export function useInviteMembre(showToast) {
   // const navigate = useNavigate();
   const queryClient = useQueryClient()
   const { mutate: inviteMembre, isLoading } = useMutation({
     mutationFn: (membreInfo) => addOrgMembre(membreInfo),
     onSuccess: function () {
         queryClient.invalidateQueries('organizationsMembers')
-       toast.success('membre invited')
+       {showToast && toast.success('membre invited')}
      
       
     },
