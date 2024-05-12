@@ -3,7 +3,7 @@ import Logo from "../../ui/Logo";
 import Label from "../../ui/Label"
 import Input from "../../ui/Input"
 import Button from "../../ui/Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../hook/useUser";
 import emailjs from '@emailjs/browser';
 import { useInviteMembre } from "../../hook/useInviteMembre";
@@ -180,8 +180,9 @@ const OnBoardingPage = () => {
 
 
          {!isSettingUpOrganization && <div>
-         <img className="h-12 w-12 mb-6 mx-auto bg-green-500 p-1 text-white rounded-full ring-8 ring-green-500/30 dark:ring-green-500/50" src={checkMarkGreenIcon} alt="check mark  cirlce icon" />
-          <h3 className="text-white">You're all set! You can now start using the app.🎉</h3>
+         <img className="h-12 w-12  mx-auto bg-green-500 p-1 text-white rounded-full ring-8 ring-green-500/30 dark:ring-green-500/50" src={checkMarkGreenIcon} alt="check mark  cirlce icon" />
+          <h3 className="text-white my-6 ">You're all set! You can now start using the app.🎉</h3>
+          <Link to="/dashboard"><Button className="button-transparent  text-white rounded-md">Go to your dashboard</Button></Link>
 
          </div> }
 
