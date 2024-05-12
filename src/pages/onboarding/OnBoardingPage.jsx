@@ -9,6 +9,8 @@ import { useUser } from "../../hook/useUser";
 import emailjs from '@emailjs/browser';
 import { useForm } from "react-hook-form";
 import { useInviteMembre } from "../../hook/useInviteMembre";
+import { useCreateOrganization } from "../../hook/useCreateOrganization";
+import toast from "react-hot-toast";
 
 const OnBoardingPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -17,7 +19,7 @@ const OnBoardingPage = () => {
   const [memberRole,setMemberRole]=useState('membre')
   const {user}=useUser()
  const { inviteMembre, isLoading:isInvitingMember }=useInviteMembre()
-
+ const {createOrganization, isCreatingOrganization}=useCreateOrganization()
   const navigate=useNavigate()
 
   const form=useRef()
@@ -47,13 +49,14 @@ const OnBoardingPage = () => {
 
 
     // CREATE AN ORGANIZATION WITH THAT USER DETAILS
-     const {error}= await supabase
-    .from('organizations')
-    .insert([
-      {organizationName:orgName,organizationLogoUrl:'',orgId:user?.data.user.id },
-    ])
-    .select()
-  
+    //  const {error}= await supabase
+    // .from('organizations')
+    // .insert([
+    //   {organizationName:orgName,organizationLogoUrl:'',orgId:user?.data.user.id },
+    // ])
+    // .select()
+     
+    createOrganization({organizationName:orgName,organizationLogoUrl:'',orgId:user?.data.user.id })
 
     // CREATE A NEW INVITE IF THE USER CHOSE TO INVITE A MEMBRE
     const invitedMembre={

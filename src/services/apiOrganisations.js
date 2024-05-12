@@ -44,8 +44,8 @@ export const updateOrganization=async({userId,newOrgInfo})=>{
 
 
   export const createOrganization=async(orgDetails)=>{
-    const {data,error}= await supabase
-    .from('organizationsMembers')
+    const {data:createdOrganization,error}= await supabase
+    .from('organizations')
     .insert([orgDetails])
     .select()
 
@@ -53,5 +53,5 @@ export const updateOrganization=async({userId,newOrgInfo})=>{
         console.log("creating org error",error)
     }
 
-    return {data}
+    return { createdOrganization }
   }

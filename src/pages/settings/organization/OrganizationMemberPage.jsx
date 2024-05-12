@@ -11,11 +11,11 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../../hook/useUser";
 const OrganizationMemberPage = () => {
-  const { orgMembres, error, isLoading } = useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
+  const  {isLoading:isGettingUser,user,isAuthenticated}=useUser()
+  const { orgMembres, error, isLoading } = useGetMembres(user?.data.user.id || null)
   const [membreEmailToBeDeleted, setMembreEmailToBeDeleted] = useState()
   const { deletingOrgMembre, isDeleting } = useDeleteMembre()
   const [searchQuery, setSearchQuery] = useState(""); // State to store search query
-  const  {isLoading:isGettingUser,user,isAuthenticated}=useUser()
   const userEmail=user?.data.user.email
   const owner={memberEmail:userEmail,memberRole:"owner"}
 

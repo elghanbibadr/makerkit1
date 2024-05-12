@@ -8,13 +8,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast'
 import { useGetMembres } from '../../../hook/useGetMembre'
+import { useUser } from '../../../hook/useUser'
 
 
 const OrganizationInviteMembrePage = () => {
   const [memberEmail,setOrgEmail]=useState('')
   const [memberRole,setMembreRole]=useState('membre')
-  const {orgMembres,isLoading:isGettingOrgMembers}=useGetMembres("1a52b845-58b1-4e08-a0cd-590cf886e11c")
+  const  {isLoading:isGettingUser,user,isAuthenticated}=useUser()
+  const {orgMembres,isLoading:isGettingOrgMembers}=useGetMembres(user?.data.user.id || "")
  const { inviteMembre, isLoading:isInvitingMember }=useInviteMembre()
+ const userEmail=user?.data.user.email
 
  const navigate = useNavigate();
 
@@ -27,12 +30,12 @@ const OrganizationInviteMembrePage = () => {
   const invitedMembre={
     memberRole,
     memberEmail,
-    orgId:"1a52b845-58b1-4e08-a0cd-590cf886e11c",
+    orgId:user?.data.user.id,
   }
   
 
   if(isGettingOrgMembers) return 
-   if(orgMembres.orgMembers.some(item => item.memberEmail==="tuwuhe@pelagius.net" ) ||  invitedMembre.memberEmail==="bghanbi50@gmail.com"){
+   if(orgMembres.orgMembers.some(item => item.memberEmail===invitedMembre.memberEmail) ||  invitedMembre.memberEmail===userEmail){
       return toast.error('invite already exist !')
       
    }
