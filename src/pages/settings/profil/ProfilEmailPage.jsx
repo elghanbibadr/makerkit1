@@ -12,10 +12,8 @@ import { useUpdateEmail } from "../../../hook/useUpdateEmail";
 const ProfilEmailPage = () => {
 
   const { user } = useUser()
-
+  const userEmail=user?.data.user.email
   const { updateUserEmail, isUpdating } = useUpdateEmail()
-
-
   const [email, setEmail] = useState("")
   const [repeatedEmail, setRepeatedEmail] = useState("")
 
@@ -28,6 +26,10 @@ const ProfilEmailPage = () => {
     if (email !== repeatedEmail) {
       return toast.error('oops emails are not matched ')
     }
+
+    // if(email === userEmail){
+    //   return toast.error("email did not changed !")
+    // }
 
     updateUserEmail(email)
 
@@ -52,6 +54,7 @@ const ProfilEmailPage = () => {
           value={email}
           disabled={isUpdating}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <Label className="small-title " labelfor="repeatedemail">
@@ -63,8 +66,10 @@ const ProfilEmailPage = () => {
           name="repeatedemail"
           type="email"
           value={repeatedEmail}
+          
           disabled={isUpdating}
           onChange={(e) => setRepeatedEmail(e.target.value)}
+          required
         />
 
         <Button className="bg-darkPink mt-5  p-2 rounded-md text-sm" disabled={isUpdating}>

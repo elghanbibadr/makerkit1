@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-
+input:disabled{background-color:transparent  !important; border: transparent;}
 
 body{
   background:  #030712 !important;

@@ -12,6 +12,9 @@ export default async function getUser() {
 export  async function UpdateUserEmail(newEmail) {
     const { data, error } = await supabase.auth.updateUser({
         email: newEmail,
+
+    },{
+        emailRedirectTo:"http://localhost:5173/emailChanged"
     })
 
     return { data, error }
