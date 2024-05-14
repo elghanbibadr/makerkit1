@@ -67,7 +67,8 @@ const ProfilPasswordPage = () => {
 
         />   
         <Button className="bg-darkPink mt-5 text-white p-3 rounded-md text-sm">
-          Update Password Address
+          {!isUpdating && <span>Update Password Address</span>}
+          {isUpdating && <span>Updating Password ...</span>}
         </Button>
       </form>
     </div>

@@ -2,7 +2,7 @@ import logo from "../../assets/logo.svg";
 
 const Footer = () => {
   return (
-    <footer className=" mt-60 mb-10 text-white ">
+    <footer className=" mt-32 mb-10 text-white ">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-7 gap-8">
         {/* Column 1 */}
         <div className="md:col-span-2">

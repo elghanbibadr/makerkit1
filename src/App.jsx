@@ -8,6 +8,7 @@ import OnBoardingPage from "./pages/onboarding/OnBoardingPage";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import OrganizationInviteMembrePage from "./pages/settings/organization/OrganizationInviteMembrePage";
 import InviteAcceptedPage from "./pages/inviteAccepted/InviteAcceptedPage";
+import EmailChangeConfirmation from "./pages/emailChangeConfirmation/EmailChangeConfirmation";
 
 // Lazy load components
 const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
@@ -50,6 +51,8 @@ function App() {
               <Route index path="/" element={<HomePage />} />
               <Route path="pricing" element={<PricingPage />} />
               <Route path="faq" element={<FaqPage />} />
+              <Route path="emailChanged" element={<EmailChangeConfirmation />} />
+              
               <Route path="inviteAccepted" element={<InviteAcceptedPage />} />
 
             </Route>

@@ -1,6 +1,6 @@
-const CtaCard = ({ children }) => {
+const CtaCard = ({ children ,className}) => {
   return (
-    <div className="p-2 text-center text-sm mx-auto test shadow-grayBoxShadow m-6 w-fit px-6 rounded-full">
+    <div className={`p-2 text-center text-sm mx-auto test shadow-grayBoxShadow m-6 w-fit px-6 rounded-full ${className}`}>
       <span className=" font-semibold text-lightGrey">{children}</span>
     </div>
   );

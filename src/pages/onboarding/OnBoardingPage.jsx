@@ -44,7 +44,6 @@ const OnBoardingPage = () => {
 
 
       // REDIRECT TO THE DASHBOARD IF THERE IS ALREADY AN ORGANIZATION
-
     if ( !isGettingOrganizationDetails &&  organizationDetails?.organizations.length!==0) {
       navigate('/dashboard')
     }

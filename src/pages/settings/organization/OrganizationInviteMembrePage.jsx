@@ -12,11 +12,11 @@ import { useUser } from '../../../hook/useUser'
 
 
 const OrganizationInviteMembrePage = () => {
-  const [memberEmail,setOrgEmail]=useState('')
+  const [memberEmail,setMembreEmail]=useState('')
   const [memberRole,setMembreRole]=useState('membre')
   const  {isLoading:isGettingUser,user,isAuthenticated}=useUser()
   const {orgMembres,isLoading:isGettingOrgMembers}=useGetMembres(user?.data.user.id || "")
- const { inviteMembre, isLoading:isInvitingMember }=useInviteMembre()
+ const { inviteMembre, isLoading:isInvitingMember }=useInviteMembre(true)
  const userEmail=user?.data.user.email
 
  const navigate = useNavigate();
@@ -55,7 +55,7 @@ const OrganizationInviteMembrePage = () => {
     () => {
       console.log('SUCCESS!');
 
-
+      setMembreEmail('')
     },
     (error) => {
      
@@ -79,7 +79,7 @@ const OrganizationInviteMembrePage = () => {
     {/* ref={form} */}
     <form ref={form} onSubmit={inviteMembreHandler} className="my-7">
       <div className="sm:flex  gap-2 ">
-      <Input name='memberEmail' value={memberEmail} onChange={(e)=>setOrgEmail(e.target.value)} type='email' placeholder="membre@email.com" required/>
+      <Input name='memberEmail' value={memberEmail} onChange={(e)=>setMembreEmail(e.target.value)} type='email' placeholder="membre@email.com" required/>
       <select name='memberRole'  id="" className="h-fit relative top-4" value={memberRole} onChange={(e)=> setMembreRole(e.target.value)}>
           <option value="member">member</option>
           <option value="admin">admin</option>
