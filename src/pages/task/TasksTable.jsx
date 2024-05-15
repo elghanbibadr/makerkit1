@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { markTaskAsTodo } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { Link } from "react-router-dom";
@@ -6,14 +6,16 @@ import Overlay from "../../ui/Overlay";
 import { markTaskAsDone } from "../../services/apiTasks";
 import { useTask } from "../../hook/usetasks";
 import { useUser } from "../../hook/useUser";
+import { useTaskDone } from "../../hook/useTaskDone";
 
-const TasksTable = ({searchTaskQuery}) => {
-  
+const TasksTable = ({ searchTaskQuery }) => {
+
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
   const [taskToDeleteId, setTaskToDelete] = useState(null);
- const {user}=useUser()
+  const { user } = useUser()
   const userId = user?.data.user.id;
+  const {markTaskDone , isMarkingTaskDone}=useTaskDone()
 
   const { tasks, isLoading, error } = useTask(userId);
 
@@ -24,26 +26,28 @@ const TasksTable = ({searchTaskQuery}) => {
   };
 
   // Task delete handler
-
   const handleTaskDelete = (taskId) => {
     setDeleteTaskModelOpen(true);
     setTaskToDelete(taskId);
   };
 
-  // taske as done handler
 
+
+  // taske as done handler
   const handleTaskMarkedAsDone = (taskId) => {
-    markTaskAsDone(taskId);
+    markTaskDone(taskId);
   };
+
+  
   const handleTaskMarkedAsTodo = (taskId) => {
     markTaskAsTodo(taskId);
   };
 
 
 
-  const SearchedTasks = tasks?.filter(({ taskName,taskDescription }) =>
+  const SearchedTasks = tasks?.filter(({ taskName, taskDescription }) =>
     taskName.toLowerCase().includes(searchTaskQuery.toLowerCase()) ||
-  taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase())
+    taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase())
   );
 
 
