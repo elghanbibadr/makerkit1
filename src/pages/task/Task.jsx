@@ -11,13 +11,14 @@ const Task = () => {
   const { session,filteredTasks,setFilteredTasks } = useContext(AppContext);
   const userId = session?.user.id;
   const { tasks, isLoading, error } = useTask(userId);
+  const [searchTaskQuery, setSearchTaskQuery] = useState(""); // State to store search query
 
 
 console.log('tasks', tasks)
   
   const handleSearchInputChange = (e) => {
-    setSearchInput(e.target.value);
-    filterTasks(e.target.value);
+    setSearchTaskQuery(e.target.value)
+    // filterTasks(e.target.value);
   };
 
   const filterTasks = (searchTerm) => {
@@ -55,9 +56,9 @@ console.log('tasks', tasks)
           </label>
 
             </Button>
-          <input type="email" value={searchInput} onChange={handleSearchInputChange} placeholder="Search for task" className="input" />
+          <input type="email" value={searchTaskQuery} onChange={handleSearchInputChange} placeholder="Search for task" className="input" />
         </div>
-        <TasksTable searchInput={searchInput}  />
+        <TasksTable searchTaskQuery={searchTaskQuery}  />
       </div>
    
        

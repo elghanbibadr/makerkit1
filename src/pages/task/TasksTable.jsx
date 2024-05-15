@@ -1,19 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import {  useState } from "react";
 import { markTaskAsTodo } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
-import { AppContext } from "../../store/AppContext";
-import { DeleteTaskModal } from "./DeleteTaskModal";
 import { Link } from "react-router-dom";
 import Overlay from "../../ui/Overlay";
 import { markTaskAsDone } from "../../services/apiTasks";
 import { useTask } from "../../hook/usetasks";
+import { useUser } from "../../hook/useUser";
 
-const TasksTable = () => {
-  const { session,filteredTasks,setFilteredTasks} = useContext(AppContext);
+const TasksTable = ({searchTaskQuery}) => {
+  
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
   const [taskToDeleteId, setTaskToDelete] = useState(null);
-  const userId = session?.user.id;
+ const {user}=useUser()
+  const userId = user?.data.user.id;
 
   const { tasks, isLoading, error } = useTask(userId);
 
@@ -40,14 +40,15 @@ const TasksTable = () => {
   };
 
 
-  // useEffect(() =>{
-  // console.log("filtered",filteredTasks)
-  // setFilteredTasks(tasks)
-  // },[])
-  // TASK VIEW HANLDER
+
+  const SearchedTasks = tasks?.filter(({ taskName,taskDescription }) =>
+    taskName.toLowerCase().includes(searchTaskQuery.toLowerCase()) ||
+  taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase())
+  );
 
 
-  console.log(filteredTasks)
+
+
   const handleTaskView = (taskToBeEdited) => {
     console.log(taskToBeEdited);
   };
@@ -76,7 +77,7 @@ const TasksTable = () => {
           </thead>
           <tbody className="text-white">
             {tasks?.length > 0 &&
-              filteredTasks?.map((task, index) => (
+              SearchedTasks.map((task, index) => (
                 <tr key={task.id} className="text-left border-b border-accent1">
                   <td>{task.taskName}</td>
                   <td>{task.taskDescription}</td>

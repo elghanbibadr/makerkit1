@@ -66,13 +66,13 @@ const Navbar = () => {
 
         <div className="lg:flex lg:items-center lg:order-2">
           <div className="relative  mr-10 ">
-            <img
+            {/* <img
               className="h-8  p-1 shadow-lg border-2 border-transparent hover:border-darkPink rounded-full"
               onClick={toggleMode}
               src={moon}
               alt="moon icon"
-            />
-            <AnimatePresence>{isModeCardOpen && <ScreenModeCard />}</AnimatePresence>
+            /> */}
+            {/* <AnimatePresence>{isModeCardOpen && <ScreenModeCard />}</AnimatePresence> */}
             {/* BUTTONS */}
           </div>
           <div className=" lg:flex">

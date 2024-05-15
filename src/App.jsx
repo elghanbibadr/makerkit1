@@ -45,7 +45,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<LoadingSpinner className="h-screen" />}>
           <Routes>
             <Route path="/" element={<HomePageLayout />}>
               <Route index path="/" element={<HomePage />} />
