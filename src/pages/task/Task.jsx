@@ -1,32 +1,24 @@
 import React, { useState } from "react";
+
 import Button from "../../ui/Button";
-import { useTask } from "../../hook/usetasks";
-import NewTaskModal from "./NewTaskModal";
-import { useContext } from "react";
-import { AppContext } from "../../store/AppContext";
-import TasksTable from "./TasksTable";
+import { useUser } from "../../hook/useUser";
+import TasksTable from "../../../src/pages/task/TasksTable"
+import NewTaskModal from "../../../src/pages/task/NewTaskModal"
 
 const Task = () => {
-  const [searchInput, setSearchInput] = useState('');
-  const { session,filteredTasks,setFilteredTasks } = useContext(AppContext);
-  const userId = session?.user.id;
-  const { tasks, isLoading, error } = useTask(userId);
+
+  const {user}=useUser()
+  const userId = user?.data.user.id;
+
   const [searchTaskQuery, setSearchTaskQuery] = useState(""); // State to store search query
 
 
-console.log('tasks', tasks)
   
-  const handleSearchInputChange = (e) => {
-    setSearchTaskQuery(e.target.value)
-    // filterTasks(e.target.value);
-  };
+  const handleSearchInputChange = (e) => setSearchTaskQuery(e.target.value)  ;
+  
 
-  const filterTasks = (searchTerm) => {
-    const filtered = tasks.filter((task) =>
-      task.taskName.toLowerCase().startsWith(searchTerm.toLowerCase())
-    );
-    setFilteredTasks(filtered);
-  };
+
+  
   return (
     <>
       <div>
@@ -66,6 +58,7 @@ console.log('tasks', tasks)
  
     </>
   );
-};
+
+}
 
 export default Task;

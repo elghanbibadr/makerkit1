@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { markTaskAsTodo } from "../../services/apiTasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { Link } from "react-router-dom";
 import Overlay from "../../ui/Overlay";
-import { markTaskAsDone } from "../../services/apiTasks";
 import { useTask } from "../../hook/usetasks";
 import { useUser } from "../../hook/useUser";
-import { useTaskDone } from "../../hook/useTaskDone";
+import { useTaskStatus } from "../../hook/useTaskStatus";
+
 
 const TasksTable = ({ searchTaskQuery }) => {
 
@@ -15,7 +14,7 @@ const TasksTable = ({ searchTaskQuery }) => {
   const [taskToDeleteId, setTaskToDelete] = useState(null);
   const { user } = useUser()
   const userId = user?.data.user.id;
-  const {markTaskDone , isMarkingTaskDone}=useTaskDone()
+  const { changeTaskStatus, isChangingTaskStatus } = useTaskStatus()
 
   const { tasks, isLoading, error } = useTask(userId);
 
@@ -33,15 +32,8 @@ const TasksTable = ({ searchTaskQuery }) => {
 
 
 
-  // taske as done handler
-  const handleTaskMarkedAsDone = (taskId) => {
-    markTaskDone(taskId);
-  };
-
-  
-  const handleTaskMarkedAsTodo = (taskId) => {
-    markTaskAsTodo(taskId);
-  };
+  // HANDLE TASK STATUS (DONE,TODO) CHANGED
+  const handleTaskStatusChanged = (taskId, isDone) => changeTaskStatus({ taskId, isDone })
 
 
 
@@ -49,7 +41,6 @@ const TasksTable = ({ searchTaskQuery }) => {
     taskName.toLowerCase().includes(searchTaskQuery.toLowerCase()) ||
     taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase())
   );
-
 
 
 
@@ -133,7 +124,7 @@ const TasksTable = ({ searchTaskQuery }) => {
                         {!task.isDone && (
                           <li
                             className="my-2"
-                            onClick={() => handleTaskMarkedAsDone(task.id)}
+                            onClick={() => handleTaskStatusChanged(task.id, true)}
                           >
                             Mark as Done
                           </li>
@@ -141,7 +132,7 @@ const TasksTable = ({ searchTaskQuery }) => {
                         {task.isDone && (
                           <li
                             className="my-2"
-                            onClick={() => handleTaskMarkedAsTodo(task.id)}
+                            onClick={() => handleTaskStatusChanged(task.id, false)}
                           >
                             Mark as Todo
                           </li>
@@ -157,14 +148,14 @@ const TasksTable = ({ searchTaskQuery }) => {
           </tbody>
         </table>
       )}
-      {deleteTaskModalOpen && (
+      {/* {deleteTaskModalOpen && (
         <Overlay>
           <DeleteTaskModal
             setDeleteTaskModelOpen={setDeleteTaskModelOpen}
             taskToDeleteId={taskToDeleteId}
           />
         </Overlay>
-      )}
+      )} */}
     </>
   );
 };

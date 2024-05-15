@@ -1,25 +1,26 @@
 import { useEffect } from "react"
 import { useUser } from "../hook/useUser"
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
-const ProtectedRoute = ({children}) => {
-    const navigate=useNavigate()
+const ProtectedRoute = ({ children }) => {
+    const navigate = useNavigate()
 
-    const {isLoading,user,isAuthenticated}=useUser()
+    const { isLoading , isAuthenticated } = useUser()
 
 
-    console.log('isAuth',isAuthenticated)
-    useEffect(()=>{
-        if(!isLoading && !isAuthenticated){
+    console.log('isAuth', isAuthenticated)
+    useEffect(() => {
+        if (!isLoading && !isAuthenticated) {
             navigate('/auth/signin')
         }
-    },[isAuthenticated,isLoading])
+    }, [isAuthenticated, isLoading])
 
-    if(isLoading){
-    return <h1 className="text-red-600 text-4xl">Loading ........</h1>
+    if (isLoading) {
+        return <LoadingSpinner className="h-screen" />
     }
-    console.log('user',user)
-  if(isAuthenticated)   return children
+
+    if (isAuthenticated) return children
 }
 
 export default ProtectedRoute

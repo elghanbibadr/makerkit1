@@ -2,13 +2,13 @@ import { useMutation, useQueryClient } from "react-query";
 import { markTaskAsDone as markTaskAsDoneApi } from "../services/apiTasks";
 import toast from "react-hot-toast";
 
-export function useTaskDone(){
+export function useTaskStatus(){
     const queryClient = useQueryClient()
 
-    const { mutate :markTaskDone, isloading:isMarkingTaskDone } = useMutation({
+    const { mutate :changeTaskStatus, isloading: isChangingTaskStatus} = useMutation({
         mutationFn: markTaskAsDoneApi,
         onSuccess: () => {          
-          toast.success("Task marked as done");
+          toast.success("Task status changed");
           queryClient.invalidateQueries("tasks");
        
         },
@@ -17,5 +17,5 @@ export function useTaskDone(){
         },
       });
 
-      return {markTaskDone , isMarkingTaskDone}
+      return {changeTaskStatus , isChangingTaskStatus}
 }

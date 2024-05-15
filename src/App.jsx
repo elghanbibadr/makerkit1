@@ -84,7 +84,7 @@ function App() {
                 </Route>
                 <Route path="subscription" element={<SettingSubscription />} />
               </Route>
-              <Route path="dashboard/tasks" element={<ProtectedRoute><Task /></ProtectedRoute>} />
+              <Route path="dashboard/tasks" element={<Task />} />
               <Route path="dashboard/tasks/:taskId" element={<SingleTask />} />
             </Route>
 
@@ -107,9 +107,9 @@ function App() {
             duration: 5000,
           },
           style: {
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px",
+            fontSize: "14px",
+            maxWidth: "540px",
+            padding: "10px 15px",
             backgroundColor: "white",
             color: "#6b7280e0",
           },
