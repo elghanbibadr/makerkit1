@@ -49,6 +49,8 @@ const OrganizationMemberPage = () => {
     memberEmail.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  console.log("searched invite",SearchedAcceptedInvites)
+
 
 
   return (
@@ -85,29 +87,10 @@ const OrganizationMemberPage = () => {
             </Link>
 
           </div>
-          {/* members list */}
-          {/* "me" */}
-        {/* {  <div className="mt-7 sm:flex sm:justify-between sm:items-center">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
-                <h6 className="font-semibold text-sm text-white">B</h6>
-              </div>
-             <span className="text-xs sm:text-[14px] font-normal text-white">{userEmail} </span>
-              <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">
-                You
-              </span>{" "}
-            </div>
-            <div className="flex ">
-              <span className=" text-xs font-medium ml-5 bg-yellow-200  text-black px-4 py-1 rounded-md ">
-                Owner
-              </span>{" "}
-              <img className="h-6 relative left-3 cursor-pointer cursor-not-allowed" src={dottedLine} alt="" />
-            </div>
-          </div> } */}
-          {/*  */}
+        
 
 
-        { acceptedInvites.length > 0  && SearchedAcceptedInvites?.map(({memberRole,memberEmail}) =>{
+        {  SearchedAcceptedInvites?.map(({memberRole,memberEmail}) =>{
 
           return <div className="mt-7 sm:flex sm:justify-between sm:items-center">
           <div className="flex items-center gap-3">
