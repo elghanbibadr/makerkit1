@@ -1,19 +1,21 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { createTask as createTaskApi } from "../services/apiTasks";
+import toast from "react-hot-toast";
 
-export function useCreateTask(){
+export function useCreateTask() {
+  const queryClient = useQueryClient()
 
-    const { mutate :createTask, isloading:isCreatingTask,error } = useMutation({
-        mutationFn: createTaskApi,
-        onSuccess: () => {          
-          toast.success("Task successfully created");
-          queryClient.invalidateQueries("tasks");
-       
-        },
-        onError: (err) => {
-          toast.error(err.message);
-        },
-      });
+  const { mutate: createTask, isloading: isCreatingTask, error } = useMutation({
+    mutationFn: createTaskApi,
+    onSuccess: () => {
+      toast.success("Task successfully created");
+      queryClient.invalidateQueries("tasks");
 
-      return {createTask , isCreatingTask}
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  return { createTask, isCreatingTask }
 }

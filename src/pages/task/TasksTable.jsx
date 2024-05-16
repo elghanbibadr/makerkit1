@@ -5,7 +5,9 @@ import Overlay from "../../ui/Overlay";
 import { useTask } from "../../hook/usetasks";
 import { useUser } from "../../hook/useUser";
 import { useTaskStatus } from "../../hook/useTaskStatus";
-
+import Button from "../../ui/Button";
+import { useDeleteTask } from "../../hook/useDeleteTask";
+import closeIcon from '../../assets/xIcon.svg'
 
 const TasksTable = ({ searchTaskQuery }) => {
 
@@ -15,6 +17,7 @@ const TasksTable = ({ searchTaskQuery }) => {
   const { user } = useUser()
   const userId = user?.data.user.id;
   const { changeTaskStatus, isChangingTaskStatus } = useTaskStatus()
+  const {deleteTask   , isDeleting}=useDeleteTask()
 
   const { tasks, isLoading, error } = useTask(userId);
 
@@ -138,7 +141,11 @@ const TasksTable = ({ searchTaskQuery }) => {
                           </li>
                         )}
                         <li onClick={() => handleTaskDelete(task.id)}>
-                          Delete Task
+                        
+                    <label  className="flex cursor-pointer" htmlFor="my_modal_2" >
+                    Delete Task
+                    </label>
+
                         </li>
                       </ul>
                     )}
@@ -148,6 +155,30 @@ const TasksTable = ({ searchTaskQuery }) => {
           </tbody>
         </table>
       )}
+         <input type="checkbox" id="my_modal_2" className="modal-toggle" />
+              <div className="modal bg-darkPink" role="dialog">
+                <div className="max-w-[500px] shadow-pinkBoxShadow z-10 bg-[#030712] p-7 rounded-[0.8rem] modal-box">
+                  <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-white">Deleting Task</h3>
+                    <label className="flex cursor-pointer" htmlFor="my_modal_2">
+                      <img className="h-6 hover:border-[1px] border-lightGrey p-1 rounded-full" src={closeIcon} alt="close icon" />
+
+                    </label>
+                  </div>
+                  <div className="text-sm text-white">
+                    <p>You are deleting the invite to <strong>task Name</strong></p>
+                    <p className="my-4">Do you want to continue?</p>
+                  </div>
+                  <Button onClick={() => deleteTask(taskToDeleteId)}  className="bg-red-800 text-white  mt-6 text-sm py-2 px-5 rounded-md">
+                    {/* {!isDeleting && <span>Delete Invite</span>}
+                    {isDeleting && <span>Deleting Invite</span>} */}
+                    <span>Yep,delete task</span>
+                  </Button>
+                </div>
+                <label className="modal-backdrop " htmlFor="my_modal_2">
+                  close
+                </label>
+              </div>
       {/* {deleteTaskModalOpen && (
         <Overlay>
           <DeleteTaskModal
