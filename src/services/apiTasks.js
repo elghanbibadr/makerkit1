@@ -1,4 +1,5 @@
 import supabase from "../../public/supabase/Supabase";
+import SingleTask from "../pages/task/SingleTask";
 
 export async function getTasks(userId) {
   let { data: tasks, error } = await supabase
@@ -80,4 +81,19 @@ export async function updateTask(taskId,updatedTask){
   }catch(e){
     alert(e.message)
   }
+}
+
+
+
+export async function getSingleTask(taskId){
+  let { data: singleTask, error } = await supabase
+    .from("tasks")
+    .select()
+    .eq("id", taskId);
+
+  if (error) {
+    console.log(error);
+  }
+
+  return singleTask;
 }

@@ -1,74 +1,75 @@
-import { useContext, useState } from "react";
-import { AppContext } from "../../store/AppContext";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../../ui/Button";
-import supabase from "../../../public/supabase/Supabase";
 import { useTask } from "../../hook/usetasks";
 import LoadingSpinner from "../../ui/LoadingSpinner";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { updateTask } from "../../services/apiTasks";
-import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
-import { queryClient } from "../../App";
+import { useUpdateTask } from "../../hook/useUpdateTask";
+import { useUser } from "../../hook/useUser";
+import { useGetSingleTask } from "../../hook/useGetSingleTask";
 
 
 
 const SingleTask = () => {
-  const { session } = useContext(AppContext);
+
+  const { user } = useUser();
+  const { id: userId } = user?.data.user;
   const { taskId } = useParams();
-  const userId = session?.user.id;
-  const { tasks, isLoading } = useTask(userId);
-  const taskTobeEdited = tasks?.find((task) => task.id == taskId);
-  const [taskName, setTaskName] = useState(taskTobeEdited?.taskName);
-  const [taskDescription, setTaskDescription] = useState(
-    taskTobeEdited?.taskDescription
-  );
+  const { tasks, isLoading: isGettingTask } = useTask(userId);
+  const { updateTask, isUpdatingTask } = useUpdateTask()
+  const [taskDescription, setTaskDescription] = useState("");
+
+  const { singleTask, error, isLoading } = useGetSingleTask(taskId)
+  const [taskName, setTaskName] = useState("");
 
 
 
 
-  const { mutate, isLoadingUpdateTask } = useMutation({
-    mutationFn: ({ taskId, updatedTask }) => updateTask(taskId, updatedTask),
-    onSuccess: () => {
-      toast.success("Task successfully updated");
-      queryClient.invalidateQueries("tasks");
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
-  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    mutate({ taskId: taskId, updatedTask: { taskName: taskName, taskDescription: taskDescription } });
+    updateTask({ taskId: taskId, updatedTask: { taskName: taskName, taskDescription: taskDescription } });
   };
+
+
+  useEffect(() => {
+    if (isLoading || !singleTask) return
+
+    setTaskName(singleTask[0].taskName)
+    setTaskDescription(singleTask[0].taskDescription)
+
+  }, [SingleTask, isLoading])
+
+
   return (
     <>
-      {!isLoading && (
+      {!isGettingTask && (
         <form onSubmit={handleSubmit} className="text-white text-3xl">
           <div className="flex justify-between">
-            <h3>{taskTobeEdited?.taskName}</h3>
-            <div className="flex items-center cursor-pointer button-transparent border-none rounded-md">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-                class="mr-2 h-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                ></path>
-              </svg>
-              <p className="text-sm font-medium">
-                <Link to="/dashboard/tasks">Back to Task</Link>
-              </p>
-            </div>
+            {singleTask?.length > 0 && <h3>{singleTask[0].taskName}</h3>}
+            <Link to={"/dashboard/tasks"}>
+              <div className="flex items-center cursor-pointer button-transparent border-none rounded-md">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  class="mr-2 h-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                  ></path>
+                </svg>
+                <p className="text-sm font-medium">
+                  Back to Task
+                </p>
+              </div>
+            </Link>
           </div>
           <div className="w-full  md:w-1/2">
             <div className="mt-6">
@@ -89,7 +90,7 @@ const SingleTask = () => {
                 Description
               </label>
               <textarea
-                className="input  w-full  "
+                className="input overflow-hidden  w-full  "
                 type="text"
                 value={taskDescription}
                 name="Description"
@@ -126,7 +127,7 @@ const SingleTask = () => {
           </div>
         </form>
       )}
-      {isLoading && <LoadingSpinner />}
+      {isGettingTask && <LoadingSpinner />}
     </>
   );
 };
