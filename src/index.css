@@ -14,6 +14,9 @@ body{
   font-family: "Inter", sans-serif;}
 
 
+
+  /* TYPOGRAPHY GENERAL STYLES */
+
 .gr{
   background-image: linear-gradient(to bottom right,#a78bfa ,#6d28d9);
 
@@ -32,19 +35,24 @@ h3{
   @apply scroll-m-20 text-2xl font-medium tracking-tight
 }
 
+h6{
+  @apply text-lg font-medium 
+}
+
 .linkHover{
   @apply text-xs mt-6 font-medium w-fit hover:bg-[#17182A] px-4 py-2 rounded-md  block  mb-4
 }
 
-.small-title,footer p{
-  @apply text-sm  font-medium text-gray-500 dark:text-gray-400
+.small-title,.text-small-gray,.input,footer li{
+  @apply text-sm  font-normal text-gray-400 
 }
+/* 
+.text-small-gray{
+  @apply 
+}
+ */
 
 
-footer p{
-  margin-block: 4px;
-  cursor: pointer;
-}
 
 img{
   cursor: pointer;
@@ -65,7 +73,7 @@ img{
 /* INPUTS */
 
 .input{
-  @apply  px-4 py-2 mt-2 rounded bg-transparent text-accent1 text-gray-400 font-medium text-sm focus:outline-none border border-accent1
+  @apply  px-4 py-2 mt-2 rounded bg-transparent   focus:outline-none border border-accent1
 }
 
 
