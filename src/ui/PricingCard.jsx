@@ -30,11 +30,11 @@ const PricingCard = ({
             {title === "Pro" && (
               <img className="h-4" src={proplanicon} alt="pro plan icon" />
             )}
-            <span> {description}</span>
+            <span c> {description}</span>
           </div>
         )}
       </div>
-      <span className="small-title inline-block my-3">
+      <span className="text-small-gray inline-block my-3">
         Description of your {title} plan
       </span>
       {title !== "Premium" && (

@@ -1,4 +1,3 @@
-import Button from "../../../ui/Button";
 import { useContext, useEffect, useState, useRef, Children } from "react";
 import { AppContext } from "../../../store/AppContext";
 import supabase from "../../../../public/supabase/Supabase";
@@ -6,12 +5,11 @@ import { supabaseUrl } from "../../../../public/supabase/Supabase";
 import { useUpdateUser } from "../../../services/useUpdateUser";
 import uploadIcon from "../../../assets/uploadIcon.svg"
 import { Link } from "react-router-dom";
-import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 import Input from "../../../ui/Input";
 import Label from "../../../ui/Label";
 import toast from "react-hot-toast";
+import { PurpleButton } from "../../../ui/PurpleButton";
 
-// import FileInput from "../../../ui/FileInput";
 const ProfilDetails = () => {
   const { session } = useContext(AppContext)
 
@@ -24,6 +22,7 @@ const ProfilDetails = () => {
   const { updateUser, isUpdating } = useUpdateUser()
   // const {uploadingAvatar,isUpoading}=useUploadAvatar()
 
+  // console.log('isUpdatig',isUpdatingProfil)
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -49,24 +48,24 @@ const ProfilDetails = () => {
     e.preventDefault()
     if (!name) return
     console.log(selectedFile)
-    if (selectedFile) {
-      const { data, error } = await supabase.storage
-        .from('avatars')
-        .upload(selectedFile.name, selectedFile);
+    // if (selectedFile) {
+    //   const { data, error } = await supabase.storage
+    //     .from('avatars')
+    //     .upload(selectedFile.name, selectedFile);
       
 
-        if(error){
-          console.log(error.message)
-          toast.error(error.message)
-          return 
-        }
+    //     if(error){
+    //       console.log(error.message)
+    //       toast.error(error.message)
+    //       return 
+    //     }
 
-      //   console.log(  `path, ${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`)
-      // const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
-      setAvatarUrl(`${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`)
-      updateUser({ name, avatarURL})
+    //   //   console.log(  `path, ${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`)
+    //   // const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
+    //   setAvatarUrl(`${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`)
       
-    }
+    // }
+    updateUser({ name})
 
   }
 
@@ -165,12 +164,8 @@ const ProfilDetails = () => {
         </Link>
 
       </div>
-      {!isUpdating && <Button className="bg-darkPink  p-2 px-5 rounded-md text-sm">
-        Update profil
-      </Button>}
-      {isUpdating && <Button className="bg-darkPink  p-2 px-5 rounded-md text-sm">
-        Updating...
-      </Button>}
+     
+      <PurpleButton text='update profil' isLoading={isUpdating} />
 
     </form>
   );

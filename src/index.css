@@ -60,15 +60,17 @@ img{
 
 /* BUTTONS */
 
-.button-transparent{
+/* .button-transparent{
   @apply border border-accent1  hover:bg-accent1 hover:text-white text-sm h-10 px-4
 }
 
 .button-pink{
-  @apply  bg-darkPink px-4 py-2
+  @apply  bg-darkPink 
+} */
+
+button{
+  @apply text-sm px-4 py-1 text-white duration-200 font-medium tracking-wide outline-none
 }
-
-
 
 /* INPUTS */
 
