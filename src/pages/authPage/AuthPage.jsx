@@ -1,20 +1,17 @@
-import {  useState } from "react";
-import Button from "../../ui/Button";
+import { useState } from "react";
 import googlelogo from "../../assets/googlelogo.webp";
 import supabase from "../../../public/supabase/Supabase";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
 import toast from "react-hot-toast";
 import Label from "../../ui/Label";
-
 import { PurpleButton } from "../../ui/PurpleButton";
 import { ButtonTransparent } from "../../ui/Button-transparent";
 import Logo from "../../ui/Logo";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,10 +20,9 @@ const AuthPage = ({ isSignUp = true }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
-
       if (isSignUp) {
         if (data.repeatedpassword !== data.password) {
           return toast.error("passwords are not matched");
@@ -35,15 +31,13 @@ const AuthPage = ({ isSignUp = true }) => {
       } else {
         await Login(data.email, data.password);
       }
-
     } catch (e) {
-      console.log(e.message)
+      console.log(e.message);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
       // Reset the form values
       reset();
     }
-
   };
 
   async function Login(email, password) {
@@ -52,8 +46,7 @@ const AuthPage = ({ isSignUp = true }) => {
       password: password,
     });
 
-
-    console.log("sign in data", data)
+    console.log("sign in data", data);
     if (error) return toast.error(error.message);
     navigate("/dashboard");
   }
@@ -65,15 +58,11 @@ const AuthPage = ({ isSignUp = true }) => {
       password: password,
     });
 
-
-    console.log('error',error)
-
-
+    console.log("error", error);
 
     if (!error) {
-      console.log("data sign up", data)
+      console.log("data sign up", data);
       // create a new row inside the organization tables for this user
-
     }
     if (error) return toast.error(error.message);
     navigate("/onboarding");
@@ -98,27 +87,20 @@ const AuthPage = ({ isSignUp = true }) => {
           <h5 className="scroll-m-20 font-heading mb-5 text-lg font-medium text-white text-center">
             {isSignUp ? "Create your account" : "Sign in to your account"}
           </h5>
-          {/* <Button
-            c
-            className="button-transparent mt-6 w-full flex justify-between rounded-md p-4"
-          >
-            <img className="h-6" src={googlelogo} alt="google logo image" />
-            <span className="text-center w-full  text-white">
-              Sign {isSignUp ? "up" : "in"} with Google
-            </span>
-          </Button> */}
 
-          <ButtonTransparent onClick={handleGoogleSignIn} className="mx-auto"  text="continue with google" icon={googlelogo} alt="google logo image" />
-
-
+          <ButtonTransparent
+            onClick={handleGoogleSignIn}
+            className="mx-auto"
+            text="continue with google"
+            icon={googlelogo}
+            alt="google logo image"
+          />
           <span className="text-[.8rem] mt-4 font-medium flex items-center justify-center text-gray-400">
             or continue with email
           </span>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-6">
-              <Label labelfor="email">
-                Email Address
-              </Label>
+              <Label labelfor="email">Email Address</Label>
               <input
                 className={`input block w-full `}
                 id="email"
@@ -134,9 +116,7 @@ const AuthPage = ({ isSignUp = true }) => {
               )}
             </div>
             <div className="mt-4">
-              <Label labelfor="password">
-                Password
-              </Label>
+              <Label labelfor="password">Password</Label>
               <input
                 className=" input block  w-full "
                 id="password"
@@ -157,9 +137,7 @@ const AuthPage = ({ isSignUp = true }) => {
             </div>
             {isSignUp && (
               <div className="mt-4">
-                <Label labelfor="repeatpassword">
-                  RepeatPassword
-                </Label>
+                <Label labelfor="repeatpassword">RepeatPassword</Label>
                 <input
                   className=" input block  w-full "
                   id="repeatpassword"
@@ -177,8 +155,11 @@ const AuthPage = ({ isSignUp = true }) => {
               </div>
             )}
 
-            <PurpleButton text={isSignUp ? 'sign up' :'sign in'} className='w-full' isLoading={isLoading} />       
-                   
+            <PurpleButton
+              text={isSignUp ? "sign up" : "sign in"}
+              className="w-full"
+              isLoading={isLoading}
+            />
           </form>
           <div className="text-[.8rem] font-medium flex justify-center gap-1 items-center mt-4">
             <span className="text-white">

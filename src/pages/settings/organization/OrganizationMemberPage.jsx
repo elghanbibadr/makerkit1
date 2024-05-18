@@ -1,15 +1,14 @@
 import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 import inviteIcon from '../../../assets/inviteIcon.svg'
-import dottedLine from '../../../assets/dottedLine.svg'
 import { useGetMembres } from "../../../hook/useGetMembre";
 import closeIcon from '../../../assets/xIcon.svg'
 import { useState } from "react";
-import { deleteOrgMembre } from "../../../services/apiMembre";
 import { useDeleteMembre } from "../../../hook/useDeleteMembre";
-import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../../hook/useUser";
+
+
 const OrganizationMemberPage = () => {
   const  {isLoading:isGettingUser,user,isAuthenticated}=useUser()
   const { orgMembres, error, isLoading } = useGetMembres(user?.data.user.id || null)

@@ -170,8 +170,7 @@ const TasksTable = ({ searchTaskQuery }) => {
                     <p className="my-4">Do you want to continue?</p>
                   </div>
                   <Button onClick={() => deleteTask(taskToDeleteId)}  className="bg-red-800 text-white  mt-6 text-sm py-2 px-5 rounded-md">
-                    {/* {!isDeleting && <span>Delete Invite</span>}
-                    {isDeleting && <span>Deleting Invite</span>} */}
+                 
                     <span>Yep,delete task</span>
                   </Button>
                 </div>
@@ -179,14 +178,7 @@ const TasksTable = ({ searchTaskQuery }) => {
                   close
                 </label>
               </div>
-      {/* {deleteTaskModalOpen && (
-        <Overlay>
-          <DeleteTaskModal
-            setDeleteTaskModelOpen={setDeleteTaskModelOpen}
-            taskToDeleteId={taskToDeleteId}
-          />
-        </Overlay>
-      )} */}
+  
     </>
   );
 };
