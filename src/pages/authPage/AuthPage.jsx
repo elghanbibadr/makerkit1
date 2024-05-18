@@ -3,7 +3,6 @@ import logo from "../../assets/logo.svg";
 import Button from "../../ui/Button";
 import googlelogo from "../../assets/googlelogo.webp";
 import supabase from "../../../public/supabase/Supabase";
-import { AppContext } from "../../store/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { SignUp } from "../../services/apiAuth";
@@ -13,6 +12,7 @@ import Label from "../../ui/Label";
 import Logo from "../../ui/Logo";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { ColorRing } from "react-loader-spinner";
+import { PurpleButton } from "../../ui/PurpleButton";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
@@ -94,7 +94,6 @@ const AuthPage = ({ isSignUp = true }) => {
     <div className="flex  flex-col justify-center items-center ">
       <div className="w-[400px]">
         <Link to="/">
-          {/* <img className="mx-auto" src={logo} alt="makerkit logo" /> */}
           <Logo className="mx-auto" />
         </Link>
         <div className="border border-accent1 shadow-pinkBoxShadow2 p-6 rounded-xl mt-10">
@@ -176,43 +175,8 @@ const AuthPage = ({ isSignUp = true }) => {
               </div>
             )}
 
-            {isSignUp && (
-              <Button className="button-pink text-white w-full mt-6 rounded-md">
-                Sign up
-                {isLoading && 
-                  <ColorRing
-                    visible={true}
-                    height="30"
-                    width="30"
-                    ariaLabel="color-ring-loading"
-                    wrapperStyle={{}}
-                    wrapperClass="color-ring-wrapper"
-                    colors={['#C8A2FF', 'white', "#C8A2FF", "white", "#C8A2FF", "white"]}
-                  // colors={['white', 'white',"white","white","white","white"]}
-                  />
-              }
-              </Button>
-            )}
-
-            {!isSignUp && (
-              <Button className="button-pink text-white w-full mt-6 rounded-md">
-                Sign in
-                {isLoading && 
-               
-                  <ColorRing
-                    visible={true}
-                    height="30"
-                    width="30"
-                    ariaLabel="color-ring-loading"
-                    wrapperStyle={{}}
-                    wrapperClass="color-ring-wrapper"
-                    colors={['#C8A2FF', 'white', "#C8A2FF", "white", "#C8A2FF", "white"]}
-                  // colors={['white', 'white',"white","white","white","white"]}
-                  />
-                }
-
-              </Button>
-            )}
+            <PurpleButton text={isSignUp ? 'sign up' :'sign in'} className='w-full' isLoading={isLoading} />       
+                   
           </form>
           <div className="text-[.8rem] font-medium flex justify-center gap-1 items-center mt-4">
             <span className="text-white">
