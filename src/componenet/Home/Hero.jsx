@@ -10,17 +10,17 @@ const Hero = () => {
         {" "}
         Get started for free. No credit card required. Cancel anytime.
       </CtaCard>
-      <h1 className="text-center text-4xl mt-10 text-gray-600 text-white dark:text-white md:text-5xl flex flex-col font-heading font-medium xl:text-7xl 2xl:text-[5.2rem]">
+      <h1 className="text-center mt-10  text-white dark:text-white flex flex-col font-heading font-medium ">
         The SaaS Solution for
         <span className="gr bg-clip-text text-transparent from-primary-400 to-primary-700 leading-[1.2]">
           developers and founders
         </span>
       </h1>
-      <p className="gradientParagraph my-6 lg:w-[80%]">
+      <h3 className="gradient-text my-6 lg:w-[80%]">
         Here you can write a short description of your SaaS This subheading is
         usually laid out on multiple lines Impress your customers, straight to
         the point.
-      </p>
+      </h3>
       <Button
         className="bg-darkPink rounded-full   text-white   py-5 px-6 "
         withArrow={true}

@@ -27,13 +27,22 @@ body{
   @apply  space-y-1 bg-gradient-to-br text-xl lg:text-2xl dark:from-white dark:via-gray-300 dark:to-gray-400 bg-clip-text text-gray-700 font-normal dark:text-transparent;
 }
 
+h1{
+  @apply text-4xl    md:text-5xl   font-medium xl:text-7xl 2xl:text-[5.2rem]
+}
+
 h2{
   @apply  scroll-m-20 text-4xl font-semibold tracking-tight dark:text-white
 }
 
 h3{
-  @apply scroll-m-20 text-2xl font-medium tracking-tight
+  @apply scroll-m-20 text-xl md:text-2xl font-normal tracking-tight
 }
+
+h4{
+  @apply text-base md:text-lg font-semibold
+}
+
 
 h6{
   @apply text-lg font-medium 
@@ -54,7 +63,16 @@ img{
 
 /* BUTTONS */
 
+.gradient-text {
+  background-color: #6b7280e0;
 
+  background-image: linear-gradient(45deg, rgb(255, 255, 255), #9ca3af);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+}
 
 button{
   @apply text-sm px-4 py-1 text-white duration-200 capitalize font-medium tracking-wide outline-none h-10
