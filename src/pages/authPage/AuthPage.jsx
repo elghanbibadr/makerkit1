@@ -1,18 +1,16 @@
-import { useContext, useState } from "react";
-import logo from "../../assets/logo.svg";
+import {  useState } from "react";
 import Button from "../../ui/Button";
 import googlelogo from "../../assets/googlelogo.webp";
 import supabase from "../../../public/supabase/Supabase";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { SignUp } from "../../services/apiAuth";
+
 import toast from "react-hot-toast";
-// import input from "../../ui/input";
 import Label from "../../ui/Label";
-import Logo from "../../ui/Logo";
-import LoadingSpinner from "../../ui/LoadingSpinner";
-import { ColorRing } from "react-loader-spinner";
+
 import { PurpleButton } from "../../ui/PurpleButton";
+import { ButtonTransparent } from "../../ui/Button-transparent";
+import Logo from "../../ui/Logo";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
@@ -97,18 +95,22 @@ const AuthPage = ({ isSignUp = true }) => {
           <Logo className="mx-auto" />
         </Link>
         <div className="border border-accent1 shadow-pinkBoxShadow2 p-6 rounded-xl mt-10">
-          <h5 className="scroll-m-20 font-heading text-lg font-medium text-white text-center">
-            {isSignUp ? "Create account" : "Sign in to your account"}
+          <h5 className="scroll-m-20 font-heading mb-5 text-lg font-medium text-white text-center">
+            {isSignUp ? "Create your account" : "Sign in to your account"}
           </h5>
-          <Button
-            onClick={handleGoogleSignIn}
+          {/* <Button
+            c
             className="button-transparent mt-6 w-full flex justify-between rounded-md p-4"
           >
             <img className="h-6" src={googlelogo} alt="google logo image" />
             <span className="text-center w-full  text-white">
               Sign {isSignUp ? "up" : "in"} with Google
             </span>
-          </Button>
+          </Button> */}
+
+          <ButtonTransparent onClick={handleGoogleSignIn} className="mx-auto"  text="continue with google" icon={googlelogo} alt="google logo image" />
+
+
           <span className="text-[.8rem] mt-4 font-medium flex items-center justify-center text-gray-400">
             or continue with email
           </span>

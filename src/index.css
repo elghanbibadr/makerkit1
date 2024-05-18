@@ -46,12 +46,6 @@ h6{
 .small-title,.text-small-gray,.input,footer li{
   @apply text-sm  font-normal text-gray-400 
 }
-/* 
-.text-small-gray{
-  @apply 
-}
- */
-
 
 
 img{
@@ -60,17 +54,11 @@ img{
 
 /* BUTTONS */
 
-/* .button-transparent{
-  @apply border border-accent1  hover:bg-accent1 hover:text-white text-sm h-10 px-4
-}
 
-.button-pink{
-  @apply  bg-darkPink 
-} */
 
 button{
-  @apply text-sm px-4 py-1 text-white duration-200 font-medium tracking-wide outline-none
-}
+  @apply text-sm px-4 py-1 text-white duration-200 capitalize font-medium tracking-wide outline-none h-10
+} 
 
 /* INPUTS */
 
