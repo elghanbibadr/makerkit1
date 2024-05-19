@@ -16,7 +16,7 @@ const Hero = () => {
           developers and founders
         </span>
       </h1>
-      <h3 className="gradient-text my-6 lg:w-[80%]">
+      <h3 className="gradient-text my-6 mx-auto md:w-[60%]">
         Here you can write a short description of your SaaS This subheading is
         usually laid out on multiple lines Impress your customers, straight to
         the point.
