@@ -26,11 +26,13 @@ const WhatWeProvide = () => {
       {data.map((item, index) => (
         <React.Fragment key={index}>
           <WhatWeProvideDesc
+          id={index}
             title={item.title}
             subtitle={item.subtitle}
             description={item.description}
           />
-          <div className="mt-10">
+          {console.log("index",index)}
+          <div  className={`mt-10 ${index === 1 ? "col-start-1 col-end-2 row-start-2 ":""}`}>
             <img src={item.imgSrc} alt={item.imgAlt} />
           </div>
         </React.Fragment>
