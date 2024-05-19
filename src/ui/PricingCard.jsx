@@ -2,6 +2,9 @@ import Button from "./Button";
 import checkmark from "../assets/checkmark.svg";
 import proplanicon from "../assets/proplanicon.svg";
 import { Link } from "react-router-dom";
+import {PurpleButton} from "../ui/PurpleButton"
+import { ButtonTransparent } from "./Button-transparent";
+
 const PricingCard = ({
   title,
   description,
@@ -37,18 +40,18 @@ const PricingCard = ({
       <span className="text-small-gray inline-block my-3">
         Description of your {title} plan
       </span>
-      {title !== "Premium" && (
+      { (
         <div className="my-3">
           <span className="text-2xl text-white font-bold lg:text-3xl xl:text-4xl">
             {console.log(yearlyBilling, monthlybilling)}
             {selectedPlan !== "Monthly" ? yearlyBilling : monthlybilling}
           </span>
-          <span className="text-lg lowercase text-gray-500 dark:text-gray-400">
+          { title!=="Premium" && <span className="text-lg lowercase text-gray-500 dark:text-gray-400">
             <span>/{selectedPlan === "Monthly" ? "Monthly" : "Yearly"}</span>
-          </span>
+          </span>}
         </div>
-      )}
-      <ul className={`text-gray-300  font-medium text-[.93rem]  ${title==='Premium' ? 'md:pb-9 lg:pb-16':'pb-0'} `}> 
+      ) }
+      <ul className={`text-gray-300  font-medium text-[.93rem]   `}> 
       
         {features.map((feature, index) => (
           <li key={index} className="flex my-1 items-center gap-2">
@@ -57,14 +60,12 @@ const PricingCard = ({
           </li>
         ))}
       </ul>
-      <Link to="/auth/signup">
-        <Button
-          className={` text-white w-full mt-6 rounded-md ${
-            title === "Pro" ? "button-pink" : "button-transparent"
-          }`}
-        >
-          {cta}
-        </Button>
+      <Link  to="/dashboard">
+       
+         {  title === "Pro" ? <PurpleButton text={cta} className="w-full mt-6" /> :
+         <ButtonTransparent  text={cta} className="w-full mt-6" />
+         }
+          
       </Link>
     </div>
   );

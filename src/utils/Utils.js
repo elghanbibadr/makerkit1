@@ -27,8 +27,8 @@ export const pricingData = [
   },
   {
     name: "Premium",
-
-    price: "Contact us",
+    monthlybilling: "Contact us",
+    yearlyBilling: "Contact us",
     features: [
       "Advanced Reporting",
       "Unlimited users",

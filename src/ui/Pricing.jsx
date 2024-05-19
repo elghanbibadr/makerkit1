@@ -10,9 +10,9 @@ const Pricing = () => {
       <h2 className="mt-10 text-white">
         Ready to take your SaaS business to the next level?
       </h2>
-      <span className="gradientParagraph inline-block my-3">
+      <h3 className="gradient-text  my-3">
         Get started on our free plan and upgrade when you are ready.
-      </span>
+      </h3>
       <PricingPlansList />
     </div>
   );
