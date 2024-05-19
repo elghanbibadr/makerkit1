@@ -43,6 +43,9 @@ h4{
   @apply text-base md:text-lg font-semibold
 }
 
+h5{
+  @apply md:text-lg text-base font-medium
+}
 
 h6{
   @apply text-lg font-medium 
