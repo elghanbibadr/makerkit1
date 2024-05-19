@@ -16,7 +16,7 @@ import { linksListsData } from "../../../../public/data/data";
 
 
 export const LinksList = () => {
- return  <div className="md:grid md:grid-cols-4  md:gap-x-3 md:col-span-3">
+ return  <div className="md:grid md:grid-cols-3 md:col-span-4 lg:col-span-3  md:gap-x-3 ">
     {linksListsData.map(({ title, items }) => {
       return <List title={title} items={items} />;
     })}

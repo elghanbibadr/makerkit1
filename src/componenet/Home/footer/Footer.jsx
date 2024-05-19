@@ -4,9 +4,9 @@ import { SubscribeForm } from "./SubscribeForm";
 
 const Footer = () => {
   return (
-    <footer className="mt-32 mb-10 text-white container mx-auto grid grid-cols-1 md:grid-cols-7 gap-8">
+    <footer className="mt-40 mb-10 text-white container mx-auto grid grid-cols-1 md:grid-cols-7 gap-8">
       <LogoAndCopyright />
-      <LinksList />
+      <LinksList  />
       <SubscribeForm />
     </footer>
   );
