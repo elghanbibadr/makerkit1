@@ -7,33 +7,28 @@ import Label from "../../../ui/Label";
 import { useUser } from "../../../hook/useUser";
 import toast from "react-hot-toast";
 import { useUpdateEmail } from "../../../hook/useUpdateEmail";
-
+import { PurpleButton } from "../../../ui/PurpleButton";
 
 const ProfilEmailPage = () => {
-
-  const { user } = useUser()
-  const userEmail=user?.data.user.email
-  const { updateUserEmail, isUpdating } = useUpdateEmail()
-  const [email, setEmail] = useState("")
-  const [repeatedEmail, setRepeatedEmail] = useState("")
-
-
-
+  const { user } = useUser();
+  const userEmail = user?.data.user.email;
+  const { updateUserEmail, isUpdating } = useUpdateEmail();
+  const [email, setEmail] = useState("");
+  const [repeatedEmail, setRepeatedEmail] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (email !== repeatedEmail) {
-      return toast.error('oops emails are not matched ')
+      return toast.error("oops emails are not matched ");
     }
 
-    // if(email === userEmail){
-    //   return toast.error("email did not changed !")
-    // }
+    if (email === userEmail) {
+      return toast.error("email did not changed !");
+    }
 
-    updateUserEmail(email)
-
-  }
+    updateUserEmail(email);
+  };
 
   return (
     <div className="text-white">
@@ -42,10 +37,7 @@ const ProfilEmailPage = () => {
         Update your email address
       </p>
       <form onSubmit={handleSubmit}>
-
-        <Label labelfor="newemail">
-          Your New Email
-        </Label>
+        <Label labelfor="newemail">Your New Email</Label>
         <Input
           className="input block w-full "
           id="newemail"
@@ -66,16 +58,16 @@ const ProfilEmailPage = () => {
           name="repeatedemail"
           type="email"
           value={repeatedEmail}
-          
           disabled={isUpdating}
           onChange={(e) => setRepeatedEmail(e.target.value)}
           required
         />
 
-        <Button className="bg-darkPink mt-5  p-2 rounded-md text-sm" disabled={isUpdating}>
-          { !isUpdating && <span>Update Email Address</span>}
-          { isUpdating && <span>Updating Email Address ...</span>}
-        </Button>
+        <PurpleButton
+          text="update email adress"
+          isLoading={isUpdating}
+          disabled={isUpdating}
+        />
       </form>
     </div>
   );

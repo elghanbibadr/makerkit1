@@ -17,5 +17,9 @@ export  async function UpdateUserEmail(newEmail) {
         emailRedirectTo:"http://localhost:5173/emailChanged"
     })
 
-    return { data, error }
+
+
+    // WE NEED TO THROW ERRORS PROGRAMATICLY SO REACT QUERY COULD RECOQNIZE THEM
+    if(error) throw new Error(` ${error.message}`)
+    return { data }
 } 
