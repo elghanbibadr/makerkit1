@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import googlelogo from "../../assets/googlelogo.webp";
 import supabase from "../../../public/supabase/Supabase";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import Label from "../../ui/Label";
 import { PurpleButton } from "../../ui/PurpleButton";
 import { ButtonTransparent } from "../../ui/Button-transparent";
 import Logo from "../../ui/Logo";
+import { useUser } from "../../hook/useUser";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const AuthPage = ({ isSignUp = true }) => {
     reset,
     formState: { errors },
   } = useForm();
-
+  const { user,isLoading:isGettingCurrentUser } = useUser();
   const onSubmit = async (data) => {
     setIsLoading(true);
 
@@ -77,6 +79,20 @@ const AuthPage = ({ isSignUp = true }) => {
     }
     if (!error) navigate("/dashboard");
   };
+
+  // REDIREC USER  TO DASHBOARD IF HE IS ALREADY AUTHENTICATED
+
+  useEffect(() => {
+    if(isGettingCurrentUser)return;
+   
+    if(user?.data?.user?.role==="authenticated"){
+      navigate('/dashboard')
+    }
+  },[isGettingCurrentUser]);
+
+
+  if(isGettingCurrentUser)return <LoadingSpinner className="h-screen" />
+
   return (
     <div className="flex  flex-col justify-center items-center ">
       <div className="w-[400px]">
