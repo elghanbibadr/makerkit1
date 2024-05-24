@@ -11,6 +11,7 @@ export default {
         secondary: "#030712",
         lighterPink: "#a78bfa",
         accent1: "#1f2937",
+        
       },
       boxShadow: {
         grayBoxShadow: "0 1px 3px 0 #334155",

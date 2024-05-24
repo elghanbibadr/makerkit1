@@ -10,6 +10,7 @@ import { ButtonTransparent } from "../../ui/Button-transparent";
 import Logo from "../../ui/Logo";
 import { useUser } from "../../hook/useUser";
 import LoadingSpinner from "../../ui/LoadingSpinner";
+import { useQueryClient } from "react-query";
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ const AuthPage = ({ isSignUp = true }) => {
     if (error) return toast.error(error.message);
     navigate("/dashboard");
   }
+  const queryClient = useQueryClient()
 
   // SIGN UP FUNCTION
   async function SignUp(email, password) {
@@ -63,8 +65,13 @@ const AuthPage = ({ isSignUp = true }) => {
     console.log("error", error);
 
     if (!error) {
+      queryClient.invalidateQueries("tasks");
       console.log("data sign up", data);
-      // create a new row inside the organization tables for this user
+      // create a new row inside the profils tables for this user
+      await supabase.from('profiles').insert([
+        {name:"",email:email,profilImageUrl:"",userId: "hello", /* other columns and their values */ }
+      ]);
+  
     }
     if (error) return toast.error(error.message);
     navigate("/onboarding");

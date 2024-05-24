@@ -15,6 +15,16 @@ const ProfilDetails = () => {
 
   const fileInputRef = useRef()
 
+
+  // issue : update user profil when user submit the form 
+
+  // sudo code
+  // each new user would have a profil row on the db
+  // read the profil row when user visite the profil details and show the details
+  // check if the either the name or the avatar changed then send an update request
+
+
+  
   const [name, setName] = useState(session?.user?.user_metadata?.fullName)
   const [selectedFile, setSelectedFile] = useState(null);
   const [avatarURL, setAvatarUrl] = useState("")
