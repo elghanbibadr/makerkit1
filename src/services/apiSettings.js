@@ -1,15 +1,15 @@
 
 import supabase from "../../public/supabase/Supabase";
 import { supabaseUrl } from "../../public/supabase/Supabase";
-export async function updateUserProfil({ name, avatarURL }) {
+export async function updateUserProfil(userId,updatedProfil) {
 
-    console.log('avatar url',avatarURL)
-    await supabase.auth.updateUser({
-        data: {
-            fullName: name,
-            avatar: avatarURL
-        },
-    })
+
+    console.log("updated profil",updatedProfil)
+    const { data, error } = await supabase
+    .from('profiles')
+    .update(updatedProfil)
+    .eq('userId', userId)
+    .select()
 
 }
 

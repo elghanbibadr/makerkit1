@@ -5,15 +5,15 @@ import toast from "react-hot-toast";
 export function useUpdateUser(){
     const queryClient=useQueryClient();
 
-    const {mutate : updateUser, isLoading: isUpdating}=useMutation({
-        mutationFn:updateUserProfil,
+    const {mutate : updateProfil, isLoading: isUpdating}=useMutation({
+        mutationFn:({userId, updatedProfil }) =>  updateUserProfil(userId,updatedProfil),
         onSuccess:() =>{
             toast.success("profil updated successfuly")
-            queryClient.invalidateQueries({queryKey:["user"]})
+            queryClient.invalidateQueries("profiles")
         },
         onError:(err) => toast.error(err.message),
     
     })
 
-    return {updateUser , isUpdating}
+    return {updateProfil , isUpdating}
 }

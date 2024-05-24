@@ -23,3 +23,20 @@ export  async function UpdateUserEmail(newEmail) {
     if(error) throw new Error(` ${error.message}`)
     return { data }
 } 
+
+
+
+export const getUserProfilDetails=async(userId)=>{
+    
+    let { data: profilDetails, error } = await supabase
+    .from('profiles')
+    .select("*")
+    // Filters
+    .eq('userId',userId)
+  
+    if(error){
+        console.log('org error',error)
+    }
+
+   return {profilDetails}
+  }
