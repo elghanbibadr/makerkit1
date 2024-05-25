@@ -36,7 +36,17 @@ const ProfilDetails = () => {
   const { updateProfil, isUpdating } = useUpdateUser();
   const profilImagePath = `${supabaseUrl}/storage/v1/object/public/avatars/`;
 
-  console.log("avatar url", avatarURL);
+
+
+  useEffect(() => {
+    if (isGettingProfilDetails) return;
+    setName(userName);
+    setAvatarUrl(profilImageUrl);
+  }, [isGettingProfilDetails]);
+
+
+
+  console.log("selected file",selectedFile)
 
   const handleUpdatingUserProfil = async (e) => {
     e.preventDefault();
@@ -46,14 +56,14 @@ const ProfilDetails = () => {
       return toast.error("nothing changed");
 
     // UPLOAD IMAGE TO THE BUCKET IF USER SELECTED A NEW PROFIL IMAGE
-    console.log("avatar url  emtpy",!avatarURL)
+
     if (selectedFile) {
-      console.log("avatar url emtpy",avatarURL)
-      // uploadingAvatar({ fileName: selectedFile.name, file: selectedFile });
+      console.log("uploading",selectedFile)
+      uploadingAvatar({ fileName: selectedFile.name, file: selectedFile });
       // STOP THE UPDATE IF THERE IS AN ERROR UPLOAD THE IMAGE
       if (uploadingProfilImageError && !isUploading) return;
 
-      setAvatarUrl(`${profilImagePath}${selectedFile.name}`);
+      // setAvatarUrl(`${profilImagePath}${selectedFile.name}`);
       updateProfil({
         userId,
         updatedProfil: {
@@ -67,14 +77,8 @@ const ProfilDetails = () => {
     updateProfil({ userId, updatedProfil: { name: name, profilImageUrl:avatarURL } });
   };
 
-  useEffect(() => {
-    if (isGettingProfilDetails) return;
-    setName(userName);
-    setAvatarUrl(profilImageUrl);
-  }, [isGettingProfilDetails]);
 
 
-  
   return (
     <form onSubmit={handleUpdatingUserProfil} className="text-white ">
       <h3>My Details</h3>

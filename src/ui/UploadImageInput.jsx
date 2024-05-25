@@ -30,6 +30,8 @@ const UploadImageInput = ({ avatarURL, setAvatarUrl, isDisabled ,setSelectedFile
   };
 
 
+  console.log("avatar url",avatarURL)
+
   return (
     <>
       <input
