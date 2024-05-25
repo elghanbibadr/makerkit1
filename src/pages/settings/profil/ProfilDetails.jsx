@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import supabase from "../../../../public/supabase/Supabase";
 import { supabaseUrl } from "../../../../public/supabase/Supabase";
 import { useUpdateUser } from "../../../services/useUpdateUser";
 import { Link } from "react-router-dom";
@@ -12,70 +11,78 @@ import { useUser } from "../../../hook/useUser";
 import UploadImageInput from "../../../ui/UploadImageInput";
 import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 const ProfilDetails = () => {
-
-  const {user }=useUser()
+  const { user } = useUser();
 
   // GETTING THE USER PROFIL DETAILS
- const  { profilDetails, error, isLoading:isGettingProfilDetails }=useGetUserProfilDetails(user?.data?.user?.id)
-  const {name:userName,email,profilImageUrl}=profilDetails?.profilDetails[0] || []
-  const [name, setName] = useState("")
+  const {
+    profilDetails,
+    error,
+    isLoading: isGettingProfilDetails,
+  } = useGetUserProfilDetails(user?.data?.user?.id);
+  const {
+    name: userName,
+    email,
+    profilImageUrl,
+  } = profilDetails?.profilDetails[0] || [];
+  const [name, setName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const {uploadingAvatar , isUploading,error:uploadingProfilImageError}=useUploadAvatar()
-  const [avatarURL,setAvatarUrl]=useState('')
-   const  userId=user?.data?.user?.id
-  const { updateProfil, isUpdating } = useUpdateUser()
-  const profilImagePath=`${supabaseUrl}/storage/v1/object/public/avatars/`
+  const {
+    uploadingAvatar,
+    isUploading,
+    error: uploadingProfilImageError,
+  } = useUploadAvatar();
+  const [avatarURL, setAvatarUrl] = useState("");
+  const userId = user?.data?.user?.id;
+  const { updateProfil, isUpdating } = useUpdateUser();
+  const profilImagePath = `${supabaseUrl}/storage/v1/object/public/avatars/`;
 
-  console.log("avatar url",avatarURL)
+  console.log("avatar url", avatarURL);
 
   const handleUpdatingUserProfil = async (e) => {
+    e.preventDefault();
 
-    e.preventDefault()
-
- 
     // PREVENT UPDATING PROFIL IF THE USER INFORMATION DOES NOT CHANGED
-    if(name===userName && profilImageUrl===avatarURL)return toast.error('nothing changed')
-   
-      // UPLOAD IMAGE TO THE BUCKET IF USER SELECTED A NEW PROFIL IMAGE
-      if (selectedFile) {
-      uploadingAvatar({fileName:selectedFile.name,file:selectedFile})
+    if (name === userName && profilImageUrl === avatarURL)
+      return toast.error("nothing changed");
+
+    // UPLOAD IMAGE TO THE BUCKET IF USER SELECTED A NEW PROFIL IMAGE
+    console.log("avatar url  emtpy",!avatarURL)
+    if (selectedFile) {
+      console.log("avatar url emtpy",avatarURL)
+      // uploadingAvatar({ fileName: selectedFile.name, file: selectedFile });
       // STOP THE UPDATE IF THERE IS AN ERROR UPLOAD THE IMAGE
-      if(uploadingProfilImageError && !isUploading)return
-      
-      setAvatarUrl(`${profilImagePath}${selectedFile.name}`)
-      updateProfil({userId,updatedProfil:{name:name,profilImageUrl:`${profilImagePath}${selectedFile.name}`}})
-    return 
+      if (uploadingProfilImageError && !isUploading) return;
+
+      setAvatarUrl(`${profilImagePath}${selectedFile.name}`);
+      updateProfil({
+        userId,
+        updatedProfil: {
+          name: name,
+          profilImageUrl: `${profilImagePath}${selectedFile.name}`,
+        },
+      });
+      return;
     }
-    // UPDATE ONLY THE USER PROFIL NAME
-    updateProfil({userId,updatedProfil:{name:name}})
-
-
-
-  }
+    // UPDATE ONLY THE USER PROFIL NAME OR REMOVE AVATAR SO SETTING IT TO THE CURRENT AVATAR URL
+    updateProfil({ userId, updatedProfil: { name: name, profilImageUrl:avatarURL } });
+  };
 
   useEffect(() => {
-  if(isGettingProfilDetails)return
-    setName(userName)
-    setAvatarUrl(profilImageUrl)
-
-  }, [isGettingProfilDetails])
-
+    if (isGettingProfilDetails) return;
+    setName(userName);
+    setAvatarUrl(profilImageUrl);
+  }, [isGettingProfilDetails]);
 
 
+  
   return (
     <form onSubmit={handleUpdatingUserProfil} className="text-white ">
-
       <h3>My Details</h3>
       <p className="text-gray-400 text-lg font-normal">
         Manage your profile details
       </p>
       <div className="mt-4">
-        {/* <label className="small-title " htmlFor="name">
-          Name
-        </label> */}
-        <Label labelfor="name"  >
-          Name
-        </Label>
+        <Label labelfor="name">Name</Label>
         <Input
           className=" block w-full "
           id="name"
@@ -87,21 +94,18 @@ const ProfilDetails = () => {
         />
       </div>
       <div className="mt-2">
-        <Label labelfor="photo">Your Photo</Label>   
-        <UploadImageInput 
-         avatarURL={avatarURL}
-         setAvatarUrl={setAvatarUrl}
-         isDisabled={isUpdating}
-         selectedFile={selectedFile} 
-        setSelectedFile={setSelectedFile}
+        <Label labelfor="photo">Your Photo</Label>
+        <UploadImageInput
+          avatarURL={avatarURL}
+          setAvatarUrl={setAvatarUrl}
+          isDisabled={isUpdating}
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
         />
       </div>
 
       <div className="mt-6">
-      
-        <Label labelfor="email" >
-        Email Address
-        </Label>
+        <Label labelfor="email">Email Address</Label>
         <Input
           className="input block w-full "
           id="email"
@@ -111,15 +115,18 @@ const ProfilDetails = () => {
           disabled
         />
         <Link to="/dashboard/settings/profil/email">
-          <span className="text-xs mt-6 font-medium w-fit hover:bg-[#17182A] px-4 py-2 rounded-md  block  mb-4">Update Email Address</span>
+          <span className="text-xs mt-6 font-medium w-fit hover:bg-[#17182A] px-4 py-2 rounded-md  block  mb-4">
+            Update Email Address
+          </span>
         </Link>
-
       </div>
-     
-      <PurpleButton text='update profil' isLoading={isUpdating} disabled={isUpdating} />
 
+      <PurpleButton
+        text="update profil"
+        isLoading={isUpdating}
+        disabled={isUpdating}
+      />
     </form>
   );
-
 };
 export default ProfilDetails;
