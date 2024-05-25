@@ -5,13 +5,13 @@ import toast from "react-hot-toast";
 export function useUploadAvatar(){
     const queryClient=useQueryClient();
 
-    const {mutate : uploadingAvatar, isLoading: isUploading}=useMutation({
-        mutationFn:uploadAvatar,
+    const {mutate : uploadingAvatar, isLoading: isUploading,error}=useMutation({
+        mutationFn: ({fileName,file}) => uploadAvatar(fileName,file),
       
         onError:(err) => toast.error(err.message),
         
     
     })
 
-    return {uploadingAvatar , isUploading}
+    return {uploadingAvatar , isUploading,error}
 }

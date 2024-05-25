@@ -10,7 +10,7 @@ import { PurpleButton } from "../../../ui/PurpleButton";
 import { useGetUserProfilDetails } from "../../../hook/useGetProfilDetails";
 import { useUser } from "../../../hook/useUser";
 import UploadImageInput from "../../../ui/UploadImageInput";
-
+import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 const ProfilDetails = () => {
 
   const {user }=useUser()
@@ -20,40 +20,36 @@ const ProfilDetails = () => {
   const {name:userName,email,profilImageUrl}=profilDetails?.profilDetails[0] || []
   const [name, setName] = useState("")
   const [selectedFile, setSelectedFile] = useState(null);
-  
+  const {uploadingAvatar , isUploading,error:uploadingProfilImageError}=useUploadAvatar()
   const [avatarURL,setAvatarUrl]=useState('')
+   const  userId=user?.data?.user?.id
   const { updateProfil, isUpdating } = useUpdateUser()
-  
+  const profilImagePath=`${supabaseUrl}/storage/v1/object/public/avatars/`
 
-
-  console.log('selected file',selectedFile)
-  console.log('avatar url',avatarURL)
-
+  console.log("avatar url",avatarURL)
 
   const handleUpdatingUserProfil = async (e) => {
 
     e.preventDefault()
-  
-    console.log('clicked')
+
+ 
     // PREVENT UPDATING PROFIL IF THE USER INFORMATION DOES NOT CHANGED
-    // if(name===userName && profilImageUrl===avatarURL)return toast.error('nothing changed')
-    if (selectedFile) {
-      const { data, error } = await supabase.storage
-        .from('avatars')
-        .upload(selectedFile.name, selectedFile);
+    if(name===userName && profilImageUrl===avatarURL)return toast.error('nothing changed')
+   
+      // UPLOAD IMAGE TO THE BUCKET IF USER SELECTED A NEW PROFIL IMAGE
+      if (selectedFile) {
+      uploadingAvatar({fileName:selectedFile.name,file:selectedFile})
+      // STOP THE UPDATE IF THERE IS AN ERROR UPLOAD THE IMAGE
+      if(uploadingProfilImageError && !isUploading)return
       
-
-        if(error){
-          console.log(error.message)
-          toast.error( 'cannot upload profil image ' + error.message)
-          return 
-        }
-
-      // const imageUrl1 = `${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`;
-      setAvatarUrl(`${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`)
-      updateProfil({userId:user?.data?.user?.id,updatedProfil:{name:name,profilImageUrl:`${supabaseUrl}/storage/v1/object/public/avatars/${data.path}`}})
-      
+      setAvatarUrl(`${profilImagePath}${selectedFile.name}`)
+      updateProfil({userId,updatedProfil:{name:name,profilImageUrl:`${profilImagePath}${selectedFile.name}`}})
+    return 
     }
+    // UPDATE ONLY THE USER PROFIL NAME
+    updateProfil({userId,updatedProfil:{name:name}})
+
+
 
   }
 

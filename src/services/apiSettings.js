@@ -17,10 +17,14 @@ export async function updateUserProfil(userId,updatedProfil) {
 
 
 export async function uploadAvatar(fileName, file) {
-    await supabase.storage
+    console.log("file name from upload",fileName)
+    const {data,error}= await supabase.storage
         .from('avatars')
         .upload(fileName, file);
+if(error) throw new Error(error.message)
+console.log("upload data",data)
 
+return data
 }
 
 
