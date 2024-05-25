@@ -10,6 +10,7 @@ import { useGetUserProfilDetails } from "../../../hook/useGetProfilDetails";
 import { useUser } from "../../../hook/useUser";
 import UploadImageInput from "../../../ui/UploadImageInput";
 import { useUploadAvatar } from "../../../hook/useUploadAvatar";
+
 const ProfilDetails = () => {
   const { user } = useUser();
 
@@ -24,6 +25,8 @@ const ProfilDetails = () => {
     email,
     profilImageUrl,
   } = profilDetails?.profilDetails[0] || [];
+
+
   const [name, setName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const {
@@ -88,10 +91,11 @@ const ProfilDetails = () => {
       <div className="mt-4">
         <Label labelfor="name">Name</Label>
         <Input
-          className=" block w-full "
+          className="input block py-1 w-full "
           id="name"
           name="name"
           value={name}
+          placeholder="Profile name"
           type="text"
           onChange={(e) => setName(e.target.value)}
           disabled={isUpdating}
@@ -111,9 +115,9 @@ const ProfilDetails = () => {
       <div className="mt-6">
         <Label labelfor="email">Email Address</Label>
         <Input
-          className="input block w-full "
+          className="input block w-full"
           id="email"
-          placeholder={email}
+          value={email}
           name="email"
           type="email"
           disabled

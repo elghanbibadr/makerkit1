@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-input:disabled{background-color:transparent  !important; border: transparent;}
 
 body{
   background:  #030712 !important;
@@ -83,7 +82,7 @@ button{
 
 /* INPUTS */
 
-.input{
+.input,.input:disabled{
   @apply  px-4 py-2 mt-2 rounded bg-transparent   focus:outline-none border border-accent1
 }
 

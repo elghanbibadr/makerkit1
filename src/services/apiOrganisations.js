@@ -35,10 +35,10 @@ export const updateOrganization=async({userId,newOrgInfo})=>{
     // .eq('orgId',userId)
   
     if(error){
-        console.log('org error',error)
+        throw new Error(error.message)
     }
 
-   return {organizations}
+   return { organizations }
   }
 
 
