@@ -3,8 +3,24 @@ import supabase from "../../public/supabase/Supabase"
 export default async function getUser() {
     const { data, error } = await supabase.auth.getUser()
 
+
+    if(error){
+      throw new Error(error.message)
+      return 
+    }
     return { data, error }
 }
+
+// export  async function getSession() {
+//     const { data, error } = await supabase.auth.getSession()
+
+
+//     if(error){
+//       throw new Error(error.message)
+//       return 
+//     }
+//     return { data, error }
+// }
 
 
 

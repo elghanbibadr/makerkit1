@@ -11,6 +11,8 @@ import { useUser } from "../../../hook/useUser";
 import UploadImageInput from "../../../ui/UploadImageInput";
 import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 
+
+
 const ProfilDetails = () => {
   const { user } = useUser();
 

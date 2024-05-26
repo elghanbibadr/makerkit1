@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import googlelogo from "../../assets/googlelogo.webp";
 import supabase from "../../../public/supabase/Supabase";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,10 +11,22 @@ import Logo from "../../ui/Logo";
 import { useUser } from "../../hook/useUser";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { useQueryClient } from "react-query";
+import { useSignUp } from "../../services/useSignUp";
+import { useLogin } from "../../hook/useLogin";
+import getUser  from "../../services/apiUser";
+import { AppContext } from "../../store/AppContext";
+
 
 const AuthPage = ({ isSignUp = true }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { session } = useContext(AppContext);
+
+
+  console.log("sessions",session)
+  const { SignUp, isSigninUp }=useSignUp()
+  const { login, isLoading:isLogin }=useLogin()
+
   const {
     register,
     handleSubmit,
@@ -22,60 +34,31 @@ const AuthPage = ({ isSignUp = true }) => {
     formState: { errors },
   } = useForm();
   const { user,isLoading:isGettingCurrentUser } = useUser();
-  const onSubmit = async (data) => {
-    setIsLoading(true);
 
-    try {
+
+
+
+
+  const onSubmit = async (data) => {
+      setIsLoading(true);
+
       if (isSignUp) {
         if (data.repeatedpassword !== data.password) {
           return toast.error("passwords are not matched");
         }
-        await SignUp(data.email, data.password);
+        SignUp({email:data.email,password: data.password});
       } else {
-        await Login(data.email, data.password);
+         login({email:data.email,password: data.password});
       }
-    } catch (e) {
-      console.log(e.message);
-    } finally {
-      setIsLoading(false);
+   
       // Reset the form values
       reset();
+      setIsLoading(false)
     }
-  };
 
-  async function Login(email, password) {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
 
-    console.log("sign in data", data);
-    if (error) return toast.error(error.message);
-    navigate("/dashboard");
-  }
-  const queryClient = useQueryClient()
 
-  // SIGN UP FUNCTION
-  async function SignUp(email, password) {
-    let { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
 
-    console.log("error", error);
-
-    if (!error) {
-      queryClient.invalidateQueries("tasks");
-      console.log("data sign up", data);
-      // create a new row inside the profils tables for this user
-      await supabase.from('profiles').insert([
-        {name:"",email:email,profilImageUrl:"",userId: "hello", /* other columns and their values */ }
-      ]);
-  
-    }
-    if (error) return toast.error(error.message);
-    navigate("/onboarding");
-  }
   const handleGoogleSignIn = async () => {
     const { user, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -89,16 +72,12 @@ const AuthPage = ({ isSignUp = true }) => {
 
   // REDIREC USER  TO DASHBOARD IF HE IS ALREADY AUTHENTICATED
 
-  useEffect(() => {
-    if(isGettingCurrentUser)return;
-   
-    if(user?.data?.user?.role==="authenticated"){
-      navigate('/dashboard')
-    }
-  },[isGettingCurrentUser]);
+  useEffect( () => {
+    if(session)navigate('/dashboard')
+  },[]);
+  // 
 
-
-  if(isGettingCurrentUser)return <LoadingSpinner className="h-screen" />
+  // if(isGettingCurrentUser)return <LoadingSpinner className="h-screen" />
 
   return (
     <div className="flex  flex-col justify-center items-center ">
@@ -181,7 +160,7 @@ const AuthPage = ({ isSignUp = true }) => {
             <PurpleButton
               text={isSignUp ? "sign up" : "sign in"}
               className="w-full"
-              isLoading={isLoading}
+              isLoading={isLogin || isSigninUp}
             />
           </form>
           <div className="text-[.8rem] font-medium flex justify-center gap-1 items-center mt-4">
