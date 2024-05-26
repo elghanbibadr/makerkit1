@@ -62,12 +62,15 @@ const AuthPage = ({ isSignUp = true }) => {
   const handleGoogleSignIn = async () => {
     const { user, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      options: {
+      redirectTo:"http://localhost:5173/dashboard"
+      },
     });
 
     if (error) {
       return toast.error(error.message);
     }
-    if (!error) navigate("/dashboard");
+  
   };
 
   // REDIREC USER  TO DASHBOARD IF HE IS ALREADY AUTHENTICATED

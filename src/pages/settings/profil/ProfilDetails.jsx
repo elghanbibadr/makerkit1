@@ -15,7 +15,7 @@ import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 
 const ProfilDetails = () => {
   const { user } = useUser();
-
+ const userEmail=user?.data?.user?.email
   // GETTING THE USER PROFIL DETAILS
   const {
     profilDetails,
@@ -23,6 +23,7 @@ const ProfilDetails = () => {
     isLoading: isGettingProfilDetails,
   } = useGetUserProfilDetails(user?.data?.user?.id);
   const {
+    id,
     name: userName,
     email,
     profilImageUrl,
@@ -51,7 +52,7 @@ const ProfilDetails = () => {
 
 
 
-  console.log("selected file",selectedFile)
+  console.log("selected file",user)
 
   const handleUpdatingUserProfil = async (e) => {
     e.preventDefault();
@@ -70,16 +71,17 @@ const ProfilDetails = () => {
 
       // setAvatarUrl(`${profilImagePath}${selectedFile.name}`);
       updateProfil({
-        userId,
         updatedProfil: {
+          id:id,
           name: name,
           profilImageUrl: `${profilImagePath}${selectedFile.name}`,
+        userId:userId,
         },
       });
       return;
     }
     // UPDATE ONLY THE USER PROFIL NAME OR REMOVE AVATAR SO SETTING IT TO THE CURRENT AVATAR URL
-    updateProfil({ userId, updatedProfil: { name: name, profilImageUrl:avatarURL } });
+    updateProfil({updatedProfil: {id:id, name: name,email:userEmail, profilImageUrl:avatarURL,userId:userId } });
   };
 
 

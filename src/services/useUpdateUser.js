@@ -6,7 +6,7 @@ export function useUpdateUser(){
     const queryClient=useQueryClient();
 
     const {mutate : updateProfil, isLoading: isUpdating}=useMutation({
-        mutationFn:({userId, updatedProfil }) =>  updateUserProfil(userId,updatedProfil),
+        mutationFn:({updatedProfil }) =>  updateUserProfil(updatedProfil),
         onSuccess:() =>{
             toast.success("profil updated successfuly")
             queryClient.invalidateQueries("profiles")

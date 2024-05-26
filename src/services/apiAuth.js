@@ -23,8 +23,16 @@ export async function SignUp({email, password}) {
    
   });
 
-console.log(data)
 
+
+  if (!error) {
+    const { user } = data;
+    const { error: insertError } = await supabase.from('profiles').insert([
+      { userId: user.id, email: email }
+    ]);
+
+    if(insertError) throw new Error(insertError.message);
+  }
   if (error) throw new Error(error.message);
 
   return data;

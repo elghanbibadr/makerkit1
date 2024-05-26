@@ -1,14 +1,13 @@
 
 import supabase from "../../public/supabase/Supabase";
 import { supabaseUrl } from "../../public/supabase/Supabase";
-export async function updateUserProfil(userId,updatedProfil) {
+export async function updateUserProfil(updatedProfil) {
 
 
     console.log("updated profil",updatedProfil)
     const { data, error } = await supabase
     .from('profiles')
-    .update(updatedProfil)
-    .eq('userId', userId)
+    .upsert(updatedProfil)
     .select()
 
     if(error){
