@@ -14,7 +14,10 @@ import { useUploadAvatar } from "../../../hook/useUploadAvatar";
 
 
 const ProfilDetails = () => {
-  const { user } = useUser();
+  const { user,isLoading } = useUser();
+
+  const [userId2,setUserId]=useState('')
+  // if(isLoading)return ;
  const userEmail=user?.data?.user?.email
   // GETTING THE USER PROFIL DETAILS
   const {
@@ -22,6 +25,8 @@ const ProfilDetails = () => {
     error,
     isLoading: isGettingProfilDetails,
   } = useGetUserProfilDetails(user?.data?.user?.id);
+
+  console.log("user id",user?.data?.user.id)
   const {
     id,
     name: userName,
@@ -44,10 +49,17 @@ const ProfilDetails = () => {
 
 
 
+  useEffect(()=>{
+    if(isLoading && user)return
+    setUserId(user?.data?.user?.id)
+    console.log("loaded",user?.data?.user?.id,user)
+  },[isLoading])
+
   useEffect(() => {
-    if (isGettingProfilDetails) return;
+    if (isGettingProfilDetails || isLoading) return;
     setName(userName);
     setAvatarUrl(profilImageUrl);
+    console.log("useeffeci id",user?.data?.user?.id)   
   }, [isGettingProfilDetails]);
 
 
@@ -75,70 +87,19 @@ const ProfilDetails = () => {
           id:id,
           name: name,
           profilImageUrl: `${profilImagePath}${selectedFile.name}`,
-        userId:userId,
+        userId:"29fcf532-3769-46c3-a103-518bc3a83b92",
         },
       });
       return;
     }
     // UPDATE ONLY THE USER PROFIL NAME OR REMOVE AVATAR SO SETTING IT TO THE CURRENT AVATAR URL
-    updateProfil({updatedProfil: {id:id, name: name,email:userEmail, profilImageUrl:avatarURL,userId:userId } });
+    updateProfil({updatedProfil: {id:id, name: name,email:userEmail, profilImageUrl:avatarURL,userId:"29fcf532-3769-46c3-a103-518bc3a83b92" } });
   };
 
 
 
   return (
-    <form onSubmit={handleUpdatingUserProfil} className="text-white ">
-      <h3>My Details</h3>
-      <p className="text-gray-400 text-lg font-normal">
-        Manage your profile details
-      </p>
-      <div className="mt-4">
-        <Label labelfor="name">Name</Label>
-        <Input
-          className="input block py-1 w-full "
-          id="name"
-          name="name"
-          value={name}
-          placeholder="Profile name"
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-          disabled={isUpdating}
-        />
-      </div>
-      <div className="mt-2">
-        <Label labelfor="photo">Your Photo</Label>
-        <UploadImageInput
-          avatarURL={avatarURL}
-          setAvatarUrl={setAvatarUrl}
-          isDisabled={isUpdating}
-          selectedFile={selectedFile}
-          setSelectedFile={setSelectedFile}
-        />
-      </div>
-
-      <div className="mt-6">
-        <Label labelfor="email">Email Address</Label>
-        <Input
-          className="input block w-full"
-          id="email"
-          value={email}
-          name="email"
-          type="email"
-          disabled
-        />
-        <Link to="/dashboard/settings/profil/email">
-          <span className="text-xs mt-6 font-medium w-fit hover:bg-[#17182A] px-4 py-2 rounded-md  block  mb-4">
-            Update Email Address
-          </span>
-        </Link>
-      </div>
-
-      <PurpleButton
-        text="update profil"
-        isLoading={isUpdating}
-        disabled={isUpdating}
-      />
-    </form>
+    <h1>hello user :{userId2}</h1>
   );
 };
 export default ProfilDetails;

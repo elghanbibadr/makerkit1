@@ -57,14 +57,9 @@ function App() {
 
             </Route>
 
-            {/* <ProtectedRoute>
-            <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />           
-            <ProtectedRoute>
-            <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>} />
-            <ProtectedRoute> */}
 
 
-            <Route element={<DashboardLayout path="/dashboard" />}>
+            <Route  element={<ProtectedRoute> <DashboardLayout path="/dashboard" /></ProtectedRoute> }>
               <Route index element={<Navigate replace to='dashboard' />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="dashboard/settings" element={<SettingLayout />}>
