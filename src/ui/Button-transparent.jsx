@@ -11,7 +11,6 @@ export const ButtonTransparent = ({ text,children, icon, alt, onClick, className
         {children}
         <span>{text}</span>
         {icon && <img className='h-4' src={icon} alt={alt} />}
-        {children}
       </button>
     );
 };

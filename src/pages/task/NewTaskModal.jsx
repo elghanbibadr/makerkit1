@@ -4,51 +4,12 @@ import closeIcon from '../../assets/xIcon.svg'
 import { AppContext } from "../../store/AppContext";
 import Datepicker from "tailwind-datepicker-react"
 import { useCreateTask } from "../../hook/useCreateTask";
+import { generateUniqueRandomNumber } from "../../utils/Utils";
+import { options  } from "../../utils/Utils";
+import Label from "../../ui/Label";
+import Input from "../../ui/Input";
+import { PurpleButton } from "../../ui/PurpleButton";
 
-
-
-
-const options = {
-  // title: "Demo Title",
-  // autoHide: true,
-  todayBtn: false,
-  clearBtn: false,
-  // clearBtnText: "Clear",
-  maxDate: new Date("2030-01-01"),
-  minDate: new Date(),
-  theme: {
-    background: "bg-[#030712]   shadow-darkPink ",
-    // icons: "",
-    text: " text-white hover:text-darkPink",
-    input: "bg-[#030712] input cursor-pointer focus:border-auto",
-    inputIcon: "hidden",
-    selected: "bg-darkPink text-darkPink hover:text-darkPink hover:bg-white",
-  },
-  // icons: {
-  // 	prev: () => <span className="h-1 w-10 block"></span>,
-  // 	next: () => <span className="h-1 w-10 block"></span>,
-  // }
-  datepickerClassNames: "top-10",
-  defaultDate: new Date(+new Date() + 86400000),
-  language: "en",
-  disabledDates: [],
-  weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-  inputNameProp: "date",
-  inputIdProp: "date",
-  inputPlaceholderProp: "Select Date",
-  inputDateFormatProp:{
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  }
-}
-function generateUniqueRandomNumber() {
-  // Multiply Math.random() by a large number to get a floating-point value,
-  // then convert it to an integer using Math.floor().
-  const randomNumber = Math.floor(Math.random() * 1000000);
-  return randomNumber;
-}
-// eslint-disable-next-line react/prop-types
 const NewTaskModal = () => {
   const { session } = useContext(AppContext);
   const [show, setShow] = useState(false)
@@ -62,36 +23,44 @@ const NewTaskModal = () => {
     formState: { errors },
   } = useForm();
   const { createTask, isCreatingTask } = useCreateTask()
+
   const onSubmit = (data) => {
     createTask({
       id: generateUniqueRandomNumber(),
       userId: currentUserId,
-      // taskDueDate:new Date(),
+      taskDueDate:taskDueDate,
       ...data,
     });
+    // modalCheckboxRef.current.checked=false
+    
+    reset()
   };
+
   const handleChange = (selectedDate) => setTaskDueDate(selectedDate)
   const handleClose = (state) => setShow(state)
+
+
   return (
     <>
       <input type="checkbox" id="my_modal_7" className="modal-toggle" ref={modalCheckboxRef} />
       <div className="modal bg-darkPink" role="dialog">
         <div className="max-w-[500px] shadow-pinkBoxShadow z-10 bg-[#030712] p-7 rounded-[0.8rem] modal-box">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-white">Create Task</h3>
+            <h4 className="text-white">Create Task</h4>
             <img className="h-6 cursor-pointer" src={closeIcon} alt="close Icon" />
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6">
-              <label className="block text-lightGrey font-medium" htmlFor="name">
+              <Label className="block text-lightGrey font-medium" htmlFor="name">
                 Name
-              </label>
+              </Label>
               <input
                 className="input w-full"
                 type="text"
                 id="taskname"
                 name="taskname"
                 placeholder="ex. Launch on IndieHackers"
+                disabled={isCreatingTask}
                 {...register("taskName", { required: "TaskName is required" })}
               />
               {errors.taskName && (
@@ -113,6 +82,7 @@ const NewTaskModal = () => {
                 name="taskDescription"
                 id="taskDescription"
                 placeholder="Describe the task "
+                disabled={isCreatingTask}
                 {...register("taskDescription", {
                   required: "TaskDescription is required",
                 })}
@@ -132,12 +102,8 @@ const NewTaskModal = () => {
                 <Datepicker options={options} onChange={handleChange} show={show} setShow={handleClose} />
               </div>
             </div>
-            <button
-              type="submit"
-              className="bg-darkPink  p-3 px-5 rounded-md text-sm text-white"
-            >
-              Create Task
-            </button>
+        
+            <PurpleButton text="create task" isLoading={isCreatingTask} />
           </form>
         </div>
         <label className="modal-backdrop " htmlFor="my_modal_7">

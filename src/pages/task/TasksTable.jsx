@@ -7,22 +7,21 @@ import { useUser } from "../../hook/useUser";
 import { useTaskStatus } from "../../hook/useTaskStatus";
 import Button from "../../ui/Button";
 import { useDeleteTask } from "../../hook/useDeleteTask";
-import closeIcon from '../../assets/xIcon.svg'
+import closeIcon from "../../assets/xIcon.svg";
+import TaskStatusBadge from "./taskStatusBadge";
 
 const TasksTable = ({ searchTaskQuery }) => {
-
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
   const [taskToDeleteId, setTaskToDelete] = useState(null);
-  const { user } = useUser()
+  const { user } = useUser();
   const userId = user?.data.user.id;
-  const { changeTaskStatus, isChangingTaskStatus } = useTaskStatus()
-  const {deleteTask   , isDeleting}=useDeleteTask()
+  const { changeTaskStatus, isChangingTaskStatus } = useTaskStatus();
+  const { deleteTask, isDeleting } = useDeleteTask();
 
   const { tasks, isLoading, error } = useTask(userId);
 
-
-  console.log(tasks)
+  console.log(tasks);
   const toggleTaskDetails = (taskId) => {
     setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
@@ -33,25 +32,19 @@ const TasksTable = ({ searchTaskQuery }) => {
     setTaskToDelete(taskId);
   };
 
-
-
   // HANDLE TASK STATUS (DONE,TODO) CHANGED
-  const handleTaskStatusChanged = (taskId, isDone) => changeTaskStatus({ taskId, isDone })
+  const handleTaskStatusChanged = (taskId, isDone) =>
+    changeTaskStatus({ taskId, isDone });
 
-
-
-  const SearchedTasks = tasks?.filter(({ taskName, taskDescription }) =>
-    taskName.toLowerCase().includes(searchTaskQuery.toLowerCase()) ||
-    taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase())
+  const SearchedTasks = tasks?.filter(
+    ({ taskName, taskDescription }) =>
+      taskName.toLowerCase().includes(searchTaskQuery.toLowerCase()) ||
+      taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase())
   );
-
-
 
   const handleTaskView = (taskToBeEdited) => {
     console.log(taskToBeEdited);
   };
-
-
 
   return (
     <>
@@ -79,23 +72,13 @@ const TasksTable = ({ searchTaskQuery }) => {
                 <tr key={task.id} className="text-left border-b border-accent1">
                   <td>{task.taskName}</td>
                   <td>{task.taskDescription}</td>
-                  {!task.isDone && <td>{task.taskDueDate}</td>}
-                  {task.isDone && (
-                    <td>
-                      {" "}
-                      <span className="text-green-500 text-xs bg-[#22c55e1a] font-semibold px-2 py-1 rounded-md ">
-                        Done
-                      </span>{" "}
-                    </td>
+                  {task.taskDueDate && (
+                    <td> {new Date(task.taskDueDate).toDateString()}</td>
                   )}
-                  {!task.isDone && (
-                    <td>
-                      {" "}
-                      <span className="bg-red-500  text-xs  text-white font-semibold px-2 py-1 rounded-md ">
-                        Todo
-                      </span>{" "}
-                    </td>
-                  )}
+
+                  <td>
+                    <TaskStatusBadge taskStatus={task.isDone} />
+                  </td>
 
                   <td className="w-5 cursor-pointer relative">
                     <svg
@@ -127,7 +110,9 @@ const TasksTable = ({ searchTaskQuery }) => {
                         {!task.isDone && (
                           <li
                             className="my-2"
-                            onClick={() => handleTaskStatusChanged(task.id, true)}
+                            onClick={() =>
+                              handleTaskStatusChanged(task.id, true)
+                            }
                           >
                             Mark as Done
                           </li>
@@ -135,17 +120,20 @@ const TasksTable = ({ searchTaskQuery }) => {
                         {task.isDone && (
                           <li
                             className="my-2"
-                            onClick={() => handleTaskStatusChanged(task.id, false)}
+                            onClick={() =>
+                              handleTaskStatusChanged(task.id, false)
+                            }
                           >
                             Mark as Todo
                           </li>
                         )}
                         <li onClick={() => handleTaskDelete(task.id)}>
-                        
-                    <label  className="flex cursor-pointer" htmlFor="my_modal_2" >
-                    Delete Task
-                    </label>
-
+                          <label
+                            className="flex cursor-pointer"
+                            htmlFor="my_modal_2"
+                          >
+                            Delete Task
+                          </label>
                         </li>
                       </ul>
                     )}
@@ -155,30 +143,36 @@ const TasksTable = ({ searchTaskQuery }) => {
           </tbody>
         </table>
       )}
-         <input type="checkbox" id="my_modal_2" className="modal-toggle" />
-              <div className="modal bg-darkPink" role="dialog">
-                <div className="max-w-[500px] shadow-pinkBoxShadow z-10 bg-[#030712] p-7 rounded-[0.8rem] modal-box">
-                  <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-white">Deleting Task</h3>
-                    <label className="flex cursor-pointer" htmlFor="my_modal_2">
-                      <img className="h-6 hover:border-[1px] border-lightGrey p-1 rounded-full" src={closeIcon} alt="close icon" />
-
-                    </label>
-                  </div>
-                  <div className="text-sm text-white">
-                    <p>You are deleting the invite to <strong>task Name</strong></p>
-                    <p className="my-4">Do you want to continue?</p>
-                  </div>
-                  <Button onClick={() => deleteTask(taskToDeleteId)}  className="bg-red-800 text-white  mt-6 text-sm py-2 px-5 rounded-md">
-                 
-                    <span>Yep,delete task</span>
-                  </Button>
-                </div>
-                <label className="modal-backdrop " htmlFor="my_modal_2">
-                  close
-                </label>
-              </div>
-  
+      <input type="checkbox" id="my_modal_2" className="modal-toggle" />
+      <div className="modal bg-darkPink" role="dialog">
+        <div className="max-w-[500px] shadow-pinkBoxShadow z-10 bg-[#030712] p-7 rounded-[0.8rem] modal-box">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-white">Deleting Task</h3>
+            <label className="flex cursor-pointer" htmlFor="my_modal_2">
+              <img
+                className="h-6 hover:border-[1px] border-lightGrey p-1 rounded-full"
+                src={closeIcon}
+                alt="close icon"
+              />
+            </label>
+          </div>
+          <div className="text-sm text-white">
+            <p>
+              You are deleting the invite to <strong>task Name</strong>
+            </p>
+            <p className="my-4">Do you want to continue?</p>
+          </div>
+          <Button
+            onClick={() => deleteTask(taskToDeleteId)}
+            className="bg-red-800 text-white  mt-6 text-sm py-2 px-5 rounded-md"
+          >
+            <span>Yep,delete task</span>
+          </Button>
+        </div>
+        <label className="modal-backdrop " htmlFor="my_modal_2">
+          close
+        </label>
+      </div>
     </>
   );
 };

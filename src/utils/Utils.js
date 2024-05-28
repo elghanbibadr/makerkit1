@@ -38,3 +38,48 @@ export const pricingData = [
     cta: "Contact us",
   },
 ];
+
+
+
+export function generateUniqueRandomNumber() {
+  // Multiply Math.random() by a large number to get a floating-point value,
+  // then convert it to an integer using Math.floor().
+  const randomNumber = Math.floor(Math.random() * 1000000);
+  return randomNumber;
+}
+
+
+// options for the date picker modal 
+
+
+export const options = {
+  // title: "Demo Title",
+  // autoHide: true,
+  todayBtn: false,
+  clearBtn: false,
+  // clearBtnText: "Clear",
+  maxDate: new Date("2030-01-01"),
+  minDate: new Date(),
+  theme: {
+    background: "bg-[#030712]   shadow-darkPink ",
+    // icons: "",
+    text: " text-white hover:text-darkPink",
+    input: "bg-[#030712] input cursor-pointer focus:border-auto",
+    inputIcon: "hidden",
+    selected: "bg-darkPink text-darkPink hover:text-darkPink hover:bg-white",
+  },
+ 
+  datepickerClassNames: "top-10",
+  defaultDate: new Date(+new Date() + 86400000),
+  language: "en",
+  disabledDates: [],
+  weekDays: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+  inputNameProp: "date",
+  inputIdProp: "date",
+  inputPlaceholderProp: "Select Date",
+  inputDateFormatProp:{
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  }
+}

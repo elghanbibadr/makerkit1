@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-
-import Button from "../../ui/Button";
-import { useUser } from "../../hook/useUser";
 import TasksTable from "../../../src/pages/task/TasksTable";
 import NewTaskModal from "../../../src/pages/task/NewTaskModal";
 import plusIcon from "../../assets/pluscircleicon.svg";
+import { ButtonTransparent } from "../../ui/Button-transparent";
+import Input from "../../ui/Input";
 
 const Task = () => {
 
@@ -14,24 +13,23 @@ const Task = () => {
 
   return (
     <>
-      <div>
         <div className="flex justify-between self-start">
-          <Button className="border-accent1 flex justify-center gap-2 items-center rounded-md hover:bg-accent1 hover:text-white">
-            <label className="flex items-center gap-2 cursor-pointer" htmlFor="my_modal_7">
-              <img className="h-4" src={plusIcon} />
+        
+          <ButtonTransparent icon={plusIcon}>
+          <label className="flex items-center gap-2 cursor-pointer" htmlFor="my_modal_7">
               <span>New Task</span>
-            </label>
-          </Button>
-          <input
+          </label>
+          </ButtonTransparent>
+
+          <Input
             type="email"
             value={searchTaskQuery}
             onChange={handleSearchInputChange}
             placeholder="Search for task"
-            className="input"
+            className="input max-w-[300px]"
           />
         </div>
         <TasksTable searchTaskQuery={searchTaskQuery} />
-      </div>
 
       <NewTaskModal />
     </>
