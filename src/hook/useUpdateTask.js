@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export function useUpdateTask() {
     const queryClient = useQueryClient()
 
-    const { mutate: updateTask, isUpdatingTask } = useMutation({
+    const { mutate: updateTask, isLoading:isUpdatingTask } = useMutation({
         mutationFn: ({ taskId, updatedTask }) => updateTaskApi(taskId, updatedTask),
         onSuccess: () => {
             toast.success("Task successfully updated");

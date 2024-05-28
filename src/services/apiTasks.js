@@ -72,15 +72,20 @@ export async function markTaskAsTodo(taskId) {
 // UPDATE TASKS
 
 export async function updateTask(taskId,updatedTask){
-  try{
+
     const { data, error } = await supabase
     .from('tasks')
     .update(updatedTask)
     .eq('id', taskId)
     .select()
-  }catch(e){
-    alert(e.message)
-  }
+
+
+    if(error){
+      throw new Error(error.message)
+      
+    }
+
+    return data
 }
 
 

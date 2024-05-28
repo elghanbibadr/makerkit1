@@ -15,6 +15,7 @@ import { useSignUp } from "../../services/useSignUp";
 import { useLogin } from "../../hook/useLogin";
 import getUser  from "../../services/apiUser";
 import { AppContext } from "../../store/AppContext";
+import InvalidInputErrorMessage from "../../ui/InvalideInputErrorMessage";
 
 
 const AuthPage = ({ isSignUp = true }) => {
@@ -107,7 +108,7 @@ const AuthPage = ({ isSignUp = true }) => {
             <div className="mt-6">
               <Label labelfor="email">Email Address</Label>
               <input
-                className={`input block w-full `}
+                className={` block w-full mb-1 ${errors.email ? "border-red-600 outline-none focus:border-red-600":""}`}
                 id="email"
                 placeholder="your@email"
                 name="email"
@@ -123,17 +124,13 @@ const AuthPage = ({ isSignUp = true }) => {
             <div className="mt-4">
               <Label labelfor="password">Password</Label>
               <input
-                className=" input block  w-full "
+                className={` block w-full mb-1 ${errors.password ? "border-red-600 outline-none focus:border-red-600":""}`}
                 id="password"
                 name="password"
                 type="password"
                 {...register("password", { required: "Password is required" })}
               />
-              {errors.password && (
-                <p className="text-red-600 text-sm font-semibold">
-                  {errors.password.message}
-                </p>
-              )}
+              {errors.password && <InvalidInputErrorMessage errorMessage={errors.password.message} />}
               {!isSignUp && (
                 <span className="text-[.79rem] cursor-pointer inline-block mt-4 hover:underline font-medium  text-gray-400">
                   Password forgotten?
@@ -144,19 +141,16 @@ const AuthPage = ({ isSignUp = true }) => {
               <div className="mt-4">
                 <Label labelfor="repeatpassword">RepeatPassword</Label>
                 <input
-                  className=" input block  w-full "
-                  id="repeatpassword"
+                className={` block w-full mb-1 ${errors.repeatedpassword ? "border-red-600 outline-none focus:border-red-600":""}`}
+                id="repeatpassword"
                   name="repeatpassword"
                   type="password"
                   {...register("repeatedpassword", {
                     required: "Repeated Password is required",
                   })}
                 />
-                {errors.repeatedpassword && (
-                  <p className="text-red-600 text-sm font-semibold">
-                    {errors.repeatedpassword.message}
-                  </p>
-                )}
+                {errors.repeatedpassword &&   <InvalidInputErrorMessage errorMessage={errors.repeatedpassword.message} />}
+
               </div>
             )}
 
