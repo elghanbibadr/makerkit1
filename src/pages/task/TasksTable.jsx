@@ -1,7 +1,6 @@
 import { useState } from "react";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { Link } from "react-router-dom";
-import Overlay from "../../ui/Overlay";
 import { useTask } from "../../hook/usetasks";
 import { useUser } from "../../hook/useUser";
 import { useTaskStatus } from "../../hook/useTaskStatus";
@@ -9,6 +8,8 @@ import Button from "../../ui/Button";
 import { useDeleteTask } from "../../hook/useDeleteTask";
 import closeIcon from "../../assets/xIcon.svg";
 import TaskStatusBadge from "./taskStatusBadge";
+import doottedLine from "../../assets/doottedLine2.png"
+import DeleteTaskModal from "./DeleteTaskModal";
 
 const TasksTable = ({ searchTaskQuery }) => {
   const [openTaskId, setOpenTaskId] = useState(null);
@@ -17,7 +18,6 @@ const TasksTable = ({ searchTaskQuery }) => {
   const { user } = useUser();
   const userId = user?.data.user.id;
   const { changeTaskStatus, isChangingTaskStatus } = useTaskStatus();
-  const { deleteTask, isDeleting } = useDeleteTask();
 
   const { tasks, isLoading, error } = useTask(userId);
 
@@ -27,9 +27,9 @@ const TasksTable = ({ searchTaskQuery }) => {
   };
 
   // Task delete handler
-  const handleTaskDelete = (taskId) => {
+  const handleTaskDelete = (taskId,taskName) => {
     setDeleteTaskModelOpen(true);
-    setTaskToDelete(taskId);
+    setTaskToDelete({taskId,taskName});
   };
 
   // HANDLE TASK STATUS (DONE,TODO) CHANGED
@@ -42,9 +42,6 @@ const TasksTable = ({ searchTaskQuery }) => {
       taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase())
   );
 
-  const handleTaskView = (taskToBeEdited) => {
-    console.log(taskToBeEdited);
-  };
 
   return (
     <>
@@ -58,12 +55,13 @@ const TasksTable = ({ searchTaskQuery }) => {
         </div>
       )}
       {!isLoading && (
-        <table className="w-full  border  p-2 mt-6 border-accent1 rounded-full">
-          <thead className="text-gray-400  text-left border-b border-accent1 ">
+        <table className="w-full  border   p-2 mt-6 border-accent1 rounded-md">
+          <thead className="text-gray-400 rounded-md text-left border-b border-accent1 ">
             <tr>
-              <th>Name</th>
+              <th >Name</th>
               <th>Description</th>
               <th>Due Date</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody className="text-white">
@@ -80,59 +78,34 @@ const TasksTable = ({ searchTaskQuery }) => {
                     <TaskStatusBadge taskStatus={task.isDone} />
                   </td>
 
-                  <td className="w-5 cursor-pointer relative">
-                    <svg
-                      onClick={() => toggleTaskDetails(index)}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                      className="w-5"
-                    >
-                      {/* your SVG path here */}
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                      ></path>
-                    </svg>
+                  <td className="w-12 cursor-pointer relative">
+                    <img  src={doottedLine}  onClick={() => toggleTaskDetails(index)} alt='dooted line'/>
+                    
+                  
                     {openTaskId === index && (
                       <ul className="shadow-pinkBoxShadow border w-[130px] mb-10 border-gray-50 border-opacity-10 font-medium text-sm py-4 bg-[#030712] z-10 p-2 px-5 rounded-md absolute top-10 -right-0">
                         <li
-                          onClick={() =>
-                            handleTaskView({ id: task.id, ...task })
-                          }
+                        
                         >
-                          <Link to={`${task.id}`}>View Task</Link>
+                          <Link to={`${task.id}`}>view Task</Link>
                         </li>
-                        {!task.isDone && (
+                        { (
                           <li
-                            className="my-2"
+                            className="my-2 text-nowrap"
                             onClick={() =>
-                              handleTaskStatusChanged(task.id, true)
+                              handleTaskStatusChanged(task.id, !task.isDone)
                             }
                           >
-                            Mark as Done
+                            {task.isDone ? "mark as todo" :" mark as done" }  
                           </li>
                         )}
-                        {task.isDone && (
-                          <li
-                            className="my-2"
-                            onClick={() =>
-                              handleTaskStatusChanged(task.id, false)
-                            }
-                          >
-                            Mark as Todo
-                          </li>
-                        )}
-                        <li onClick={() => handleTaskDelete(task.id)}>
+                       
+                        <li onClick={() => handleTaskDelete(task.id,task.taskName)}>
                           <label
                             className="flex cursor-pointer"
                             htmlFor="my_modal_2"
                           >
-                            Delete Task
+                            delete Task
                           </label>
                         </li>
                       </ul>
@@ -144,35 +117,7 @@ const TasksTable = ({ searchTaskQuery }) => {
         </table>
       )}
       <input type="checkbox" id="my_modal_2" className="modal-toggle" />
-      <div className="modal bg-darkPink" role="dialog">
-        <div className="max-w-[500px] shadow-pinkBoxShadow z-10 bg-[#030712] p-7 rounded-[0.8rem] modal-box">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-white">Deleting Task</h3>
-            <label className="flex cursor-pointer" htmlFor="my_modal_2">
-              <img
-                className="h-6 hover:border-[1px] border-lightGrey p-1 rounded-full"
-                src={closeIcon}
-                alt="close icon"
-              />
-            </label>
-          </div>
-          <div className="text-sm text-white">
-            <p>
-              You are deleting the invite to <strong>task Name</strong>
-            </p>
-            <p className="my-4">Do you want to continue?</p>
-          </div>
-          <Button
-            onClick={() => deleteTask(taskToDeleteId)}
-            className="bg-red-800 text-white  mt-6 text-sm py-2 px-5 rounded-md"
-          >
-            <span>Yep,delete task</span>
-          </Button>
-        </div>
-        <label className="modal-backdrop " htmlFor="my_modal_2">
-          close
-        </label>
-      </div>
+      <DeleteTaskModal taskInfo={taskToDeleteId} />
     </>
   );
 };
