@@ -202,6 +202,7 @@ const OnBoardingPage = () => {
               <ButtonTransparent
                 onClick={handleFinishingAddingOrgDetails}
                 text="skip"
+                className="w-full"
               />
             </form>
           </div>
@@ -230,7 +231,7 @@ const OnBoardingPage = () => {
                   You're all set! You can now start using the app.🎉
                 </h3>
                 <Link to="/dashboard">
-                  <ButtonTransparent text="Go to your dashboard" />
+                  <ButtonTransparent text="Go to your dashboard" className="mx-auto" />
                 </Link>
               </div>
             )}

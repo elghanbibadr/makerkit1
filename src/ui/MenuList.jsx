@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const MenuList = ({menuItems}) => {
   return (
        <Card >
-         <motion.ul className="lg:flex z-50"          exit={{ opacity: 0 }}
+         <motion.ul className="lg:flex p-3 z-50"          exit={{ opacity: 0 }}
  >
                 {menuItems.map(({ navLink, href }) => (
                   <Link

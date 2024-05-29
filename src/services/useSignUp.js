@@ -15,7 +15,7 @@ export function useSignUp() {
        navigate("/onboarding") 
     },     
     onError: (err) => {
-      toast.error(err)
+      toast.error(err.message)
     },
   });
 

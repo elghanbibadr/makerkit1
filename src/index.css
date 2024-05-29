@@ -52,7 +52,7 @@ h6{
 
 /* INPUTS AND FORM */
 input,textarea{
-  @apply px-4 py-2 mt-2 rounded-md mb-6 bg-transparent block w-full focus:border-darkPink text-gray-500 font-medium text-sm  border  focus:outline-none  border-accent1
+  @apply px-4 py-3 mt-2 rounded-md mb-6 bg-transparent block w-full focus:border-darkPink text-gray-500 font-medium text-sm  border  focus:outline-none  border-accent1
 }
 
 .linkHover{

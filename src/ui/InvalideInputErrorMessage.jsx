@@ -4,7 +4,7 @@ const InvalidInputErrorMessage = ({ errorMessage }) => {
   return (
     <>
       { (
-        <p className="text-red-600 text-sm font-semibold">
+        <p className="text-red-600 text-xs font-medium">
           {errorMessage}
         </p>
       )}

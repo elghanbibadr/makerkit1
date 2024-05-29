@@ -53,7 +53,7 @@ const AuthPage = ({ isSignUp = true }) => {
       }
    
       // Reset the form values
-      reset();
+      // reset();
       setIsLoading(false)
     }
 
@@ -115,11 +115,9 @@ const AuthPage = ({ isSignUp = true }) => {
                 type="email"
                 {...register("email", { required: "Email is required" })}
               />
-              {errors.email && (
-                <p className="text-red-600 text-sm font-semibold">
-                  {errors.email.message}
-                </p>
-              )}
+           
+                    {errors.email && <InvalidInputErrorMessage errorMessage={errors.email.message} />}
+
             </div>
             <div className="mt-4">
               <Label labelfor="password">Password</Label>
