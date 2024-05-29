@@ -6,7 +6,7 @@ import { updateOrganization } from "../services/apiOrganisations";
 export function useUpdateOrganization(){
     const queryClient = useQueryClient()
     const {mutate : updatingOrgDetails, isLoading: isUpdating}=useMutation({
-        mutationFn:({userId,newOrgInfo}) => updateOrganization({userId,newOrgInfo}),
+        mutationFn:({newOrgInfo}) => updateOrganization(newOrgInfo),
         onSuccess: () => {
             queryClient.invalidateQueries('organizations')
             toast.success('org updated ')

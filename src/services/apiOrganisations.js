@@ -21,16 +21,13 @@ export const getOrganizationDetails=async(userId)=>{
 
   
 
-export const updateOrganization=async({userId,newOrgInfo})=>{
-    console.log('org new',newOrgInfo)
-    console.log('usereId',userId)
-
+export const updateOrganization=async(newOrgInfo)=>{
+   console.log('org infor tesss',newOrgInfo)
     // UPDATING EITHER THE ORG NAME OF ORG LOGO URL
     let { data: organizations, error } = await supabase
     .from('organizations')
-    .update(newOrgInfo)
-    .eq('orgId',userId)
-    .select("*")
+    .upsert(newOrgInfo)
+    
     // Filters
     // .eq('orgId',userId)
   

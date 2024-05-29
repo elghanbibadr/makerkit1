@@ -20,7 +20,7 @@ const OrganizationGeneralPage = () => {
   const {organizations,isLoading:isGettingOrgDetails}=useGetOrg(userId)
   const {
     organizationName,
-
+    id:id,
     organizationLogoUrl,
   } = organizations?.organizations[0] || [];
 
@@ -69,16 +69,19 @@ const OrganizationGeneralPage = () => {
 
       // setAvatarUrl(`${profilImagePath}${selectedFile.name}`);
       updatingOrgDetails({
-        userId,
+        
         newOrgInfo: {
+          id:id,
            organizationName:orgName,
            organizationLogoUrl: `${profilImagePath}${selectedFile.name}`,
+           orgId:userId
+          //  userId,
         },
       });
       return;
     }
     // UPDATE ONLY THE USER Org NAME OR REMOVE AVATAR SO SETTING IT TO THE CURRENT AVATAR URL
-    updatingOrgDetails({ userId, newOrgInfo: { organizationName:orgName,organizationLogoUrl:orgLogoUrl} });
+    updatingOrgDetails({ newOrgInfo: {id:id, organizationName:orgName,organizationLogoUrl:orgLogoUrl,orgId:userId} });
 
   }
 
