@@ -10,11 +10,11 @@ import { Link } from 'react-router-dom';
 import documentationIcon from "../../assets/documentationIcon.svg"
 
 
-const Item = ({ icon, text ,onClick}) => {
+export const MenuListLink = ({ icon, text ,onClick}) => {
     return (
-      <div onClick={onClick} className="flex py-3 px-2   border-t border-accent1 items-center cursor-pointer hover:bg-[#17182A]">
+      <div onClick={onClick} className="flex py-3 px-2  border-t border-accent1 items-center cursor-pointer hover:bg-[#17182A]">
        {icon &&  <img className="h-5 mr-2" src={icon} alt={`${text} icon`} />}
-        <span className="text-sm font-medium">{text}</span>
+        <span className=" text-white text-sm">{text}</span>
       </div>
     );
   };
@@ -34,11 +34,11 @@ const SignInAsListMenu = ({position}) => {
          </div>
 
     <Link to="/dashboard">
-      <Item icon={dashboardIcon} text="Dashboard" />
+      <MenuListLink icon={dashboardIcon} text="Dashboard" />
     </Link>
-    <Item icon={themIcon} text="Theme" />
-    <Item icon={documentationIcon} text="Documentation" />
-   { !isLoading && <Item onClick={logout} icon={signouticon} text="Sign out" />}
+    <MenuListLink icon={themIcon} text="Theme" />
+    <MenuListLink icon={documentationIcon} text="Documentation" />
+   { !isLoading && <MenuListLink onClick={logout} icon={signouticon} text="Sign out" />}
     {isLoading && <LoadingSpinner className="h-8 w-8 mx-auto   "/>}
    
 
