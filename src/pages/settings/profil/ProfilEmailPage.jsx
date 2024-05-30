@@ -38,8 +38,8 @@ const ProfilEmailPage = () => {
       </p>
       <form onSubmit={handleSubmit}>
         <Label labelfor="newemail">Your New Email</Label>
-        <Input
-          className="input block w-full "
+        <input
+          // className="input block w-full "
           id="newemail"
           name="newemail"
           type="email"
@@ -52,8 +52,8 @@ const ProfilEmailPage = () => {
         <Label className="small-title " labelfor="repeatedemail">
           Repeat Email
         </Label>
-        <Input
-          className="input block w-full "
+        <input
+          // className="input block w-full "
           id="repeatedemail"
           name="repeatedemail"
           type="email"

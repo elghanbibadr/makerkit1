@@ -88,7 +88,7 @@ img{
 }
 
 button{
-  @apply text-xs md:text-sm px-4 py-1 text-white duration-200 capitalize font-medium tracking-wide outline-none h-10
+  @apply text-xs md:text-sm font-medium px-4 py-1 text-white duration-200   tracking-wide outline-none h-10
 } 
 
 /* INPUTS */
