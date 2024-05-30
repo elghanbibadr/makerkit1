@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useDeleteMembre } from "../../../hook/useDeleteMembre";
 import { Link } from "react-router-dom";
 import { useUser } from "../../../hook/useUser";
+import { ButtonTransparent } from "../../../ui/Button-transparent";
 
 
 const OrganizationMemberPage = () => {
@@ -57,14 +58,14 @@ const OrganizationMemberPage = () => {
       <div>
         <div className="text-white">
           <h3> Members </h3>
-          <p className="text-gray-400 text-sm md:text-base font-normal">
+          <p className="small-title">
             Manage and Invite members
           </p>
         </div>
         <div className="my-7">
-          <div className="sm:flex  gap-2 ">
-            <Input
-              className="  block mt-0 w-full "
+          <div className="flex items-center gap-2 ">
+            <input
+              className=" my-0   w-full "
               id="name"
               name="name"
               // value={name}
@@ -73,16 +74,8 @@ const OrganizationMemberPage = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             // disabled={isUpdating}
             />
-            <Link to='invite' className="w-full sm:w-[20%]  " >
-
-              <Button
-                className="button-transparent  relative top-2 	text-white rounded-md "
-              >
-
-                <img className="h-4 mr-2" src={inviteIcon} alt='invite membre icon' />
-                <span className="text-[0.8rem] text-nowrap	">Invite members</span>
-
-              </Button>
+            <Link to='invite' >
+              <ButtonTransparent  text="Invite members" icon={inviteIcon} />
             </Link>
 
           </div>
@@ -91,13 +84,13 @@ const OrganizationMemberPage = () => {
 
         {  SearchedAcceptedInvites?.map(({memberRole,memberEmail}) =>{
 
-          return <div className="mt-7 sm:flex sm:justify-between sm:items-center">
+          return <div className="mt-7 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9   flex justify-center items-center rounded-full bg-darkPink ">
               <h6 className="font-semibold text-sm text-white">{memberEmail.at(0)}</h6>
             </div>
             <span className="text-xs sm:text-[14px] font-normal text-white">{memberEmail}</span>
-            <span className=" text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">
+            <span className="hidden sm:block text-xs font-medium sm:ml-5 bg-sky-500/10  text-[#0284c7] px-4 py-1 rounded-md ">
               You
             </span>{" "}
           </div>
