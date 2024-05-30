@@ -51,7 +51,7 @@ const TasksTable = ({ searchTaskQuery }) => {
           <h2 className="my-2">
             Hey, it looks like you don't have any tasks yet... 🤔
           </h2>
-          <h3>Create your first task by clicking on the button below</h3>
+          <p>Create your first task by clicking on the button above</p>
         </div>
       )}
       {!isLoading && (
@@ -60,7 +60,7 @@ const TasksTable = ({ searchTaskQuery }) => {
             <tr>
               <th >Name</th>
               <th>Description</th>
-              <th>Due Date</th>
+              <th className="hidden md:block">Due Date</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -71,7 +71,7 @@ const TasksTable = ({ searchTaskQuery }) => {
                   <td>{task.taskName}</td>
                   <td>{task.taskDescription}</td>
                   {task.taskDueDate && (
-                    <td> {new Date(task.taskDueDate).toDateString()}</td>
+                    <td className="hidden md:block"> {new Date(task.taskDueDate).toDateString()}</td>
                   )}
 
                   <td>
@@ -116,6 +116,7 @@ const TasksTable = ({ searchTaskQuery }) => {
           </tbody>
         </table>
       )}
+      { !isLoading && !error && SearchedTasks?.length === 0 && <p className="text-white text-center mt-10">No task found .... 🤔</p> }
       <input type="checkbox" id="my_modal_2" className="modal-toggle" />
       <DeleteTaskModal taskInfo={taskToDeleteId} />
     </>

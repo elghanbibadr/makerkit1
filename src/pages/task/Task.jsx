@@ -13,20 +13,20 @@ const Task = () => {
 
   return (
     <>
-        <div className="flex justify-between self-start">
+        <div className="flex items-center gap-2 justify-between md:self-start">
         
           <ButtonTransparent icon={plusIcon}>
           <label className="flex items-center gap-2 cursor-pointer" htmlFor="my_modal_7">
-              <span>New Task</span>
+              <span className="text-xs md:text-sm text-nowrap	inline-block">New Task</span>
           </label>
           </ButtonTransparent>
 
-          <Input
+          <input
             type="email"
             value={searchTaskQuery}
             onChange={handleSearchInputChange}
             placeholder="Search for task"
-            className="input max-w-[300px]"
+            className="my-0 max-w-[300px]"
           />
         </div>
         <TasksTable searchTaskQuery={searchTaskQuery} />
