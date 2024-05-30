@@ -5,7 +5,7 @@ import { deleteOrgMembre } from "../services/apiMembre";
 export function useDeleteMembre(){
     const queryClient = useQueryClient()
     const {mutate : deletingOrgMembre, isLoading: isDeleting}=useMutation({
-        mutationFn:(membreId) => deleteOrgMembre(membreId),
+        mutationFn:(membreEmail) => deleteOrgMembre(membreEmail),
         onSuccess: () => {
             queryClient.invalidateQueries('organizationsMembers')
             document.getElementById('my_modal_6').checked=false

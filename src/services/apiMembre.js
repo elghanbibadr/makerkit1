@@ -18,15 +18,15 @@ export const getOrgMembres=async(orgId)=>{
 
 
 
-  export const deleteOrgMembre=async(membreId)=>{
+  export const deleteOrgMembre=async(membreEmail)=>{
 
-    console.log("id to be deleted",membreId)
+    console.log("id to be deleted",membreEmail)
     
     let { data, error } = await supabase
     .from('organizationsMembers')
     .delete()
     // Filters
-    .eq('id',membreId)
+    .eq('memberEmail',membreEmail)
   
     if(error){
         console.log('org error',error)

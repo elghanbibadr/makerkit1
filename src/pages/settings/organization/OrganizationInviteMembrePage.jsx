@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-
 import { useState } from "react";
 import { useInviteMembre } from "../../../hook/useInviteMembre";
 import arrow from "../../../assets/arrow.svg";
@@ -70,7 +69,7 @@ const OrganizationInviteMembrePage = () => {
   }
 
   return (
-    <div>
+    <>
       <div className="text-white">
         <h3>Invite Members</h3>
         <p className="text-gray-400 text-sm md:text-base font-normal">
@@ -105,7 +104,7 @@ const OrganizationInviteMembrePage = () => {
       >
         <ButtonTransparent text="Go back to members" icon={arrow} />
       </Link>
-    </div>
+    </>
   );
 };
 
