@@ -1,25 +1,22 @@
 import { useContext, useState, useEffect } from "react";
 import menuHamburger from "../../assets/menu.svg";
 import { Link } from "react-router-dom";
-import moon from "../../assets/moon.svg";
 import Button from "../../ui/Button";
 import { AppContext } from "../../store/AppContext";
-import { logout } from "../../services/apiAuth";
-import { useLogout } from "../../hook/useLogout";
 import MenuList from "../../ui/MenuList";
 import Logo from "../../ui/Logo";
-import ScreenModeCard from "../../ui/ScreenModeCard";
 import { AnimatePresence } from "framer-motion";
-
 import SignInAsListMenu from "./SignInAsListMenu";
-import { PurpleButton } from "../../ui/PurpleButton";
+
 const navLinks = [
   { navLink: "Blog", href: "blog" },
-  { navLink: "Documentation", href: "documentation" },
   { navLink: "Pricing", href: "pricing" },
   { navLink: "FAQ", href: "faq" },
+  { navLink: "Conact us", href: "contact Us" },
+
 ];
-const modeLinks = [{ navLink: "light" }, { navLink: "dark" }];
+
+
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isModeCardOpen, setIsModeCardOpen] = useState(false);
@@ -30,11 +27,8 @@ const Navbar = () => {
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
-  const toggleMode = () => {
-    setIsModeCardOpen((prv) => !prv);
-  };
 
-  console.log(session);
+
   const closeMenu = () => {
     if (window.innerWidth > 1023) {
       setMenuOpen(false);
