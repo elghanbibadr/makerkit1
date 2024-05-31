@@ -84,7 +84,7 @@ const AuthPage = ({ isSignUp = true }) => {
   // if(isGettingCurrentUser)return <LoadingSpinner className="h-screen" />
 
   return (
-    <div className="flex  flex-col justify-center items-center ">
+    <div data-aos="fade-up" className="flex  flex-col justify-center items-center ">
       <div className="w-[400px]">
         <Link to="/">
           <Logo className="mx-auto" />

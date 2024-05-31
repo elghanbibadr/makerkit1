@@ -41,7 +41,7 @@ const NewTaskModal = () => {
   return (
     <>
       <input type="checkbox" id="my_modal_7" className="modal-toggle" />
-      <div className="modal bg-darkPink" role="dialog">
+      <div className="modal z-50 bg-darkPink" role="dialog">
         <div className="max-w-[500px] shadow-pinkBoxShadow z-10 bg-[#030712] p-7 rounded-[0.8rem] modal-box">
           <div className="flex justify-between items-center mb-6">
             <h4 className="text-white">Create Task</h4>

@@ -2,10 +2,9 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useUpdateTask } from "../../hook/useUpdateTask";
-import { useUser } from "../../hook/useUser";
 import { useGetSingleTask } from "../../hook/useGetSingleTask";
 import { ButtonTransparent } from "../../ui/Button-transparent";
-import arrow from "../../assets/arrow2.svg";
+import arrow from "../../assets/arrow.svg";
 import { PurpleButton } from "../../ui/PurpleButton";
 import { useForm } from "react-hook-form";
 import Label from "../../ui/Label";

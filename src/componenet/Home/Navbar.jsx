@@ -90,7 +90,7 @@ const Navbar = () => {
                     <h6 className="text-sm md:text-base">B</h6>
                   </div>
                   {isSignedAsCardOpen && (
-                    <SignInAsListMenu position="right-6 top-20" />
+                    <SignInAsListMenu position="right-6 z-[9999999] top-20" />
                   )}
                 </>
               )}

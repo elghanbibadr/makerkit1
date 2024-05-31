@@ -92,7 +92,7 @@ const ProfilDetails = () => {
 
 
   return (
-    <form onSubmit={handleUpdatingUserProfil} className="text-white ">
+    <form data-aos="fade-up" onSubmit={handleUpdatingUserProfil} className="text-white ">
       <h3>My Details</h3>
       <p className="text-gray-400 text-lg font-normal">
         Manage your profile details
