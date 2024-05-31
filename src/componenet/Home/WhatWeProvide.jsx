@@ -26,13 +26,14 @@ const WhatWeProvide = () => {
       {data.map((item, index) => (
         <React.Fragment key={index}>
           <WhatWeProvideDesc
+          // data-aos="fade-up-right"
           id={index}
             title={item.title}
             subtitle={item.subtitle}
             description={item.description}
           />
-          {console.log("index",index)}
-          <div  className={`mt-10 ${index === 1 ? "col-start-1 col-end-2 row-start-2 ":""}`}>
+          {console.log(index===1)}
+          <div data-aos={`${index === 1 ? "fade-right":"fade-left"}`}  className={`mt-10 ${index === 1 ? "col-start-1 col-end-2 row-start-2 ":""}`}>
             <img src={item.imgSrc} alt={item.imgAlt} />
           </div>
         </React.Fragment>

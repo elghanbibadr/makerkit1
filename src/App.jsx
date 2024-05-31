@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -9,6 +9,8 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import OrganizationInviteMembrePage from "./pages/settings/organization/OrganizationInviteMembrePage";
 import InviteAcceptedPage from "./pages/inviteAccepted/InviteAcceptedPage";
 import EmailChangeConfirmation from "./pages/emailChangeConfirmation/EmailChangeConfirmation";
+import AOS from 'aos';
+import "aos/dist/aos.css";
 
 // Lazy load components
 const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
@@ -42,6 +44,13 @@ export const queryClient = new QueryClient({
 });
 
 function App() {
+
+useEffect(() => {
+  AOS.init({
+    duration : 2000
+  });
+}, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Router>

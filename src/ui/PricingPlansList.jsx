@@ -11,7 +11,7 @@ const PricingPlansList = () => {
   };
   return (
     <div>
-      <div className="flex justify-center mt-10 text-md ">
+      <div data-aos="fade-down" className="flex justify-center mt-10 text-md ">
         <button
           onClick={handlePlanSelected}
           id="Monthly"
@@ -53,6 +53,7 @@ const PricingPlansList = () => {
           ) => (
             <PricingCard
               key={index}
+              id={index}
               title={name}
               description={description}
               monthlybilling={monthlybilling}

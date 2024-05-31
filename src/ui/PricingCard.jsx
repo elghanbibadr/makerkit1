@@ -6,6 +6,7 @@ import {PurpleButton} from "../ui/PurpleButton"
 import { ButtonTransparent } from "./Button-transparent";
 
 const PricingCard = ({
+  id,
   title,
   description,
   features,
@@ -16,6 +17,7 @@ const PricingCard = ({
 }) => {
   return (
     <div
+    data-aos={`${id === 0 ? "zoom-in-right": id===1 ?  "zoom-in-down":"zoom-in-left"}`}
       className={`text-left mt-10 ${
         title === "Pro" ? "border-darkPink" : "border-accent1"
       }  border-[2px] rounded-xl  p-5 sm:w-[70%] sm:mx-auto md:w-full`}

@@ -5,7 +5,7 @@ import dashboardImg from "../../assets/dashboard-dark.webp";
 
 const Hero = () => {
   return (
-    <div className="mt-20 p-2 text-center flex flex-col items-center justify-center">
+    <div data-aos="fade-up" className="mt-20 p-2 text-center flex flex-col items-center justify-center">
       <CtaCard>
         {" "}
         Get started for free. No credit card required. Cancel anytime.
@@ -32,7 +32,7 @@ const Hero = () => {
       <p className=" text-xs mt-3 text-gray-500 dark:text-gray-400">
         Free plan. No credit card required.
       </p>
-      <div className="mt-20   py-12 max-w-5xl mx-auto ">
+      <div data-aos="flip-left" className="mt-20   py-12 max-w-5xl mx-auto ">
         <img
           className="rounded-md shadow-pinkBoxShadow2"
           src={dashboardImg}
