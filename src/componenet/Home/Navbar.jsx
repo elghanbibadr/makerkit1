@@ -14,6 +14,8 @@ const navLinks = [
   { navLink: "FAQ", href: "faq" },
   { navLink: "Conact us", href: "contact Us" },
 
+
+
 ];
 
 
@@ -48,9 +50,9 @@ const Navbar = () => {
   };
   return (
     <nav className=" pb-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className=" md:w-[80%] md:mx-auto flex justify-between items-center">
         <Logo />
-        <ul className=" hidden  lg:block lg:flex">
+        <ul className=" hidden  lg:flex lg:justify-between lg:relative lg:left-10">
           {navLinks.map(({ navLink, href }) => (
             <li
               key={navLink.id}

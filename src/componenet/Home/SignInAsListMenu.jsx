@@ -26,7 +26,7 @@ const SignInAsListMenu = ({position}) => {
 
 
   return (
-    <Card  className={`${position} w-[210px] py-0 p-0  m-0`}
+    <Card  className={`${position} w-[210px] py-0   m-0`}
     >
          <div className='w-full px-2 py-3   hover:bg-[#17182A]  cursor-pointer  '>
             <span className='text-[0.8rem] text-gray-600 font-medium '>Signed in as</span>
