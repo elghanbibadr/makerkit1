@@ -52,7 +52,7 @@ const Navbar = () => {
     <nav className=" pb-2 px-3  border-b border-gray-50 border-opacity-10 dark:border-dark-800/70">
       <div className=" md:w-[80%] md:mx-auto flex justify-between items-center">
         <Logo />
-        <ul className=" hidden  lg:flex lg:justify-between lg:relative lg:left-10">
+        <ul className=" hidden  lg:flex lg:justify-between ">
           {navLinks.map(({ navLink, href }) => (
             <li
               key={navLink.id}

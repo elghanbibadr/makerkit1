@@ -36,11 +36,11 @@ const TasksTable = ({ searchTaskQuery }) => {
   const handleTaskStatusChanged = (taskId, isDone) =>
     changeTaskStatus({ taskId, isDone });
 
-  const SearchedTasks = tasks?.filter(
+  const SearchedTasks = tasks?.length !==0  ?  tasks?.filter(
     ({ taskName, taskDescription }) =>
       taskName.toLowerCase().includes(searchTaskQuery.toLowerCase()) ||
-      taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase())
-  );
+      taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase()) 
+  ) : []
 
 
   return (
@@ -116,7 +116,7 @@ const TasksTable = ({ searchTaskQuery }) => {
           </tbody>
         </table>
       )}
-      { !isLoading && !error && SearchedTasks?.length === 0 && <p className="text-white text-center mt-10">No task found .... 🤔</p> }
+      { !isLoading  && !error && searchTaskQuery && SearchedTasks?.length === 0 && <p className="text-white text-center mt-10">No task found .... 🤔</p> }
       <input type="checkbox" id="my_modal_2" className="modal-toggle" />
       <DeleteTaskModal taskInfo={taskToDeleteId} />
     </>

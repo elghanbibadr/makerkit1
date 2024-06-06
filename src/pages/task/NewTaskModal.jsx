@@ -108,7 +108,7 @@ const NewTaskModal = () => {
              
            </div>
         
-            <PurpleButton  text="create task"  isLoading={isCreatingTask} />
+            <PurpleButton  text="create task" disabled={isCreatingTask}  isLoading={isCreatingTask} />
           </form>
         </div>
         <label className="modal-backdrop " htmlFor="my_modal_7">

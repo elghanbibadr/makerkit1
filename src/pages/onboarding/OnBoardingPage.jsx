@@ -14,6 +14,7 @@ import checkMarkGreenIcon from "../../assets/greenCircleCheckMark.svg";
 import { useGetOrganization } from "../../hook/useGetOrganization";
 import { PurpleButton } from "../../ui/PurpleButton";
 import { ButtonTransparent } from "../../ui/Button-transparent";
+import Select from "../../ui/Select";
 
 const OnBoardingPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -176,14 +177,15 @@ const OnBoardingPage = () => {
               Invite your team members to join your organization.
             </h4>
             <form ref={form} className="mt-16">
-              <div className="flex  gap-2">
-                <Input
+              <div className="flex items-center  gap-2">
+                <input
                   value={memberEmail}
+                  className="relative top-2"
                   onChange={(e) => setOrgEmail(e.target.value)}
                   type="email"
                   placeholder="membre@email.com"
                 />
-                <select
+                {/* <select
                   id=""
                   className="h-fit relative top-4"
                   value={memberRole}
@@ -191,7 +193,11 @@ const OnBoardingPage = () => {
                 >
                   <option value="member">member</option>
                   <option value="admin">admin</option>
-                </select>
+                </select> */}
+                   
+          <Select  name="memberRole"
+           value={memberRole}
+           onChange={(e) => setMemberRole(e.target.value) }  />
               </div>
               {/* <Button onClick={handleFinishingAddingOrgDetails} className="bg-darkPink w-full  text-white   py-2 rounded-md ">Continue</Button> */}
               <PurpleButton

@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import Button from "./Button";
 import { PurpleButton } from "./PurpleButton";
 import { ButtonTransparent } from "./Button-transparent";
+import { useUser } from "../hook/useUser";
 const MenuList = ({menuItems}) => {
+  const {user}=useUser()
   return (
        <Card className=" z-[99999999999]" >
          <motion.ul className="lg:flex w-[160px] p-3 z-[99999999999] "          exit={{ opacity: 0 }}
@@ -25,12 +27,15 @@ const MenuList = ({menuItems}) => {
                   {/* <Button className="text-white mx-4 hover:bg-accent1 px-6 py-2 rounded-full">
                   Sign In
                 </Button> */}
-                <Link to="auth/signin">
+             {!user && <>
+              <Link to="auth/signin">
                   <ButtonTransparent className="w-full"  text="sign in"/>
                 </Link>
                 <Link to="auth/signup">
                   <PurpleButton className="w-full" text="sign up"   />
                 </Link>
+             
+             </>  }
                 {/* </Link> */}
          
           </motion.ul>
