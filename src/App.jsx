@@ -12,6 +12,7 @@ import EmailChangeConfirmation from "./pages/emailChangeConfirmation/EmailChange
 import AOS from 'aos';
 import "aos/dist/aos.css";
 import BlogPage from "./pages/blog/BlogPage";
+import ContactUsPage from "./pages/contactUs/ContactUsPage";
 
 // Lazy load components
 const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
@@ -62,6 +63,7 @@ useEffect(() => {
               <Route path="pricing" element={<PricingPage />} />
               <Route path="faq" element={<FaqPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/contactUs" element={<ContactUsPage />} />
 
               <Route path="emailChanged" element={<EmailChangeConfirmation />} />
               

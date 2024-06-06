@@ -107,10 +107,10 @@ const OnBoardingPage = () => {
     <div>
       <Logo />
       <div className="mt-20  w-fit md:mx-auto">
-        <div className="flex gap-1 mb-12">
+        <div className="flex flex-col  gap-6 md:gap-2 mb-12">
           {/* tab 1 */}
           <div
-            className={`text-[13px] font-medium border-t-[3px] w-[220px] pt-2 ${
+            className={`text-[13px] w-full font-medium border-t-[3px] md:w-[220px] pt-2 ${
               currentStep === 1
                 ? "text-white border-darkPink"
                 : "text-gray-500 border-accent1"
@@ -121,7 +121,7 @@ const OnBoardingPage = () => {
           </div>
           {/* tab 2 */}
           <div
-            className={`text-[13px] font-medium border-t-[3px] w-[220px] pt-2 ${
+            className={`text-[13px] font-medium border-t-[3px] w-full md:w-[220px] pt-2 ${
               currentStep === 2
                 ? "text-white border-darkPink"
                 : "text-gray-500 border-accent1"
@@ -132,7 +132,7 @@ const OnBoardingPage = () => {
           </div>
           {/* tab 3 */}
           <div
-            className={`text-[13px] font-medium border-t-[3px] w-[220px] pt-2 ${
+            className={`text-[13px] font-medium border-t-[3px] w-full md:w-[220px] pt-2 ${
               currentStep === 3
                 ? "text-white border-darkPink"
                 : "text-gray-500 border-accent1"

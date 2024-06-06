@@ -12,7 +12,7 @@ const navLinks = [
   { navLink: "Blog", href: "blog" },
   { navLink: "Pricing", href: "pricing" },
   { navLink: "FAQ", href: "faq" },
-  { navLink: "Conact us", href: "contact Us" },
+  { navLink: "Conact us", href: "contactUs" },
 
 
 

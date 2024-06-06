@@ -36,8 +36,6 @@ const SignInAsListMenu = ({position}) => {
     <Link to="/dashboard">
       <MenuListLink icon={dashboardIcon} text="Dashboard" />
     </Link>
-    <MenuListLink icon={themIcon} text="Theme" />
-    <MenuListLink icon={documentationIcon} text="Documentation" />
    { !isLoading && <MenuListLink onClick={logout} icon={signouticon} text="Sign out" />}
     {isLoading && <LoadingSpinner className="h-8 w-8 mx-auto   "/>}
    
