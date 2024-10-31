@@ -4,17 +4,17 @@ import supabase from "../../public/supabase/Supabase"
 
 export const getOrganizationDetails=async(userId)=>{
     
-    let { data: organizations, error } = await supabase
-    .from('organizations')
+    let { data: workflow, error } = await supabase
+    .from('workflow')
     .select("*")
     // Filters
-    .eq('orgId',userId)
+    .eq('userId',userId)
   
     if(error){
         console.log('org error',error)
     }
 
-   return {organizations}
+   return {workflow}
   }
 
 

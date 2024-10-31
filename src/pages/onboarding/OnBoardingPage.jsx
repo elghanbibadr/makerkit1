@@ -41,18 +41,18 @@ const OnBoardingPage = () => {
     setCurrentStep(2);
   };
 
-  useEffect(() => {
-    // MAKE THE USER CLICK ON THE DO TO DASHBOARD BUTTON IF HE FINISH HE"IS ORG DETAILS
-    if (currentStep === 3) return;
+  // useEffect(() => {
+  //   // MAKE THE USER CLICK ON THE DO TO DASHBOARD BUTTON IF HE FINISH HE"IS ORG DETAILS
+  //   if (currentStep === 3) return;
 
-    // REDIRECT TO THE DASHBOARD IF THERE IS ALREADY AN ORGANIZATION
-    if (
-      !isGettingOrganizationDetails &&
-      organizationDetails?.organizations.length !== 0
-    ) {
-      navigate("/dashboard");
-    }
-  }, [organizationDetails, isGettingOrganizationDetails, currentStep]);
+  //   // REDIRECT TO THE DASHBOARD IF THERE IS ALREADY AN ORGANIZATION
+  //   if (
+  //     !isGettingOrganizationDetails &&
+  //     organizationDetails?.organizations.length !== 0
+  //   ) {
+  //     navigate("/dashboard");
+  //   }
+  // }, [organizationDetails, isGettingOrganizationDetails, currentStep]);
 
   const handleOrgCompletionSetUp = async () => {
     // CREATE AN ORGANIZATION WITH THAT USER DETAILS
@@ -105,9 +105,9 @@ const OnBoardingPage = () => {
 
   return (
     <div>
-      <Logo />
+      <Logo className="mx-auto mt-3" />
       <div className="mt-20  w-fit md:mx-auto">
-        <div className="flex flex-col  gap-6 md:gap-2 mb-12">
+        <div className="flex   gap-2 md:gap-6 md:gap-2 mb-12">
           {/* tab 1 */}
           <div
             className={`text-[13px] w-full font-medium border-t-[3px] md:w-[220px] pt-2 ${
@@ -146,10 +146,10 @@ const OnBoardingPage = () => {
         {/*  */}
         {/* tab 1 */}
         {currentStep === 1 && (
-          <div>
-            <h2 className="text-white mb-2">Setup Organization</h2>
+          <div className="text-center">
+            <h2 className="text-white  mb-2">Create Workflow</h2>
             <h4 className="text-gray-400 text-xl font-normal">
-              Welcome! First, let's setup your organization.
+              Welcome! First, let's setup your Workflow
             </h4>
 
             <fieldset className="mt-16">
@@ -171,7 +171,7 @@ const OnBoardingPage = () => {
 
         {/* tab 2 */}
         {currentStep === 2 && (
-          <div>
+          <div className="text-center">
             <h2 className="text-white mb-2">Invite members</h2>
             <h4 className="text-gray-400 text-xl font-normal">
               Invite your team members to join your organization.

@@ -11,7 +11,7 @@ const AppContextProvider = ({ children }) => {
 
 
 
-  console.log('session',session)
+  // console.log('session',session)
 
   useEffect( () => {
    

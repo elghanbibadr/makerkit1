@@ -17,12 +17,12 @@ const OrganizationGeneralPage = () => {
 
   const userId = user?.data?.user?.id;
 
-  const {organizations,isLoading:isGettingOrgDetails}=useGetOrg(userId)
+  const {workflow,isLoading:isGettingOrgDetails}=useGetOrg(userId)
   const {
     organizationName,
     id:id,
     organizationLogoUrl,
-  } = organizations?.organizations[0] || [];
+  } = workflow?.workflow[0] || [];
 
   const [orgName,setOrgName]=useState('')
   const [orgLogoUrl,setOrgLogoUrl]=useState('')
@@ -41,7 +41,7 @@ const OrganizationGeneralPage = () => {
 
 
   useEffect(() => {
-    if (isGettingOrgDetails || organizations?.organizations.length===0 ) return;
+    if (isGettingOrgDetails || workflow?.workflow.length===0 ) return;
      setOrgName(organizationName);
       setOrgLogoUrl(organizationLogoUrl);
   }, [isGettingOrgDetails]);

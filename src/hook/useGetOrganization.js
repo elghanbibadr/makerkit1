@@ -4,14 +4,14 @@ import { getOrganizationDetails } from "../services/apiOrganisations";
 
 export function useGetOrganization(orgId) {
     const {
-      data: organizationDetails,
+      data:workflow,
       isLoading,
       error,
     } = useQuery({
-      queryKey: ["organizations", orgId],
+      queryKey: ["workflow", orgId],
       queryFn: () => getOrganizationDetails(orgId),
     });
   
-    return { organizationDetails, error, isLoading };
+    return {workflow, error, isLoading };
   }
   

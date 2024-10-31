@@ -6,7 +6,7 @@ export default async function getUser() {
 
     if(error){
       throw new Error(error.message)
-      return 
+      console.log('error',error)
     }
     return { data, error }
 }
