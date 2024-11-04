@@ -1,95 +1,58 @@
-import React from "react";
-import StatisticChartCard from "../../componenet/Dashbaord/StatisticChartCard";
+import React, { useMemo } from "react";
 import UsersTable from "../../componenet/Dashbaord/UsersTable";
+import { useTask } from "../../hook/usetasks";
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 const Dashboard = () => {
-  const StatisticData = [
-    {
-      id: 1,
-      chartCardTitle: "Monthly Recurring Revenue",
-      percentage: "20%",
-      isGrowing: true,
-      gaineValue: "$8.5",
-      chartLineData: [3, 5, 1, 4, 2, 1, 4, 2, 10, 2],
-    },
-    {
-      id: 2,
-      chartCardTitle: "Revenue",
-      percentage: "12%",
-      isGrowing: true,
-      gaineValue: "$5.1",
-      chartLineData: [1, 1, 9, 4, 6, 3, 3, 3],
-    },
-    {
-      id: 3,
-      chartCardTitle: "Fees",
-      percentage: "9%",
-      isGrowing: true,
-      gaineValue: "$2.8",
-      chartLineData: [1, 0, 11, 20, 6, 2, 10, 2],
-    },
-    {
-      id: 3,
-      chartCardTitle: "New Customers",
-      percentage: "-25%",
-      isGrowing: false,
-      gaineValue: "2.0",
-      chartLineData: [1, 10, 13, 0, 5, 5, 0, 12],
-    },
-    {
-      id: 4,
-      chartCardTitle: "Visitor      ",
-      percentage: "-4.3%",
-      isGrowing: false,
-      gaineValue: "5.9",
-      chartLineData: [1, 3, 14, 19, 8, 2, 23, 22],
-    },
-    {
-      id: 5,
-      chartCardTitle: "Returning Visitors      ",
-      percentage: "= 10%",
-      gaineValue: "7.6",
-      chartLineData: [1, 3, 14, 11, 3, 10, 3, 12],
-    },
-    {
-      id: 6,
-      chartCardTitle: "Churn      ",
-      percentage: "-10%",
-      isGrowing: true,
-      gaineValue: "8.9%",
-      chartLineData: [10, 1, 11, 5, 7, 0, 4, 6],
-    },
-    {
-      id: 7,
-      chartCardTitle: "Support Tickets      ",
-      percentage: "-30%",
-      isGrowing: true,
-      gaineValue: "4.4",
-      chartLineData: [11, 3, 3, 10, 6, 10, 9, 12],
-    },
-    {
-      id: 8,
-      chartCardTitle: "Active Users      ",
-      percentage: "10%",
-      isGrowing: true,
-      gaineValue: "0.5",
-      chartLineData: [7, 7, 14, 1, 7, 8, 4, 2],
-    },
-  ];
+  ChartJS.register(ArcElement, Tooltip, Legend);
+
+  // GETTING THE TASKS
+  const { tasks, isLoading, error } = useTask(1);
+
+  // Count tasks by status using useMemo for performance optimization
+  const taskStatusCounts = useMemo(() => {
+    if (!tasks) return { completed: 0, inProgress: 0, pending: 0 };
+    
+    return tasks.reduce((counts, task) => {
+      console.log('task',task)
+      switch (task.status) {
+        case 'Completed':
+          counts.completed += 1;
+          break;
+        case 'In Progress':
+          counts.inProgress += 1;
+          break;
+        case 'Pending':
+          counts.pending += 1;
+          break;
+        default:
+          break;
+      }
+      return counts;
+    }, { completed: 0, inProgress: 0, pending: 0 });
+  }, [tasks]);
+
+  // Prepare data for the Pie chart
+  const data = {
+    labels: ['Completed', 'In Progress', 'Pending'],
+    datasets: [
+      {
+        label: 'Tasks by Status',
+        data: [taskStatusCounts.completed, taskStatusCounts.inProgress, taskStatusCounts.pending],
+        backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+        hoverBackgroundColor: ['#36A2EB80', '#FF638480', '#FFCE5680']
+      }
+    ]
+  };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading tasks.</p>;
 
   return (
     <React.Fragment>
-      <div className="mb-10 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4">
-        {StatisticData.map((data) => (
-          <StatisticChartCard
-            key={data.id}
-            chartCardTitle={data.chartCardTitle}
-            percentage={data.percentage}
-            isGrowing={data.isGrowing}
-            gaineValue={data.gaineValue}
-            chartLineData={data.chartLineData}
-          />
-        ))}
+      <div className="mb-10 md:grid md:grid-cols-2 flex lg:grid-cols-3 md:gap-4">
+        <Pie data={data} />
       </div>
       <UsersTable />
     </React.Fragment>

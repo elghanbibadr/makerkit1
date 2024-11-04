@@ -1,14 +1,14 @@
 import { useQuery } from "react-query";
 import { getTasks } from "../services/apiTasks";
 
-export function useTask(userId) {
+export function useTask(projectId) {
   const {
     data: tasks,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["tasks", userId],
-    queryFn: () => getTasks(userId),
+    queryKey: ["tasks", projectId],
+    queryFn: () => getTasks(projectId),
   });
 
   return { tasks, error, isLoading };

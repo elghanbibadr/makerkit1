@@ -2,10 +2,6 @@ import DashboardNav from "../../componenet/Dashbaord/DashboardNav"
 import { SideBar } from "../../componenet/Dashbaord/SideBar"
 import DashboardIcon from "../../assets/dashboardicon.svg";
 import TaskIcon from "../../assets/taskIcon.svg";
-
-import profilIcon from "../../assets/profilIcon.svg";
-import organizationIcon from "../../assets/organizationIcon.svg";
-import subscriptionIcon from "../../assets/subscription.svg";
 import { useUser } from "../../hook/useUser";
 import { useGetOrganization } from "../../hook/useGetOrganization";
 import { useGetWorkflowProjects } from "../../hook/useGetWorkflowProjects";
@@ -37,8 +33,8 @@ const WorkflowsPage = () => {
     <DashboardNav />
 
     <div  className="row-start-2 col-start-2">
-     {workflowProjects.workflowProjects.map(({id,name}) =>{
-        return <ProjectCard key={id} projectName={name} />
+     {workflowProjects?.workflowProjects.map(({id,name}) =>{
+        return <ProjectCard projectId={id} key={id} projectName={name} />
      })}
     </div>
     <SideBar links={sidebarLinks} />

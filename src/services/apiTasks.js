@@ -1,11 +1,11 @@
 import supabase from "../../public/supabase/Supabase";
 import SingleTask from "../pages/task/SingleTask";
 
-export async function getTasks(userId) {
+export async function getTasks(projectId) {
   let { data: tasks, error } = await supabase
     .from("tasks")
     .select()
-    .eq("userId", userId);
+    .eq("projectId",projectId);
 
   if (error) {
     console.log(error);
