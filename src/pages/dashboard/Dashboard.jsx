@@ -3,6 +3,7 @@ import UsersTable from "../../componenet/Dashbaord/UsersTable";
 import { useTask } from "../../hook/usetasks";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, LineElement, PointElement, LinearScale, Title, CategoryScale, BarElement } from 'chart.js';
+import { useGetProjectMembers } from "../../hook/useGetMembre";
 
 const Dashboard = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -10,6 +11,9 @@ const Dashboard = () => {
   ChartJS.register(LineElement,CategoryScale, PointElement, LinearScale, Title);
   // GETTING THE TASKS
   const { tasks, isLoading, error } = useTask(1);
+  const {projectMembers,error:errorGettingProjectMembers}=useGetProjectMembers(1)
+   console.log('error getting project members',errorGettingProjectMembers)
+  console.log('project members',projectMembers)
 
   // Count tasks by status using useMemo for performance optimization
   const taskStatusCounts = useMemo(() => {
@@ -41,8 +45,15 @@ const Dashboard = () => {
       {
         label: 'Tasks by Status',
         data: [taskStatusCounts.completed, taskStatusCounts.inProgress, taskStatusCounts.pending],
-        backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
-        hoverBackgroundColor: ['#36A2EB80', '#FF638480', '#FFCE5680']
+        backgroundColor: [
+          "#a78bfa",
+           "#6b7280e0",
+          "#6d28d9",
+           "#030712",
+  
+        ],      
+          hoverBackgroundColor: ['#36A2EB80', '#FF638480', '#FFCE5680'],
+          borderWidth:0,
       }
     ]
   };
@@ -81,13 +92,7 @@ const Dashboard = () => {
          "#6b7280e0",
         "#6d28d9",
          "#030712",
-        // 'rgba(255, 99, 132, 0.2)',
-        // 'rgba(255, 159, 64, 0.2)',
-        // 'rgba(255, 205, 86, 0.2)',
-        // 'rgba(75, 192, 192, 0.2)',
-        // 'rgba(54, 162, 235, 0.2)',
-        // 'rgba(153, 102, 255, 0.2)',
-        // 'rgba(201, 203, 207, 0.2)'
+
       ],
      
       borderRadius: 20,
@@ -96,11 +101,10 @@ const Dashboard = () => {
   };
 
   console.log("data 1",data1)
-  const options={}
   return (
     <React.Fragment>
-      <div className=" flex w-[400px] md:gap-4">
-        <Pie data={data} />
+      <div className=" flex items-center justify-between w-[500px] md:gap-20">
+        <Pie style={{height:"200px"}} data={data} />
         <Bar data={data1} options={{indexAxis:"y",scales: {
       yAxes: [{
          ticks: {

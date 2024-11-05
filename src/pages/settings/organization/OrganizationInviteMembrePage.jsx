@@ -5,7 +5,7 @@ import arrow from "../../../assets/arrow.svg";
 import { Link, useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
-import { useGetMembres } from "../../../hook/useGetMembre";
+// import { useGetMembres } from "../../../hook/useGetMembre";
 import { useUser } from "../../../hook/useUser";
 import { PurpleButton } from "../../../ui/PurpleButton";
 import { ButtonTransparent } from "../../../ui/Button-transparent";
@@ -16,9 +16,9 @@ const OrganizationInviteMembrePage = () => {
   const [memberEmail, setMembreEmail] = useState("");
   const [memberRole, setMembreRole] = useState("membre");
   const { isLoading: isGettingUser, user, isAuthenticated } = useUser();
-  const { orgMembres, isLoading: isGettingOrgMembers } = useGetMembres(
-    user?.data.user.id || ""
-  );
+  // const { orgMembres, isLoading: isGettingOrgMembers } = useGetMembres(
+  //   user?.data.user.id || ""
+  // );
   const { inviteMembre, isLoading: isInvitingMember } = useInviteMembre(true);
   const userEmail = user?.data.user.email;
 

@@ -1,19 +1,18 @@
 import supabase from "../../public/supabase/Supabase"
 
-export const getOrgMembres=async(orgId)=>{
-    
-    let { data:orgMembers, error } = await supabase
-    .from('organizationsMembers')
+export const getProjectMembers=async(projectId)=>{
+    console.log('projectid',projectId)
+    let { data:projectMembers, error } = await supabase
+    .from('projectMembre')
     .select("*")
     // Filters
-    .eq('orgId',orgId)
+    .eq('projectId',projectId)
   
     if(error){
         console.log('getting org members error',error)
     }
  
-    console.log("my",orgMembers)
-   return { orgMembers }
+   return { projectMembers }
   }
 
 

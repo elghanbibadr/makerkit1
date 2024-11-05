@@ -1,17 +1,17 @@
 import { useQuery } from "react-query";
-import { getOrgMembres } from "../services/apiMembre";
+import { getProjectMembers } from "../services/apiMembre";
 
 
-export function useGetMembres(orgId) {
+export function useGetProjectMembers(projectId) {
     const {
-      data: orgMembres,
+      data: projectMembers,
       isLoading,
       error,
     } = useQuery({
-      queryKey: ["organizationsMembers", orgId],
-      queryFn: () => getOrgMembres(orgId),
+      queryKey: ["projectMembers", projectId],
+      queryFn: () => getProjectMembers(projectId),
     });
   
-    return { orgMembres, error, isLoading };
+    return { projectMembers, error, isLoading };
   }
   

@@ -31,7 +31,7 @@ const tableData = [
 ];
 const UsersTable = () => {
   return (
-    <div className="border border-accent1  p-3 rounded-md">
+    <div className="border mt-10 border-accent1  p-3 rounded-md">
       <h4 className="text-gray-400 text-xl font-normal">Customers</h4>
       <table className="w-full mt-6 mx-3 ">
         <thead className=" text-gray-400  text-left border-b border-accent1 ">
