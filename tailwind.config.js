@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-
-export default {
+// /** @type {import('tailwindcss').Config} */
+// import daisyui from 'daisyui';
+module.exports= {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./node_modules/tailwind-datepicker-react/dist/**/*.js"],
   theme: {
     extend: {
@@ -22,5 +22,5 @@ export default {
     },
   },
 
-  plugins: [require("daisyui")],
+  plugins: [require('daisyui')],
 };

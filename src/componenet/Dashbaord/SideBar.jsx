@@ -31,6 +31,7 @@ export const SideBar = ({ links }) => {
     <aside className="lg:fixed hidden  pt-4 pl-3 lg:block bg-secondary inset-0 w-[240px] lg:row-start-1 row-span-2 lg:border-r md:border-accent1">
       <div className="mx-4 my-4">
         <Logo />
+
       </div>
 
       <ul className="text-white mt-10 relative h-full">
