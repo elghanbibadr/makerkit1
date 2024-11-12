@@ -1,5 +1,7 @@
 import supabase from "../../public/supabase/Supabase"
 
+
+
 export const addProject=async(projectInfo)=>{
   console.log("project info",projectInfo)
   // return
@@ -9,3 +11,5 @@ export const addProject=async(projectInfo)=>{
       console.log(error);
     }
   }
+
+

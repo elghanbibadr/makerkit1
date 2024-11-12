@@ -1,6 +1,6 @@
 import { useState } from "react";
 import LoadingSpinner from "../../ui/LoadingSpinner";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useTask } from "../../hook/usetasks";
 import { useUser } from "../../hook/useUser";
 import { useTaskStatus } from "../../hook/useTaskStatus";
@@ -12,16 +12,18 @@ import doottedLine from "../../assets/doottedLine2.png"
 import DeleteTaskModal from "./DeleteTaskModal";
 
 const TasksTable = ({ searchTaskQuery }) => {
+
   const [openTaskId, setOpenTaskId] = useState(null);
   const [deleteTaskModalOpen, setDeleteTaskModelOpen] = useState(false);
   const [taskToDeleteId, setTaskToDelete] = useState(null);
-  const { user } = useUser();
-  const userId = user?.data.user.id;
+  const [searchParams]=useSearchParams()
+  const projectId=searchParams.get("projectId")
   const { changeTaskStatus, isChangingTaskStatus } = useTaskStatus();
-
-  const { tasks, isLoading, error } = useTask(userId);
+  const { tasks, isLoading, error } = useTask(1);
 
   console.log(tasks);
+
+  // return
   const toggleTaskDetails = (taskId) => {
     setOpenTaskId((prevId) => (prevId === taskId ? null : taskId));
   };
@@ -36,11 +38,11 @@ const TasksTable = ({ searchTaskQuery }) => {
   const handleTaskStatusChanged = (taskId, isDone) =>
     changeTaskStatus({ taskId, isDone });
 
-  const SearchedTasks = tasks?.length !==0  ?  tasks?.filter(
-    ({ taskName, taskDescription }) =>
-      taskName.toLowerCase().includes(searchTaskQuery.toLowerCase()) ||
-      taskDescription.toLowerCase().includes(searchTaskQuery.toLowerCase()) 
-  ) : []
+  // const SearchedTasks = tasks?.length !==0  ?  tasks?.filter(
+  //   ({ taskName, taskDescription }) =>
+  //     taskName.toLowerCase().includes(searchTaskQuery?.toLowerCase()) ||
+  //     taskDescription.toLowerCase().includes(searchTaskQuery?.toLowerCase()) 
+  // ) : []
 
 
   return (
@@ -66,7 +68,7 @@ const TasksTable = ({ searchTaskQuery }) => {
           </thead>
           <tbody className="text-white">
             {tasks?.length > 0 &&
-              SearchedTasks.map((task, index) => (
+              tasks.map((task, index) => (
                 <tr key={task.id} className="text-left border-b border-accent1">
                   <td>{task.taskName}</td>
                   <td>{task.taskDescription}</td>
@@ -75,7 +77,7 @@ const TasksTable = ({ searchTaskQuery }) => {
                   )}
 
                   <td>
-                    <TaskStatusBadge taskStatus={task.isDone} />
+                    <TaskStatusBadge taskStatus={task.taskStatus} />
                   </td>
 
                   <td className="w-12 cursor-pointer relative">

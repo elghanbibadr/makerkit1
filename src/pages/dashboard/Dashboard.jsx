@@ -16,7 +16,7 @@ import {
 import { useGetProjectMembers } from "../../hook/useGetMembre";
 import PieChart from "./componenet/PieChart";
 import TasksCompletionsBarChart from "./componenet/TasksCompletionsBarChart";
-import TasksCompletedCountBarChart from "./componenet/TasksCompletedCountBarChart";
+import { Bar } from "react-chartjs-2";
 
 const Dashboard = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -117,7 +117,35 @@ const Dashboard = () => {
     <React.Fragment>
       <div className=" flex flex-col lg:flex-row lg:w-[400px]  items-center justify-between  gap-10">
         <PieChart PieChartData={PieChartData} />
-        <TasksCompletedCountBarChart data={tasksCompletedCountBarChartData} />
+        <Bar
+      data={tasksCompletedCountBarChartData}
+      options={{
+        indexAxis: "y",
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              borderRadius: 20,
+              fontSize: 1,
+            },
+          },
+        },
+
+        scales: {
+          x: [
+            {
+              beginAtZero: true,
+
+              ticks: {
+                stepSize: 1,
+                callback: (value) => (Number.isInteger(value) ? value : null), // Ensure integers on x-axis
+              },
+            },
+          ],
+        },
+      }}
+    />
+        {/* <TasksCompletedCountBarChart data={tasksCompletedCountBarChartData} /> */}
         <TasksCompletionsBarChart tasksCompletionChartData={barChartData} />
       </div>
       <UsersTable />

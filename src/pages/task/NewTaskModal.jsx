@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import closeIcon from '../../assets/xIcon.svg'
-import { AppContext } from "../../store/AppContext";
 import Datepicker from "tailwind-datepicker-react"
 import { useCreateTask } from "../../hook/useCreateTask";
 import { generateUniqueRandomNumber } from "../../utils/Utils";
@@ -10,9 +9,7 @@ import Label from "../../ui/Label";
 import { PurpleButton } from "../../ui/PurpleButton";
 
 const NewTaskModal = () => {
-  const { session } = useContext(AppContext);
   const [show, setShow] = useState(false)
-  const currentUserId = session?.user.id;
   const [taskDueDate, setTaskDueDate] = useState(new Date(+new Date() + 86400000))
   const {
     register,
@@ -25,7 +22,7 @@ const NewTaskModal = () => {
   const onSubmit = (data) => {
     createTask({
       id: generateUniqueRandomNumber(),
-      userId: currentUserId,
+      projectId:3,
       taskDueDate:taskDueDate,
       ...data,
     });

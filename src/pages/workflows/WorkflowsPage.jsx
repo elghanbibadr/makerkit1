@@ -20,7 +20,6 @@ const WorkflowsPage = () => {
     user?.data.user.id
   );
 
-  console.log("workflow",workflow)
   const { workflowProjects, error: errorGettingWorkflows } =
     useGetWorkflowProjects(workflow?.workflow[0]?.id);
 
