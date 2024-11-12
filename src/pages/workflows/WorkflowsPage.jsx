@@ -30,8 +30,8 @@ const WorkflowsPage = () => {
     return <h1>Something went wrong ...</h1>;
   }
 
-  function addProject() {
-    // await createProject([{name:'badr 2',workflowId:workflow.workflow.id}])
+  async function addProject() {
+    await createProject([{name:'badr 2',workflowId:workflow?.workflow[0].id}])
   }
   return (
     <div className="lg:grid lg:grid-rows-[auto_1fr] lg:grid-cols-[220px_1fr] lg:gap-x-6  ">
