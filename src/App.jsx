@@ -19,7 +19,8 @@ import "aos/dist/aos.css";
 import BlogPage from "./pages/blog/BlogPage";
 import ContactUsPage from "./pages/contactUs/ContactUsPage";
 import WorkflowsPage from "./pages/workflows/WorkflowsPage";
-
+import ProfilePage from "./pages/Profile/Profile";
+import WorkflowLayout from "./pages/workflows/WorkflowLayout";
 // Lazy load components
 const HomePageLayout = lazy(() => import("./pages/homePage/HomePageLayout"));
 const HomePage = lazy(() => import("./pages/homePage/HomePage"));
@@ -93,8 +94,13 @@ function App() {
 
               <Route path="inviteAccepted" element={<InviteAcceptedPage />} />
             </Route>
+            
+      <Route path="workflow" element={<WorkflowLayout />}>
+        <Route index element={<WorkflowsPage />} /> {/* Default workflow page */}
+        <Route path="profile" element={<ProfilePage />} /> {/* Profile page */}
+      </Route>
+  
 
-              <Route path="workflow" element={<WorkflowsPage />} />
 
             <Route
               element={

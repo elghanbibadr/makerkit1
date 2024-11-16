@@ -21,7 +21,6 @@ const TasksTable = ({ searchTaskQuery }) => {
   const { changeTaskStatus, isChangingTaskStatus } = useTaskStatus();
   const { tasks, isLoading, error } = useTask(1);
 
-  console.log(tasks);
 
   // return
   const toggleTaskDetails = (taskId) => {

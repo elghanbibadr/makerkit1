@@ -10,8 +10,8 @@ import { useCreateProject } from "../../hook/useCreateProject";
 import { useGetWorkflow } from "../../hook/useGetWorkflow";
 
 const sidebarLinks = [
-  { to: "/dashboard", icon: DashboardIcon, text: "Workflows" },
-  { to: "/dashboard/tasks", icon: TaskIcon, text: "settings" },
+  { to: "/workflow", icon: DashboardIcon, text: "Workflows" },
+  { to: "profile", icon: TaskIcon, text: "Profile" },
 ];
 
 const WorkflowsPage = () => {
@@ -33,8 +33,7 @@ const WorkflowsPage = () => {
     await createProject([{name:'badr 2',workflowId:workflow?.workflow[0].id}])
   }
   return (
-    <div className="lg:grid lg:grid-rows-[auto_1fr] lg:grid-cols-[220px_1fr] lg:gap-x-6  ">
-      <DashboardNav />
+    
 
       <div className="row-start-2 col-start-2">
         {workflowProjects?.workflowProjects.map(({ id, name }) => {
@@ -42,10 +41,9 @@ const WorkflowsPage = () => {
         })}
         <Modal2 onClick={addProject} />
       </div>
-      <div></div>
+     
 
-      <SideBar links={sidebarLinks} />
-    </div>
+     
   );
 };
 

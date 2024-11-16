@@ -23,6 +23,7 @@ const OrganizationGeneralPage = () => {
     id:id,
     organizationLogoUrl,
   } = workflow?.workflow[0] || [];
+  
 
   const [orgName,setOrgName]=useState('')
   const [orgLogoUrl,setOrgLogoUrl]=useState('')
