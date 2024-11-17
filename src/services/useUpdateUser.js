@@ -8,10 +8,10 @@ export function useUpdateUser(){
     const {mutate : updateProfil, isLoading: isUpdating}=useMutation({
         mutationFn:({updatedProfil }) =>  updateUserProfil(updatedProfil),
         onSuccess:() =>{
-            toast.success("profil updated successfuly")
+            toast.success("Profile Name Ipdated Successfully")
             queryClient.invalidateQueries("profiles")
         },
-        onError:(err) => toast.error(err.message),
+        onError:(err) => toast.error("Something Went Wrong !!"),
     
     })
 

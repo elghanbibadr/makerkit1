@@ -164,9 +164,10 @@ function App() {
             duration: 5000,
           },
           style: {
-            fontSize: "14px",
+            fontSize: "13px",
+            fontWeight:"500",
             maxWidth: "540px",
-            padding: "10px 15px",
+            padding: "7px 15px",
             backgroundColor: "white",
             color: "#6b7280e0",
           },

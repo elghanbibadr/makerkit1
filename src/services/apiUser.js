@@ -43,7 +43,7 @@ export  async function UpdateUserEmail(newEmail) {
 
 
 export const getUserProfilDetails=async(userId)=>{
-    
+    console.log("user if from api",userId)
     let { data: profilDetails, error } = await supabase
     .from('profiles')
     .select("*")
@@ -53,6 +53,8 @@ export const getUserProfilDetails=async(userId)=>{
     if(error){
         console.log('org error',error)
     }
+
+    console.log("profile details from api",profilDetails)
 
    return {profilDetails}
   }

@@ -33,8 +33,8 @@ const SignInAsListMenu = ({position}) => {
             <span className='block text-[0.8rem] font-medium'>{session?.user?.email}</span>
          </div>
 
-    <Link to="/dashboard">
-      <MenuListLink icon={dashboardIcon} text="Dashboard" />
+    <Link to="/workflow">
+      <MenuListLink icon={dashboardIcon} text="My Workflow" />
     </Link>
    { !isLoading && <MenuListLink onClick={logout} icon={signouticon} text="Sign out" />}
     {isLoading && <LoadingSpinner className="h-8 w-8 mx-auto   "/>}

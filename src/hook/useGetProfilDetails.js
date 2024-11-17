@@ -3,7 +3,7 @@ import { getUserProfilDetails } from "../services/apiUser";
 
 export function useGetUserProfilDetails(userId) {
     const {
-      data: profilDetails,
+      data: profileDetails,
       isLoading,
       error,
     } = useQuery({
@@ -11,6 +11,6 @@ export function useGetUserProfilDetails(userId) {
       queryFn: () => getUserProfilDetails(userId),
     });
   
-    return { profilDetails, error, isLoading };
+    return { profileDetails, error, isLoading };
   }
   
