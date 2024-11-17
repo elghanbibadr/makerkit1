@@ -52,7 +52,7 @@ const UploadImageInput = ({ avatarURL, setAvatarUrl, isDisabled ,setSelectedFile
         {
           <div className="flex items-center gap-3  font-semibold text-gray-500 dark:text-gray-400 [&amp;>*]:mt-[0.35rem] cursor-pointer text-xs">
             {!avatarURL  && (
-              <img className="h-6 w-6" src={uploadIcon} alt="" />
+              <img className="h-6  w-6 " src={uploadIcon} alt="" />
             )}
             {!selectedFile && <span>Click here to upload an image </span>}
           </div>
