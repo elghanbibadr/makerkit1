@@ -13,6 +13,7 @@ import ProfilItemCard from "./components/ProfilItemCard";
 import NameUpdateCard from "./components/NameUpdateCard";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import EmailUpdateCard from "./components/EmailUpdateCard";
+import PasswordUpdateCard from "./components/PasswordUpdateCard";
 
 const ProfilePage = () => {
   const { user, isLoading } = useUser();
@@ -101,38 +102,7 @@ const ProfilePage = () => {
       </ProfilItemCard> */}
       <NameUpdateCard profileDetails={profileDetails?.profilDetails[0]} />
      <EmailUpdateCard />
-      <ProfilItemCard
-        title="Update your Password"
-        desc="Update your password to keep your account secure."
-      >
-        <Label labelfor="name">New Password</Label>
-        <Input
-          className="text-sm block py-2 w-full "
-          id="name"
-          name="name"
-          value={name}
-          placeholder=""
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-          disabled={isUpdating}
-        />
-        <Label labelfor="repeatEmail">Repeat New Password</Label>
-        <Input
-          className="text-sm block py-2 w-full "
-          id="repeatEmail"
-          name="repeatEmail"
-          value={name}
-          placeholder=""
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-          disabled={isUpdating}
-        />
-        <PurpleButton
-          text="Update Password"
-          // isLoading={isUpdating}
-          // disabled={isUpdating}
-        />
-      </ProfilItemCard>
+    <PasswordUpdateCard />
     </div>
   );
 };
